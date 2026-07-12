@@ -24,3 +24,17 @@ __pycache__/
 
 # 依赖目录
 node_modules/
+
+# 原始爬取中间产物（保留 full 题库 JSON，忽略其他中间文件）
+raw_chapter*.html
+raw_sign_page.html
+kemu1_analysis_sample.json
+kemu1_question_bank.json
+kemu1_question_bank_enhanced.json
+kemu1_question_bank_simple.json
+kemu1_question_bank_with_analysis.json
+kemu1_stats.json
+
+# Python 脚本（构建工具，不需要部署）
+*.py
+

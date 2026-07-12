@@ -1,168 +1,145 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="科目一教考在线学习 - 2026年7月最新版，依据公安部令第163号，包含口诀背记、题目练习、模拟考试、记分管理、标志识别">
-  <meta name="keywords" content="科目一,驾考,2026,记分管理,公安部令第163号,口诀,模拟考试">
-  <title>科目一教考在线学习 | 2026年7月最新版</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="科目一教考 · 1964道完整题库 · 24分类 · 76条口诀 · 公安部令第163号 · 2026年7月最新版">
+<meta name="keywords" content="科目一,驾考,1964题,口诀,记分管理,公安部令第163号,2026">
+<title>科目一教考 · 1964题完整题库 · 24分类速记</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ==================== 顶部固定导航 ==================== -->
-  <header class="header">
-    <div class="header-title">科目一教考</div>
-    <div class="header-subtitle">2026年7月最新版</div>
-    <nav class="nav-tabs">
-      <button class="nav-tab active" data-module="home">首页</button>
-      <button class="nav-tab" data-module="mnemonics">口诀背记</button>
-      <button class="nav-tab" data-module="practice">题目练习</button>
-      <button class="nav-tab" data-module="exam">模拟考试</button>
-      <button class="nav-tab" data-module="score">记分管理</button>
-      <button class="nav-tab" data-module="signs">标志识别</button>
-      <button class="nav-tab" data-module="changes">2026新变化</button>
-    </nav>
-  </header>
+<!-- ==================== 顶部毛玻璃导航 ==================== -->
+<nav id="topnav">
+  <div class="brand">
+    <span class="brand-mark">科</span>
+    <span class="brand-text">科目一<span class="brand-accent">·</span>教考</span>
+  </div>
+  <div class="nav-links">
+    <a href="#practice" class="nav-link active" data-view="practice">题库练习</a>
+    <a href="#mnemonics" class="nav-link" data-view="mnemonics">口诀总览</a>
+    <a href="#categories" class="nav-link" data-view="categories">分类导航</a>
+  </div>
+  <div class="nav-meta">
+    <span class="nav-stat"><span id="nav-progress">0</span> / 1964</span>
+    <span class="nav-stat nav-stat-accuracy">正确率 <span id="nav-accuracy">—</span></span>
+  </div>
+</nav>
 
-  <!-- ==================== 主内容区 ==================== -->
-  <main class="main-container">
+<!-- ==================== 主内容 ==================== -->
+<main id="app">
 
-    <!-- 首页模块 -->
-    <section id="module-home" class="module-section active">
-      <div class="home-hero">
-        <h1>科目一教考在线学习</h1>
-        <p>2026年7月最新版 · 依据公安部令第163号《道路交通安全违法行为记分管理办法》</p>
-        <div class="stats-bar">
-          <div class="stat-item">
-            <span class="stat-number" id="stat-mnemonics">0</span>
-            <span class="stat-label">口诀条数</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number" id="stat-questions">0</span>
-            <span class="stat-label">题目数量</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number" id="stat-score">0</span>
-            <span class="stat-label">记分规则</span>
-          </div>
+  <!-- ========== 题库练习视图 ========== -->
+  <section id="view-practice" class="view active">
+    <!-- 分类侧栏 + 答题主区 -->
+    <aside class="practice-sidebar" id="category-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-label">分类导航</div>
+        <div class="sidebar-count" id="sidebar-total">24 个分类</div>
+      </div>
+      <div class="sidebar-search">
+        <input type="text" id="search-input" placeholder="搜索题目关键词…" autocomplete="off">
+      </div>
+      <div class="sidebar-list" id="category-list"></div>
+    </aside>
+
+    <div class="practice-main">
+      <!-- 答题头部 -->
+      <header class="practice-header">
+        <div class="header-left">
+          <div class="practice-cat-tag" id="practice-cat-tag">全部题目</div>
+          <h2 class="practice-title">
+            <span id="practice-index">1</span>
+            <span class="title-divider">/</span>
+            <span id="practice-total">1964</span>
+          </h2>
         </div>
+        <div class="header-right">
+          <button class="ghost-btn" id="btn-prev" title="上一题">←</button>
+          <button class="ghost-btn" id="btn-next" title="下一题">→</button>
+          <button class="ghost-btn" id="btn-shuffle" title="乱序">⇄</button>
+          <button class="ghost-btn" id="btn-reset" title="重置进度">↺</button>
+        </div>
+      </header>
+
+      <!-- 进度条 -->
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+        <div class="progress-glow"></div>
       </div>
 
-      <h2 class="module-title">功能导航</h2>
-      <p class="module-desc">点击下方卡片进入对应学习模块</p>
-
-      <div class="card-grid">
-        <div class="nav-card" data-module="mnemonics">
-          <div class="nav-card-icon" style="background:#3b82f6">诀</div>
-          <div class="nav-card-content">
-            <h3>口诀背记</h3>
-            <p>12大类速记口诀，涵盖速度、让行、记分、灯光等</p>
-          </div>
+      <!-- 题目卡片 -->
+      <article class="question-card" id="question-card">
+        <div class="q-meta">
+          <span class="q-type" id="q-type">单选题</span>
+          <span class="q-chapter" id="q-chapter">章节</span>
+          <span class="q-tags" id="q-tags"></span>
         </div>
-
-        <div class="nav-card" data-module="practice">
-          <div class="nav-card-icon" style="background:#16a34a">练</div>
-          <div class="nav-card-content">
-            <h3>题目练习</h3>
-            <p>分类练习判断题与单选题，即时反馈解析</p>
+        <div class="q-body" id="q-body">
+          <div class="q-image-wrap" id="q-image-wrap" style="display:none">
+            <div class="q-image-placeholder">[ 图像题 ]</div>
           </div>
+          <div class="q-text" id="q-text">题目加载中…</div>
         </div>
-
-        <div class="nav-card" data-module="exam">
-          <div class="nav-card-icon" style="background:#dc2626">考</div>
-          <div class="nav-card-content">
-            <h3>模拟考试</h3>
-            <p>100题随机抽题，90分及格，模拟真实考试</p>
-          </div>
+        <div class="q-options" id="q-options"></div>
+        <div class="q-feedback" id="q-feedback" style="display:none"></div>
+        <div class="q-analysis" id="q-analysis" style="display:none">
+          <div class="analysis-label">解析</div>
+          <div class="analysis-text" id="analysis-text"></div>
         </div>
-
-        <div class="nav-card" data-module="score">
-          <div class="nav-card-icon" style="background:#ea580c">分</div>
-          <div class="nav-card-content">
-            <h3>记分管理</h3>
-            <p>12/9/6/3/1五档完整记分规则与口诀</p>
-          </div>
+        <div class="q-mnemonic-hint" id="q-mnemonic-hint" style="display:none">
+          <div class="hint-label">口诀提示</div>
+          <div class="hint-content" id="hint-content"></div>
         </div>
+      </article>
 
-        <div class="nav-card" data-module="signs">
-          <div class="nav-card-icon" style="background:#0891b2">标</div>
-          <div class="nav-card-content">
-            <h3>标志识别</h3>
-            <p>交通标志、道路标线、交警手势图解</p>
-          </div>
-        </div>
-
-        <div class="nav-card" data-module="changes">
-          <div class="nav-card-icon" style="background:#7c3aed">新</div>
-          <div class="nav-card-content">
-            <h3>2026新变化</h3>
-            <p>最新法规变化要点与新能源知识考点</p>
-          </div>
+      <!-- 题目快捷跳转 -->
+      <div class="quick-jump">
+        <div class="quick-jump-label">题目跳转</div>
+        <div class="quick-jump-input">
+          <input type="number" id="jump-input" min="1" max="1964" placeholder="题号">
+          <button class="mini-btn" id="jump-btn">跳转</button>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 口诀背记模块 -->
-    <section id="module-mnemonics" class="module-section">
-      <h2 class="module-title">口诀背记</h2>
-      <p class="module-desc">按分类学习记忆口诀，高效掌握科目一知识点</p>
-      <div class="filter-bar" id="mnemonic-filters"></div>
-      <div id="mnemonics-container"></div>
-    </section>
-
-    <!-- 题目练习模块 -->
-    <section id="module-practice" class="module-section">
-      <h2 class="module-title">题目练习</h2>
-      <p class="module-desc">分类练习，答题后即时显示解析与正确答案</p>
-      <div class="filter-bar" id="practice-filters"></div>
-      <div class="practice-header">
-        <div class="progress-info" id="practice-progress">第 1/0 题</div>
+  <!-- ========== 口诀总览视图 ========== -->
+  <section id="view-mnemonics" class="view">
+    <div class="view-inner">
+      <header class="view-header">
+        <div class="section-label">MNEMONICS · 速记口诀</div>
+        <h2 class="section-title">76 条<span class="accent">口诀总览</span></h2>
+        <p class="section-lead">按 24 个分类整理的全部速记口诀，配合题目练习效果更佳。每条口诀均附详细解释与适用场景。</p>
+      </header>
+      <div class="mnemonics-filter-bar" id="mnemonics-filter">
+        <button class="filter-chip active" data-cat="all">全部 <span class="chip-count">76</span></button>
       </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="practice-progress-fill" style="width:0%"></div>
-      </div>
-      <div id="practice-container"></div>
-    </section>
+      <div class="mnemonics-grid" id="mnemonics-grid"></div>
+    </div>
+  </section>
 
-    <!-- 模拟考试模块 -->
-    <section id="module-exam" class="module-section">
-      <h2 class="module-title">模拟考试</h2>
-      <p class="module-desc">100题随机抽题，90分及格，模拟真实考试环境</p>
-      <div class="practice-header" id="exam-header" style="display:none">
-        <div class="progress-info" id="exam-progress">第 1/100 题</div>
-      </div>
-      <div class="progress-bar" id="exam-progress-bar" style="display:none">
-        <div class="progress-fill" id="exam-progress-fill" style="width:0%"></div>
-      </div>
-      <div id="exam-container"></div>
-    </section>
+  <!-- ========== 分类导航视图 ========== -->
+  <section id="view-categories" class="view">
+    <div class="view-inner">
+      <header class="view-header">
+        <div class="section-label">CATEGORIES · 24 分类导航</div>
+        <h2 class="section-title">题库<span class="accent">分类总览</span></h2>
+        <p class="section-lead">点击任意分类进入对应题目练习，每类均已标注题目数量与主题色。</p>
+      </header>
+      <div class="categories-grid" id="categories-grid"></div>
+    </div>
+  </section>
 
-    <!-- 记分管理模块 -->
-    <section id="module-score" class="module-section">
-      <h2 class="module-title">记分管理</h2>
-      <p class="module-desc">依据公安部令第163号，五档记分完整规则（12分/9分/6分/3分/1分）</p>
-      <div id="score-container"></div>
-    </section>
+</main>
 
-    <!-- 标志识别模块 -->
-    <section id="module-signs" class="module-section">
-      <h2 class="module-title">标志识别</h2>
-      <p class="module-desc">交通标志、道路标线、交警手势信号图解</p>
-      <div id="signs-container"></div>
-    </section>
+<!-- ==================== 答题反馈 Toast ==================== -->
+<div class="toast" id="toast"></div>
 
-    <!-- 2026新变化模块 -->
-    <section id="module-changes" class="module-section">
-      <h2 class="module-title">2026年7月最新变化</h2>
-      <p class="module-desc">最新法规变化要点与新能源知识考点</p>
-      <div id="changes-container"></div>
-    </section>
-
-  </main>
-
-  <!-- 引入数据文件与应用逻辑 -->
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
