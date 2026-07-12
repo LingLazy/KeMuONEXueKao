@@ -42,3 +42,7 @@ kemu1_stats.json
 image_map.json
 image_match_result.json
 
+# 仅构建用的数据源与参考资料（保留本地，不进入仓库与部署包）
+kemu1_question_bank_full.json
+科目一考试口诀技巧.md
+
