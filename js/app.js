@@ -89,6 +89,7 @@
     currentList: [],            // 当前题目列表（按分类筛选后）
     currentIdx: 0,              // 当前题目在list中的索引
     answered: Store.get('kemu1_answered', {}),  // {qid: {selected, correct}}
+    bookmarks: Store.get('kemu1_bookmarks', {}), // {qid: true} 收藏的题目
     searchQuery: '',
     shuffle: false,
     theme: Store.get('kemu1_theme', 'light')   // light/dark
@@ -292,9 +293,8 @@
       $('#q-tags').innerHTML = '';
       $('#q-chapter').textContent = '';
       $('#q-image-wrap').style.display = 'none';
-      $('#q-feedback').style.display = 'none';
-      $('#q-analysis').style.display = 'none';
-      $('#q-mnemonic-hint').style.display = 'none';
+      $('#q-guide').style.display = 'none';
+      $('#q-result').style.display = 'none';
       $('#practice-index').textContent = '0';
       $('#practice-total').textContent = '0';
       $('#progress-fill').style.width = '0%';
@@ -399,17 +399,24 @@
       });
     }
 
-    // 反馈、解析、口诀
-    const fbEl = $('#q-feedback');
-    const anEl = $('#q-analysis');
-    const hintEl = $('#q-mnemonic-hint');
+    // 引导区与结果区显示控制
+    const guideEl = $('#q-guide');
+    const resultEl = $('#q-result');
+    const bookmarkBtn = $('#btn-bookmark');
 
     if (answered) {
-      showFeedback(q, record);
+      // 已答题：显示结果区，隐藏引导区
+      if (guideEl) guideEl.style.display = 'none';
+      showResult(q, record);
     } else {
-      fbEl.style.display = 'none';
-      anEl.style.display = 'none';
-      hintEl.style.display = 'none';
+      // 未答题：显示引导区，隐藏结果区
+      if (guideEl) guideEl.style.display = 'flex';
+      if (resultEl) resultEl.style.display = 'none';
+    }
+
+    // 收藏按钮状态
+    if (bookmarkBtn) {
+      bookmarkBtn.classList.toggle('active', !!State.bookmarks[q.id]);
     }
 
     // 卡片进入动画
@@ -449,51 +456,139 @@
       });
     }
 
-    showFeedback(q, { selected, correct });
+    // 隐藏引导区，显示结果区
+    $('#q-guide').style.display = 'none';
+    showResult(q, { selected, correct });
     updateNavMeta();
     updateHomeStats();
 
     toast(correct ? '回答正确' : '回答错误', correct ? 'success' : 'error');
   }
 
-  // 显示答题反馈 + 解析 + 口诀提示
-  function showFeedback(q, record) {
-    const fbEl = $('#q-feedback');
-    const anEl = $('#q-analysis');
-    const hintEl = $('#q-mnemonic-hint');
+  // 显示答案（引导型：不答题直接查看答案与解析）
+  function showAnswerDirectly() {
+    const list = State.currentList;
+    if (!list.length) return;
+    const q = list[State.currentIdx];
+    if (State.answered[q.id]) return; // 已答过不再处理
 
-    fbEl.style.display = 'flex';
-    fbEl.className = 'q-feedback ' + (record.correct ? 'correct' : 'wrong');
+    // 标记为"已查看"（记为答错，鼓励用户主动学习）
+    State.answered[q.id] = { selected: -1, correct: false, viewed: true };
+    Store.set('kemu1_answered', State.answered);
+
+    // 标记正确答案
+    const optsEl = $('#q-options');
+    $$('.opt-item', optsEl).forEach(el => el.classList.add('disabled'));
+    if (q.type === 'judge') {
+      $$('.opt-item', optsEl).forEach((el, i) => {
+        const val = i === 1;
+        if (val === q.answer) el.classList.add('correct');
+      });
+    } else {
+      $$('.opt-item', optsEl).forEach((el, i) => {
+        if (i === q.answer) el.classList.add('correct');
+      });
+    }
+
+    // 隐藏引导区，显示结果区（标记为"查看答案"状态）
+    $('#q-guide').style.display = 'none';
+    showResult(q, { selected: -1, correct: false, viewed: true });
+    updateNavMeta();
+    updateHomeStats();
+    toast('已显示答案', 'info');
+  }
+
+  // 显示答题结果：状态条 + Tab切换（解析/口诀）
+  function showResult(q, record) {
+    const resultEl = $('#q-result');
+    const statusBar = $('#q-status-bar');
+    const statusIcon = $('#status-icon');
+    const statusText = $('#status-text');
+    const statusAnswer = $('#status-answer');
+
+    resultEl.style.display = 'block';
+
+    // 状态条内容
     const correctText = q.type === 'judge'
       ? (q.answer ? '正确' : '错误')
       : ['A', 'B', 'C', 'D', 'E', 'F'][q.answer] + ' · ' + (q.options?.[q.answer] || '');
-    fbEl.innerHTML = record.correct
-      ? `<span class="fb-icon">✓</span><span class="fb-text">回答正确</span><span class="fb-answer">正确答案：${correctText}</span>`
-      : `<span class="fb-icon">✗</span><span class="fb-text">回答错误</span><span class="fb-answer">正确答案：${correctText}</span>`;
 
-    // 解析
-    if (q.analysis) {
-      anEl.style.display = 'block';
-      $('#analysis-text').innerHTML = highlightKeywords(q.analysis, q.keywords || []);
+    if (record.viewed) {
+      // 查看答案模式
+      statusBar.className = 'q-status-bar wrong';
+      statusIcon.textContent = '?';
+      statusText.textContent = '查看答案';
+      statusAnswer.textContent = '正确答案：' + correctText;
+    } else if (record.correct) {
+      statusBar.className = 'q-status-bar correct';
+      statusIcon.textContent = '✓';
+      statusText.textContent = '回答正确';
+      statusAnswer.textContent = '正确答案：' + correctText;
     } else {
-      anEl.style.display = 'none';
+      statusBar.className = 'q-status-bar wrong';
+      statusIcon.textContent = '✗';
+      statusText.textContent = '回答错误';
+      statusAnswer.textContent = '正确答案：' + correctText;
     }
 
-    // 口诀提示：根据题目tags匹配相关口诀
+    // 解析面板
+    const analysisText = $('#analysis-text');
+    if (q.analysis) {
+      analysisText.innerHTML = highlightKeywords(q.analysis, q.keywords || []);
+    } else {
+      analysisText.innerHTML = '<span class="hint-empty">暂无解析</span>';
+    }
+
+    // 口诀面板
     const relatedMnemonics = findRelatedMnemonics(q);
+    const hintContent = $('#hint-content');
+    const mnemonicBadge = $('#mnemonic-badge');
+    const tabMnemonic = $('#tab-mnemonic');
+
     if (relatedMnemonics.length) {
-      hintEl.style.display = 'block';
-      const content = $('#hint-content');
       const html = relatedMnemonics.slice(0, 3).map(m => `
         <div class="hint-block">
           <span class="hint-text">${escapeHtml(m.text)}</span>
           <div class="hint-explain">${escapeHtml(m.explain)}</div>
         </div>
       `).join('');
-      content.innerHTML = html;
+      hintContent.innerHTML = html;
+      if (mnemonicBadge) {
+        mnemonicBadge.textContent = relatedMnemonics.length;
+        mnemonicBadge.style.display = 'inline-grid';
+      }
+      if (tabMnemonic) tabMnemonic.style.opacity = '1';
     } else {
-      hintEl.style.display = 'none';
+      hintContent.innerHTML = '<span class="hint-empty">本题暂无匹配口诀</span>';
+      if (mnemonicBadge) mnemonicBadge.style.display = 'none';
+      if (tabMnemonic) tabMnemonic.style.opacity = '0.5';
     }
+
+    // 默认切换到解析 Tab
+    switchTab('analysis');
+  }
+
+  // Tab 切换
+  function switchTab(name) {
+    $$('.q-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    $$('.tab-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+  }
+
+  // 收藏/取消收藏
+  function toggleBookmark() {
+    const list = State.currentList;
+    if (!list.length) return;
+    const q = list[State.currentIdx];
+    const isBookmarked = !!State.bookmarks[q.id];
+    if (isBookmarked) {
+      delete State.bookmarks[q.id];
+    } else {
+      State.bookmarks[q.id] = true;
+    }
+    Store.set('kemu1_bookmarks', State.bookmarks);
+    const btn = $('#btn-bookmark');
+    if (btn) btn.classList.toggle('active', !isBookmarked);
+    toast(isBookmarked ? '已取消收藏' : '已收藏题目', 'info');
   }
 
   // 根据题目tags查找相关口诀
@@ -639,6 +734,14 @@
     // 上一题/下一题
     const btnPrev = $('#btn-prev');
     const btnNext = $('#btn-next');
+    const gotoNext = () => {
+      if (State.currentIdx < State.currentList.length - 1) {
+        State.currentIdx++;
+        renderQuestion();
+      } else {
+        toast('已经是最后一题');
+      }
+    };
     if (btnPrev) btnPrev.addEventListener('click', () => {
       if (State.currentIdx > 0) {
         State.currentIdx--;
@@ -647,13 +750,26 @@
         toast('已经是第一题');
       }
     });
-    if (btnNext) btnNext.addEventListener('click', () => {
-      if (State.currentIdx < State.currentList.length - 1) {
-        State.currentIdx++;
-        renderQuestion();
-      } else {
-        toast('已经是最后一题');
-      }
+    if (btnNext) btnNext.addEventListener('click', gotoNext);
+
+    // 答题后高亮"下一题"按钮
+    const btnNextHighlight = $('#btn-next-highlight');
+    if (btnNextHighlight) btnNextHighlight.addEventListener('click', gotoNext);
+
+    // 显示答案（引导型）
+    const btnShowAnswer = $('#btn-show-answer');
+    if (btnShowAnswer) btnShowAnswer.addEventListener('click', showAnswerDirectly);
+
+    // 收藏
+    const btnBookmark = $('#btn-bookmark');
+    if (btnBookmark) btnBookmark.addEventListener('click', toggleBookmark);
+
+    // Tab 切换
+    const qTabs = $('#q-tabs');
+    if (qTabs) qTabs.addEventListener('click', e => {
+      const tab = e.target.closest('.q-tab');
+      if (!tab) return;
+      switchTab(tab.dataset.tab);
     });
 
     // 乱序切换（active态明显标识）
