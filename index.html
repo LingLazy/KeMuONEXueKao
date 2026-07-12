@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,96 +12,235 @@
 </head>
 <body>
 
-<!-- ==================== 顶部毛玻璃导航 ==================== -->
-<nav id="topnav">
-  <div class="brand">
-    <span class="brand-mark">科</span>
-    <span class="brand-text">科目一<span class="brand-accent">·</span>教考</span>
+<!-- ==================== 顶部导航 ==================== -->
+<header id="topnav">
+  <div class="nav-inner">
+    <a href="#home" class="brand" data-view="home">
+      <span class="brand-mark">科</span>
+      <span class="brand-text">科目一<span class="brand-accent">·</span>教考</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#home" class="nav-link" data-view="home">主页</a>
+      <a href="#practice" class="nav-link" data-view="practice">题库练习</a>
+      <a href="#mnemonics" class="nav-link" data-view="mnemonics">口诀总览</a>
+      <a href="#categories" class="nav-link" data-view="categories">分类导航</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="nav-meta">
+        <span class="nav-stat"><span id="nav-progress">0</span><span class="nav-stat-divider">/</span><span class="nav-stat-total">1964</span></span>
+        <span class="nav-stat nav-stat-accuracy">正确率 <span id="nav-accuracy">—</span></span>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" title="切换主题" aria-label="切换主题">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
   </div>
-  <div class="nav-links">
-    <a href="#practice" class="nav-link active" data-view="practice">题库练习</a>
-    <a href="#mnemonics" class="nav-link" data-view="mnemonics">口诀总览</a>
-    <a href="#categories" class="nav-link" data-view="categories">分类导航</a>
-  </div>
-  <div class="nav-meta">
-    <span class="nav-stat"><span id="nav-progress">0</span> / 1964</span>
-    <span class="nav-stat nav-stat-accuracy">正确率 <span id="nav-accuracy">—</span></span>
-  </div>
-</nav>
+</header>
 
 <!-- ==================== 主内容 ==================== -->
 <main id="app">
 
-  <!-- ========== 题库练习视图 ========== -->
-  <section id="view-practice" class="view active">
-    <!-- 分类侧栏 + 答题主区 -->
-    <aside class="practice-sidebar" id="category-sidebar">
-      <div class="sidebar-header">
-        <div class="sidebar-label">分类导航</div>
-        <div class="sidebar-count" id="sidebar-total">24 个分类</div>
-      </div>
-      <div class="sidebar-search">
-        <input type="text" id="search-input" placeholder="搜索题目关键词…" autocomplete="off">
-      </div>
-      <div class="sidebar-list" id="category-list"></div>
-    </aside>
-
-    <div class="practice-main">
-      <!-- 答题头部 -->
-      <header class="practice-header">
-        <div class="header-left">
-          <div class="practice-cat-tag" id="practice-cat-tag">全部题目</div>
-          <h2 class="practice-title">
-            <span id="practice-index">1</span>
-            <span class="title-divider">/</span>
-            <span id="practice-total">1964</span>
-          </h2>
-        </div>
-        <div class="header-right">
-          <button class="ghost-btn" id="btn-prev" title="上一题">←</button>
-          <button class="ghost-btn" id="btn-next" title="下一题">→</button>
-          <button class="ghost-btn" id="btn-shuffle" title="乱序">⇄</button>
-          <button class="ghost-btn" id="btn-reset" title="重置进度">↺</button>
-        </div>
-      </header>
-
-      <!-- 进度条 -->
-      <div class="progress-track">
-        <div class="progress-fill" id="progress-fill"></div>
-        <div class="progress-glow"></div>
-      </div>
-
-      <!-- 题目卡片 -->
-      <article class="question-card" id="question-card">
-        <div class="q-meta">
-          <span class="q-type" id="q-type">单选题</span>
-          <span class="q-chapter" id="q-chapter">章节</span>
-          <span class="q-tags" id="q-tags"></span>
-        </div>
-        <div class="q-body" id="q-body">
-          <div class="q-image-wrap" id="q-image-wrap" style="display:none">
-            <div class="q-image-placeholder">[ 图像题 ]</div>
+  <!-- ========== 主页视图 ========== -->
+  <section id="view-home" class="view active">
+    <div class="home-hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="hero-left">
+          <div class="hero-tag">
+            <span class="tag-dot"></span>
+            <span>2026年7月最新版 · 公安部令第163号</span>
           </div>
-          <div class="q-text" id="q-text">题目加载中…</div>
+          <h1 class="hero-title">
+            <span class="title-line">驾考科目一</span>
+            <span class="title-line title-accent">速记通</span>
+          </h1>
+          <p class="hero-sub">1964 道完整题库 · 76 条速记口诀 · 24 个精细分类。关键词标注、口诀提示、分类速练，一站式攻克科目一。</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-go="practice">
+              <span>开始练习</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <button class="btn btn-ghost" data-go="mnemonics">
+              <span>浏览口诀</span>
+            </button>
+            <button class="btn btn-ghost" data-go="categories">
+              <span>分类导航</span>
+            </button>
+          </div>
         </div>
-        <div class="q-options" id="q-options"></div>
-        <div class="q-feedback" id="q-feedback" style="display:none"></div>
-        <div class="q-analysis" id="q-analysis" style="display:none">
-          <div class="analysis-label">解析</div>
-          <div class="analysis-text" id="analysis-text"></div>
+        <div class="hero-right">
+          <div class="hero-stats-card">
+            <div class="stats-card-header">
+              <span class="stats-label">题库概览</span>
+              <span class="stats-version">v2026.07</span>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-item">
+                <div class="stat-num" id="home-stat-questions">1964</div>
+                <div class="stat-name">完整题目</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num" id="home-stat-mnemonics">76</div>
+                <div class="stat-name">速记口诀</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num" id="home-stat-categories">24</div>
+                <div class="stat-name">精细分类</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num" id="home-stat-images">371</div>
+                <div class="stat-name">图像题目</div>
+              </div>
+            </div>
+            <div class="stats-progress">
+              <div class="stats-progress-header">
+                <span>我的进度</span>
+                <span id="home-progress-text">0 / 1964</span>
+              </div>
+              <div class="stats-progress-bar">
+                <div class="stats-progress-fill" id="home-progress-fill"></div>
+              </div>
+              <div class="stats-progress-meta">
+                <span>正确率 <strong id="home-accuracy">—</strong></span>
+                <span>已练习 <strong id="home-practiced">0</strong> 题</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="q-mnemonic-hint" id="q-mnemonic-hint" style="display:none">
-          <div class="hint-label">口诀提示</div>
-          <div class="hint-content" id="hint-content"></div>
-        </div>
-      </article>
+      </div>
+    </div>
 
-      <!-- 题目快捷跳转 -->
-      <div class="quick-jump">
-        <div class="quick-jump-label">题目跳转</div>
-        <div class="quick-jump-input">
-          <input type="number" id="jump-input" min="1" max="1964" placeholder="题号">
-          <button class="mini-btn" id="jump-btn">跳转</button>
+    <div class="home-features">
+      <div class="section-header">
+        <span class="section-eyebrow">FEATURES</span>
+        <h2 class="section-title">核心功能</h2>
+        <p class="section-desc">三大学习模式，覆盖记忆、练习、查阅全场景</p>
+      </div>
+      <div class="features-grid">
+        <article class="feature-card" data-go="practice">
+          <div class="feature-icon feature-icon-1">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h3 class="feature-title">题库练习</h3>
+          <p class="feature-desc">1964 道题目按 24 分类精细组织，支持搜索、乱序、跳转。关键词智能高亮，口诀即时提示。</p>
+          <div class="feature-arrow">→</div>
+        </article>
+        <article class="feature-card" data-go="mnemonics">
+          <div class="feature-icon feature-icon-2">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3 class="feature-title">口诀总览</h3>
+          <p class="feature-desc">76 条速记口诀按分类整理，每条均附详细解释与适用场景。筛选查阅，配合练习效果更佳。</p>
+          <div class="feature-arrow">→</div>
+        </article>
+        <article class="feature-card" data-go="categories">
+          <div class="feature-icon feature-icon-3">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h3 class="feature-title">分类导航</h3>
+          <p class="feature-desc">24 个分类可视化卡片，点击即进入对应分类题目练习。针对性强化薄弱环节。</p>
+          <div class="feature-arrow">→</div>
+        </article>
+      </div>
+    </div>
+
+    <div class="home-hotcats">
+      <div class="section-header">
+        <span class="section-eyebrow">HOT CATEGORIES</span>
+        <h2 class="section-title">热门分类</h2>
+        <p class="section-desc">点击卡片快速进入对应分类练习</p>
+      </div>
+      <div class="hotcats-grid" id="home-hotcats"></div>
+    </div>
+  </section>
+
+  <!-- ========== 题库练习视图 ========== -->
+  <section id="view-practice" class="view">
+    <div class="practice-layout">
+      <!-- 分类侧栏 -->
+      <aside class="practice-sidebar" id="category-sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-title">分类导航</div>
+          <div class="sidebar-count" id="sidebar-total">24 个分类</div>
+        </div>
+        <div class="sidebar-search">
+          <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="search-input" placeholder="搜索题目关键词…" autocomplete="off">
+        </div>
+        <div class="sidebar-list" id="category-list"></div>
+      </aside>
+
+      <!-- 答题主区 -->
+      <div class="practice-main">
+        <header class="practice-header">
+          <div class="header-left">
+            <div class="practice-cat-tag" id="practice-cat-tag">全部题目</div>
+            <h2 class="practice-title">
+              <span id="practice-index">1</span>
+              <span class="title-divider">/</span>
+              <span id="practice-total">1964</span>
+            </h2>
+          </div>
+          <div class="header-right">
+            <button class="icon-btn" id="btn-prev" title="上一题 (←)" aria-label="上一题">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="icon-btn" id="btn-next" title="下一题 (→)" aria-label="下一题">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <button class="icon-btn" id="btn-shuffle" title="乱序" aria-label="乱序">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+            </button>
+            <button class="icon-btn" id="btn-reset" title="重置进度" aria-label="重置进度">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+
+        <article class="question-card" id="question-card">
+          <div class="q-meta">
+            <span class="q-type" id="q-type">单选题</span>
+            <span class="q-chapter" id="q-chapter">章节</span>
+            <span class="q-tags" id="q-tags"></span>
+          </div>
+          <div class="q-body" id="q-body">
+            <div class="q-image-wrap" id="q-image-wrap" style="display:none">
+              <div class="q-image-placeholder">[ 图像题 ]</div>
+            </div>
+            <div class="q-text" id="q-text">题目加载中…</div>
+          </div>
+          <div class="q-options" id="q-options"></div>
+          <div class="q-feedback" id="q-feedback" style="display:none"></div>
+          <div class="q-analysis" id="q-analysis" style="display:none">
+            <div class="analysis-label">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span>解析</span>
+            </div>
+            <div class="analysis-text" id="analysis-text"></div>
+          </div>
+          <div class="q-mnemonic-hint" id="q-mnemonic-hint" style="display:none">
+            <div class="hint-label">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>口诀提示</span>
+            </div>
+            <div class="hint-content" id="hint-content"></div>
+          </div>
+        </article>
+
+        <div class="practice-footer">
+          <div class="quick-jump">
+            <span class="quick-jump-label">跳转</span>
+            <input type="number" id="jump-input" min="1" max="1964" placeholder="题号">
+            <button class="mini-btn" id="jump-btn">GO</button>
+          </div>
+          <div class="keyboard-hint">
+            <kbd>←</kbd><kbd>→</kbd> 翻页 · <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> 选项
+          </div>
         </div>
       </div>
     </div>
@@ -109,26 +248,24 @@
 
   <!-- ========== 口诀总览视图 ========== -->
   <section id="view-mnemonics" class="view">
-    <div class="view-inner">
+    <div class="view-container">
       <header class="view-header">
-        <div class="section-label">MNEMONICS · 速记口诀</div>
-        <h2 class="section-title">76 条<span class="accent">口诀总览</span></h2>
-        <p class="section-lead">按 24 个分类整理的全部速记口诀，配合题目练习效果更佳。每条口诀均附详细解释与适用场景。</p>
+        <span class="section-eyebrow">MNEMONICS</span>
+        <h2 class="section-title">76 条<span class="title-accent">速记口诀</span></h2>
+        <p class="section-desc">按 24 个分类整理的全部速记口诀，配合题目练习效果更佳。每条口诀均附详细解释与适用场景。</p>
       </header>
-      <div class="mnemonics-filter-bar" id="mnemonics-filter">
-        <button class="filter-chip active" data-cat="all">全部 <span class="chip-count">76</span></button>
-      </div>
+      <div class="mnemonics-filter-bar" id="mnemonics-filter"></div>
       <div class="mnemonics-grid" id="mnemonics-grid"></div>
     </div>
   </section>
 
   <!-- ========== 分类导航视图 ========== -->
   <section id="view-categories" class="view">
-    <div class="view-inner">
+    <div class="view-container">
       <header class="view-header">
-        <div class="section-label">CATEGORIES · 24 分类导航</div>
-        <h2 class="section-title">题库<span class="accent">分类总览</span></h2>
-        <p class="section-lead">点击任意分类进入对应题目练习，每类均已标注题目数量与主题色。</p>
+        <span class="section-eyebrow">CATEGORIES</span>
+        <h2 class="section-title">24 个<span class="title-accent">分类导航</span></h2>
+        <p class="section-desc">点击任意分类进入对应题目练习，每类均已标注题目数量与主题色。</p>
       </header>
       <div class="categories-grid" id="categories-grid"></div>
     </div>
@@ -136,7 +273,7 @@
 
 </main>
 
-<!-- ==================== 答题反馈 Toast ==================== -->
+<!-- ==================== Toast ==================== -->
 <div class="toast" id="toast"></div>
 
 <script src="js/data.js"></script>
