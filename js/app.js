@@ -235,11 +235,17 @@
     const kwList = q.keywords || [];
     $('#q-text').innerHTML = highlightKeywords(q.question, kwList);
 
-    // 图像题占位
-    if (q.is_image_question) {
-      $('#q-image-wrap').style.display = 'block';
+    // 图像题：显示实际图片或占位符
+    const imgWrap = $('#q-image-wrap');
+    if (q.image) {
+      imgWrap.style.display = 'block';
+      imgWrap.innerHTML = '<img class="q-image" src="' + q.image + '" alt="题目图片" loading="lazy" onerror="this.parentNode.innerHTML=\'[ 图片加载失败 ]\'; this.parentNode.classList.add(\'q-image-placeholder\')">';
+    } else if (q.is_image_question) {
+      imgWrap.style.display = 'block';
+      imgWrap.className = 'q-image-wrap q-image-placeholder';
+      imgWrap.innerHTML = '[ 图像题 · 图片暂缺 ]';
     } else {
-      $('#q-image-wrap').style.display = 'none';
+      imgWrap.style.display = 'none';
     }
 
     // 选项

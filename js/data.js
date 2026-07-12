@@ -6803,8 +6803,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "酒驾一次12分。根据《道路交通安全违法行为记分管理办法》第八条，机动车驾驶人有下列交通违法行为之一，一次记12分：（一）饮酒后驾驶机动车的。处罚细则：1、记分：一次性记满12分（驾驶证暂扣）。2、罚款：1000~2000元（《道路交通安全法》第91条）。3、暂扣驾驶证：6个月（首次饮酒驾驶）。",
     "analysis_url": "http://tiba.jsyks.com/Post/effab.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1.jpg",
+    "is_image_question": true,
     "keywords": [
       "12分",
       "1分",
@@ -16194,8 +16194,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "C1驾驶证准驾车型为小型、微型载客汽车以及轻型、微型载货汽车；轻型、微型专项作业车 。此外，准予驾驶的其他准驾车型包括C2、C3、C4 。图1是小型汽车，属于C1驾驶证准驾范围。图2是大型客车，需要A1驾驶证才能驾驶，C1不能驾驶。图3是三轮摩托车，需要D驾驶证才能驾驶，C1不能驾驶。图4是重型载货汽车，需要B2驾驶证才能驾驶，C1不能驾驶。所以，持有C1驾驶证可以驾驶图1所示车型，答案选图1。需注意：选项中的图1、图2、图3和图4与实际图片中的标识并不是一一对应的，考生在答题时应根据车辆类型而非图片编号来确定正确答案。",
     "analysis_url": "http://tiba.jsyks.com/Post/b291c.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20082.jpg",
+    "is_image_question": true,
     "keywords": [
       "吊销",
       "实习期",
@@ -18156,7 +18156,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "机动车信号灯（圆形信号灯）有红、黄、绿三种颜色。 红灯亮时，禁止车辆通行，车辆不得越过停止线，右转弯的车辆在不妨碍被放行的车辆、行人通行的情况下，可以通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/7ed55.htm",
-    "image": "",
+    "image": "assets/images/20421.jpg",
     "is_image_question": true,
     "keywords": [
       "人行横道线",
@@ -18229,7 +18229,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "红灯亮起表示要停车等待，禁止通行，绿灯亮起表示可以通行，黄灯亮起则是起到警示作用，提醒即将切换信号灯状态。《道路交通安全法》第二十六条 交通信号灯由红灯、绿灯、黄灯组成。红灯表示禁止通行，绿灯表示准许通行，黄灯表示警示。",
     "analysis_url": "http://tiba.jsyks.com/Post/3bad3.htm",
-    "image": "",
+    "image": "assets/images/20425.jpg",
     "is_image_question": true,
     "keywords": [
       "停止",
@@ -18449,8 +18449,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "方向信号灯箭头方向向左、向上、向右分别表示左转、直行、右转。绿色箭头表示允许车辆沿箭头所指方向通行；红色箭头表示禁止车辆沿箭头所指方向通行；黄色箭头表示对箭头所指方向车辆起黄灯作用。 如图所示，绿色箭头灯向上和向右，表示允许车辆直行或向右转弯行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/daa75.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20422.jpg",
+    "is_image_question": true,
     "keywords": [
       "停止",
       "减速慢行",
@@ -18521,7 +18521,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "路口信号灯黄灯不断闪烁，代表交通信号暂时解除，路口进入无信号控制状态。此时没有固定的通行规则，车辆必须减速行驶，注意瞭望，确认路口安全后再通过，避免发生交通事故。【拓展知识】黄灯常亮（倒计时）：表示即将切换为红灯，已过停止线可继续通过，未过线应停车等待。黄灯持续闪烁：信号灯暂时解除，路口为“无灯控”状态，需减速瞭望、确认安全后通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/b20ef.htm",
-    "image": "",
+    "image": "assets/images/117.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -18572,8 +18572,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "当驾驶机动车在铁路道口看到红灯亮时，说明可能有火车即将通过，此时绝对不可以越过停止线，必须停车等待，确保安全，不能边观察边缓慢通过，也不能加速通过，更不能在火车到来前冒险通过，否则极易发生与火车碰撞的危险事故。",
     "analysis_url": "http://tiba.jsyks.com/Post/7355e.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20544.jpg",
+    "is_image_question": true,
     "keywords": [
       "人行横道线",
       "停止",
@@ -18989,7 +18989,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "这个标志是黄色三角形警告标志，图案显示多辆车辆依次排列，对应含义是“注意前方车辆排队”，提示驾驶人前方路段可能出现车流拥堵、排队缓行的情况，需提前减速、保持车距。依据GB 5768.2-2022《道路交通标志和标线 第2部分：道路交通标志》，该标志为注意前方车辆排队，用以提醒车辆驾驶人注意前方车辆排队。",
     "analysis_url": "http://tiba.jsyks.com/Post/dfdf6.htm",
-    "image": "",
+    "image": "assets/images/20644.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19023,7 +19023,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "十字交叉路口：警告前方道路有十字交叉路口，应谨慎慢行，注意横向车辆。",
     "analysis_url": "http://tiba.jsyks.com/Post/74931.htm",
-    "image": "",
+    "image": "assets/images/122.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19193,8 +19193,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "这是反向弯路标志，标志牌中间的图案形似“Z”或“2”，用以直观地表示反向弯路的情况。标志的含义是警告车辆驾驶人前方有两个相邻的方向相反的急弯路。反向弯路：警告车辆驾驶人前方有反向弯路。【二反】连续弯路：警告车辆驾驶人前方有连续弯路。【三连续】易滑：提醒车辆驾驶人减速慢行，注意路滑。",
     "analysis_url": "http://tiba.jsyks.com/Post/b4587.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/126.jpg",
+    "is_image_question": true,
     "keywords": [
       "作业区",
       "指示",
@@ -19261,7 +19261,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "该标志的含义是上陡坡。标志通常为黑边三角形，内部图案为黑色和黄色斜向相间。黑色部分含有一个黄色箭头，箭头方向向上倾斜，指示上坡方向；箭头方向向下倾斜，指示下坡方向。【拓展知识】下陡坡：标志图案为单一向下的箭头。上陡坡：标志图案为单一向上的箭头。连续下坡：标志图案为两个向下的箭头。",
     "analysis_url": "http://tiba.jsyks.com/Post/9ebe0.htm",
-    "image": "",
+    "image": "assets/images/95.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19329,7 +19329,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "该标志的含义是连续下坡，表示前方是连续下坡路段，提醒驾驶人注意控制车速，谨慎驾驶，避免因长时间下坡导致刹车过热或失控。【拓展知识】下陡坡：标志图案为单一向下的箭头。上陡坡：标志图案为单一向上的箭头。",
     "analysis_url": "http://tiba.jsyks.com/Post/7fcbd.htm",
-    "image": "",
+    "image": "assets/images/129.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19363,8 +19363,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "两侧变窄：两侧对称缩窄，表示车行道沿中心线双向变窄。右侧变窄：左侧为竖直线，右侧为曲线，曲线与直线的间距上窄下宽，形象表示右侧路面逐渐缩窄。左侧变窄：右侧为竖直线，左侧为曲线，曲线与直线的间距上窄下宽，形象表示左侧路面逐渐缩窄。",
     "analysis_url": "http://tiba.jsyks.com/Post/fc419.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/130.jpg",
+    "is_image_question": true,
     "keywords": [
       "作业区",
       "指示",
@@ -19465,7 +19465,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "标志中的图案形状是上下宽、中间窄，直观地表示出窄桥的形状，用以警告车辆驾驶人注意前方桥面宽度变窄，应谨慎驾驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/2b963.htm",
-    "image": "",
+    "image": "assets/images/133.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19500,7 +19500,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "标志中的图案是两个相反方向的箭头，表示该路段允许双向行驶，因此是双向交通标志。双向交通：用以提醒车辆驾驶人注意会车。设在由双向分离行驶，因某种原因出现临时性或永久性的不分离双向行驶的路段，或由单向行驶进入双向行驶的路段前适当位置。会车让行：表示车辆会车时，应停车让对方车先行。会车先行：表示车辆在会车时享有优先通行权利。",
     "analysis_url": "http://tiba.jsyks.com/Post/75b55.htm",
-    "image": "",
+    "image": "assets/images/134.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -19544,7 +19544,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "注意行人：用以警告车辆驾驶人减速慢行，注意行人。注意行人：用以警告车辆驾驶人减速慢行，注意行人。人行横道：表示该处为人行横道，机动车驾驶人应注意观察行人，遇行人已进入人行横道时应停车让行人通过。",
     "analysis_url": "http://tiba.jsyks.com/Post/5cbe8.htm",
-    "image": "",
+    "image": "assets/images/135.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19612,7 +19612,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "注意牲畜：提醒前方路段经常有牲畜横穿或出入，应注意慢行。注意野生动物：提醒前方路段经常有野生动物横穿或出入，应注意慢行。",
     "analysis_url": "http://tiba.jsyks.com/Post/c2245.htm",
-    "image": "",
+    "image": "assets/images/137.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19646,7 +19646,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "这个标志是三角形黄底黑图案，图案中有一头鹿的样子，是注意野生动物标志，用来提醒车辆驾驶人在该路段行驶时应注意减速慢行，因为可能有野生动物出现或横穿道路。这种标志通常设置在野生动物保护区附近或野生动物频繁出没的区域。",
     "analysis_url": "http://tiba.jsyks.com/Post/5a465.htm",
-    "image": "",
+    "image": "assets/images/138.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19681,7 +19681,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "标志中有一个信号灯的图案，是注意信号灯标志，用以提醒驾驶人注意前方的信号灯，遵守交通信号灯的指示行车。",
     "analysis_url": "http://tiba.jsyks.com/Post/bbe12.htm",
-    "image": "",
+    "image": "assets/images/139.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19724,7 +19724,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图案为落石，是注意落石标志，明确地提示驾驶人前方可能有落石情况，需要提高警惕。注意落石：提醒前方是有落石危险的傍山路段，应注意落石。傍山险路：提醒前方是傍山险路，应小心驾驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/8ab8a.htm",
-    "image": "",
+    "image": "assets/images/140.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19758,7 +19758,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "风吹飘带的图案是注意横风标志的常见表现形式之一。注意横风标志用以提醒车辆驾驶人谨慎驾驶，注意横风。因为横风可能会对车辆的行驶稳定性产生影响。标志通常设在经常有很强的侧向风的路段前适当位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/aaaad.htm",
-    "image": "",
+    "image": "assets/images/141.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19792,7 +19792,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "易滑路段：警告前方路面较滑，易发生事故，应减速慢行。反向弯路：警告车辆驾驶人前方有反向弯路。连续弯路：警告车辆驾驶人前方有连续弯路。",
     "analysis_url": "http://tiba.jsyks.com/Post/a1d89.htm",
-    "image": "",
+    "image": "assets/images/142.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19826,7 +19826,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "傍山险路：提醒前方是傍山险路，应小心驾驶。注意落石：提醒前方是有落石危险的傍山路段，应注意落石。",
     "analysis_url": "http://tiba.jsyks.com/Post/6d1df.htm",
-    "image": "",
+    "image": "assets/images/143.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19860,7 +19860,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "该标志的含义是：堤坝路。依据 GB 5768.2-2022《道路交通标志和标线 第 2 部分：道路交通标志》7.23 堤坝路警告标志条款：该黄底三角警告标志图形包含抬高梯形堤坝路基与水体波纹，用以提醒车辆驾驶人谨慎驾驶，前方为沿水库、湖泊、河流修建的堤坝道路，路基高于水面，路侧存在坠水风险，设置在堤坝路段前适当位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/58802.htm",
-    "image": "",
+    "image": "assets/images/144.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19894,7 +19894,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "村庄：提醒前方是紧靠村庄、集镇且视线不良的路段，应小心驾驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/91ce6.htm",
-    "image": "",
+    "image": "assets/images/145.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19928,7 +19928,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "黄底黑图隧道形，前方进入隧道口。根据《道路交通标志和标线》（GB 5768-2022）标准，这个黄色三角形警告标志上，画着一个隧道入口的图案是隧道标志，提醒前方是双向行驶并且照明不好的隧道，应注意慢行。",
     "analysis_url": "http://tiba.jsyks.com/Post/42c91.htm",
-    "image": "",
+    "image": "assets/images/146.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -19996,7 +19996,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "路面不平：提醒前方路面颠簸或有桥头跳车比较严重，应减速慢行。驼峰桥：提醒前方是拱度很大、影响视距的驼峰桥，应谨慎驾驶。减速丘：用以提醒车辆驾驶人减速，注意前方路段设有减速丘。",
     "analysis_url": "http://tiba.jsyks.com/Post/dab6d.htm",
-    "image": "",
+    "image": "assets/images/149.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20030,7 +20030,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "减速丘：用以提醒车辆驾驶人减速，注意前方路段设有减速丘 。（2022新版道路交通标志国家标准修改了路面高突标志的名称 , 改为减速丘标志）路面不平：提醒前方路面颠簸或有桥头跳车比较严重，应减速慢行。驼峰桥：提醒前方是拱度很大、影响视距的驼峰桥，应谨慎驾驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/a9f84.htm",
-    "image": "",
+    "image": "assets/images/150.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20099,7 +20099,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "过水路面（漫水桥）：提醒前方是过水路面或漫水桥路段，应停车察明水情，确认安全后，低速通过。渡口：提醒前方是车辆渡口，应谨慎驾驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/75d2f.htm",
-    "image": "",
+    "image": "assets/images/152.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -20143,7 +20143,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "左侧绕行：用以告示前方道路有障碍物，车辆应按标志指示减速慢行，左侧绕行通过。左右绕行左侧绕行右侧绕行",
     "analysis_url": "http://tiba.jsyks.com/Post/a12d5.htm",
-    "image": "",
+    "image": "assets/images/164.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20211,7 +20211,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "注意障碍物：：告示前方道路有障碍物，车辆应按标志指示减速慢行，绕行通过。注意障碍物-左右绕行注意障碍物-左侧绕行注意障碍物-右侧绕行",
     "analysis_url": "http://tiba.jsyks.com/Post/ac3ab.htm",
-    "image": "",
+    "image": "assets/images/163.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20246,7 +20246,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "使用车辆碰撞的示意图，直观地表示事故多发，因此是事故易发路段标志，用以警告前方道路为事故易发路段，车辆驾驶人应谨慎驾驶。设在交通事故易发路段前适当位置，如急弯、陡坡、视线不佳或有特殊危险因素的路段。",
     "analysis_url": "http://tiba.jsyks.com/Post/ea07d.htm",
-    "image": "",
+    "image": "assets/images/161.jpg",
     "is_image_question": true,
     "keywords": [
       "120",
@@ -20288,7 +20288,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "无人看守铁路道口：警告前方是无人看守的铁路道口，应按照交通信号指示通行，无交通信号时应减速或停车观察，确认安全后通过。有人看守铁路道口：警告前方是有人看守的铁路道口，应减速或停车观察，按照交通信号或管理人员的指挥通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/af442.htm",
-    "image": "",
+    "image": "assets/images/154.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20322,7 +20322,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "标志中间是栅栏图案，因此是有人看守铁路道口标志，警告前方是有人看守的铁路道口，应减速或停车观察，按照交通信号或管理人员的指挥通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/e4804.htm",
-    "image": "",
+    "image": "assets/images/153.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20357,7 +20357,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "叉形符号：表示多股铁路与道路相交，设在铁路道口标志上方。",
     "analysis_url": "http://tiba.jsyks.com/Post/4c111.htm",
-    "image": "",
+    "image": "assets/images/155.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -20401,7 +20401,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "【斜杠符号】设在“无人看守铁路道口”标志下方的红色斜杠，表示距无人看守铁路道口的距离，一条斜杠代表50米。因此，图示标志一条红色斜杠，表示距无人看守铁路道口50米。距无人看守铁路道口50米距无人看守铁路道口100米距无人看守铁路道口150米",
     "analysis_url": "http://tiba.jsyks.com/Post/f3862.htm",
-    "image": "",
+    "image": "assets/images/156.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20469,7 +20469,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "【斜杠符号】设在“无人看守铁路道口”标志下方的红色斜杠，表示距无人看守铁路道口的距离，一条斜杠代表50米。因此，图示标志三条红色斜杠，表示距无人看守铁路道口150米。距无人看守铁路道口50米距无人看守铁路道口100米距无人看守铁路道口150米",
     "analysis_url": "http://tiba.jsyks.com/Post/79c95.htm",
-    "image": "",
+    "image": "assets/images/158.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20504,7 +20504,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "黄底黑边三角形，答案优先选注意。注意非机动车：提醒前方道路经常有非机动车横穿或出入，应注意慢行。非机动车行驶：前方道路只供非机动车行驶。非机动车道：所指示车道只供非机动车行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/fa2c1.htm",
-    "image": "",
+    "image": "assets/images/159.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -20591,7 +20591,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "注意残疾人：提醒前方是残疾人经常出入地点，应减速慢行，注意残疾人。",
     "analysis_url": "http://tiba.jsyks.com/Post/b6987.htm",
-    "image": "",
+    "image": "assets/images/160.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20625,7 +20625,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "施工：告示前方道路施工，车辆应减速慢行或绕道行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/c8baa.htm",
-    "image": "",
+    "image": "assets/images/20287.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20659,7 +20659,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "交叉路口标志，用以警告车辆驾驶人前方是被交路比当前道路窄的交叉路口，谨慎驾驶，注意横向来车。",
     "analysis_url": "http://tiba.jsyks.com/Post/bb911.htm",
-    "image": "",
+    "image": "assets/images/20335.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20693,7 +20693,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "如图所示的线形诱导标，设置在视线不好的T形交叉口，用以引导行车方向，提醒驾驶人谨慎驾驶，注意前方线形变化。线形诱导标为黄底黑图形 、无边框，形状为矩形。",
     "analysis_url": "http://tiba.jsyks.com/Post/ed5d8.htm",
-    "image": "",
+    "image": "assets/images/260.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20807,7 +20807,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "这个警告标志是注意危险标志，用于提醒驾驶者前方存在潜在的危险或或需要注意的路况。它并不特指某种具体的危险，而是提醒驾驶人保持警惕，注意观察路况。",
     "analysis_url": "http://tiba.jsyks.com/Post/e2349.htm",
-    "image": "",
+    "image": "assets/images/166.jpg",
     "is_image_question": true,
     "keywords": [
       "120",
@@ -20851,7 +20851,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "建议速度：用以提醒车辆驾驶人以建议的速度行驶。建议速度和限制速度不同，仅表示警告和建议。限制速度：本标志至前方解除限制速度标志或另一块不同限速值的限制速度标志的路段内，机动车行驶速度不准超过标志所示数值。最低限速：前方道路的最低时速限制。",
     "analysis_url": "http://tiba.jsyks.com/Post/91136.htm",
-    "image": "",
+    "image": "assets/images/168.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -20910,7 +20910,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "注意潮汐车道：用以警告车辆驾驶人注意前方为潮汐车道，即前方车道上车辆行驶方向可随交通管理需要变化。设在潮汐车道路段起点前适当位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/e7cfa.htm",
-    "image": "",
+    "image": "assets/images/170.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -20945,7 +20945,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "注意保持车距：用以警告车辆驾驶人注意和前车保持安全距离。设在道路路侧干扰较少、行驶速度较高的路段前适当位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/9afe2.htm",
-    "image": "",
+    "image": "assets/images/171.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -20996,7 +20996,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "注意合流：用以警告车辆驾驶人注意前方有车辆汇合。设在主路合流点前适当位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/8db3c.htm",
-    "image": "",
+    "image": "assets/images/173.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -21042,7 +21042,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "注意车道数变少标志：用以提醒车辆驾驶人注意前方车道数量变少。设在变化点前适当位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/9e1d1.htm",
-    "image": "",
+    "image": "assets/images/256.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -21093,7 +21093,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "避险车道：提醒前方道路设置了避险车道，即供速度失控车辆驶离原车道，进行安全减速的专用车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/5c525.htm",
-    "image": "",
+    "image": "assets/images/174.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -21143,7 +21143,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "慢行标志：提醒前方道路发生特殊情况，影响行车安全，需减速慢行。",
     "analysis_url": "http://tiba.jsyks.com/Post/7aab8.htm",
-    "image": "",
+    "image": "assets/images/162.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -21178,7 +21178,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "警告标志-交通事故管理，用以警告前方路段正在进行道路交通事故管理，车辆驾驶人应减速慢行、停车等候或绕道行驶。该标志为粉红色底或荧光粉红色底、黑文字。作为临时性标志设在进行交通事故管理的路段前适当位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/cf036.htm",
-    "image": "",
+    "image": "assets/images/20241.jpg",
     "is_image_question": true,
     "keywords": [
       "120",
@@ -21222,7 +21222,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "停车让行：表示车辆必须在进入路口前完全停止，确认安全后，方可通行。标志形状为正八边形，颜色为红底白字。减速让行：表示相交道路有优先通行权，车辆应慢行或停车，观察相交道路行车情况，让相交道路车辆优先通行和确认安全时，方可通行。标志形状为倒等边三角形，颜色为白底，红边，黑字。",
     "analysis_url": "http://tiba.jsyks.com/Post/459a5.htm",
-    "image": "",
+    "image": "assets/images/176.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -21278,7 +21278,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "减速让行标志（倒等边三角形，白底红边黑字“让”）：表示相交道路有优先通行权，车辆应慢行或停车，观察相交道路行车情况，让相交道路车辆优先通行和确认安全时，方可通行。停车让行标志（八角形，红底白字“停”）：表示车辆必须在停止线前停车瞭望，确认安全后方可通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/dcf68.htm",
-    "image": "",
+    "image": "assets/images/177.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -21340,7 +21340,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "会车让行：表示车辆会车时，应停车让对方车先行。会车先行：表示车辆在会车时享有优先通行权利。对向来车方向为红色箭头，优先行进方向为白色箭头。双向交通：用以提醒车辆驾驶人注意会车。",
     "analysis_url": "http://tiba.jsyks.com/Post/0079e.htm",
-    "image": "",
+    "image": "assets/images/178.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -21444,7 +21444,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "禁止超车：前方路段禁止机动车超车，直到出现解除禁止超车标志。解除禁止超车：禁止超车路段结束，与禁止超车标志成对使用。",
     "analysis_url": "http://tiba.jsyks.com/Post/59d1f.htm",
-    "image": "",
+    "image": "assets/images/188.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -21484,7 +21484,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "图片中的交通标志是一个禁令标志，由红色圆圈、斜杠以及内部的小型客车图案组成。在交通标志体系里，红色圆圈加斜杠通常表示禁止，该标志内的小型客车图案表明其含义是禁止小型客车驶入。小型客车一般指核载人数较少（通常9人及以下）的载客汽车，像常见的家用轿车等就属于小型客车范畴。",
     "analysis_url": "http://tiba.jsyks.com/Post/37779.htm",
-    "image": "",
+    "image": "assets/images/20460.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -21591,7 +21591,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "禁止向左转弯：前方路口禁止一切车辆向左转弯。禁止向右转弯：前方路口禁止一切车辆向右转弯。",
     "analysis_url": "http://tiba.jsyks.com/Post/a6f72.htm",
-    "image": "",
+    "image": "assets/images/181.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -21632,7 +21632,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "禁止向右转弯：前方路口禁止一切车辆向右转弯。禁止向左转弯：前方路口禁止一切车辆向左转弯。",
     "analysis_url": "http://tiba.jsyks.com/Post/ee4fa.htm",
-    "image": "",
+    "image": "assets/images/182.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -21673,7 +21673,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "禁止直行：前方路口禁止一切车辆直行。此标志设在禁止直行的路口前适当位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/e68e8.htm",
-    "image": "",
+    "image": "assets/images/183.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -21714,7 +21714,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "禁止向左向右转弯：前方路口禁止一切车辆向左向右转弯。",
     "analysis_url": "http://tiba.jsyks.com/Post/6848d.htm",
-    "image": "",
+    "image": "assets/images/184.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -21755,7 +21755,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "禁止直行和向左转弯：前方路口禁止一切车辆直行和向左转弯。",
     "analysis_url": "http://tiba.jsyks.com/Post/bd019.htm",
-    "image": "",
+    "image": "assets/images/185.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -21837,7 +21837,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "禁止掉头：前方路口禁止机动车掉头。允许掉头：此处允许机动车掉头。",
     "analysis_url": "http://tiba.jsyks.com/Post/e948a.htm",
-    "image": "",
+    "image": "assets/images/187.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -21922,7 +21922,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "禁止车辆长时停放：表示在限定的范围内，禁止一切车辆长时停、放，临时停放不受限制。设在禁止车辆长时停、放的地方，标志颜色为蓝底 、红圈、红斜杠。临时停放指车辆停车上下客或装卸货等，且驾驶人在车内或车旁守候。禁止车辆停放：表示在限定的范围内，禁止一切车辆停、放，无论驾驶人是否离开车辆。设在禁止车辆停、放的地方，标志颜色为蓝底、红圈、红斜杠。禁止车辆停放的时段、车种和范围可用辅助标志说明。",
     "analysis_url": "http://tiba.jsyks.com/Post/cd63d.htm",
-    "image": "",
+    "image": "assets/images/191.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -21965,7 +21965,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "限制高度：前方路段禁止装载高度超过标志所示数值的车辆通行。限制宽度：前方路段禁止装载宽度超过标志所示数值的车辆通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/9be19.htm",
-    "image": "",
+    "image": "assets/images/194.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -21999,7 +21999,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "限制宽度：前方路段禁止装载宽度超过标志所示数值的车辆通行。限制高度：前方路段禁止装载高度超过标志所示数值的车辆通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/e5941.htm",
-    "image": "",
+    "image": "assets/images/193.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22033,7 +22033,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "禁止鸣喇叭：前方道路禁止车辆鸣喇叭。鸣喇叭：机动车行至本标志处应鸣喇叭，以提醒对向车辆驾驶人注意并减速慢行。",
     "analysis_url": "http://tiba.jsyks.com/Post/a8ac2.htm",
-    "image": "",
+    "image": "assets/images/192.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22067,7 +22067,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "限制速度：本标志至前方解除限制速度标志或另一块不同限速值的限制速度标志的路段内，机动车行驶速度不准超过标志所示数值。最低限速：前方道路的最低时速限制。建议速度：提醒车辆驾驶人以建议的速度行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/cd0e8.htm",
-    "image": "",
+    "image": "assets/images/195.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22131,7 +22131,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "停车检查：前方是机动车必须停车接受检查的地点。海关：道路前方是海关，所有机动车必须停车接受海关检查后方可通过。",
     "analysis_url": "http://tiba.jsyks.com/Post/91865.htm",
-    "image": "",
+    "image": "assets/images/197.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -22174,7 +22174,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "线形诱导标，用于引导行车方向，指示道路使用者前方线形变化。标志顶端的小三角形指向哪一侧，就表示哪一侧可以通行。顶端三角形在右侧，表示右侧通行。顶端三角形在左侧，表示左侧通行。顶端三角形在两侧，表示两侧通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/4b350.htm",
-    "image": "",
+    "image": "assets/images/261.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22276,7 +22276,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "国（Guo）道编号： 指示当前所行驶道路的国道编号。省（Sheng ）道编号：指示当前所行驶道路的省道编号。县（Xian）道编号：指示当前所行驶道路的县道编号。乡（Xiang）道编号：指示当前所行驶道路的乡道编号。",
     "analysis_url": "http://tiba.jsyks.com/Post/12250.htm",
-    "image": "",
+    "image": "assets/images/243.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22412,7 +22412,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "这个蓝底白图案的标志，清晰显示了前方交叉路口的三个行驶方向（左转远大路、直行知泉路、右转林园路）及距离，是典型的交叉路口预告标志，用于提前告知驾驶人前方路口的道路名称与行驶方向，方便提前规划车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/30b06.htm",
-    "image": "",
+    "image": "assets/images/237.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22515,7 +22515,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "解除禁止超车：表示禁止超车路段结束；与禁止超车标志成对使用；此标志设在禁止超车路段的终点。禁止超车：前方路段禁止机动车超车，直到出现解除禁止超车标志。",
     "analysis_url": "http://tiba.jsyks.com/Post/30284.htm",
-    "image": "",
+    "image": "assets/images/189.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -22555,7 +22555,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "解除限制速度：标志中数字“40”被斜线划掉，含义是表示之前路段的“最高时速40公里”限制到此结束，车辆可以按照道路规定的正常速度行驶。限制速度：本标志至前方解除限制速度标志或另一块不同限速值的限制速度标志的路段内，机动车行驶速度不准超过标志所示数值。",
     "analysis_url": "http://tiba.jsyks.com/Post/a0c58.htm",
-    "image": "",
+    "image": "assets/images/196.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22589,7 +22589,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "机动车行驶：表示该道路仅供机动车通行。机动车车道：表示该车道仅供机动车通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/f2097.htm",
-    "image": "",
+    "image": "assets/images/229.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22625,7 +22625,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "非机动车行驶：形状：一般为圆形，蓝底白图案，标志中有一辆自行车的图形。含义：指示非机动车可以在此路段行驶，主要是为了引导非机动车的行驶方向，告诉非机动车驾驶人可以沿着该标志指示的方向前行。但这个标志并不代表该路段是专门的非机动车道，可能与机动车混行。作用：提醒非机动车驾驶人在该路段的行驶权利和行驶方向，确保非机动车能够安全、有序地行驶。非机动车车道：形状：一般为方形，蓝底白图案，标志中有自行车和车道的图形。含义：表示该路段是专门为非机动车设置的车道，机动车不得驶入。明确划分了道路的使用权限，为非机动车提供了相对独立和安全的行驶空间。作用：保障非机动车的行驶安全，减少非机动车与机动车之间的冲突，提高道路通行效率。",
     "analysis_url": "http://tiba.jsyks.com/Post/7e143.htm",
-    "image": "",
+    "image": "assets/images/231.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -22676,7 +22676,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "蓝底白图是指示，不要混淆成警告。鸣喇叭：机动车行至本标志处应鸣喇叭，以提醒对向车辆驾驶人注意并减速慢行。禁止鸣喇叭：表示前方道路禁止车辆鸣喇叭。",
     "analysis_url": "http://tiba.jsyks.com/Post/241ef.htm",
-    "image": "",
+    "image": "assets/images/215.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22711,7 +22711,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "速度标志别花眼，蓝低红高黄建议。最低限速：前方道路的最低时速限制。限制速度：本标志至前方解除限制速度标志或另一块不同限速值的限制速度标志的路段内，机动车行驶速度不准超过标志所示数值。建议速度：提醒车辆驾驶人以建议的速度行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/a6227.htm",
-    "image": "",
+    "image": "assets/images/217.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -22761,7 +22761,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "只准直行：前方路口一切车辆只准直行。（圆胖子箭头转弯不方便-只准直行）单行路：前方道路为单向行驶，已进入车辆应按标志指示方向行车。（长瘦子箭头很单薄-单行路）【拓展延伸】指示标志，箭头指哪往哪走。",
     "analysis_url": "http://tiba.jsyks.com/Post/50fd7.htm",
-    "image": "",
+    "image": "assets/images/200.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22795,7 +22795,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "向右转弯：前方路口一切车辆只准向右转弯。向左转弯：前方路口一切车辆只准向左转弯。【拓展延伸】指示标志，箭头指哪往哪走。",
     "analysis_url": "http://tiba.jsyks.com/Post/18d69.htm",
-    "image": "",
+    "image": "assets/images/202.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22829,7 +22829,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "直行和向右转弯：前方路口一切车辆只准直行和向右转弯。直行和向左转弯向左和向右转弯【拓展延伸】指示标志，箭头指哪往哪走。",
     "analysis_url": "http://tiba.jsyks.com/Post/7ff63.htm",
-    "image": "",
+    "image": "assets/images/203.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22863,7 +22863,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "直行和向左转弯：前方路口一切车辆只准直行和向左转弯。直行和向右转弯向左和向右转弯【拓展延伸】指示标志，箭头指哪往哪走。",
     "analysis_url": "http://tiba.jsyks.com/Post/86a40.htm",
-    "image": "",
+    "image": "assets/images/204.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22897,7 +22897,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "向左和向右转弯：前方路口一切车辆只准向左和向右转弯。直行右转弯直行左转弯【拓展延伸】指示标志，箭头指哪往哪走。",
     "analysis_url": "http://tiba.jsyks.com/Post/4a31c.htm",
-    "image": "",
+    "image": "assets/images/205.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -22931,7 +22931,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "立体交叉直行和右转弯行驶：该标志是立体交叉行驶指示标志，图案包含向上的直行箭头和向右的转弯箭头，结合“立体交叉”的场景属性，含义是“立体交叉直行和右转弯行驶”，用于指示车辆在立体交叉路段可选择直行或右转的行驶路线。其他选项分析如下：1：标志中无左转箭头，排除 “左转弯行驶” 的表述。2：缺少 “立体交叉” 的场景限定，该标志针对立体交叉路段，并非普通路段的直行右转。",
     "analysis_url": "http://tiba.jsyks.com/Post/57379.htm",
-    "image": "",
+    "image": "assets/images/208.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -23000,7 +23000,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "分隔带右侧行驶：前方路段一切车辆只准靠右侧行驶。分隔带左侧行驶：前方路段一切车辆只准靠左侧行驶。【拓展延伸】向下箭头左右斜，左斜靠左行，右斜靠右行。",
     "analysis_url": "http://tiba.jsyks.com/Post/6b35a.htm",
-    "image": "",
+    "image": "assets/images/20265.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -23044,7 +23044,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "分隔带左侧行驶：前方路段一切车辆只准靠左侧行驶。分隔带右侧行驶：前方路段一切车辆只准靠右侧行驶。【拓展延伸】指示标志，箭头指哪往哪走。",
     "analysis_url": "http://tiba.jsyks.com/Post/629ee.htm",
-    "image": "",
+    "image": "assets/images/207.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -23087,7 +23087,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "环岛行驶：前方环岛，一切车辆只准靠右环形，环内车辆具有优先权，车辆进入环岛时应让环岛内车辆优先通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/80ef2.htm",
-    "image": "",
+    "image": "assets/images/210.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -23165,7 +23165,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "单行路：前方道路为单向行驶，已进入车辆应按标志指示方向行车。向左单行路向右单行路直行单行路",
     "analysis_url": "http://tiba.jsyks.com/Post/ce8f5.htm",
-    "image": "",
+    "image": "assets/images/211.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -23210,7 +23210,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "单行路：前方道路为单向行驶，已进入车辆应按标志指示方向行车。向左单行路向右单行路直行单行路",
     "analysis_url": "http://tiba.jsyks.com/Post/685a2.htm",
-    "image": "",
+    "image": "assets/images/212.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -23255,7 +23255,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "蓝色隧道图标+数字（如2km）是隧道出口距离预告指路标志，用于指示到前方隧道出口的距离。在隧道尽头看到的亮光，表示出口；2km表示距离，这个标志的含义是指示到前方隧道出口的距离。",
     "analysis_url": "http://tiba.jsyks.com/Post/81ee4.htm",
-    "image": "",
+    "image": "assets/images/259.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -23295,7 +23295,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "交通监控设备标志属于指路标志，蓝底、白图形、白边框、蓝色衬边。用于告知机动车驾驶人本路段设置了图像采集等交通监控设备。【拓展知识】违法抓拍摄像头属于交通监控设备的一种。交通监控设备有多种类型和功能，违法抓拍摄像头主要用于抓拍车辆的违法行为，如闯红灯、超速、不按规定车道行驶等。它通过拍摄图像或视频的方式记录违法车辆的信息，为交通管理部门提供执法依据。",
     "analysis_url": "http://tiba.jsyks.com/Post/52129.htm",
-    "image": "",
+    "image": "assets/images/20284.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -23364,7 +23364,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "单行路：前方道路为单向行驶，已进入车辆应按标志指示方向行车。向左单行路向右单行路直行单行路",
     "analysis_url": "http://tiba.jsyks.com/Post/7e9f3.htm",
-    "image": "",
+    "image": "assets/images/213.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -23410,7 +23410,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "标志为蓝底白色，中间一条竖直粗箭向上，左右各有一条细短横线，是国标 GB 5768.2-2022 中的“干路先行”标志，表示本车所在道路为干路，享有优先通行权，支路车辆应让行。",
     "analysis_url": "http://tiba.jsyks.com/Post/b6368.htm",
-    "image": "",
+    "image": "assets/images/218.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -23497,7 +23497,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "应急避难设施（场所）：附近有应急避难场所、隧道等设施的疏散通道或其他应急避难设施。",
     "analysis_url": "http://tiba.jsyks.com/Post/d2f6b.htm",
-    "image": "",
+    "image": "assets/images/20464.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -23532,7 +23532,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "山水图案 + P + 观景台文字，对应观景台功能，因此选观景台。观景台：标志指示方向有观景台，驾驶人可在路侧停车观察。休息区：标志指示方向有路侧休息区。",
     "analysis_url": "http://tiba.jsyks.com/Post/60c8b.htm",
-    "image": "",
+    "image": "assets/images/251.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -23577,7 +23577,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "错车道：指示前方路段设有避让来车的处所。紧急停车带：前方路段设有紧急停车的位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/052b5.htm",
-    "image": "",
+    "image": "assets/images/250.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -23627,7 +23627,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "蓝底白图是指示，不要混淆成警告。人行横道：表示该处为人行横道，机动车驾驶人应注意观察行人，遇行人已进入人行横道时应停车让行人通过。注意行人：用以警告车辆驾驶人减速慢行，注意行人。",
     "analysis_url": "http://tiba.jsyks.com/Post/ba267.htm",
-    "image": "",
+    "image": "assets/images/216.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -23662,7 +23662,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "室内停车场：附近设有室内停车场。露天停车场：附近设有露天停车场。",
     "analysis_url": "http://tiba.jsyks.com/Post/10813.htm",
-    "image": "",
+    "image": "assets/images/248.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -23750,7 +23750,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "允许掉头：表示该处允许机动车掉头，设在允许机动车掉头的地点。",
     "analysis_url": "http://tiba.jsyks.com/Post/6ad66.htm",
-    "image": "",
+    "image": "assets/images/235.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -23793,7 +23793,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "红圈红箭头在右-会车让行；蓝底红箭头在左-会车先行。会车先行：表示车辆在会车时享有优先通行权利。对向来车方向为红色箭头，优先行进方向为白色箭头。会车让行：表示车辆会车时，应停车让对方车先行。双向交通：用以提醒车辆驾驶人注意会车。",
     "analysis_url": "http://tiba.jsyks.com/Post/ec007.htm",
-    "image": "",
+    "image": "assets/images/219.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -23852,7 +23852,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "绕行：前方道路实施交通管制，车辆需按照标志所指示的路线绕行。如图所示，高度超过4米的车辆需按箭头指引的路线绕行通过，因此是超高绕行>。",
     "analysis_url": "http://tiba.jsyks.com/Post/c0c67.htm",
-    "image": "",
+    "image": "assets/images/254.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -23887,7 +23887,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "掉头车道：所指示的车道为掉头车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/b1907.htm",
-    "image": "",
+    "image": "assets/images/225.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -23927,7 +23927,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "直行和右转合用车道：所指示的车道为直行和右转合用车道。直行和左转合用车道：所指示的车道为直行和左转合用车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/31278.htm",
-    "image": "",
+    "image": "assets/images/223.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -23962,7 +23962,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "直行和左转合用车道：所指示的车道为直行和左转合用车道。直行和右转合用车道：所指示的车道为直行和右转合用车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/473f7.htm",
-    "image": "",
+    "image": "assets/images/224.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -24003,7 +24003,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "右转车道：所指示的车道为右转车道。左转车道：所指示的车道为左转车道。直行车道：所指示的车道为直行车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/095d8.htm",
-    "image": "",
+    "image": "assets/images/220.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -24085,7 +24085,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "直行车道：所指示的车道为直行车道。右转车道：所指示的车道为右转车道。左转车道：所指示的车道为左转车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/cb564.htm",
-    "image": "",
+    "image": "assets/images/222.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -24126,7 +24126,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "掉头和左转合用车道：所指示的车道为掉头和左转合用车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/d6d84.htm",
-    "image": "",
+    "image": "assets/images/226.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -24201,7 +24201,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "根据国标《道路交通标志和标线》（GB 5768.2-2022），图中这个方形、蓝底、白自行车 + 向下箭头 + 两侧车道线的标志，正式名称是非机动车车道标志。表示：该车道专供所有非机动车（自行车、电动自行车、三轮车等）行驶，机动车禁止驶入。非机动车车道：方的，非机动车有车道。非机动车行驶：圆的，非机动车能通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/ea07a.htm",
-    "image": "",
+    "image": "assets/images/232.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -24278,7 +24278,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "多乘员车辆（HOV）专用车道：表示该车道仅供多乘员的车辆通行。机动车车道：表示该车道仅供机动车通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/12bed.htm",
-    "image": "",
+    "image": "assets/images/20456.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -24423,7 +24423,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "分向行驶车道：各车道车辆应按照标志指示方向行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/6f189.htm",
-    "image": "",
+    "image": "assets/images/20461.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -24457,7 +24457,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "蓝底加油枪，就是加油站。图中这个蓝底黑油箱的标志是加油站，用于指示加油站的位置，为驾驶人提供明确的指引，让他们能够快速找到可以加油的地点。这种标志设计具有明确的辨识度和规范性。蓝色底色在交通标志中通常表示指示信息，黑色的油箱图案形象地表示了与加油相关的功能。",
     "analysis_url": "http://tiba.jsyks.com/Post/d0c06.htm",
-    "image": "",
+    "image": "assets/images/20465.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -24492,7 +24492,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "地点识别指路标志-地铁，为道路使用者提供各种重要场所的识别和指向。",
     "analysis_url": "http://tiba.jsyks.com/Post/f5cae.htm",
-    "image": "",
+    "image": "assets/images/20336.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -24613,7 +24613,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "车道数增加：前车道数量增加，需谨慎驾驶。车道数减少：前方车道数量变少，需提高警惕",
     "analysis_url": "http://tiba.jsyks.com/Post/4645d.htm",
-    "image": "",
+    "image": "assets/images/257.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -24808,7 +24808,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "蓝牌标地点，搭配距离是“地点距离”。根据 GB 5768《道路交通标志和标线》的规定，该标志属于地点距离指路标志，其功能正是指引前方途经的重要公路编号（如 G101）、道路名称（如南直路、八一路）、地名，同时标注对应的距离信息。",
     "analysis_url": "http://tiba.jsyks.com/Post/81a32.htm",
-    "image": "",
+    "image": "assets/images/247.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -24842,7 +24842,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "十字交叉路口：两条道路垂直相交，告知前方是十字交叉路口、交叉公路的编号或交叉道路的名称、通往方向信息、地理方向信息。大交通量的四车道以上公路交叉路口预告：预告前方交叉路口形式、交叉公路的编号或交叉公路的名称、通往方向信息、地理方向信息以及距前方交叉路口的距离。",
     "analysis_url": "http://tiba.jsyks.com/Post/00624.htm",
-    "image": "",
+    "image": "assets/images/238.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -24876,7 +24876,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "丁字路口：一条道路与另一条道路的一侧相交形成“T”字形，标志上一横一竖，代表两条路在这里交汇，但竖向的这条路是尽头路，也就是我们常说的丁字路口。告知前方是丁字交叉路口、交叉公路的编号或交叉道路的名称、通往方向信息、地理方向信息。十字交叉路口：两条道路垂直相交（横竖交叉），告知前方是十字交叉路口、交叉公路的编号或交叉道路的名称、通往方向信息、地理方向信息。Y形路口：两条道路汇合形成Y字形，告知前方是Y形交叉路口及通往方向信息。",
     "analysis_url": "http://tiba.jsyks.com/Post/6d67a.htm",
-    "image": "",
+    "image": "assets/images/239.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -24910,7 +24910,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "环形交叉路口预告：告知前方是环形交叉路口、交叉公路的编号或交叉道路的名称、通往方向信息、地理方向信息。互通式立体交叉预告：告知前方互通式立体交叉路口的形式、交叉公路的编号或交叉道路的名称、通往方向信息、地理方向信息。",
     "analysis_url": "http://tiba.jsyks.com/Post/07682.htm",
-    "image": "",
+    "image": "assets/images/241.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -24989,7 +24989,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "该标志由“ETC”字样 和“收费站”图形组合而成，是道路交通标志和标线（GB 5768）中规定的指路标志，用于预告前方收费站设有电子不停车收费（ETC）车道，方便已安装ETC设备的车辆提前选择车道快速通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/675b6.htm",
-    "image": "",
+    "image": "assets/images/275.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25033,7 +25033,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "如图所示编号，指示高速公路命名编号，作为指路标志的路线信息。字母G，为“国”字拼音的首字母。",
     "analysis_url": "http://tiba.jsyks.com/Post/224fa.htm",
-    "image": "",
+    "image": "assets/images/267.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25077,7 +25077,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "【绿底标志在高速，看图识字就可以】入口预告：预告前方进入高速公路或城市快速路入口的距离及行车方向。标志上明确标注“入口”字样，并带有距离提示和箭头，表示前方2公里处有高速公路入口。",
     "analysis_url": "http://tiba.jsyks.com/Post/49d2b.htm",
-    "image": "",
+    "image": "assets/images/264.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25121,7 +25121,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中这个标志通常是在高速公路上，上面会有具体的地点名称以及行驶方向的信息，所以它是高速公路地点、方向预告，用以指示前方高速公路或城市快速路的两个行驶方向。其他选项分析如下：1，高速公路右侧出口预告一般会明确标明“出口”字样以及方向箭头指向右侧；2，高速公路下一出口预告通常会有“下一出口”的字样及相关信息；3，高速公路左侧出口预告会有明确指向左侧的箭头和“出口”字样。",
     "analysis_url": "http://tiba.jsyks.com/Post/4aea3.htm",
-    "image": "",
+    "image": "assets/images/265.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25165,7 +25165,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "地点距离预告：预告高速公路或城市快速路前方所有经管的重要的地点、道路的名称和距离。地点、方向预告：指示前方高速公路或城市快速路的两个行驶方向。",
     "analysis_url": "http://tiba.jsyks.com/Post/41ba2.htm",
-    "image": "",
+    "image": "assets/images/266.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25238,7 +25238,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "下一出口预告：预告下一出口的信息和距离。",
     "analysis_url": "http://tiba.jsyks.com/Post/59f4a.htm",
-    "image": "",
+    "image": "assets/images/268.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25282,7 +25282,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "高速公路终点标志的特点是两条平行竖线和桥之间有一条红色的斜杠，指示高速公路或城市快速路终点。设在高速公路或城市快速路终点处，用以告知驾驶人马上要到达高速公路的终点。",
     "analysis_url": "http://tiba.jsyks.com/Post/a132a.htm",
-    "image": "",
+    "image": "assets/images/271.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25458,7 +25458,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "道路交通信息：指示高速公路或城市快速路上收听交通信息广播的频率。 kHz是一个重要的参数，它用来表示声音、电磁波、影像信号等信号的频率。",
     "analysis_url": "http://tiba.jsyks.com/Post/4c6b9.htm",
-    "image": "",
+    "image": "assets/images/273.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25502,7 +25502,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "停车领卡：进入高速公路或城市快速路收费站入口，需停车领卡。设有电子不停车收费（ETC）车道的收费站",
     "analysis_url": "http://tiba.jsyks.com/Post/c89ea.htm",
-    "image": "",
+    "image": "assets/images/274.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -25546,7 +25546,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "电子不停车收费（ETC）车道指引标志：用以指明电子不停车收费车道，设在收费广场渐变段起点前300m处，标志版面中宜指示收费车道数量，当车道数量超过5时，以5车道表示，黄色箭头表示ETC车辆的行驶方向。图中表示单向4个收费车道时的电子不停车收费（ETC）车道指引标志。",
     "analysis_url": "http://tiba.jsyks.com/Post/0dc12.htm",
-    "image": "",
+    "image": "assets/images/20334.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25591,7 +25591,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "高速公路特殊天气建议速度指路标志，提醒车辆驾驶人在雨、雪、雾等特殊天气下，根据能看清楚道路两侧的白色半圆状车距确认线数量来确定相应的建议行驶速度。",
     "analysis_url": "http://tiba.jsyks.com/Post/d6319.htm",
-    "image": "",
+    "image": "assets/images/277.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -25652,7 +25652,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "【绿牌电话标，高速紧急用】这个标志是绿色背景的高速公路服务类指示标志，标志中的听筒电话图标，是提示高速公路沿线设置的、专为车辆故障或发生事故等紧急情况时使用的紧急电话。它不同于普通的公用电话或报警救援电话，是高速公路特有的一种应急通信设施。因此，图中标志对应的含义是“高速公路紧急电话”。",
     "analysis_url": "http://tiba.jsyks.com/Post/8c8ef.htm",
-    "image": "",
+    "image": "assets/images/278.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25704,7 +25704,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中标志上是用一个大写的“P”加上一个扳手、一个加油机、刀叉等图案组合而成，这代表着高速公路服务区预告，用以预告前方服务区的位置和服务区能提供的服务，可提供停车（P）、加油、维修（扳手）、餐饮、超市、住宿等综合性服务。",
     "analysis_url": "http://tiba.jsyks.com/Post/5ea1b.htm",
-    "image": "",
+    "image": "assets/images/282.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -25757,7 +25757,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "高速公路停车区预告：预告前方停车区（设置的临时停靠点，不允许长时间停靠）的位置。【标志上有茶杯】高速公路停车场预告：预告前方停车场（供车辆停放的场地）的距离和位置。【标志上无茶杯】",
     "analysis_url": "http://tiba.jsyks.com/Post/830a8.htm",
-    "image": "",
+    "image": "assets/images/283.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -25818,7 +25818,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "高速公路停车场预告标志，“P”字母，是国际通用的 “停车场（Parking）” 标识；“南口”+ 箭头，指明该停车场的位置在南口方向。整体功能是预告前方高速公路停车场的位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/f5a1d.htm",
-    "image": "",
+    "image": "assets/images/284.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -25929,7 +25929,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中标志是一个棕色的矩形牌子，上面有一个景区的图案，旁边标有具体的数字，数字表示距离。因此该标志是旅游区距离，用以告知道路前方旅游区的名称、有代表性的图形以及前往旅游区的距离。",
     "analysis_url": "http://tiba.jsyks.com/Post/6d652.htm",
-    "image": "",
+    "image": "assets/images/286.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -26168,8 +26168,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "可跨越同向车行道分界线：道路中线为白色虚线，用于分隔同向行驶的交通流，在保证安全的情况下，允许车辆短时越线行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/35d61.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/292.jpg",
+    "is_image_question": true,
     "keywords": [
       "人行横道线",
       "停止线",
@@ -26202,8 +26202,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "《道路交通标志和标线》GB 5768：黄色线无论虚实，均用于分隔对向交通流（即对向来车与本车方向相反）。白色线才用于分隔同向车道。题干问的是“黄色分界线”的核心功能，因此选“分隔对向行驶的交通流”。（能否跨越由虚实决定：虚线可临时越线，实线禁止越线，但两者首要作用都是“对向分隔”。）",
     "analysis_url": "http://tiba.jsyks.com/Post/cc269.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/293.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -26226,8 +26226,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中双黄色虚线为潮汐车道线，依据国标 GB 5768.3-2022：两条黄色虚线并列组成的双黄虚线，属于潮汐车道指示标线，用于划定行驶方向可随高峰车流、交管调度动态变更的车道。普通双向分道线仅使用单条黄实线 / 单条黄虚线，不会采用双黄虚线样式，因此该标线为潮汐车道线。",
     "analysis_url": "http://tiba.jsyks.com/Post/8341a.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/294.jpg",
+    "is_image_question": true,
     "keywords": [
       "人行横道线",
       "停止线",
@@ -26261,7 +26261,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "车行道边缘白色实线：用白色实线划分机动车道与非机动车道分界（简称机非分界），禁止车辆跨越车行道边缘或机非分界。",
     "analysis_url": "http://tiba.jsyks.com/Post/7fdc8.htm",
-    "image": "",
+    "image": "assets/images/295.jpg",
     "is_image_question": true,
     "keywords": [
       "人行横道线",
@@ -26297,8 +26297,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "车行道边缘白色虚线：用白色虚线划分机非分界，允许车辆临时越线行驶，但应避让其他正常行驶的车辆、非机动车和行人。",
     "analysis_url": "http://tiba.jsyks.com/Post/36908.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/296.jpg",
+    "is_image_question": true,
     "keywords": [
       "150米",
       "人行横道线",
@@ -26341,7 +26341,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "图中路口内的黄色虚线，是路口导向线，用于辅助车辆在路口内按照规定路线行驶，引导车流有序通过路口。根据《道路交通标志和标线》（GB 5768），路口导向线为黄色或白色虚线，设置在交叉路口内，用以引导不同流向的车辆按指定路径通行，减少冲突点。【路口导向线的颜色区分】白色虚线：连接同向车行道分界线或机非分界线；黄色虚线：连接对向车行道分界线。",
     "analysis_url": "http://tiba.jsyks.com/Post/54c8e.htm",
-    "image": "",
+    "image": "assets/images/298.jpg",
     "is_image_question": true,
     "keywords": [
       "人行横道线",
@@ -26376,7 +26376,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "有固定导向箭头的车道线，叫做导向车道线。设置于路口驶入段的车行道分界线，车辆在该车道内应按车道行驶方向标志显示的指向行驶。具有固定行驶方向的为导向车道线；可根据信号灯或路面标志牌指示改变行驶方向的为可变导向车道线。",
     "analysis_url": "http://tiba.jsyks.com/Post/510d4.htm",
-    "image": "",
+    "image": "assets/images/300.jpg",
     "is_image_question": true,
     "keywords": [
       "人行横道线",
@@ -26500,7 +26500,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "人行横道线（斑马线）：白色平行粗实线，标示一定条件下准许行人横穿道路的路径，同时警示机动车驾驶人注意行人及非机动车过街。机动车禁止在人行横道线上停车，通过人行横道时应减速慢行，遇到行人需停车礼让。",
     "analysis_url": "http://tiba.jsyks.com/Post/f35a7.htm",
-    "image": "",
+    "image": "assets/images/302.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -26556,8 +26556,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "人行横道预告标识线：白色菱形图案，提示车辆驾驶人注意道路前方设置了人行横道线，需提前减速慢行。",
     "analysis_url": "http://tiba.jsyks.com/Post/994e8.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/303.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -26611,7 +26611,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "白色折线车距确认线：以白色折线作为车距确认标线，两道为一组，每组间隔50米，作为车辆驾驶人保持行车安全距离的参考。",
     "analysis_url": "http://tiba.jsyks.com/Post/c9409.htm",
-    "image": "",
+    "image": "assets/images/304.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -26715,8 +26715,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "道路出口标线，一般由出口的纵向标线和三角地带标线组成。用于引导驶出车辆的运行轨迹，使车辆安全交汇，减少与突出缘石碰撞的可能。",
     "analysis_url": "http://tiba.jsyks.com/Post/c7af2.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/306.jpg",
+    "is_image_question": true,
     "keywords": [
       "三角",
       "事故",
@@ -26756,8 +26756,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "道路入口标线为白色，一般由入口的纵向标线和三角地带标线组成。用于引导驶入车辆的运行轨迹，使车辆安全交汇，减少与突出缘石碰撞的可能。",
     "analysis_url": "http://tiba.jsyks.com/Post/f569d.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/307.jpg",
+    "is_image_question": true,
     "keywords": [
       "三角",
       "事故",
@@ -26797,8 +26797,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中的白色矩形标线框是平行式停车位，其特点是车位方向与道路走向平行，通常设置在道路两侧或路肩区域，上方的蓝色“P”标志也进一步确认了这是停车区域。其他选项分析如下：-出租车专用上下客停车位会有“出租车”文字或专属标识，图中无此类标注。-倾斜式停车位的标线框为斜向设置，与道路形成一定角度，和图中平行的矩形框不符。-垂直式停车位的标线框与道路走向垂直，呈直角排列，与图中样式不同。",
     "analysis_url": "http://tiba.jsyks.com/Post/2bcc7.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/308.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -26842,8 +26842,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "车种专用港湾式停靠站标线：与停靠站中间标注的车辆类型文字（如公交车、校车）相符的特定车辆停靠，除特定车辆外，其他车辆不得在此区域停留。图中标注公交车，因此是公交车停靠站。",
     "analysis_url": "http://tiba.jsyks.com/Post/0597c.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/312.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -26885,8 +26885,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "导向箭头颜色为白色，用以指示车辆的行驶方向。箭头指向前方，表示直行。",
     "analysis_url": "http://tiba.jsyks.com/Post/d71f1.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/313.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -26909,8 +26909,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "导向箭头颜色为白色，用以指示车辆的行驶方向。箭头指向前和指向左，表示前方路口可以直行或左转。",
     "analysis_url": "http://tiba.jsyks.com/Post/3e015.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/314.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -26940,8 +26940,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "导向箭头颜色为白色，用以指示车辆的行驶方向。箭头指向前和指向右，表示直行或右转。",
     "analysis_url": "http://tiba.jsyks.com/Post/8f8c9.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/315.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -26971,8 +26971,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "导向箭头的颜色为白色，用于指示车辆在该路口允许的行驶方向。从图中这个箭头的形状和指向能够清晰地看出，是在指示车辆可以直行，同时其箭头的弯曲部分指示了也可以掉头，所以含义是指示前方可直行或掉头。",
     "analysis_url": "http://tiba.jsyks.com/Post/3c180.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/319.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -27002,8 +27002,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "导向箭头颜色为白色，用以指示车辆的行驶方向。箭头指向反向和指向左，表示左转或掉头。",
     "analysis_url": "http://tiba.jsyks.com/Post/39ef9.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/320.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -27033,8 +27033,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "导向箭头颜色为白色，用以指示车辆的行驶方向。箭头指向左，表示左转。",
     "analysis_url": "http://tiba.jsyks.com/Post/1d64f.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/316.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -27064,8 +27064,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "导向箭头颜色为白色，用以指示车辆的行驶方向。箭头指向右，表示右转。",
     "analysis_url": "http://tiba.jsyks.com/Post/95fc2.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/317.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -27095,8 +27095,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "导向箭头颜色为白色，用以指示车辆的行驶方向。箭头指向反向，表示掉头。",
     "analysis_url": "http://tiba.jsyks.com/Post/1e53c.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/318.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -27171,8 +27171,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "导向箭头颜色为白色，用以指示车辆的行驶方向，箭头提示前方道路有右弯或需向右合流。",
     "analysis_url": "http://tiba.jsyks.com/Post/78aff.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/322.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -27196,8 +27196,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "固定停车方向停车位标线：停车位对车辆停车方向有特殊要求，箭头所指方向标示停车后车头的朝向。",
     "analysis_url": "http://tiba.jsyks.com/Post/2b151.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/309.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -27241,8 +27241,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "如图所示，白色矩形标线框中标明19:00-6:00，表示的是限定的时间，因此是限时停车位。机动车限时停车位标线的作用就是明确告知驾驶者，该停车位只在标注的特定时段允许停放机动车，其他时段禁止停放。",
     "analysis_url": "http://tiba.jsyks.com/Post/f2df4.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/310.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -27285,8 +27285,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "看到多乘员专用，选多乘员车辆专用道。多乘员车辆专用车道线：由白色虚线及白色文字“多乘员专用”组成，表示该车道为有多个乘车人的多乘员车辆专用的车道，未载乘客或乘员数未达规定的车辆不得入内行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/3c29a.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/342.jpg",
+    "is_image_question": true,
     "keywords": [
       "人行横道线",
       "停止线",
@@ -27321,8 +27321,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "港湾式停靠站标线：标示车辆通向专门的分离引道的路径和停靠位置，由渐变段引道白色虚线、正常段外缘白色实线或白色填充线组成。",
     "analysis_url": "http://tiba.jsyks.com/Post/42e64.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/311.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -27402,7 +27402,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "根据GB 5768.3-2009《道路交通标志和标线第3部分：道路交通标线》的规定：黄色虚线，可跨越对向车行道分界线（可跨越道路中心线）用以分隔对向行驶的交通流。车辆在保证安全的情况下，可以越线超车或转弯。起到指示的作用，属于指示标线。",
     "analysis_url": "http://tiba.jsyks.com/Post/55d48.htm",
-    "image": "",
+    "image": "assets/images/289.jpg",
     "is_image_question": true,
     "keywords": [
       "三角",
@@ -27451,8 +27451,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "路面数字是速度限制标记：白色字符表示相应车行道上车辆行驶的最低限速值；黄色字符表示相应车行道上车辆行驶的最高限速值，这类标记属于路面限速标记字符，用于规范车辆行驶速度范围。",
     "analysis_url": "http://tiba.jsyks.com/Post/4ef4f.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/324.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -27492,8 +27492,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "路面限速标记字符，黄字最高限，白字最低限。白色字符表示相应车行道上车辆行驶的最低限速值；黄色字符表示相应车行道上车辆行驶的最高限速值。图中是黄色“100”，所以是最高限速100km/h。",
     "analysis_url": "http://tiba.jsyks.com/Post/029f7.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/325.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -27533,8 +27533,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "路面限速标记字符，黄字最高限，白字最低限。白色字符表示相应车行道上车辆行驶的最低限速值；黄色字符表示相应车行道上车辆行驶的最高限速值。图中是白色“80”，所以是最低限速80km/h。",
     "analysis_url": "http://tiba.jsyks.com/Post/768c0.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/326.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -27573,8 +27573,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中红圈内的白色自行车图案，是非机动车道的法定路面标记，代表该区域专供非机动车（含自行车、电动自行车等）行驶，机动车严禁占用。其他选项排除原因：（自行车专用道）、（电瓶车专用道）：自行车、电瓶车均属于非机动车，该车道为所有非机动车共用，并非仅单一车型专用，表述错误；（摩托车专用道）：摩托车属于机动车，专用道不会使用自行车图案标识，表述错误；因此正确答案为：非机动车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/4684b.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/327.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -27648,7 +27648,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中道路中心的双黄实线，是禁止跨越对向车行道分界线。根据《道路交通标志和标线》（GB 5768），双黄实线的作用是分隔对向行驶的车流，严禁车辆跨越、压线或越线行驶，包括超车、转弯、掉头等操作。",
     "analysis_url": "http://tiba.jsyks.com/Post/b1b9e.htm",
-    "image": "",
+    "image": "assets/images/328.jpg",
     "is_image_question": true,
     "keywords": [
       "人行横道线",
@@ -27682,7 +27682,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "黄线虚实看两边，实线禁跨虚可越。根据《道路交通标志和标线》（GB 5768.3）规定，黄色虚实线由一条黄色实线和一条黄色虚线组成。实线一侧禁止车辆越线行驶，虚线一侧在确保安全的前提下允许车辆越线超车或向左转弯。因此“实线一侧禁止越线”表述正确。",
     "analysis_url": "http://tiba.jsyks.com/Post/485cd.htm",
-    "image": "",
+    "image": "assets/images/329.jpg",
     "is_image_question": true,
     "keywords": []
   },
@@ -27729,7 +27729,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "禁止跨越同向车行道分界线：白色实线，禁止车辆跨越车行道分界线进行变换车道或借道超车。",
     "analysis_url": "http://tiba.jsyks.com/Post/23bf9.htm",
-    "image": "",
+    "image": "assets/images/331.jpg",
     "is_image_question": true,
     "keywords": [
       "人行横道线",
@@ -27765,8 +27765,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "路缘石上的黄色虚线，禁止路边长时间停、放车辆，但一般情况下允许装卸货物或上下人员等的临时停放。 黄色实线，禁止路边停、放车辆。",
     "analysis_url": "http://tiba.jsyks.com/Post/aafb6.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/332.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -27810,8 +27810,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "黄实线禁停，黄虚线限长停。根据《道路交通标志和标线》国家标准（GB 5768）：路缘石上的黄色实线，表示禁止路边停、放车辆，包括临时停车与长时间停车。黄色虚线，禁止路边长时间停、放车辆，但一般情况下允许装卸货物或上下人员等的临时停放。",
     "analysis_url": "http://tiba.jsyks.com/Post/d4089.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/333.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -27855,7 +27855,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "停止线：信号灯路口的白色横实线，表示车辆等待放行信号或者停车让行的停车位置的路面标线，并且不能超过或压下该线。 【拓展知识】 以停止线为界，停止线到路口的区域称为停止线以内，停止线与车道间的区域称为停止线以外。",
     "analysis_url": "http://tiba.jsyks.com/Post/877a7.htm",
-    "image": "",
+    "image": "assets/images/334.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -27902,7 +27902,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中路口最前端的双白实线，配合右侧的“停”字标志，是停车让行线。根据《道路交通标志和标线》（GB 5768），停车让行线为双白实线，设置在设有停车让行标志的路口，车辆必须在此线前停车瞭望，确认安全后再通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/2a33c.htm",
-    "image": "",
+    "image": "assets/images/335.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -28014,7 +28014,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "导流线的颜色为白色，起到引导和分流车辆的作用。与道路中心线相连时，也可用黄色。标线形式可分为单实线、V形线和斜纹线三种。车辆在交叉口需按规定的路线行驶，不得压线或越线行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/a30d3.htm",
-    "image": "",
+    "image": "assets/images/337.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -28063,8 +28063,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "中心圈是道路标线的一种，设置在平面交叉路口的中心位置，通常呈圆形或菱形，其主要功能是管制和引导交通，区分车辆进行大、小转弯，以及指示交叉口车辆左右转弯的路径。【拓展知识】中心圈的特征包括：颜色：白色，以便于驾驶人清晰识别。形状：圆形或菱形，根据不同的路口设计和交通需求来确定具体的尺寸和形状。填充图案：内部采用斜线填充，以增强视觉上的区分度和警示作用。行驶规则：左转车辆在通过中心圈时，应沿中心圈的左侧行驶，不得压线或从右侧向左行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/d344d.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/338.jpg",
+    "is_image_question": true,
     "keywords": [
       "人行横道线",
       "停止线",
@@ -28134,7 +28134,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中施划在路口中央的黄色方形交叉网格标线是网状线，用于严格禁止一切车辆临时或长时间停车，防止因停车导致交通堵塞。当前方车辆停驶时，后车必须在网状线外等候，确认前方有足够空间后方可驶过 。",
     "analysis_url": "http://tiba.jsyks.com/Post/61ec8.htm",
-    "image": "",
+    "image": "assets/images/340.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -28178,7 +28178,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "公交车专用车道线：由黄色虚线及白色文字组成，表示除公交车外，其他车辆及行人不得进入该车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/34536.htm",
-    "image": "",
+    "image": "assets/images/341.jpg",
     "is_image_question": true,
     "keywords": [
       "人行横道线",
@@ -28213,8 +28213,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "禁止掉头标记：由黄色导向箭头和黄色叉形标记左右组合而成，黄色叉形标记位于左侧，表示本路口或区间禁止车辆掉头。",
     "analysis_url": "http://tiba.jsyks.com/Post/86f18.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/343.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -28244,8 +28244,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "箭头指向右，表示禁止右转。由黄色导向箭头和黄色叉形标记左右组合而成的禁止转弯标记，黄色叉形标记位于左侧，表示本路口或区间禁止车辆转弯。",
     "analysis_url": "http://tiba.jsyks.com/Post/27e7c.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/344.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -28275,8 +28275,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "车行道横向减速标线：警告车辆驾驶人本车道需减速慢行。",
     "analysis_url": "http://tiba.jsyks.com/Post/033e5.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/345.jpg",
+    "is_image_question": true,
     "keywords": [
       "人行横道线",
       "停止线",
@@ -28310,8 +28310,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中黄色标线为路面宽度渐变标线，通常设置在道路宽度发生变化的路段，如道路由宽变窄或由窄变宽的地方。这种标线的作用是提醒驾驶人注意前方道路宽度的变化，提前调整车速和行车位置，确保行车安全。",
     "analysis_url": "http://tiba.jsyks.com/Post/cd5b1.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/346.jpg",
+    "is_image_question": true,
     "keywords": [
       "人行横道线",
       "停止线",
@@ -28345,8 +28345,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "接近障碍物标线：指示路面有固定性障碍物，警告车辆驾驶人谨慎行车，引导交通流顺畅驶离障碍物区域。",
     "analysis_url": "http://tiba.jsyks.com/Post/3f6d6.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/347.jpg",
+    "is_image_question": true,
     "keywords": [
       "人行横道线",
       "停止线",
@@ -28379,8 +28379,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "黄黑相间的斜纹线条标记是立面标记警告标线，提醒驾驶人注意，在车行道或近旁有高出路面的构造物。",
     "analysis_url": "http://tiba.jsyks.com/Post/30115.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/348.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -28561,7 +28561,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "【停止信号】动作要领：交警左臂向前上方直伸，掌心向前；右臂沿裤中缝对齐，无任何动作。手势示意：交警面向的车辆不准通行。点击查看交警手势动图【识别技巧】交警的面部对着交警的哪个方向，就是在指挥哪个方向的车。",
     "analysis_url": "http://tiba.jsyks.com/Post/50791.htm",
-    "image": "",
+    "image": "assets/images/350.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -28605,7 +28605,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "【直行信号】双手平伸右手前折要直行。动作要领：交警左臂向左平伸，掌心向前；右臂向右平伸，掌心向前，向左摆动。手势示意：准许交警右侧的直行车辆通行。点击查看交警手势动图【识别技巧】交警的面部对着交警的哪个方向，就是在指挥哪个方向的车。",
     "analysis_url": "http://tiba.jsyks.com/Post/76d87.htm",
-    "image": "",
+    "image": "assets/images/351.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -28649,7 +28649,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "【左转弯信号】右臂前伸，左臂摆，左转。动作要领：交警右臂向前平伸，掌心向前；左臂与手掌平直向右前方摆动，掌心向右。手势示意：准许交警左侧的车辆左转弯，在不妨碍被放行车辆通行的情况下可以掉头。点击查看交警手势动图【识别技巧】交警的面部对着交警的哪个方向，就是在指挥哪个方向的车。",
     "analysis_url": "http://tiba.jsyks.com/Post/48172.htm",
-    "image": "",
+    "image": "assets/images/352.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -28693,7 +28693,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "【左转弯信号】动作要领：交警右臂向前平伸，掌心向前；左臂与手掌平直向右前方摆动，掌心向右。手势示意：准许交警左侧的车辆左转弯，在不妨碍被放行车辆通行的情况下可以掉头。点击查看交警手势动图【识别技巧】交警的面部对着交警的哪个方向，就是在指挥哪个方向的车。",
     "analysis_url": "http://tiba.jsyks.com/Post/e7424.htm",
-    "image": "",
+    "image": "assets/images/353.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -28738,7 +28738,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "【减速慢行信号】交警右手平伸向下摆。动作要领：交警右臂向前方平伸，掌心向下；右臂与手掌平直向下方摆动。手势示意：交警右侧的车辆应当减速慢行。点击查看交警手势动图【识别技巧】交警的面部对着交警的哪个方向，就是在指挥哪个方向的车。",
     "analysis_url": "http://tiba.jsyks.com/Post/a3036.htm",
-    "image": "",
+    "image": "assets/images/357.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -28839,7 +28839,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "【右转弯信号】左臂前伸，右臂摆，右转。动作要领：交警左臂向前平伸，掌心向前；右臂与手掌平直向左前方摆动，掌心向左。手势示意：准许交警右侧的车辆右转弯。点击查看交警手势动图【识别技巧】交警的面部对着交警的哪个方向，就是在指挥哪个方向的车。",
     "analysis_url": "http://tiba.jsyks.com/Post/e6da6.htm",
-    "image": "",
+    "image": "assets/images/356.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -28883,7 +28883,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "【右转弯信号】右手在下右转弯动作要领：交警左臂向前平伸，掌心向前；右臂与手掌平直向左前方摆动，掌心向左。手势示意：准许交警右侧的车辆右转弯。点击查看交警手势动图【识别技巧】交警的面部对着交警的哪个方向，就是在指挥哪个方向的车。",
     "analysis_url": "http://tiba.jsyks.com/Post/70d0f.htm",
-    "image": "",
+    "image": "assets/images/355.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -28978,8 +28978,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "旅游区标志的颜色为棕底、白字（图形）、白边框、棕色衬边，形状为矩形；旅游区标志的作用是方便旅游者识别通往旅游区的方向和距离，了解旅游项目的类别。",
     "analysis_url": "http://tiba.jsyks.com/Post/cb7a5.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/285.jpg",
+    "is_image_question": true,
     "keywords": [
       "150米",
       "作业区",
@@ -29022,8 +29022,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "禁令标志是交通标志中主要标志的一种，对车辆加以禁止或限制的标志，禁令标志的颜色除个别标志外，通常为白底、红圈、红杠、黑图形，图形压杠；禁令标志的形状为圆形、八角形、顶角向下的等边三角形。",
     "analysis_url": "http://tiba.jsyks.com/Post/5314d.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/121.jpg",
+    "is_image_question": true,
     "keywords": [
       "三角",
       "事故",
@@ -29346,7 +29346,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "请注意：选项中的ABCD与标志图的ABCD并非一一对应。图中D图表示此处禁止一切车辆长时间停放，但可以临时停车，因此应选择与D图对应的选项。图A禁止车辆停放标志，表示在限定的范围内，禁止一切车辆停、放，无论驾驶人是否离开车辆；图B停车让行标志，表示车辆必须在进入路口前完全停止，确认安全后，方可通行；图C禁止驶入标志，表示表示禁止一切车辆驶入（含非机动车）；图D禁止车辆长时停放标志，表示在限定的范围内，禁止一切车辆长时停、放，临时停放不受限制。",
     "analysis_url": "http://tiba.jsyks.com/Post/03ce2.htm",
-    "image": "",
+    "image": "assets/images/1220.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -29389,8 +29389,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "请注意：【图片的ABCD并不是对应选项的ABCD】。如图所示，ABCD图对应的车道指示标志及含义分别为：A图-小型客车车道，表示该车道仅供小型客车通行；B图-有轨电车专用车道，图案为带有集电装置的有轨电车，表示该车道仅供有轨电车通行；C图-多乘员车辆（HOV）专用车道标志，表示该车道仅供多乘员的车辆通行；D图-公交专用车道，表示该车道仅供公交车辆 、通勤班车等大型载客汽车通行。所以，B图标志表示仅供有轨电车通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/f10c5.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20329.jpg",
+    "is_image_question": true,
     "keywords": [
       "作业区",
       "指示",
@@ -29424,7 +29424,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "本题要求找出与名称对应正确的高速公路交通标志，考的是标志和其下方的文字能不能对上号：图A：该标志为“高速公路终点”，而不是“起点预告”，含义对应错误。图B：该标志为“高速公路服务区预告”，带有餐饮、加油、维修等功能，而不是单纯的“停车场预告”，含义对应错误。图C：该标志为“高速公路紧急停车带”，用以指引高速公路紧急停车带的位置，与含义完全吻合，为正确答案。图D：该标志为“高速公路紧急电话”，而不是“公用电话”，含义对应错误。因此，只有图中C的“标志-含义”完全匹配。",
     "analysis_url": "http://tiba.jsyks.com/Post/fa10f.htm",
-    "image": "",
+    "image": "assets/images/20458.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -31444,7 +31444,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "如图所示，港湾式紧急停车带标志，用以指引港湾式紧急停车带的位置。设在港湾式紧急停车带前适当位置 。必要时，可设置预告标志。",
     "analysis_url": "http://tiba.jsyks.com/Post/b5420.htm",
-    "image": "",
+    "image": "assets/images/20333.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -31617,7 +31617,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中标志由字母“P”和“公交”文字组成，表示公交车专用停车位。该标志指示该停车位专供公交车停放，其他车辆不得占用。",
     "analysis_url": "http://tiba.jsyks.com/Post/ff45f.htm",
-    "image": "",
+    "image": "assets/images/20296.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -31669,7 +31669,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "如图所示，行人标志，表示该段道路仅供行人步行，任何车辆不准进入。设在步行街两端起点处 。有时段规定时，应用辅助标志说明 。",
     "analysis_url": "http://tiba.jsyks.com/Post/b2ee6.htm",
-    "image": "",
+    "image": "assets/images/20267.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -31748,7 +31748,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "看字找字，标志上的文字即含义，因此选停车点。指路标志-停车点，用以指引停车点的标志，设在停车点入口附近。",
     "analysis_url": "http://tiba.jsyks.com/Post/e3643.htm",
-    "image": "",
+    "image": "assets/images/20332.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -31835,7 +31835,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "指示标志-开车灯，表示机动车开至该标志处应开启车灯，设在隧道口前等需要开车灯处。",
     "analysis_url": "http://tiba.jsyks.com/Post/a17f2.htm",
-    "image": "",
+    "image": "assets/images/20217.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -32033,7 +32033,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "观察图中的信号灯：左转箭头灯为红灯，禁止左转；直行箭头灯为红灯，禁止直行；右转箭头灯为绿灯，允许右转。根据交通信号灯通行规则：红灯表示禁止通行，绿灯表示准许通行。因此此时只能向右转弯。",
     "analysis_url": "http://tiba.jsyks.com/Post/0b5ae.htm",
-    "image": "",
+    "image": "assets/images/10.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -32076,8 +32076,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "《道路交通安全法实施条例》第四十四条：在道路同方向划有2条以上机动车道的，左侧为快速车道，右侧为慢速车道。图中蓝车在同向3车道的最左侧车道上，因此是快速车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/f4a97.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/12.jpg",
+    "is_image_question": true,
     "keywords": [
       "150米",
       "减速车道",
@@ -32173,8 +32173,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "灯/警冲突，听交警。交警的指挥信号高于交通信号灯。当交警发出停止信号时，意味着此时路口的交通通行规则有所变化。即使绿灯亮起，我方车辆也应遵循交警的指挥，在路口停止线以外停车等待，不能直接通过路口。这样可以避免交通混乱和事故的发生，确保道路交通的有序和安全。驾驶机动车在路口遇到交警发出停止手势信号时，交警面向的车辆应停车等待。点击查看交警手势动图",
     "analysis_url": "http://tiba.jsyks.com/Post/11543.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/9.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -32305,8 +32305,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "如图所示，当前天气状况为雪天。雪天环境下，能见度显著降低，行车视线会受到影响，且前方有正在行驶的车辆，因此应当使用近光灯保证良好的视线，同时不会对其他车辆造成过多干扰。而不使用灯光会使行车非常危险；远光灯会在雪面上形成反光，更加影响视线；另外雪天不是雾天，不需要使用雾灯。所以，使用近光灯才是保障行车安全的正确选择 。",
     "analysis_url": "http://tiba.jsyks.com/Post/ab1b1.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20401.jpg",
+    "is_image_question": true,
     "keywords": [
       "倒车灯",
       "前照灯",
@@ -32428,8 +32428,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "雨天跟车行驶时，雨水会反射强光造成眩目，严禁使用远光灯，避免影响前车视线；同时应开启近光灯以保障自身视野。因此“不能使用远光灯”做法正确。依据《道路交通安全法实施条例》第五十八条：机动车在夜间没有路灯、照明不良或者遇有雾、雨、雪、沙尘、冰雹等低能见度情况下行驶时，应当开启前照灯、示廓灯和后位灯，但同方向行驶的后车与前车近距离行驶时，不得使用远光灯。机动车雾天行驶应当开启雾灯和危险报警闪光灯。",
     "analysis_url": "http://tiba.jsyks.com/Post/a4cc6.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1611.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "200米",
@@ -32514,8 +32514,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "如图所示，夜间通过没有行人通行的人行横道时，应交替使用远近光灯示意。根据《道路交通安全法实施条例》第五十九条规定：机动车在夜间通过急弯、坡路、拱桥、人行横道或者没有交通信号灯控制的路口时，应当交替使用远近光灯示意。",
     "analysis_url": "http://tiba.jsyks.com/Post/45ff2.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1207.jpg",
+    "is_image_question": true,
     "keywords": [
       "上坡",
       "下坡",
@@ -32619,8 +32619,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "如图所示，右前方设有向左急转弯标志，提醒车辆驾驶人通过急弯路段时，应减速鸣喇叭示意。1、减速慢行：降低车速，以便更好地控制车辆，应对弯道。2、鸣喇叭示意：在弯道前鸣喇叭，提醒可能存在的对向车辆或其他道路使用者。3、靠右行驶：在弯道中，应靠右行驶，避免占用对向车道。4、注意观察：密切注意弯道对面是否有来车，以及路面情况。5、避免紧急制动：尽量避免在弯道中紧急制动，以免车辆失控。",
     "analysis_url": "http://tiba.jsyks.com/Post/f8d8e.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/22.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -33078,8 +33078,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "在距急弯路50米以内的路段不能停放机动车。急弯路视线不好，车辆停放在此处会影响其他车辆的行驶安全，容易引发交通事故。根据《道路安全法实施条例》的相关规定，机动车在道路上临时停车应当遵守下列规定：（2）交叉路口、铁路道口、急转弯、宽度不足4米的窄路、桥梁、陡坡、隧道以及距离上述地点50米以内的路段，不得停车；【口5】（3）公共汽车站、急救站、加油站、消防栓或者消防队（站）门前以及距离上述地点30米以内的路段，除使用上述设施的以外，不得停车；【站3】",
     "analysis_url": "http://tiba.jsyks.com/Post/0613c.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20323.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -33715,7 +33715,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "请注意选项顺序。图中同向三车道的限速标志显示：A车道限速120-100km/h，B车道 100-80km/h，C车道 80-60km/h。车速高于110km/h（处于 120-100km/h 区间），应在A车道行驶，符合该车道的限速范围，选择A车道对应的选项即可。",
     "analysis_url": "http://tiba.jsyks.com/Post/c2cf2.htm",
-    "image": "",
+    "image": "assets/images/1218.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -33768,7 +33768,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "在高速公路上临时停放故障车，警告标志应当设置在车后150米以外。《道路交通安全法》第六十八条 机动车在高速公路上发生故障时，警告标志应当设置在故障车来车方向一百五十米以外，车上人员应当迅速转移到右侧路肩上或者应急车道内，并且迅速报警。",
     "analysis_url": "http://tiba.jsyks.com/Post/3185e.htm",
-    "image": "",
+    "image": "assets/images/20406.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -33875,7 +33875,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "高速限速：最低60，最高120；最低车速：两车道左100；三车道以上左110，中90；左快右慢，因此在最右侧车道的车速不能低于60公里/小时。根据《道路交通安全法实施条例》第七十八条规定，高速公路应当标明车道的行驶速度，最高车速不得超过每小时120公里，最低车速不得低于每小时60公里。【解题关键】图中车道数量是解题关键，遇到这类最低限速考题，先数车道，再对号入座选数值，最高限速默认120km/h（除非题干特别说明）。",
     "analysis_url": "http://tiba.jsyks.com/Post/4d11d.htm",
-    "image": "",
+    "image": "assets/images/1192.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -33926,7 +33926,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "高速限速：最低60，最高120；最低车速：两车道左100；三车道以上左110，中90；因此，同向三车道中间车道的车速不能低于90公里/小时。《道路交通安全法实施条例》第七十八条：同方向有3条以上车道的，最左侧车道的最低车速为每小时110公里，中间车道的最低车速为每小时90公里。三车道最低限速从左到右分别是：110、90、60。【解题关键】图中车道数量是解题关键，遇到这类最低限速考题，先数车道，再对号入座选数值，最高限速默认120km/h（除非题干特别说明）。",
     "analysis_url": "http://tiba.jsyks.com/Post/c2c3a.htm",
-    "image": "",
+    "image": "assets/images/83.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -34069,8 +34069,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "限制速度标志：本标志至前方解除限制速度标志或另一块不同限速值的限制速度标志的路段内，机动车行驶速度不准超过标志所示数值。如图所示数值为120，因此，在这段高速公路上行驶的最高车速是120公里/小时。",
     "analysis_url": "http://tiba.jsyks.com/Post/97370.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/81.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -34120,8 +34120,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "这道题考的是限速标志，红圈禁令标志表示最高限速；蓝底指示标志表示最低限速，因此，在这段高速公路上行驶的最高车速是100公里/小时，最低车速是60公里/小时。",
     "analysis_url": "http://tiba.jsyks.com/Post/f2824.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/82.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -34171,8 +34171,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中显示的限速标志为110公里/小时，表示在这条高速公路上行驶时的最高速度不能超过110公里/小时。根据《道路交通安全法实施条例》第七十八条规定，道路限速标志标明的车速与车道行驶车速的规定不一致的，按照道路限速标志标明的车速行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/3f5c8.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/25.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -34345,8 +34345,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "如图所示，同方向只有1条机动车道的城市道路，最高速度不能超过50公里/小时。根据《道路交通安全法》第四十五条规定，在没有限速标志、标线的道路上，机动车不得超过下列最高行驶速度：(一)没有道路中心线的道路，城市道路为每小时30公里，公路为每小时40公里；【无线】城3公4(二)同方向只有1条机动车道的道路，城市道路为每小时50公里，公路为每小时70公里。【有线】城5公7。",
     "analysis_url": "http://tiba.jsyks.com/Post/e39ab.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/26.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -34627,7 +34627,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "铁路道口是一个交通环境复杂且存在潜在危险的地点，因为火车通过时速度较快且拥有道路优先权。在铁路道口进行掉头容易引发事故，因此，出于安全考虑，铁路道口禁止掉头。其他选项分析如下：有铁路道口标志 - 这个标志本身并不是禁止掉头的原因，而是提醒驾驶人注意铁路道口的存在。铁路道口车流量大 - 虽然车流量大可能会增加掉头的难度和危险性，但这并不是铁路道口禁止掉头的主要原因。有铁路道口信号灯 - 信号灯的存在是为了控制交通流，确保火车和机动车能够安全通过，而不是禁止掉头的直接原因。因此，正确答案是容易引发事故。",
     "analysis_url": "http://tiba.jsyks.com/Post/61d97.htm",
-    "image": "",
+    "image": "assets/images/1196.jpg",
     "is_image_question": true,
     "keywords": [
       "120",
@@ -34687,7 +34687,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "交叉路口车流量大，交通情况复杂，容易发生交通事故，不具备超车条件，所以不得超车。《道路交通安全法》第四十三条：行经铁路道口、交叉路口、窄桥、弯道、陡坡、隧道、人行横道、市区交通流量大的路段等没有超车条件的，不得超车。",
     "analysis_url": "http://tiba.jsyks.com/Post/888e1.htm",
-    "image": "",
+    "image": "assets/images/1197.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -34916,8 +34916,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "从匝道驶入高速公路时开启左转向灯，可以向其他道路使用者示意你的车辆即将从匝道向左并入高速公路的行车道。根据《道路交通安全法实施条例》第七十九条：机动车从匝道驶入高速公路，应当开启左转向灯，在不妨碍已在高速公路内的机动车正常行驶的情况下驶入车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/d790c.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20418.jpg",
+    "is_image_question": true,
     "keywords": [
       "倒车灯",
       "前照灯",
@@ -35259,8 +35259,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "驶离高速公路时，需先驶入减速车道，再逐步降低车速。图中位置为高速公路的减速车道入口区域，按照规定应驶入减速车道。而继续向前行驶不符合驶离流程；保持100公里/小时车速过快，驶离高速需减速；车速降到40公里/小时以下是在减速车道内的操作，而非此位置的行驶要求。根据《道路交通安全法实施条例》第七十九条规定，机动车驶离高速公路时，应当开启右转向灯，驶入减速车道，降低车速后驶离。",
     "analysis_url": "http://tiba.jsyks.com/Post/edadb.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/88.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -35692,8 +35692,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "红灯亮起表示要停车等待，绿灯亮起表示可以通行，黄灯亮起则是起到警示作用，提醒即将切换信号灯状态。",
     "analysis_url": "http://tiba.jsyks.com/Post/c8941.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/103.jpg",
+    "is_image_question": true,
     "keywords": [
       "停止",
       "减速慢行",
@@ -35757,8 +35757,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "方向信号灯箭头方向向左、向上、向右分别表示左转、直行、右转。绿色箭头表示允许车辆沿箭头所指方向通行；红色箭头表示禁止车辆沿箭头所指方向通行；黄色箭头表示对箭头所指方向车辆起黄灯作用。 如图所示，绿色箭头灯向右，表示允许车辆向右转弯行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/ae8b7.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/10.jpg",
+    "is_image_question": true,
     "keywords": [
       "停止",
       "减速慢行",
@@ -36338,8 +36338,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中道路无中心线、无分道线，属于没有划分机动车道、非机动车道和人行道的道路。根据《道路交通安全法》，此类道路机动车应在道路中间通行（保障对向来车安全，避免占道冲突 ），非机动车和行人在道路两侧通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/1798b.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20403.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -36411,8 +36411,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "如图所示，路面由黄色虚线和“公交专用”文字组成的车道，表示除公交车外，其他车辆及行人不得进入该车道。",
     "analysis_url": "http://tiba.jsyks.com/Post/e1f87.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/8.jpg",
+    "is_image_question": true,
     "keywords": [
       "人行横道线",
       "停止线",
@@ -36772,8 +36772,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "【行人优先】机动车进出道路或者在没有交通信号、人行横道的路段行驶，应当减速或停车避让横过道路的行人。不可采取加速绕行的方法通过，也不要鸣喇叭示意其让路。",
     "analysis_url": "http://tiba.jsyks.com/Post/07f3e.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/14.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -36924,7 +36924,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "安全行驶和避免事故是最重要的考虑因素，因此机动车在图中这样没有划分机动车道、非机动车道和人行道的道路上行驶时，在道路中间通行的主要原因是：给两侧的非机动车和行人留有充足的通行空间，这样可以为非机动车和行人提供更多的安全空间，减少交通事故的风险，提高道路使用的安全性。",
     "analysis_url": "http://tiba.jsyks.com/Post/853d4.htm",
-    "image": "",
+    "image": "assets/images/1235.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -37061,7 +37061,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "驾驶机动车在道路通行中要坚持行人优先的原则，当遇行人横过道路时，应当减速或停车避让，待行人通过后再通行，不得加速抢行。",
     "analysis_url": "http://tiba.jsyks.com/Post/ab06d.htm",
-    "image": "",
+    "image": "assets/images/1237.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -37106,8 +37106,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "三特不超3：特殊路段/特殊天气/特殊操作，限速30。 《道路交通安全法实施条例》第四十六条，机动车行驶中遇有下列情形之一的，最高行驶速度不得超过每小时30公里，其中拖拉机、电瓶车、轮式专用机械车不得超过每小时15公里： （一）进出非机动车道，通过铁路道口、急弯路、窄路、窄桥时；【特殊路段】 （二）掉头、转弯、下陡坡时；【特殊操作】 （三）遇雾、雨、雪、沙尘、冰雹，能见度在50米以内时；【特殊天气】 （四）在冰雪、泥泞的道路上行驶时；【特殊路段】5、牵引发生故障的机动车时。【特殊操作】",
     "analysis_url": "http://tiba.jsyks.com/Post/b153d.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1646.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -37658,8 +37658,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "进入环岛路口时，应该让已在路口内的车辆先行。因为环岛内的车辆已经在正常行驶中，具有优先通行权。其他选项分析如下：交替变换远近光灯提醒路口内车辆让行是不正确的操作，这种行为可能会干扰其他车辆的正常行驶。从路口内车辆前迅速插入是非常危险且不文明的驾驶行为，容易引发交通事故。鸣喇叭直接进入路口也是错误的，鸣喇叭可能会惊吓到其他车辆和行人，而且不能解决优先通行权的问题。",
     "analysis_url": "http://tiba.jsyks.com/Post/8ff26.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20396.jpg",
+    "is_image_question": true,
     "keywords": [
       "上坡",
       "下坡",
@@ -37840,8 +37840,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "在路口右转弯遇对向车辆左转弯时，根据交通法规，左转弯车辆的通行权相对优先，右转弯车辆应让行对面左转弯车辆。右转弯通常不受信号灯控制，但不能影响正常通行的其他车辆和行人。如果直接向右转弯通过或者加速通过，很可能与左转弯车辆发生碰撞，非常危险。而鸣喇叭催促也是错误的做法，不能解决通行问题，还可能引发冲突。",
     "analysis_url": "http://tiba.jsyks.com/Post/a27ac.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1931.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -37983,8 +37983,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "路口三车均直行，无信号灯、标志标线管控，遵循无控路口让右先行规则。图中画面为本车直行车内视角，白色车辆出现在本车右方道路，右方来车享有优先通行权，本车需停车让行，让右方道路车辆先行。法规依据：《道路交通安全法实施条例》规定，无交通信号灯、交通标志标线控制的交叉路口，右方道路来车先行。",
     "analysis_url": "http://tiba.jsyks.com/Post/10d89.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20451.jpg",
+    "is_image_question": true,
     "keywords": [
       "上坡",
       "下坡",
@@ -38294,7 +38294,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "通过桥梁或涵洞时，驾驶人应当特别注意路面状况，谨慎驾驶，减速靠右行驶，不要超速或急刹车。如图所示，机动车与对向来车有会车可能时，为确保会车安全，应减速靠右低速通过。",
     "analysis_url": "http://tiba.jsyks.com/Post/8bd03.htm",
-    "image": "",
+    "image": "assets/images/1527.jpg",
     "is_image_question": true,
     "keywords": []
   },
@@ -38370,7 +38370,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "在遇到急转弯标志的路段时，为了确保行车安全，驾驶人应当采取以下措施：1、减速慢行：降低车速，以便更好地控制车辆，应对弯道。2、鸣喇叭示意：在弯道前鸣喇叭，提醒可能存在的对向车辆或其他道路使用者。3、靠右行驶：在弯道中，应靠右行驶，避免占用对向车道。4、注意观察：密切注意弯道对面是否有来车，以及路面情况。5、避免紧急制动：尽量避免在弯道中紧急制动，以免车辆失控。",
     "analysis_url": "http://tiba.jsyks.com/Post/8b78f.htm",
-    "image": "",
+    "image": "assets/images/1528.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -38729,7 +38729,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "夜间驾驶机动车遇对方使用远光灯，无法看清前方路况时，正确的做法是：降低车速，谨慎会车。这样做的原因包括：1、安全优先：降低车速可以增加反应时间，减少在视线不佳情况下发生事故的风险。2、避免眩光：在对方车辆使用远光灯时，直视前方可能会受到眩光影响，降低车速有助于避免这种情况。3、遵守交通规则：在视线受阻的情况下，减速行驶是遵守交通规则和安全驾驶的要求。",
     "analysis_url": "http://tiba.jsyks.com/Post/34623.htm",
-    "image": "",
+    "image": "assets/images/1529.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -39048,7 +39048,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "机动车进出道路，遇行人横穿道路时，应当及时减速或停车避让。",
     "analysis_url": "http://tiba.jsyks.com/Post/79e7e.htm",
-    "image": "",
+    "image": "assets/images/1534.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -39447,8 +39447,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "驾驶车辆遇到前方车辆行进缓慢或道路、路口因故堵塞时，应减速或停车，依次缓慢行驶或耐心排队等待。即便是绿灯亮，也要依次停在路口外等候，不得进入路口或停在路口内等候，以免加剧阻塞或被夹在路口内进退两难。",
     "analysis_url": "http://tiba.jsyks.com/Post/c6eec.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20435.jpg",
+    "is_image_question": true,
     "keywords": [
       "上坡",
       "下坡",
@@ -39551,7 +39551,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "在拥挤路段排队行驶时，遇到其他车辆强行穿插行驶，为保证安全，减速或停车让行可以避免因躲避或加速而导致的交通事故。在拥挤的交通条件下，保持冷静，适当减速或必要时停车，让穿插的车辆先行，是一种安全且礼貌的做法。其他选项分析如下：1，迅速躲避可能会导致与其他车辆发生碰撞；2，持续鸣喇叭警告不一定能阻止对方车辆强行穿插，还可能引发冲突和噪音干扰；3，提高车速不让其穿插非常危险，容易发生碰撞事故。",
     "analysis_url": "http://tiba.jsyks.com/Post/0649d.htm",
-    "image": "",
+    "image": "assets/images/1241.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -39637,7 +39637,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "驾驶车辆遇到前方车辆行进缓慢或道路、路口因故堵塞时，应减速或停车，依次缓慢行驶或耐心排队等待。即便是绿灯亮，也要依次停在路口外等候，不得进入路口或停在路口内等候，以免加剧阻塞或被夹在路口内进退两难。",
     "analysis_url": "http://tiba.jsyks.com/Post/dbb32.htm",
-    "image": "",
+    "image": "assets/images/20436.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -39672,7 +39672,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "如图所示，前方有右侧变窄警告标志，表示前方右侧车行道或路面变窄。因此正确的做法是：每车道一辆依次交替驶入左侧车道。这种做法被称为“拉链式”通行，它是一种公平且有效率的通行方式，可以减少拥堵并提高道路使用效率。《道路交通安全法》第四十五条，在车道减少的路段、路口，或者在没有交通信号灯、交通标志、交通标线或者交通警察指挥的交叉路口遇到停车排队等候或者缓慢行驶时，机动车应当依次交替通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/32f33.htm",
-    "image": "",
+    "image": "assets/images/1536.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -39795,8 +39795,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "本题考查拥堵路口通行与网状线规则：1、黄色网状线是禁止停车标线，禁止在该区域内等候；2、当路口已被前车占满、出现拥堵时，即使绿灯亮起，也必须停在停止线以外等待，不得进入路口，目的是保障路口通行秩序，避免堵死交叉路口。因此正确做法是停在路口以外等待。法规依据：《道路交通安全法实施条例》的相关规定，当路口绿灯亮，但前方机动车在停车排队等候时，应停在路口以外等待，不要进入路口内，以免造成交通拥堵或阻碍其他车辆通行。【拓展知识】停止线是路口的 “边界线”：停止线以外：指停止线与车道之间的区域，是合法等待区；停止线以内（含网格线、人行道）：等同于“路口以内”，法律明确要求“停在路口以外”，即整辆车必须停在停止线外，严禁压停止线、网格线或占用人行道，否则属于“进入路口违法停车”。",
     "analysis_url": "http://tiba.jsyks.com/Post/8bfea.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/738.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -40133,7 +40133,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "如图所示，驾驶机动车遇到设有过水路面警告标志时，正确的做法应停车察明水情，确认安全后，低速通过。根据《道路交通安全法实施条例》的规定，机动车行经漫水路或漫水桥时，应当停车察明水情，确认安全后，低速通过。",
     "analysis_url": "http://tiba.jsyks.com/Post/26435.htm",
-    "image": "",
+    "image": "assets/images/20466.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -40610,7 +40610,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "车灯在车辆行驶中起到提醒、照明和警示的作用，对车辆自身和其他道路交通参与者都具有重要的意义。夜间驾驶机动车通过人行横道或没有交通信号灯控制的路口，应在距路口约100米处减速慢行，并且交替使用远、近光灯示意，以提示其他交通参与者注意来车，确认安全后低速通过，同时要注意黑暗中的行人和非机动车。",
     "analysis_url": "http://tiba.jsyks.com/Post/ed289.htm",
-    "image": "",
+    "image": "assets/images/1207.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -40688,7 +40688,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "远光灯的光线强烈，直接照射在前车的后视镜上会产生眩光，严重影响前车驾驶人的视线，增加发生事故的风险。此外，使用远光灯还会使前车驾驶人难以看清后方情况，对其变道、停车等操作造成干扰。因此，夜间跟车行驶时，不能使用远光灯。",
     "analysis_url": "http://tiba.jsyks.com/Post/30775.htm",
-    "image": "",
+    "image": "assets/images/1208.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -41134,8 +41134,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "驾驶机动车在有障碍的路段遇对向来车时，有障碍的一方让无障碍的一方先行；但有障碍的一方已驶入障碍路段而无障碍的一方未驶入时，有障碍的一方先行。",
     "analysis_url": "http://tiba.jsyks.com/Post/86f88.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/38.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -41193,7 +41193,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "注意观察地面车道箭头和信号灯。如图所示，1、机动车所在车道的箭头指向左侧和前方，表示允许机动车左转或直行；2、前方车道信号灯显示绿灯，表示允许通行，因此，车辆可以左转或直行行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/2086e.htm",
-    "image": "",
+    "image": "assets/images/1211.jpg",
     "is_image_question": true,
     "keywords": []
   },
@@ -41217,7 +41217,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "图中车辆处于环岛内，行驶轨迹为向右驶出环岛，驶出前需提前开启右转向灯。根据《道路交通安全法实施条例》明确：机动车驶出环岛前，应当开启右转向灯，告知后方、右侧车辆自身即将驶离环岛。",
     "analysis_url": "http://tiba.jsyks.com/Post/02e80.htm",
-    "image": "",
+    "image": "assets/images/1540.jpg",
     "is_image_question": true,
     "keywords": [
       "倒车灯",
@@ -41891,8 +41891,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "如图所示，右前方禁令标志：禁止机动车驶入：表示前方路段禁止各类机动车驶入。设在禁止机动车驶入路段的入口处",
     "analysis_url": "http://tiba.jsyks.com/Post/10e81.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1919.jpg",
+    "is_image_question": true,
     "keywords": [
       "作业区",
       "指示",
@@ -42064,8 +42064,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "请注意题干关键词，首先。水深看不清，停车先察明。在驾驶机动车遇到漫水桥时，首先应该停车察看水情。这是为了确保安全，避免因为水深而导致的车辆损坏或者事故。根据《道路交通安全法实施条例》的规定：机动车行经漫水路或者漫水桥时，应当停车察明水情，确认安全后，低速通过。",
     "analysis_url": "http://tiba.jsyks.com/Post/991b0.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/61.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -42128,7 +42128,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "如图所示，机动车行驶在直行车道，因此只允许车辆直行，不允许进行左转或右转，这是遵守交通规则和确保行车安全的做法。其他选项分析如下：观察左侧无车后，可以左转 - 这是错误的，直行车道只能直行，不允许左转。从该处直接左转 - 这也是错误的，直接左转可能会违反交通规则，干扰其他车辆的正常行驶，并增加交通事故的风险。倒车退到虚线处换到左转车道 - 这是非常危险的行为，倒车可能会造成严重的交通事故，而且在实线处倒车是违反交通规则的。",
     "analysis_url": "http://tiba.jsyks.com/Post/2fa27.htm",
-    "image": "",
+    "image": "assets/images/1543.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -42344,8 +42344,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "【右侧变窄】警告标志，警告前方是右侧车行道或路面变窄的路段，遇来车应减速避让。",
     "analysis_url": "http://tiba.jsyks.com/Post/3bc19.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1922.jpg",
+    "is_image_question": true,
     "keywords": [
       "作业区",
       "指示",
@@ -42481,8 +42481,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "驾驶机动车在没有交通信号的道路，遇行人横过道路，要及时减速慢行或停车避让。",
     "analysis_url": "http://tiba.jsyks.com/Post/6d143.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/781.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -42585,8 +42585,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "驾驶机动车遇到行人通过人行横道时，应及时减速停车让行，不得加速从行人两侧绕行通过。从行人前方绕行：错误。这样做可能会惊吓行人，并且是违反交通规则的行为。停车让行人先行：正确。根据交通法规，驾驶人应当在人行横道上停车让行人先行。鸣喇叭提醒行人：错误。人行横道上鸣喇叭是不被允许的，且可能惊吓行人。从行人后方绕行：错误。这样做可能会导致与行人发生碰撞，是危险且不负责任的行为。",
     "analysis_url": "http://tiba.jsyks.com/Post/30d2e.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20440.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -42647,8 +42647,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "驾驶机动车通过无信号灯控制或无人看守的铁路道口时，要在道口外停车观察，做到一停（在停止线以外停车）、二看（观察左右是否有驶来的列车）、三通过（确认安全后，低速通过）。",
     "analysis_url": "http://tiba.jsyks.com/Post/b0eb7.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/42.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -42682,7 +42682,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "如图所示，当同向车道的前车C车减速让超时，如果对向车道有B车驶来，A车应避免强行超车，因为这可能会导致与B车发生碰撞。安全的做法是放弃超车，等待合适的时机再进行超车。其他选项的分析如下：加速超越C车 - 这可能会导致与对向车道的B车发生碰撞，是危险的。鸣喇叭示意B车让行后超车 - 在对向车道有来车的情况下，这样做是不安全的，因为B车可能不会或不能及时让行。直接向左变更车道，迫使B车让行 - 这种做法可能会迫使B车紧急制动或避让，从而增加事故风险。因此，正确答案是：放弃超越C车，这是考虑到行车安全和遵守交通规则的做法。",
     "analysis_url": "http://tiba.jsyks.com/Post/177f7.htm",
-    "image": "",
+    "image": "assets/images/1546.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -42726,7 +42726,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "夜间驾驶机动车与同方向行驶的前车距离较近时，应使用近光灯，禁止使用远光灯，避免灯光照射至前车后视镜造成前车驾驶人炫目，影响行车安全。",
     "analysis_url": "http://tiba.jsyks.com/Post/57f7c.htm",
-    "image": "",
+    "image": "assets/images/1547.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -42780,8 +42780,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "观察各车道的导向箭头，从左至右依次为左转车道、直行车道、直行和右转车道，因此要进行左转弯，应该选择最左侧标有左转弯箭头的车道。而中间车道是供直行车辆行驶的，最右侧车道是供直行和右转弯合用的，都不适合左转弯。",
     "analysis_url": "http://tiba.jsyks.com/Post/179be.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/43.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -42810,7 +42810,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "《道路交通安全法》第三十六条 根据道路条件和通行需要，道路划分为机动车道、非机动车道和人行道的，机动车、非机动车、行人实行分道通行。没有划分机动车道、非机动车道和人行道的，机动车在道路中间通行，非机动车和行人在道路两侧通行。这样规定的原因是：1、机动车在道路中间通行可以给两侧的非机动车和行人留有充足的通行空间，同时避免车辆过于靠近路边，从而减少冲出路外的风险。2、非机动车和行人在道路两侧通行可以获得更多的安全空间，降低与机动车发生冲突的可能性。",
     "analysis_url": "http://tiba.jsyks.com/Post/c1cfb.htm",
-    "image": "",
+    "image": "assets/images/1235.jpg",
     "is_image_question": true,
     "keywords": []
   },
@@ -43287,8 +43287,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "如图所示，后车跟车太近，未与前车保持安全距离，导致前车停车礼让时，被后车追尾。驾驶机动车与同车道行驶的前车，注意保持足以采取紧急制动措施的安全距离。",
     "analysis_url": "http://tiba.jsyks.com/Post/b65f5.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/32.jpg",
+    "is_image_question": true,
     "keywords": [
       "120",
       "122",
@@ -43403,7 +43403,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "从图中可以看到路口处设有允许掉头标志，黄色虚实线虚线的一侧是允许车辆跨越的。因此从中心线虚线处掉头是合理且安全的，既不会影响行人，也能较为顺畅地完成掉头动作。其他选项分析如下：1，在人行横道上掉头是错误的，因为人行横道是行人通行的区域，车辆不能在上面掉头；2，进入路口后掉头可能会影响其他车辆正常行驶，增加交通拥堵和事故风险；3，从右侧车道掉头不符合正常的交通规则和驾驶习惯。",
     "analysis_url": "http://tiba.jsyks.com/Post/059be.htm",
-    "image": "",
+    "image": "assets/images/68.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -43433,8 +43433,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "路口左转的标准操作是贴近路口中心点左侧转弯，这样不会占用对向车道；而靠右转弯、骑中心点均属于违规操作。《道路交通安全法实施条例》规定：机动车通过有交通信号灯控制的交叉路口，向左转弯时，靠路口中心点左侧转弯，转弯时开启转向灯，夜间行驶开启近光灯。",
     "analysis_url": "http://tiba.jsyks.com/Post/b89c8.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/44.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -43486,8 +43486,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "禁掉头标志立，路口掉头不可取。图中是设有禁止掉头标志的路口，因此遇到这种情况时，该路口不能掉头。禁止掉头标志明确表示在这个路口不允许车辆进行掉头操作。其他选项分析如下：1、沿左侧车道掉头是错误的，因为有禁止掉头标志。2、选择中间车道掉头也不对，有禁止标志的路口任何车道都不能掉头。3、在路口内掉头同样错误，禁止掉头的路口不可以进行掉头行为。",
     "analysis_url": "http://tiba.jsyks.com/Post/65ddf.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/66.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -44575,8 +44575,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "超车时，应当从前车的左侧超越。我国实行右侧通行原则，驾驶员在左侧，相对来说左侧的视野更好，更便于观察路况，也更安全。而且从左侧超车符合正常的交通规则和驾驶习惯。其他选项分析如下：1，从前车的右侧超越是非常危险且违规的行为，因为右侧的视野盲区较大。2，左右两侧均可超越是错误的，只能从左侧超。3，从无障碍一侧超越也是不正确的，规定就是要从左侧超越，而不是单纯看有无障碍。",
     "analysis_url": "http://tiba.jsyks.com/Post/a1b06.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20411.jpg",
+    "is_image_question": true,
     "keywords": [
       "交替使用",
       "右侧",
@@ -44711,7 +44711,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "如图所示，行车中遇到学生队伍通过人行横道时，停车等待直到学生队伍完全通过是正确的做法。因为学生是道路交通中的弱势群体，需要给予特别的保护和照顾。其他选项分析如下：按照前方交通信号灯指示直接通行是错误的，即便信号灯允许通行，但有学生正在过马路，也应该停车让行；鸣喇叭提醒让学生队伍中空出缺口穿行过去，这种行为可能惊吓到学生，也不利于保障学生的安全；鸣喇叭催促还未通过的学生加快速度通过是不合适的，会给学生带来压力和恐慌，应耐心等待。",
     "analysis_url": "http://tiba.jsyks.com/Post/4d1d3.htm",
-    "image": "",
+    "image": "assets/images/1906.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -45164,8 +45164,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中后方有执行任务的警车（特种车辆），根据交通规则，其他车辆遇到执行紧急任务的特种车辆时，应当及时让行，确保特种车辆能顺利通行，所以前车应及时让行。《道路交通安全法》,警车、消防车、救护车、工程救险车执行紧急任务时，可以使用警报器、标志灯具；在确保安全的前提下，不受行驶路线、行驶方向、行驶速度和信号灯的限制，其他车辆和行人应当让行。",
     "analysis_url": "http://tiba.jsyks.com/Post/c8188.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/74.jpg",
+    "is_image_question": true,
     "keywords": [
       "上坡",
       "下坡",
@@ -46928,7 +46928,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "道路限速标志标明的车速与车道行驶车速的规定不一致时，应当按照道路限速标志标明的车速行驶。如图所示，左侧车道：限速区间100-120公里/小时；中间车道：限速区间80-100公里/小时；右侧车道：限速区间60-80公里/小时。因此，当车速高于110公里/小时时，应当在最左侧车道行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/47f92.htm",
-    "image": "",
+    "image": "assets/images/1194.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -46980,8 +46980,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "夜间会车或跟车行驶，应当使用近光灯。会车前，应当在距对向来车150米之外改用近光灯，以避免远光灯的强光照射到对方驾驶人，减少眩光，确保双方的视线不受干扰，降低发生事故的风险。",
     "analysis_url": "http://tiba.jsyks.com/Post/79c12.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20407.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -47333,7 +47333,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "从图中可以清晰地看到，A车开启左转向灯，欲左转时压实线变更车道。压实线变更车道是明确的违法行为，因为道路上的实线起到分隔不同车道、规范车辆行驶路径的作用，压实线变道容易干扰其他车辆的正常行驶，增加交通事故的风险。",
     "analysis_url": "http://tiba.jsyks.com/Post/f9c75.htm",
-    "image": "",
+    "image": "assets/images/20445.jpg",
     "is_image_question": true,
     "keywords": [
       "停止",
@@ -47368,8 +47368,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "匝道弯道不超车，跟车行驶最稳妥。高速公路匝道属于弯道、变道过渡路段，空间狭窄、视线受限，严禁超车，遇到前车速度较低时，应跟随前车行驶，待进入加速车道后再根据情况调整车速。",
     "analysis_url": "http://tiba.jsyks.com/Post/bdb12.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20400.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -47438,7 +47438,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "如图所示，当夜间驾驶机动车行驶到这个路口，遇行人正在通过人行横道时，根据交通法规，驾驶人应停车让行，确保行人安全通过。其他选项分析如下：1，连续鸣喇叭催促行人快速通过是不文明且不安全的行为，可能会惊吓到行人，导致意外发生。2，交替使用远近光灯警告行人也是不合适的，会对行人造成干扰和不适。3，加速从行人的身后通过更是极其危险的，容易引发交通事故，危及行人生命安全。",
     "analysis_url": "http://tiba.jsyks.com/Post/cbeb4.htm",
-    "image": "",
+    "image": "assets/images/839.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -47493,7 +47493,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "图片中道路右侧有黄色实线，这是典型的禁止停车标线，属于禁停路段。在该路段临时停放机动车，属于在有禁停标线路段停车的违法行为。",
     "analysis_url": "http://tiba.jsyks.com/Post/a1f9a.htm",
-    "image": "",
+    "image": "assets/images/20454.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -47555,7 +47555,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "从图中可以清晰的看到A车行驶在应急车道上。应急车道是专门供工程救险、消防救援、医疗救护或民警执行紧急公务等处理应急事务的车辆使用的，社会车辆在正常情况下禁止占用应急车道行驶。所以，A车的违法行为是占用应急车道行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/fab5e.htm",
-    "image": "",
+    "image": "assets/images/20447.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -47723,8 +47723,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "在大雾天气条件下跟车行驶，使用雾灯可以增强穿透力，更好地照亮前方道路。其他不正确的选项分析如下：开启右转向灯一般是在准备向右变更车道时使用，在大雾跟车行驶时不需要。远光灯在大雾天气会被雾气反射，导致视线更差，不能使用。不使用灯光会使车辆在大雾中难以被其他车辆发现，增加事故风险。",
     "analysis_url": "http://tiba.jsyks.com/Post/8bdd8.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20408.jpg",
+    "is_image_question": true,
     "keywords": [
       "倒车灯",
       "前照灯",
@@ -47758,7 +47758,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中A车车轮碾压车道之间的白色实线实施变道，因此A车“压实线变更车道”是说法正确的选项。道路上的实线就好比一堵“墙”，禁止跨越、碾压，A车压实线变更车道，属于交通违法行为。【答疑解惑】题干题意为选出描述 A 车行为的正确语句，并非判断 A 车操作是否合规。",
     "analysis_url": "http://tiba.jsyks.com/Post/a7fb9.htm",
-    "image": "",
+    "image": "assets/images/20446.jpg",
     "is_image_question": true,
     "keywords": [
       "倒车灯",
@@ -47848,7 +47848,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "当驾驶机动车从匝道驶入高速公路时，应该提前开启左转向灯。这是因为在驶入高速公路时，车辆需要向左并入主线车道，开启左转向灯可以向后方来车传递车辆即将并入的信号，确保安全。其他选项分析如下：1，开右转向灯是错误的，因为不是往右行驶。2，直接加速驶入高速公路主线很危险，没有给其他车辆反应的时间。3， 在匝道上超车更是绝对不允许的，匝道通常比较狭窄，超车容易引发事故。",
     "analysis_url": "http://tiba.jsyks.com/Post/b5128.htm",
-    "image": "",
+    "image": "assets/images/20418.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -47898,7 +47898,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "上陡坡：提醒前方有向上的陡坡路段，应小心驾驶。下陡坡：提醒前方有向下的陡坡路段，应小心驾驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/94ee1.htm",
-    "image": "",
+    "image": "assets/images/95.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -47966,7 +47966,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "两个连续的下坡箭头，是连续下坡标志：提醒前方有两个及以上的连续下坡路段，应小心驾驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/4b642.htm",
-    "image": "",
+    "image": "assets/images/129.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -48395,7 +48395,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "从图中可以看出，前方有行人正在通过道路。减速让行，必要时停车，这是保障行人安全，文明驾驶的正确做法。在道路上，行人相对于机动车处于弱势地位，机动车驾驶人有义务保障行人的安全。而加速通过是非常危险且错误的做法，容易引发交通事故。变换远近光灯催促行人以及鸣喇叭提醒行人让行，这种行为可能会惊吓到行人，导致他们出现惊慌失措的反应，也容易引发意外。",
     "analysis_url": "http://tiba.jsyks.com/Post/bd815.htm",
-    "image": "",
+    "image": "assets/images/20542.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -49136,7 +49136,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "在没有划分车道的道路上通行时，机动车应在道路中间通行。这样规定是为了保证机动车行驶有相对稳定和安全的路线，减少与路边行人和非机动车发生碰撞的风险。其他选项分析如下：1，非机动车在道路左侧通行是错误的，非机动车通常应靠道路右侧行驶。2，行人在道路中间通行很危险，行人应该靠路边行走。3，非机动车在道路中间通行不正确，非机动车应当在道路两侧通行，通常在右侧。",
     "analysis_url": "http://tiba.jsyks.com/Post/de1b4.htm",
-    "image": "",
+    "image": "assets/images/1206.jpg",
     "is_image_question": true,
     "keywords": []
   },
@@ -50023,7 +50023,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "铁路道口是比较危险的路段，火车通行具有优先权且速度快、制动距离长。当遇到红灯亮时，意味着可能有火车即将通过或者正在通过，此时必须停车等待，确保安全。其他选项分析如下：1，在铁路道口倒车是极其危险的行为，容易引发事故。2，在铁路道口掉头同样危险，空间狭窄且情况复杂。3，不观察就加速通过更是不可取的，这种做法完全忽视了潜在的危险。",
     "analysis_url": "http://tiba.jsyks.com/Post/bed09.htm",
-    "image": "",
+    "image": "assets/images/20544.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -50357,7 +50357,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "在没有道路中心线的公路上，驾驶机动车最高行驶速度不得超过每小时40公里。根据《道路交通安全法实施条例》的相关规定，在没有道路中心线的公路上，机动车最高行驶速度不得超过每小时40公里。",
     "analysis_url": "http://tiba.jsyks.com/Post/e8423.htm",
-    "image": "",
+    "image": "assets/images/1530.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -50398,7 +50398,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "同方向只有1条机动车道的道路，城市道路为每小时50公里。根据《道路交通安全法实施条例》的相关规定，机动车在道路上行驶不得超过限速标志、标线标明的速度。在没有限速标志、标线的道路上，机动车不得超过下列最高行驶速度：(二)同方向只有1条机动车道的道路，城市道路为每小时50公里，公路为每小时70公里。（有线：城5公7）",
     "analysis_url": "http://tiba.jsyks.com/Post/d3829.htm",
-    "image": "",
+    "image": "assets/images/20452.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -50614,7 +50614,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "在高速公路上行驶，同方向有2条车道的，左侧车道为快车道。根据规定，左侧车道的最低车速为每小时100公里。右侧车道最低车速为每小时60公里。《道路交通安全法实施条例》第七十八条：高速公路最高车速不得超过每小时120公里，最低车速不得低于每小时60公里。1、同方向有2条车道的，左侧车道的最低车速为每小时100公里；【解题关键】图中车道数量是解题关键，遇到这类考题先数车道，再对号入座选数值，最高限速默认120km/h（除非题干特别说明）。",
     "analysis_url": "http://tiba.jsyks.com/Post/ef748.htm",
-    "image": "",
+    "image": "assets/images/20467.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -51032,7 +51032,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "A 车已经进入路口实线直行车道，实线区域不允许变道，不能左转、右转，只能先直行通过路口，再重新找路线左转。看图关键信息：1、A 车当前在直行车道，地面箭头仅允许直行；路口信号灯左转箭头为红灯，且实线区禁止跨车道变道。2、实线区不得压线变更车道，不能临时左转，也不能原地右转。",
     "analysis_url": "http://tiba.jsyks.com/Post/d1cc0.htm",
-    "image": "",
+    "image": "assets/images/2100.jpg",
     "is_image_question": true,
     "keywords": []
   },
@@ -51221,7 +51221,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "图中场景存在多种潜在危险：①是B车存在借道超车的可能，对向已有来车，若贸然超车极易引发正面碰撞；②是道路右侧行人动向不明，有突然横穿马路的风险；③是路旁出口随时可能有车辆驶出，易造成交叉碰撞。行车时需全面留意以上三类潜在危险。",
     "analysis_url": "http://tiba.jsyks.com/Post/da8fa.htm",
-    "image": "",
+    "image": "assets/images/20163.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -51651,7 +51651,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "【左转弯待转信号】动作要领：交警左臂向左下方平伸，掌心向下；左臂与手掌平直向下方摆动。手势示意：准许交警左侧的左转弯车辆进入路口，沿左转弯行驶方向靠近路口中心，等待左转弯信号。点击查看交警手势动图【识别技巧】交警的面部对着交警的哪个方向，就是在指挥哪个方向的车。",
     "analysis_url": "http://tiba.jsyks.com/Post/0da57.htm",
-    "image": "",
+    "image": "assets/images/354.jpg",
     "is_image_question": true,
     "keywords": [
       "停止",
@@ -52390,7 +52390,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "请注意：选项中的ABCD与标志图的ABCD并非一一对应。如图所示，在高速公路上机动车因故障无法移动并停在最左侧行车道上时，驾乘人员应选择图中位置D等待救援，因为右侧护栏外是最安全的位置，它远离行车道，可以最大程度减少被撞击的风险。其他选项分析如下：1，图中位置A：在故障车前等待会增加危险，因为后方来车可能无法及时看到故障车辆和人员。2，图中位置B：行车道的左侧并不是安全的位置，因为它紧邻行车道，存在被其他车辆撞击的风险。3，图中位置C：在最左侧行车道上的故障车辆旁的中央隔离带也不是正确的撤离位置。",
     "analysis_url": "http://tiba.jsyks.com/Post/d2fe5.htm",
-    "image": "",
+    "image": "assets/images/20450.jpg",
     "is_image_question": true,
     "keywords": [
       "150米",
@@ -52984,7 +52984,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "见减速让行先减速，观察确认才通过。如图所示，设有减速让行标志的路口，意味着车辆驾驶人在接近路口或交叉口时必须减速行驶，并观察路口的交通情况，确保安全后再通过。即使路口没有车辆和行人，驾驶人也应减速观察，以应对可能出现的突发情况。其他选项分析如下：1，即使路口没有车辆和行人，也不能加速通过，要遵循减速让行的标志要求。2，不能只是减速，还要观察确认安全，不能在未确认安全的情况下通过。3，在路口停车后向左转头观察并快速通过存在安全隐患，应全面观察确认安全后再通过。",
     "analysis_url": "http://tiba.jsyks.com/Post/a99b3.htm",
-    "image": "",
+    "image": "assets/images/2070.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -53027,7 +53027,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "海关标志：道路前方是海关，所有机动车必须停车接受海关检查后方可通过。",
     "analysis_url": "http://tiba.jsyks.com/Post/d57ff.htm",
-    "image": "",
+    "image": "assets/images/198.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -53061,7 +53061,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "向左转弯标志：前方路口一切车辆只准向左转弯。箭头明确指向左，指示车辆向左转弯。",
     "analysis_url": "http://tiba.jsyks.com/Post/8dfac.htm",
-    "image": "",
+    "image": "assets/images/201.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -53096,7 +53096,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "步行：前方道路只供步行，任何车辆不准进入。人行横道：表示该处为人行横道，机动车驾驶人应注意观察行人，遇行人已进入人行横道时应停车让行人通过。注意行人：警告前方道路设有人行横道线，应减速慢行，注意行人。注意儿童：警告前方是儿童频繁出入的地点，应减速慢行，注意儿童。",
     "analysis_url": "http://tiba.jsyks.com/Post/bef0e.htm",
-    "image": "",
+    "image": "assets/images/214.jpg",
     "is_image_question": true,
     "keywords": [
       "上坡",
@@ -53141,7 +53141,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "标志中有车在隧道口前开灯的图案，因此是隧道开车灯标志，警告前方是无照明或照明不足的隧道，应打开前照灯，注意行驶。该标志通常设置在无照明或照明不足的隧道入口前的适当位置。其目的是为了提醒驾驶员在进入光线较暗的隧道时，开启车灯以提高视线清晰度，确保行车安全。",
     "analysis_url": "http://tiba.jsyks.com/Post/a78fb.htm",
-    "image": "",
+    "image": "assets/images/169.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -53185,7 +53185,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "此标志为注意分离式道路标志。分离式道路是指左、右行车道分开修建的公路，一般在道路中间有一定的间隔或隔离设施。看到这个标志，驾驶人应注意前方道路可能出现分岔、分隔等情况，提前做好准备，谨慎驾驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/eb784.htm",
-    "image": "",
+    "image": "assets/images/172.jpg",
     "is_image_question": true,
     "keywords": [
       "作业区",
@@ -53445,7 +53445,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "驾驶机动车遇有路口堵塞时，车辆既不可在黄色网格线区域临时停车等待，也不可在人行横道停车。即便是绿灯亮，也要在路口外依次排队等待，不得进入路口或停在路口内等候，以免加剧阻塞或被夹在路口内进退两难。正确的做法是，在确保安全的情况下，在当前车道内依次排队等待，直到道路畅通为止。",
     "analysis_url": "http://tiba.jsyks.com/Post/a0a6a.htm",
-    "image": "",
+    "image": "assets/images/738.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -53565,7 +53565,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "如图所示，右侧路边有禁止停车标志和标线，因此在这段道路上的任何地方都不能停车。只要有这个标志，该路段就不允许停车。根据《道路交通安全法实施条例》的规定，机动车在道路上临时停车，应当遵守下列规定：(一)在设有禁停标志、标线的路段，在机动车道与非机动车道、人行道之间设有隔离设施的路段以及人行横道、施工地段，不得停车。",
     "analysis_url": "http://tiba.jsyks.com/Post/f6268.htm",
-    "image": "",
+    "image": "assets/images/2067.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -54018,7 +54018,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "根据《道路交通标志和标线 第2部分：道路交通标志》（GB 5768.2-2022）第6.31条规定，该标志为残疾人专用停车位标志。标志特征：上方为停车标识字母“P”，下方配有轮椅图案，二者结合表示残疾人专用停车位标志，表示此处仅允许残疾人驾驶的车辆停放。",
     "analysis_url": "http://tiba.jsyks.com/Post/b6fb0.htm",
-    "image": "",
+    "image": "assets/images/20294.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -54158,8 +54158,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "图A：图案是电动自行车，是电动自行车行驶标志，表示该道路仅供电动自行车通行。图B：图案是行人，是行人标志，表示该段道路仅供行人步行，任何车辆不准进入。图C：图案是货车，是靠右侧车道行驶标志，表示车辆除必要的超车行为外应靠右侧车道行驶。图D：图案是行人与自行车，是非机动车与行人共享空间通行标志，表示该道路仅供非机动车与行人通行，机动车不准进入。所以答案是图D。需注意：选项中的图A、图B、图C和图D与标志图中的标识并不是一一对应的，考生在答题时应根据图片标识对应的选项来确定正确答案。",
     "analysis_url": "http://tiba.jsyks.com/Post/bef01.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/19984.jpg",
+    "is_image_question": true,
     "keywords": [
       "作业区",
       "指示",
@@ -55061,7 +55061,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "左灯亮，车左移。图中显示前方小型客车已经开启了左转向灯，并且车辆位置稍微偏向道路的左侧。根据交通规则，开启左转向灯通常表示车辆准备向左变道或进行左转。因此，可以判断前方小型客车正在提示它准备向左变道。",
     "analysis_url": "http://tiba.jsyks.com/Post/be45b.htm",
-    "image": "",
+    "image": "assets/images/2049.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -55319,8 +55319,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "车辆行驶在设置了车道信号灯的道路上，必须选择绿色箭头灯亮的车道行驶。绿色箭头灯亮时，准许本车道车辆按指示方向通行；红色叉形灯或者红色箭头灯亮时，禁止本车道车辆通行。 如图所示：两侧车道红色叉形灯亮，因此禁止通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/5bfaa.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/551.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -55632,7 +55632,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "这道题目考察的是车辆在道路上变更车道的正确操作。根据道路交通安全法规，车辆变更车道时应当遵守以下规定：1、不得在实线内变道：实线表示禁止车辆跨越，因此不能在实线内变道。2、在虚线区按导向箭头指示变道：虚线表示允许变道，但必须按照导向箭头指示的方向进行，确保安全。3、不得在路口停止线前变道：在路口停止线前变道会影响交通秩序，增加事故风险。4、不得借用人行横道变道：人行横道是供行人使用的，车辆不得借用人行横道变道。因此，图中车辆正确的做法是：在虚线区内按导向箭头指示变道。",
     "analysis_url": "http://tiba.jsyks.com/Post/db308.htm",
-    "image": "",
+    "image": "assets/images/20658.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -55672,7 +55672,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "根据《道路交通安全法》和校车通行规则，校车在最右侧车道（③车道）停靠上下学生时：校车所在车道（③）及相邻左侧车道（②）的车辆必须停车等待；其他车道（①）的车辆可以正常通行。图中③车道：校车所在车道（必须停车）；②车道：相邻车道（必须停车）；①车道：非相邻车道（可以通行）。所以能通行的是①。",
     "analysis_url": "http://tiba.jsyks.com/Post/db135.htm",
-    "image": "",
+    "image": "assets/images/20646.jpg",
     "is_image_question": true,
     "keywords": []
   },
@@ -56172,7 +56172,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "最右车道上写有公交字样，占用公交专用道属于违法行为。",
     "analysis_url": "http://tiba.jsyks.com/Post/e61c7.htm",
-    "image": "",
+    "image": "assets/images/2036.jpg",
     "is_image_question": true,
     "keywords": [
       "交替使用",
@@ -56379,7 +56379,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "紧急停车带：前方路段设有紧急停车的位置。设在高速公路和一级公路上，供车辆发生故障或其他原因紧急停车使用的临时停车地带。 紧急停车带只供紧急情况下使用，不得无故占用紧急停车带。",
     "analysis_url": "http://tiba.jsyks.com/Post/0c873.htm",
-    "image": "",
+    "image": "assets/images/280.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -56483,7 +56483,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "车辆行驶在设置了车道信号灯的道路上，必须选择绿色箭头灯亮的车道行驶。绿色箭头灯亮时，准许本车道车辆按指示方向通行；红色叉形灯或者红色箭头灯亮时，禁止本车道车辆通行。 如图所示，中间车道绿色箭头灯亮，表示允许通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/f43a3.htm",
-    "image": "",
+    "image": "assets/images/2043.jpg",
     "is_image_question": true,
     "keywords": [
       "停止",
@@ -56853,7 +56853,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "符合自学直考规定条件的就可以驾驶图中这辆自学直考车辆。《机动车驾驶证申领和使用规定》第四十二条，申请人为自学直考人员的，在道路上学习驾驶时，应当在自学用车上按规定放置、粘贴学车专用标识，自学用车不得搭载随车指导人员以外的其他人员。",
     "analysis_url": "http://tiba.jsyks.com/Post/ec60a.htm",
-    "image": "",
+    "image": "assets/images/2028.jpg",
     "is_image_question": true,
     "keywords": [
       "吊销",
@@ -56894,8 +56894,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "黄灯闪烁是警示信号，提示驾驶人注意危险或需谨慎通行。正确的做法是提前减速，观察周围路况（行人、车辆等），确认安全后再通过。而加速、鸣喇叭或直接通过均不符合安全驾驶规范。",
     "analysis_url": "http://tiba.jsyks.com/Post/d4e2f.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/2055.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -56919,8 +56919,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "转向灯的作用是提前告知其他车辆和行人自己的行驶意图。图中蓝车开启右转向灯，表示车辆准备向右转弯行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/ec80c.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/2048.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "150米",
@@ -57808,7 +57808,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "《道路交通安全法实施条例》,在没有中心隔离设施或中心线的狭窄山路上会车，应减速靠右行驶；不靠山体的一方先行，靠山体的一方让行。理由：靠山体一侧路幅相对固定、不易外移，让行更安全；不靠山体一侧外侧临崖，先通过后即排除坠崖风险。",
     "analysis_url": "http://tiba.jsyks.com/Post/d2a1e.htm",
-    "image": "",
+    "image": "assets/images/20661.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -58426,8 +58426,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "看灯看道辨方向，左转绿灯左转行。交通信号灯中，绿灯亮时准许通行，且需按车道指示行驶。图中车道为左转导向车道，对应信号灯左转绿灯亮起，所以允许车辆向左转弯 。",
     "analysis_url": "http://tiba.jsyks.com/Post/5dab2.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/112.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -58476,7 +58476,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "图中显示的是黄色信号灯，它的作用是路口警示，提醒驾驶人信号灯即将切换，需减速并准备停车，避免抢行。【拓展知识】黄灯的两种核心场景对比：1、持续闪烁的黄灯：《GB 5768.2-2022》定义为“闪光警告信号灯”，属于路口警示，表示路口状态不确定，车辆、行人需减速观望，确认安全后再通行，无需停车等待。2、单次亮起的黄灯：《道路交通安全法》配套信号灯规则，表示绿灯即将结束、红灯即将亮起，车辆需减速准备停车；若已越过停止线，可继续通过路口，未越过则不得抢行。",
     "analysis_url": "http://tiba.jsyks.com/Post/e00e7.htm",
-    "image": "",
+    "image": "assets/images/20426.jpg",
     "is_image_question": true,
     "keywords": [
       "停止",
@@ -58630,7 +58630,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "夜间在窄桥会车时，应当使用近光灯而非远光灯。远光灯会导致对向驾驶人眩目，增加碰撞风险，尤其在窄桥等狭窄路段更需确保双方行车安全。题干中“使用远光灯”的说法违反夜间会车安全规则，因此表述错误。",
     "analysis_url": "http://tiba.jsyks.com/Post/bd021.htm",
-    "image": "",
+    "image": "assets/images/20648.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -59048,8 +59048,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "图中路口信号灯为闪光警告信号灯（持续闪烁的黄灯），提示车辆、行人通行时注意瞭望，确认安全后通过，禁止加速转弯或直行。",
     "analysis_url": "http://tiba.jsyks.com/Post/62fb9.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/11.jpg",
+    "is_image_question": true,
     "keywords": []
   },
   {
@@ -59358,7 +59358,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "【三角减速让】驾驶机动车从辅路汇入主路，遇到左侧一辆机动车从主路进入辅路时，应减速或停车让左侧车辆先行，不要向左突然急加速转向汇入车流。从主路汇入辅路时，要提前减速，注意观察右侧车辆是否让行，确认安全后，逐渐汇入。",
     "analysis_url": "http://tiba.jsyks.com/Post/d1428.htm",
-    "image": "",
+    "image": "assets/images/2063.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -61947,7 +61947,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "根据交通法规，路口黄灯不断闪烁，代表交通信号暂时解除，此时路口的信号灯不再执行常规的红黄绿控制，车辆和行人需在确保安全的前提下通行，同时要注意瞭望，避让其他方向的交通参与者。【拓展知识】黄灯常亮（倒计时）：表示即将切换为红灯，已过停止线可继续通过，未过线应停车等待。黄灯持续闪烁：信号灯暂时解除，路口为“无灯控”状态，需减速瞭望、确认安全后通行。",
     "analysis_url": "http://tiba.jsyks.com/Post/b2025.htm",
-    "image": "",
+    "image": "assets/images/2040.jpg",
     "is_image_question": true,
     "keywords": [
       "120",
@@ -63211,8 +63211,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "《道路交通安全法》第五十一条，机动车行驶时，驾驶人、乘坐人员应当按规定使用安全带，摩托车驾驶人及乘坐人员应当按规定戴安全头盔。如图所示，驾驶人没有系安全带。",
     "analysis_url": "http://tiba.jsyks.com/Post/12eb5.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/71.jpg",
+    "is_image_question": true,
     "keywords": [
       "12分",
       "1分",
@@ -63256,8 +63256,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "当发生事故或者车辆故障时，牢记第一时间打开双闪灯。在确保安全的前提下，立即将车移动至右侧应急车道，在车辆后方正确放置三角警示牌，提醒后方来车注意安全。《道路交通安全法》第六十八条：机动车在高速公路上发生故障时，应当依照本法第五十二条的有关规定办理；警告标志应当设置在故障车来车方向150米以外，车上人员应当迅速转移到右侧路肩上或者应急车道内，并且迅速报警。",
     "analysis_url": "http://tiba.jsyks.com/Post/70b02.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/72.jpg",
+    "is_image_question": true,
     "keywords": [
       "12分",
       "1分",
@@ -63348,7 +63348,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "《道路交通安全法实施条例》第六十三条：在设有禁停标志、标线的路段，在机动车道与非机动车道、人行道之间设有隔离设施的路段以及人行横道、施工地段，不得停车。",
     "analysis_url": "http://tiba.jsyks.com/Post/05cc3.htm",
-    "image": "",
+    "image": "assets/images/76.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -63405,8 +63405,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "《道路交通安全法实施条例》第六十三条 机动车在道路上临时停车，应当遵守下列规定：(三)公共汽车站、急救站、加油站、消防栓或者消防队(站)门前以及距离上述地点30米以内的路段，除使用上述设施的以外，不得停车；",
     "analysis_url": "http://tiba.jsyks.com/Post/99729.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20444.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "12分",
@@ -63462,7 +63462,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "这道题考察的是机动车停放的违法行为。公共汽车站是供公共汽车停靠上下乘客的专用区域，图中机动车在此停车会阻碍公共汽车的正常停靠和乘客的上下车，影响公共交通秩序，属于违法行为。根据《道路交通安全法实施条例》的相关规定，机动车在道路上临时停车，应当遵守下列规定：(三)公共汽车站、急救站、加油站、消防栓或者消防队(站)门前以及距离上述地点30米以内的路段，除使用上述设施的以外，不得停车；",
     "analysis_url": "http://tiba.jsyks.com/Post/1494e.htm",
-    "image": "",
+    "image": "assets/images/20469.jpg",
     "is_image_question": true,
     "keywords": [
       "100米",
@@ -66253,8 +66253,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中机动车有故意遮挡机动车号牌的行为，违反了《道路交通安全法》的规定，因此属于违法行为。根据《道路交通安全法》的相关规定，故意遮挡、污损或者不按规定安装机动车号牌的行为，是违反道路交通安全法律、法规的行为，属于违法行为。这种行为不仅会被处以罚款，驾驶证被扣分，严重时甚至可能面临更严重的法律后果。",
     "analysis_url": "http://tiba.jsyks.com/Post/52913.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20327.jpg",
+    "is_image_question": true,
     "keywords": [
       "12分",
       "1分",
@@ -67313,8 +67313,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中机动车使用口罩遮挡号牌的违法行为是故意遮挡号牌。根据《道路交通安全法》第十一条规定：机动车号牌应当按照规定悬挂并保持清晰、完整，不得故意遮挡、污损。否则不仅会被处以罚款，驾驶证被扣分，严重时甚至可能面临更严重的法律后果。",
     "analysis_url": "http://tiba.jsyks.com/Post/41c2f.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20327.jpg",
+    "is_image_question": true,
     "keywords": [
       "12分",
       "1分",
@@ -67577,8 +67577,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "图中前方小型客车未开启灯光，违反了夜间 / 低能见度条件下的灯光使用规定。《道路交通安全法实施条例》第五十八条，机动车在夜间没有路灯、照明不良或者遇有雾、雨、雪、沙尘、冰雹等低能见度情况下行驶时，应当开启前照灯、示廓灯和后位灯，但同方向行驶的后车与前车近距离行驶时，不得使用远光灯。机动车雾天行驶应当开启雾灯和危险报警闪光灯。",
     "analysis_url": "http://tiba.jsyks.com/Post/cf0a9.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/2050.jpg",
+    "is_image_question": true,
     "keywords": [
       "12分",
       "1分",
@@ -70133,7 +70133,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "在道路行驶中，车辆有义务保证所载货物的稳固，避免货物掉落影响其他车辆安全。A车货物掉落是导致B车与其碰撞的直接原因，B车正常行驶并无过错。根据交通事故责任认定原则，A车因自身过错导致事故发生，应负全部责任。【拓展知识】有学员会疑惑：会不会是后车跟车过近呢？实际上，前车货物掉落属于自身违规隐患，突发不可预判，不能用常规安全距离苛求后车，无论保持多远距离都难以提前避让，故此情形一律由前车全责。",
     "analysis_url": "http://tiba.jsyks.com/Post/59f0a.htm",
-    "image": "",
+    "image": "assets/images/1551.jpg",
     "is_image_question": true,
     "keywords": [
       "120",
@@ -70394,7 +70394,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "驾驶机动车需要掉头时，观察前、后方交通情况，确认安全后减速或停车开启左转向灯，正确选择掉头地点和时机进行掉头。掉头时不要妨碍其他车辆和行人的正常通行。 图中B车掉头妨碍A车正常行驶，因此，B车负全部责任。",
     "analysis_url": "http://tiba.jsyks.com/Post/fe16c.htm",
-    "image": "",
+    "image": "assets/images/1554.jpg",
     "is_image_question": true,
     "keywords": [
       "120",
@@ -70926,8 +70926,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "如图所示，机动车碰撞道路防护栏，应报警处理。根据《道路交通安全法》道路交通事故有下列情形之一的，当事人应当保护现场并立即报警：5、碰撞建筑物、公共设施或者其他设施的；",
     "analysis_url": "http://tiba.jsyks.com/Post/2ee36.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1901.jpg",
+    "is_image_question": true,
     "keywords": [
       "120",
       "122",
@@ -71133,8 +71133,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中信号灯显示：A车所在的直行方向为绿灯（被放行状态），B车所在的右转方向虽可通行，但根据交通规则，右转车辆需避让被放行的直行车辆，不得妨碍其正常通行。此事故中B车右转时未避让直行的A车，违反了让行规则，因此B车需负全责。",
     "analysis_url": "http://tiba.jsyks.com/Post/757ad.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1925.jpg",
+    "is_image_question": true,
     "keywords": [
       "120",
       "122",
@@ -72098,8 +72098,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "转弯让直行，不让负全责。在交叉路口，转弯车辆（B车）必须让行直行车辆（A车），这是基本的通行规则。即使B车是绿灯左转，也不得妨碍对向直行的车辆，否则承担事故全责。",
     "analysis_url": "http://tiba.jsyks.com/Post/df190.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1926.jpg",
+    "is_image_question": true,
     "keywords": [
       "120",
       "122",
@@ -72825,8 +72825,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "夜间发生事故且车辆难以移动时，应开启危险报警闪光灯（双闪）、示廓灯和后位灯，以警示其他车辆避免二次事故。但远光灯会直射对向车辆驾驶人眼睛，造成眩目，增加危险，因此不应开启。",
     "analysis_url": "http://tiba.jsyks.com/Post/bb526.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/20656.jpg",
+    "is_image_question": true,
     "keywords": [
       "100米",
       "120",
@@ -73071,7 +73071,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "在电动汽车中，当看到红色电池＋感叹号形状的指示灯亮起时，是电动汽车的动力蓄电池故障警告，表明电池系统存在异常（如过热、短路或内部损坏）。此时应安全停车并联系检修，继续行驶可能导致电池损坏或安全隐患。",
     "analysis_url": "http://tiba.jsyks.com/Post/b459e.htm",
-    "image": "",
+    "image": "assets/images/20630.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -73118,7 +73118,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "图中指示灯为一个红色的电池形状，是电动汽车仪表盘上的充电系统故障警示灯。当这个指示灯亮起时，表明车辆的充电系统可能遇到了问题，需要及时检查和维修。",
     "analysis_url": "http://tiba.jsyks.com/Post/daf03.htm",
-    "image": "",
+    "image": "assets/images/20636.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -73212,7 +73212,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中这个黄色指示灯是胎压故障警告灯，外形像瘪胎加感叹号，在电动汽车上同样代表轮胎胎压异常（过高或过低），需立即检查轮胎状态，而不是表示电机或电池故障。",
     "analysis_url": "http://tiba.jsyks.com/Post/af9fe.htm",
-    "image": "",
+    "image": "assets/images/20635.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -73259,7 +73259,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中指示灯呈现出类似电机的形状，并且上方有代表过热的波浪线条，是电机过热警告指示灯，表示电动汽车的驱动电机温度过高。此时应降低车速，避免急加速，必要时停车熄火让电机冷却。继续强行驾驶可能导致电机损坏。",
     "analysis_url": "http://tiba.jsyks.com/Post/b7495.htm",
-    "image": "",
+    "image": "assets/images/20634.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -73306,7 +73306,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "电动汽车仪表盘上出现如图所示的车身轮廓+红色感叹号，通常代表整车系统故障（如电控系统、安全系统等综合问题），属于较高优先级警告。",
     "analysis_url": "http://tiba.jsyks.com/Post/ac5d8.htm",
-    "image": "",
+    "image": "assets/images/20632.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -73353,7 +73353,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "电动汽车仪表盘上出现如图所示的电机图标+红色感叹号，表示驱动电机故障，可能影响车辆动力输出或导致无法行驶。",
     "analysis_url": "http://tiba.jsyks.com/Post/ffad3.htm",
-    "image": "",
+    "image": "assets/images/20631.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -73445,7 +73445,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "图中箭头指向的仪表带有温度计样式（带波浪线）、“℃”标识（温度单位），且表盘有水温相关的刻度（如 “50、90、130”），这些都是水温表的典型特征，用于显示发动机冷却液的温度。",
     "analysis_url": "http://tiba.jsyks.com/Post/e3560.htm",
-    "image": "",
+    "image": "assets/images/361.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -73478,7 +73478,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "【km/h是速度，r/min是转速】箭头指示的仪表为 “发动机转速表”，表盘底部标注 “r/min ×1000”（转/分钟×1000），表示当前发动机曲轴转速。",
     "analysis_url": "http://tiba.jsyks.com/Post/e9204.htm",
-    "image": "",
+    "image": "assets/images/359.jpg",
     "is_image_question": true,
     "keywords": [
       "100",
@@ -73651,7 +73651,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "图中红圈内的符号表示后风窗玻璃刮水器及洗涤器的控制开关（小方框代表后风窗，图案体现刮水、喷水功能 ），用于控制后风窗玻璃的刮水器和洗涤器。",
     "analysis_url": "http://tiba.jsyks.com/Post/cb721.htm",
-    "image": "",
+    "image": "assets/images/394.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -73715,7 +73715,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "图中红圈内的符号表示前风窗玻璃刮水器。该符号的图案类似于一个扇形挡风玻璃加上雨刮摆动的线条，用于控制前挡风玻璃的雨刮器功能。后窗相关功能（如除霜或雨刮）会有不同的标识，例如矩形图案或附加箭头。",
     "analysis_url": "http://tiba.jsyks.com/Post/f6043.htm",
-    "image": "",
+    "image": "assets/images/393.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -73838,7 +73838,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "图中红圈内的图标是锁与开锁样式的开关，功能为控制车门的锁住和开锁。因此，这个开关控制的是车门的锁住和开锁功能。",
     "analysis_url": "http://tiba.jsyks.com/Post/d7c52.htm",
-    "image": "",
+    "image": "assets/images/20711.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -73883,7 +73883,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "图中所示的符号是车门锁住开锁的控制装置开关——上方为“车门轮廓”（代表车门），下方为“钥匙齿状结构”（代表锁具），组合表示“控制车门的锁定与解锁”。",
     "analysis_url": "http://tiba.jsyks.com/Post/e8a12.htm",
-    "image": "",
+    "image": "assets/images/396.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -74184,8 +74184,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "制动踏板是行车制动器的操作装置，用于汽车减速和停车。踩下制动踏板，产生制动作用，抬起制动踏板，制动解除。因此，当行车中遇红灯时，应踩下制动踏板（脚刹）以减速并在停止线以外停车等待。",
     "analysis_url": "http://tiba.jsyks.com/Post/f6d05.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/409.jpg",
+    "is_image_question": true,
     "keywords": [
       "ABS",
       "ESP",
@@ -74349,8 +74349,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "速度和里程表：速度表指示汽车行驶速度，单位为公里/小时（km/h），速度表指针所指的数字显示当前车辆的行驶速度。里程表累计行驶总里程数以公里（km）为单位；日里程表用于记录一天或某段区间的里程数；按回零按钮至“0”位后重新开始计数。",
     "analysis_url": "http://tiba.jsyks.com/Post/39449.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/360.jpg",
+    "is_image_question": true,
     "keywords": [
       "100",
       "110",
@@ -74587,7 +74587,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "如图所示，前雾灯开启。弯曲的“丰”表示光线的方向，绿“丰”在左，表示前雾灯；黄“丰”在右，表示后雾灯。【左前右后】",
     "analysis_url": "http://tiba.jsyks.com/Post/9df0e.htm",
-    "image": "",
+    "image": "assets/images/367.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -74700,7 +74700,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "如图所示灯亮，表示发动机机油压力过低或机油量不足。 应对措施：停车检查机油量，若过少则进行补充添加，若不少则尽快联系救援。",
     "analysis_url": "http://tiba.jsyks.com/Post/3a9e8.htm",
-    "image": "",
+    "image": "assets/images/370.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -74820,7 +74820,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "机动车仪表板上的红色感叹号（括号内圆圈感叹号）通常表示制动系统出现异常或故障。可能由以下原因引起：1，制动液液位过低。2，制动系统出现故障，如刹车片磨损严重或制动液不符合要求。因此，该指示灯亮起时，表示制动系统可能出现异常，而不是单一的制动踏板未回位或驻车制动解除。",
     "analysis_url": "http://tiba.jsyks.com/Post/f2e3f.htm",
-    "image": "",
+    "image": "assets/images/371.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -74871,7 +74871,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "机动车仪表板上显示括号内圆圈“P”的指示灯亮起时，表示驻车制动器处于制动状态。这是驻车制动（手刹）提示灯，当手刹被拉起时，该灯会亮起，提示驾驶人驻车制动器处于工作状态。",
     "analysis_url": "http://tiba.jsyks.com/Post/aa06a.htm",
-    "image": "",
+    "image": "assets/images/373.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -75148,7 +75148,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "仪表板上如图所示灯亮，表示油箱内燃油已到最低液面。",
     "analysis_url": "http://tiba.jsyks.com/Post/85197.htm",
-    "image": "",
+    "image": "assets/images/374.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -75357,7 +75357,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "灯光的光线是平行直射的，平行光线照的远，因此仪表板上如图所示灯亮，表示远光灯开启。",
     "analysis_url": "http://tiba.jsyks.com/Post/029f4.htm",
-    "image": "",
+    "image": "assets/images/376.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -75483,7 +75483,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "图中为安全带未系提示灯，该灯亮起时，表明驾驶人安全带未正确系好，或安全带插头未插入锁扣，需提醒驾驶人规范佩戴安全带。题目描述与指示灯的法定含义一致，故判断为正确。",
     "analysis_url": "http://tiba.jsyks.com/Post/8bf77.htm",
-    "image": "",
+    "image": "assets/images/378.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -75678,7 +75678,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "危险报警闪光灯：与转向信号灯共用一套灯具，当汽车发生故障停车或遇到紧急情况需要处理时使用，发出交替的闪光信号，用于警告后方车辆和行人。前后位置灯：又称示廓灯、小灯，用于夜间和特殊天气行驶时，标示汽车的宽度，提醒其他车辆注意。",
     "analysis_url": "http://tiba.jsyks.com/Post/900d2.htm",
-    "image": "",
+    "image": "assets/images/379.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -75792,7 +75792,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "仪表板上左转向灯的图标箭头向左，右转向灯的图标箭头向右。如图所示，机动车仪表板上的指示灯亮，表示右转向指示灯开启，右转向指示灯闪烁。",
     "analysis_url": "http://tiba.jsyks.com/Post/c2128.htm",
-    "image": "",
+    "image": "assets/images/380.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -75956,7 +75956,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "蓝底红电极亮，充电电路有故障。充电指示灯的作用就是用来显示充电电路的工作状态。当充电电路出现故障或者发电机不向蓄电池充电时，充电指示灯就会亮起，以提醒驾驶人注意车辆充电系统存在问题。因此，如图所示的指示灯亮，表示充电电路故障或发电机不向蓄电池充电。",
     "analysis_url": "http://tiba.jsyks.com/Post/d4d11.htm",
-    "image": "",
+    "image": "assets/images/382.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -76012,7 +76012,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "该指示灯用来显示车辆各车门状况，任意车门未关上，或者未关好，该指示灯都有点亮相应的车门指示灯，提示车主车门未关好，当车门关闭或者关好时，相应车门指示灯熄灭。",
     "analysis_url": "http://tiba.jsyks.com/Post/3f2eb.htm",
-    "image": "",
+    "image": "assets/images/383.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -76059,7 +76059,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "车头发动机舱，车尾行李舱（俗称后备箱），机动车仪表板上出现如图所示符号，提示行李舱开启。",
     "analysis_url": "http://tiba.jsyks.com/Post/9ae7e.htm",
-    "image": "",
+    "image": "assets/images/384.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -76155,7 +76155,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "如图所示，一个带有气囊图案的黄色指示灯是安全气囊故障指示灯。当安全气囊系统出现故障时，这个指示灯就会亮起，以提醒驾驶人安全气囊系统存在问题，应尽快进行检查和维修，因为安全气囊是非常重要的安全装置，在关键时刻能起到关键的保护作用。不能忽视这个指示灯的提示，要及时处理故障，确保安全气囊在需要时能正常工作。",
     "analysis_url": "http://tiba.jsyks.com/Post/40d08.htm",
-    "image": "",
+    "image": "assets/images/386.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -76211,7 +76211,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中像太阳一样的符号，表示车灯总开关，是控制车辆所有车灯的一个开关。当这个开关处于开启状态时，能够控制车辆的所有车灯，包括大灯、示廓灯、雾灯、转向灯等。",
     "analysis_url": "http://tiba.jsyks.com/Post/2fa4c.htm",
-    "image": "",
+    "image": "assets/images/387.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -76254,7 +76254,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "空气内循环是让车内空气在车内循环流动，空气外循环是引入车外空气到车内。如图所示，箭头由车外进入车内，因此表示空气外循环。",
     "analysis_url": "http://tiba.jsyks.com/Post/859b1.htm",
-    "image": "",
+    "image": "assets/images/388.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -76297,7 +76297,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "空气内循环是让车内空气在车内循环流动，空气外循环是引入车外空气到车内。",
     "analysis_url": "http://tiba.jsyks.com/Post/74b70.htm",
-    "image": "",
+    "image": "assets/images/389.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -76340,7 +76340,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "机动车仪表板上冷风暖气风扇的图标通常用来表示车辆空调系统的风扇控制。因此，仪表板上出现图中这个符号，表示启用冷风暖气风扇。",
     "analysis_url": "http://tiba.jsyks.com/Post/daf04.htm",
-    "image": "",
+    "image": "assets/images/390.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -76383,7 +76383,7 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "箭头来指示出风的方向，箭头指向地板和驾驶人，就表示对应的吹风功能启用。因此，该图标表示地板及迎面出风。",
     "analysis_url": "http://tiba.jsyks.com/Post/cf855.htm",
-    "image": "",
+    "image": "assets/images/391.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -76426,7 +76426,7 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "箭头来指示出风的方向，箭头指向驾驶人，就表示对应的吹风功能启用。因此，该图标表示迎面出风。",
     "analysis_url": "http://tiba.jsyks.com/Post/aa924.htm",
-    "image": "",
+    "image": "assets/images/392.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -77077,8 +77077,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "如图所示，杆上有球形装饰的是变速器操纵杆，用于选择车辆的驾驶速度，控制车辆的动力传输。通常位于车辆中央控制台的前部，靠近驾驶员座位。【拓展】红色问号（？）在球形状的位置，是变速器操纵杆红色问号（？）在杆柄状的位置，是驻车制动器操纵杆",
     "analysis_url": "http://tiba.jsyks.com/Post/4539c.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/412.jpg",
+    "is_image_question": true,
     "keywords": [
       "ABS",
       "ESP",
@@ -77155,7 +77155,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中为点火开关操纵装置。点火开关4个档位的功能是：LOCK：切断电源，锁定方向盘；ACC：接通附件电源（比如收音机等附件）；ON：接通除起动机外的全车全部电源；START：接通起动机电源，起动机起动。",
     "analysis_url": "http://tiba.jsyks.com/Post/a6bb1.htm",
-    "image": "",
+    "image": "assets/images/414.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -77280,8 +77280,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "左右转向灯开关是控制转向信号灯的操纵装置，与前照灯共用一个操纵杆。向上抬杆，开启右转向灯；向下按杆，开启左转向灯。",
     "analysis_url": "http://tiba.jsyks.com/Post/a28db.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/420.jpg",
+    "is_image_question": true,
     "keywords": [
       "ABS",
       "ESP",
@@ -77331,8 +77331,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "灯光-信号组合开关操作装置用于控制车辆的灯光和信号系统。这个装置通常位于方向盘下方的转向柱上。通过操作它，可以打开或关闭车辆的大灯、小灯、转向灯、雾灯等灯光设备，以及发出相应的信号，如转向信号。例如，向上拨动可能是右转向灯，向下拨动是左转向灯，旋转旋钮可以切换不同的灯光模式。",
     "analysis_url": "http://tiba.jsyks.com/Post/c565f.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/419.jpg",
+    "is_image_question": true,
     "keywords": [
       "ABS",
       "ESP",
@@ -77389,8 +77389,8 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "旋转开关的不同位置对应控制机动车不同的灯光部位。图中所示的这个旋转开关旋转到前后雾灯这一挡，因此控制的是车辆的前后雾灯。前后雾灯主要用于在能见度低的条件下，如雾、雨、雪等天气，提供额外的照明并提高车辆的可见性，以增强行车安全。",
     "analysis_url": "http://tiba.jsyks.com/Post/1bb95.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/425.jpg",
+    "is_image_question": true,
     "keywords": [
       "ABS",
       "ESP",
@@ -77622,8 +77622,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "刮水器开关控制刮水器与洗涤器，在雨天或下雪天行驶时使用，可清除风窗玻璃上的雨雪，保证驾驶人有良好的视线。拨动开关，风窗玻璃刮水器开始工作。",
     "analysis_url": "http://tiba.jsyks.com/Post/34d96.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/427.jpg",
+    "is_image_question": true,
     "keywords": [
       "ABS",
       "ESP",
@@ -77666,8 +77666,8 @@ const QUESTIONS = [
     "answer": 1,
     "analysis": "风窗玻璃刮水器开关一般安装在转向盘右下方转向柱上，用右手操纵。上下拨动这个开关，前风窗玻璃刮水器开始工作。向上拨动拨杆，刮水器单次刮水一回；向下拨动拨杆有3个挡位，分别是间歇刮水、慢速刮水、快速刮水；将杠向内拉动，清洗液喷出。",
     "analysis_url": "http://tiba.jsyks.com/Post/8e392.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/429.jpg",
+    "is_image_question": true,
     "keywords": [
       "ABS",
       "ESP",
@@ -78102,8 +78102,8 @@ const QUESTIONS = [
     "answer": 3,
     "analysis": "防抱死制动系统（ABS）的作用是保证车辆在任何路面上进行紧急制动时，防止车轮抱死，保持前轮转向能力，消除制动过程中的跑偏、侧滑等非稳定状态，并获得良好的制动效果.",
     "analysis_url": "http://tiba.jsyks.com/Post/6e4fd.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/432.jpg",
+    "is_image_question": true,
     "keywords": [
       "ABS",
       "ESP",
@@ -78421,8 +78421,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "安全气囊与安全带要配套使用，如果不系安全带，气囊引爆时会对驾乘人员头部和颈部造成严重伤害，这种伤害对儿童可能是致命的。",
     "analysis_url": "http://tiba.jsyks.com/Post/c79e0.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/433.jpg",
+    "is_image_question": true,
     "keywords": [
       "ABS",
       "ESP",
@@ -78619,7 +78619,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "行驶至上陡坡路段时，换低挡位、踏加速踏板是正确的做法。低挡位能提供更大的扭矩，使车辆在上陡坡时有足够的动力爬坡。踏加速踏板可以增加发动机的输出功率，进一步增强动力，帮助车辆顺利爬上陡坡。其他选项分析如下：1，换低挡位松开加速踏板，可能会导致车辆动力不足，无法顺利爬坡。2，高挡位扭矩较小，在上陡坡时难以提供足够的动力。3，换高挡位松开加速踏板，车辆会因为动力严重不足而无法爬坡，甚至可能熄火后溜。",
     "analysis_url": "http://tiba.jsyks.com/Post/17d01.htm",
-    "image": "",
+    "image": "assets/images/1927.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -79372,8 +79372,8 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "《道路交通安全法实施条例》第六十一条 牵引故障机动车应当遵守下列规定：(一)被牵引的机动车除驾驶人外不得载人，不得拖带挂车；(二)被牵引的机动车宽度不得大于牵引机动车的宽度；(三)使用软连接牵引装置时，牵引车与被牵引车之间的距离应当大于4米小于10米；(四)对制动失效的被牵引车，应当使用硬连接牵引装置牵引；(五)牵引车和被牵引车均应当开启危险报警闪光灯。",
     "analysis_url": "http://tiba.jsyks.com/Post/7573d.htm",
-    "image": "",
-    "is_image_question": false,
+    "image": "assets/images/1930.jpg",
+    "is_image_question": true,
     "keywords": [
       "ABS",
       "ESP",
@@ -79432,7 +79432,7 @@ const QUESTIONS = [
     "answer": 0,
     "analysis": "机动车仪表板上一个黄色的圆圈，里面写着“ABS”的图标亮起，表示防抱死制动系统故障。",
     "analysis_url": "http://tiba.jsyks.com/Post/f2f14.htm",
-    "image": "",
+    "image": "assets/images/372.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",
@@ -79865,7 +79865,7 @@ const QUESTIONS = [
     "answer": 2,
     "analysis": "图中前后两端有类似灯泡及光线的图形标记，是前后位置灯（又称示廓灯）的图标，用以表示车辆的前大灯和后尾灯的工作状态。当位置灯被打开时，如图所示的图标会在仪表盘上亮起，以提醒驾驶人车辆的位置灯已经开启。",
     "analysis_url": "http://tiba.jsyks.com/Post/68834.htm",
-    "image": "",
+    "image": "assets/images/369.jpg",
     "is_image_question": true,
     "keywords": [
       "ABS",

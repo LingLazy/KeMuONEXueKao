@@ -38,3 +38,7 @@ kemu1_stats.json
 # Python 脚本（构建工具，不需要部署）
 *.py
 
+# 图片匹配中间产物
+image_map.json
+image_match_result.json
+

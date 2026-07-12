@@ -532,15 +532,36 @@ main#app {
   margin-bottom: 1.25rem;
   padding: 1rem;
   background: var(--ink-3);
-  border: 1px dashed var(--line-strong);
+  border: 1px solid var(--line-strong);
   border-radius: var(--r-md);
   text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+.q-image-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(217, 119, 6, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.q-image {
+  max-width: 100%;
+  max-height: 320px;
+  height: auto;
+  border-radius: var(--r-sm);
+  display: inline-block;
+  transition: transform 0.4s var(--ease-out);
+}
+.q-image:hover {
+  transform: scale(1.02);
 }
 .q-image-placeholder {
   color: var(--paper-mute);
   font-family: var(--mono);
   font-size: 0.85rem;
   letter-spacing: 0.1em;
+  padding: 2rem 1rem;
 }
 .q-text {
   font-family: var(--serif);
