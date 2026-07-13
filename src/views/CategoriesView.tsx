@@ -111,6 +111,10 @@ export default function CategoriesView() {
   if (error) {
     return (
       <div className="view view-categories">
+        <div className="geo-bg-decor" aria-hidden="true">
+          <div className="geo-bg-grid" />
+          <div className="geo-dots-lg" />
+        </div>
         <div className="view-container">
           <EmptyState
             title="数据加载失败"
@@ -130,6 +134,10 @@ export default function CategoriesView() {
   if (!questions) {
     return (
       <div className="view view-categories">
+        <div className="geo-bg-decor" aria-hidden="true">
+          <div className="geo-bg-grid" />
+          <div className="geo-dots-sm" />
+        </div>
         <div className="view-container">
           <div
             className="cats-loading"
@@ -165,6 +173,16 @@ export default function CategoriesView() {
 
   return (
     <div className="view view-categories">
+      {/* 分类视图装饰层 · 同心环 + 横竖虚线束 + 三角切片 */}
+      <div className="geo-bg-decor" aria-hidden="true">
+        <div className="geo-bg-grid" />
+        <div className="geo-half-rings-br" />
+        <div className="geo-vline-bundle" />
+        <div className="geo-triangle-rt" />
+        <div className="geo-cross-marks" />
+        <div className="geo-hline-dashed" style={{ top: '32%' }} />
+        <div className="geo-hline-dashed" style={{ top: '68%' }} />
+      </div>
       <div className="view-container">
         <header className="section-header">
           <span className="section-eyebrow">Categories</span>

@@ -189,6 +189,10 @@ export default function ExamView() {
   if (error) {
     return (
       <div className="view view-exam">
+        <div className="geo-bg-decor" aria-hidden="true">
+          <div className="geo-bg-grid" />
+          <div className="geo-dots-lg" />
+        </div>
         <div className="view-container">
           <EmptyState
             title="题库加载失败"
@@ -208,6 +212,10 @@ export default function ExamView() {
   if (!questions) {
     return (
       <div className="view view-exam">
+        <div className="geo-bg-decor" aria-hidden="true">
+          <div className="geo-bg-grid" />
+          <div className="geo-dots-sm" />
+        </div>
         <div className="view-container">
           <div className="exam-loading">
             <div className="spinner" />
@@ -246,6 +254,10 @@ export default function ExamView() {
 
   return (
     <div className="view view-exam">
+      {/* 答题页装饰层 · 极简网格底纹 (不干扰答题专注) */}
+      <div className="geo-bg-decor" aria-hidden="true">
+        <div className="geo-bg-grid" />
+      </div>
       {/* 顶部固定栏 */}
       <header className={`exam-header ${lowTime ? 'low-time' : ''}`}>
         <div className="exam-header-left">
@@ -467,6 +479,15 @@ export default function ExamView() {
 function ExamStartView({ onStart, total }: { onStart: () => void; total: number }) {
   return (
     <div className="view view-exam">
+      {/* 开始页装饰层 · 品牌光晕 + 涟漪环 + 三角切片 + S 曲线 */}
+      <div className="geo-bg-decor" aria-hidden="true">
+        <div className="geo-bg-grid" />
+        <div className="geo-glow-primary-tl" />
+        <div className="geo-ripple-tr" />
+        <div className="geo-triangle-bl" />
+        <div className="geo-curve-s" />
+        <div className="geo-cross-marks" />
+      </div>
       <div className="view-container">
         <motion.div
           className="exam-start"
@@ -574,6 +595,25 @@ function ExamResultView({
   const passed = result.passed;
   return (
     <div className="view view-exam">
+      {/* 结果页装饰层 · 通过=成功光晕+同心环; 失败=危险光晕+对角线 */}
+      <div className="geo-bg-decor" aria-hidden="true">
+        <div className="geo-bg-grid" />
+        {passed ? (
+          <>
+            <div className="geo-glow-success-mr" />
+            <div className="geo-glow-primary-tl" />
+            <div className="geo-half-rings-br" />
+            <div className="geo-curve-s" />
+          </>
+        ) : (
+          <>
+            <div className="geo-glow-danger-ml" />
+            <div className="geo-diag-line" />
+            <div className="geo-triangle-rt" />
+            <div className="geo-cross-marks" />
+          </>
+        )}
+      </div>
       <div className="view-container">
         <motion.div
           className={`exam-result ${passed ? 'passed' : 'failed'}`}

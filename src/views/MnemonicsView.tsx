@@ -192,6 +192,11 @@ export default function MnemonicsView() {
   if (!mnemonics) {
     return (
       <div className="view view-mnemonics">
+        {/* 加载态装饰层 · 极简网格+小点阵 */}
+        <div className="geo-bg-decor" aria-hidden="true">
+          <div className="geo-bg-grid" />
+          <div className="geo-dots-sm" />
+        </div>
         <div className="view-container">
           <div className="mnemonics-loading">
             <ListItemSkeleton />
@@ -206,12 +211,21 @@ export default function MnemonicsView() {
 
   return (
     <div className={`view view-mnemonics ${studyMode ? 'study-mode-active' : ''}`}>
-      {/* 构成主义几何背景装饰层 */}
+      {/* 构成主义几何背景装饰层 · 口诀速记专题 */}
+      {/* 装饰主题：流动感 · 呼应口诀的旋律与节奏 */}
       <div className="geo-bg-decor" aria-hidden="true">
         <div className="geo-bg-grid" />
         <div className="geo-arc-tr" />
         <div className="geo-diag-line" />
         <div className="geo-square-bl" />
+        {/* 扩展装饰：波浪线呼应口诀的流动节奏 */}
+        <div className="geo-wave-lines" />
+        {/* 扩展装饰：S 形曲线强化记忆路径意象 */}
+        <div className="geo-curve-s" />
+        {/* 扩展装饰：十字坐标矩阵标记知识点定位 */}
+        <div className="geo-cross-marks" />
+        {/* 扩展装饰：倾斜点阵丰富视觉层次 */}
+        <div className="geo-dots-tilt" />
       </div>
       <div className="view-container">
         {/* 标题区 */}

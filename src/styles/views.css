@@ -19,6 +19,12 @@
   max-width: var(--container-max);
   margin: 0 auto;
 }
+/* Hero 内容层 · z-index:1 确保在装饰层 (geo-wave-lines 等) 之上 */
+.home-hero > .home-hero-content,
+.home-hero > *:not(.home-hero-bg):not([class*="geo-"]) {
+  position: relative;
+  z-index: 1;
+}
 .home-hero-bg {
   position: absolute;
   inset: 0;
@@ -2769,6 +2775,416 @@
   }
   .geo-diag-line {
     opacity: 0.05;
+  }
+}
+
+/* ===================================================================
+   扩展装饰系统 · v2 (2026-07 增强版)
+   - 曲线波纹 / 十字坐标 / 点阵变体 / 平行线束 / 同心环
+   - 各视图差异化组合,避免千篇一律
+   - 全部 absolute + pointer-events:none,不干扰交互
+   =================================================================== */
+
+/* ---------- 曲线波纹类 ---------- */
+
+/* 大型 S 形曲线 · 左下到右上 (用 SVG path data-url 实现) */
+.geo-curve-s {
+  position: absolute;
+  left: -5%;
+  bottom: 8%;
+  width: 70%;
+  height: 280px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 280' preserveAspectRatio='none'><path d='M0,220 C150,220 250,40 400,80 C550,120 650,260 800,180' fill='none' stroke='%233F51D9' stroke-width='1.5' opacity='0.18'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+/* 波浪线束 · 多条平行波浪 (呼应海浪/能量流动) */
+.geo-wave-lines {
+  position: absolute;
+  right: 3%;
+  top: 18%;
+  width: 320px;
+  height: 160px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 160' preserveAspectRatio='none'><path d='M0,20 Q80,0 160,20 T320,20' fill='none' stroke='%23F59E0B' stroke-width='1.2' opacity='0.20'/><path d='M0,60 Q80,40 160,60 T320,60' fill='none' stroke='%23F59E0B' stroke-width='1.2' opacity='0.15'/><path d='M0,100 Q80,80 160,100 T320,100' fill='none' stroke='%23F59E0B' stroke-width='1.2' opacity='0.12'/><path d='M0,140 Q80,120 160,140 T320,140' fill='none' stroke='%23F59E0B' stroke-width='1.2' opacity='0.08'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+/* 圆形涟漪 · 同心圆扩散 (从右上向外扩散) */
+.geo-ripple-tr {
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+}
+.geo-ripple-tr::before,
+.geo-ripple-tr::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--geo-curve);
+}
+.geo-ripple-tr::after {
+  inset: 60px;
+  border-color: var(--geo-wave);
+  opacity: 0.6;
+}
+
+/* ---------- 十字坐标类 ---------- */
+
+/* 工程坐标十字 · 散布点缀 (3x3 矩阵) */
+.geo-cross-marks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 25%, var(--geo-cross) 1px, transparent 2px),
+    radial-gradient(circle at 80% 15%, var(--geo-cross) 1px, transparent 2px),
+    radial-gradient(circle at 35% 75%, var(--geo-cross) 1px, transparent 2px),
+    radial-gradient(circle at 90% 65%, var(--geo-cross) 1px, transparent 2px),
+    radial-gradient(circle at 60% 45%, var(--geo-cross) 1px, transparent 2px);
+  background-size: 100% 100%;
+  opacity: 0.7;
+}
+
+/* 十字标记 (单个,通过伪元素绘 + 形) */
+.geo-cross-anchor {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+.geo-cross-anchor::before,
+.geo-cross-anchor::after {
+  content: '';
+  position: absolute;
+  background: var(--geo-cross);
+}
+.geo-cross-anchor::before {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+}
+.geo-cross-anchor::after {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+/* ---------- 点阵变体类 ---------- */
+
+/* 大点阵 · 疏 (24px 间距,呼应工程图纸) */
+.geo-dots-lg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 1px 1px, var(--geo-dot-lg) 1.5px, transparent 0);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 85%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 85%);
+}
+
+/* 小点阵 · 密 (12px 间距,科技感) */
+.geo-dots-sm {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 1px 1px, var(--geo-dot-sm) 1px, transparent 0);
+  background-size: 12px 12px;
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 80% 80%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 60% 50% at 80% 80%, #000 0%, transparent 75%);
+}
+
+/* 斜点阵 (倾斜 15deg 的点阵) */
+.geo-dots-tilt {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 1px 1px, var(--geo-dot-lg) 1.5px, transparent 0);
+  background-size: 20px 20px;
+  transform: rotate(-15deg) scale(1.2);
+  transform-origin: top left;
+  -webkit-mask-image: radial-gradient(ellipse 50% 40% at 20% 20%, #000 0%, transparent 80%);
+  mask-image: radial-gradient(ellipse 50% 40% at 20% 20%, #000 0%, transparent 80%);
+  opacity: 0.5;
+}
+
+/* ---------- 平行线束类 ---------- */
+
+/* 平行斜线束 (3 条对角线,呼应数据流) */
+.geo-parallel-lines {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to bottom left, transparent 49.7%, var(--geo-curve) 49.7%, var(--geo-curve) 50.3%, transparent 50.3%),
+    linear-gradient(to bottom left, transparent 39.7%, var(--geo-curve) 39.7%, var(--geo-curve) 40.3%, transparent 40.3%),
+    linear-gradient(to bottom left, transparent 29.7%, var(--geo-curve) 29.7%, var(--geo-curve) 30.3%, transparent 30.3%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+}
+
+/* 竖向虚线束 (多条竖虚线,呼应柱状图/数据列) */
+.geo-vline-bundle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent 80px,
+    var(--geo-line) 80px,
+    var(--geo-line) 81px
+  );
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+  opacity: 0.5;
+}
+
+/* 横向粗虚线 (单条,横贯版面) */
+.geo-hline-dashed {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--geo-line) 0,
+    var(--geo-line) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ---------- 同心环变体类 ---------- */
+
+/* 同心半圆环 · 右下角 (替代满圆,更克制) */
+.geo-half-rings-br {
+  position: absolute;
+  bottom: -180px;
+  right: -180px;
+  width: 460px;
+  height: 460px;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 1px solid var(--geo-curve);
+  box-shadow:
+    inset 0 0 0 40px transparent,
+    inset 0 0 0 41px var(--geo-curve),
+    inset 0 0 0 80px transparent,
+    inset 0 0 0 81px var(--geo-wave);
+  opacity: 0.5;
+  -webkit-mask-image: linear-gradient(to top left, #000 50%, transparent 50%);
+  mask-image: linear-gradient(to top left, #000 50%, transparent 50%);
+}
+
+/* 同心方框 · 左上角 (方块版同心环) */
+.geo-nested-squares-tl {
+  position: absolute;
+  top: 60px;
+  left: 4%;
+  width: 160px;
+  height: 160px;
+  pointer-events: none;
+  border: 1px solid var(--geo-line);
+}
+.geo-nested-squares-tl::before,
+.geo-nested-squares-tl::after {
+  content: '';
+  position: absolute;
+  border: 1px solid var(--geo-line);
+}
+.geo-nested-squares-tl::before {
+  inset: 24px;
+  opacity: 0.8;
+}
+.geo-nested-squares-tl::after {
+  inset: 48px;
+  opacity: 0.5;
+}
+
+/* ---------- 斜纹底纹类 ---------- */
+
+/* 斜纹方块底 (45deg 细斜纹,呼应工程剖面线) */
+.geo-hatch-block {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--geo-stripe) 0,
+    var(--geo-stripe) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+  pointer-events: none;
+}
+
+/* ---------- 三角切片类 ---------- */
+
+/* 等腰三角形 · 左下角 (指向右上,呼应箭头/方向感) */
+.geo-triangle-bl {
+  position: absolute;
+  bottom: 40px;
+  left: 3%;
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-bottom: 100px solid var(--geo-red);
+  opacity: 0.06;
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+
+/* 直角三角形 · 右上角 (直角在右上,呼应构成主义海报) */
+.geo-triangle-rt {
+  position: absolute;
+  top: 80px;
+  right: 5%;
+  width: 100px;
+  height: 100px;
+  background: var(--geo-blue);
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* ---------- 颜色光晕类 (彩色渐变光斑,柔化背景) ---------- */
+
+/* 品牌色光晕 · 左上 (柔光弥散) */
+.geo-glow-primary-tl {
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--primary-bg) 0%, transparent 70%);
+  opacity: 0.7;
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+/* 强调色光晕 · 右下 (柔光弥散) */
+.geo-glow-accent-br {
+  position: absolute;
+  bottom: -200px;
+  right: -200px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--accent-bg) 0%, transparent 70%);
+  opacity: 0.6;
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+/* 成功色光晕 · 中部偏右 (通过/合格语义) */
+.geo-glow-success-mr {
+  position: absolute;
+  top: 30%;
+  right: -150px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--success-bg) 0%, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+  filter: blur(50px);
+}
+
+/* 危险色光晕 · 中部偏左 (失败/警示语义) */
+.geo-glow-danger-ml {
+  position: absolute;
+  top: 30%;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--danger-bg) 0%, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+  filter: blur(50px);
+}
+
+/* ---------- 容器辅助类 ---------- */
+
+/* 确保 view 容器为定位上下文 (装饰元素需要 absolute) */
+.view-practice,
+.view-categories,
+.view-exam,
+.view-home {
+  position: relative;
+}
+
+/* 内容层在装饰层之上 */
+.view-practice > *:not(.geo-bg-decor),
+.view-categories > *:not(.geo-bg-decor),
+.view-exam > *:not(.geo-bg-decor),
+.view-home > *:not(.home-hero-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- 移动端响应式 ---------- */
+
+@media (max-width: 768px) {
+  /* 移动端隐藏重型装饰,保留轻量点缀 */
+  .geo-curve-s,
+  .geo-wave-lines,
+  .geo-parallel-lines,
+  .geo-vline-bundle,
+  .geo-half-rings-br,
+  .geo-nested-squares-tl,
+  .geo-hatch-block,
+  .geo-triangle-bl,
+  .geo-triangle-rt,
+  .geo-glow-primary-tl,
+  .geo-glow-accent-br,
+  .geo-glow-success-mr,
+  .geo-glow-danger-ml {
+    display: none;
+  }
+  .geo-ripple-tr {
+    width: 240px;
+    height: 240px;
+    top: -80px;
+    right: -80px;
+  }
+  .geo-cross-marks {
+    opacity: 0.4;
+  }
+  .geo-dots-lg,
+  .geo-dots-sm,
+  .geo-dots-tilt {
+    opacity: 0.5;
+  }
+  .geo-hline-dashed {
+    opacity: 0.4;
+  }
+}
+
+/* 尊重用户的运动偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .geo-curve-s,
+  .geo-wave-lines,
+  .geo-ripple-tr {
+    animation: none;
   }
 }
 

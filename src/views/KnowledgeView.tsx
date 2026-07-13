@@ -135,6 +135,11 @@ export default function KnowledgeView() {
   if ((!markdown && !loadError) || reloading) {
     return (
       <div className="view view-knowledge">
+        {/* 加载态装饰层 · 极简网格+小点阵 */}
+        <div className="geo-bg-decor" aria-hidden="true">
+          <div className="geo-bg-grid" />
+          <div className="geo-dots-sm" />
+        </div>
         <div className="view-container">
           <div className="knowledge-loading">
             <Skeleton width="40%" height={28} />
@@ -154,6 +159,11 @@ export default function KnowledgeView() {
   if (loadError) {
     return (
       <div className="view view-knowledge">
+        {/* 错误态装饰层 · 网格+大点阵 */}
+        <div className="geo-bg-decor" aria-hidden="true">
+          <div className="geo-bg-grid" />
+          <div className="geo-dots-lg" />
+        </div>
         <div className="view-container">
           <EmptyState
             title="知识内容加载失败"
@@ -176,12 +186,21 @@ export default function KnowledgeView() {
 
   return (
     <div className="view view-knowledge">
-      {/* 构成主义几何背景装饰层 */}
+      {/* 构成主义几何背景装饰层 · 知识学习专题 */}
+      {/* 装饰主题：结构感 · 呼应章节层次与知识体系 */}
       <div className="geo-bg-decor" aria-hidden="true">
         <div className="geo-bg-grid" />
         <div className="geo-arc-tl" />
         <div className="geo-diag-line" />
         <div className="geo-square-br" />
+        {/* 扩展装饰：嵌套方框呼应知识体系的层级结构 */}
+        <div className="geo-nested-squares-tl" />
+        {/* 扩展装饰：S 形曲线作为侧栏视觉引导线 */}
+        <div className="geo-curve-s" />
+        {/* 扩展装饰：竖排虚线束呼应章节分隔 */}
+        <div className="geo-vline-bundle" />
+        {/* 扩展装饰：强调色光晕营造阅读沉浸感 */}
+        <div className="geo-glow-accent-br" />
       </div>
       {/* 阅读进度条 · 固定在视图顶部 */}
       <div className="reading-progress-bar" aria-hidden="true">

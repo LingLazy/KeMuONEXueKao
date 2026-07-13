@@ -120,9 +120,20 @@ export default function HomeView() {
 
   return (
     <div className="view view-home">
+      {/* 主页装饰层 · 品牌光晕 + S 曲线 + 涟漪环 + 三角切片 (Hero 区已自带点阵/同心圆/虚线) */}
+      <div className="geo-bg-decor" aria-hidden="true">
+        <div className="geo-glow-primary-tl" />
+        <div className="geo-glow-accent-br" />
+        <div className="geo-curve-s" />
+        <div className="geo-ripple-tr" />
+        <div className="geo-triangle-rt" />
+        <div className="geo-cross-marks" />
+      </div>
       {/* Hero */}
       <section className="home-hero">
         <div className="home-hero-bg" aria-hidden="true" />
+        {/* Hero 区扩展装饰 · 波浪线 + 大点阵 (独立层,避免 home-hero-bg 的 z-index:-1 影响) */}
+        <div className="geo-wave-lines" aria-hidden="true" />
         <div className="home-hero-content">
           <motion.div
             className="home-hero-eyebrow"

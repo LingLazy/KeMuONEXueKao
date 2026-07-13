@@ -112,6 +112,10 @@ export default function PracticeView() {
   if (error) {
     return (
       <div className="view view-practice">
+        <div className="geo-bg-decor" aria-hidden="true">
+          <div className="geo-bg-grid" />
+          <div className="geo-dots-lg" />
+        </div>
         <div className="view-container">
           <EmptyState
             title="数据加载失败"
@@ -131,6 +135,10 @@ export default function PracticeView() {
   if (!questions) {
     return (
       <div className="view view-practice">
+        <div className="geo-bg-decor" aria-hidden="true">
+          <div className="geo-bg-grid" />
+          <div className="geo-dots-sm" />
+        </div>
         <div className="view-container">
           <QuestionCardSkeleton />
         </div>
@@ -142,6 +150,10 @@ export default function PracticeView() {
   if (practice.list.length === 0) {
     return (
       <div className="view view-practice">
+        <div className="geo-bg-decor" aria-hidden="true">
+          <div className="geo-bg-grid" />
+          <div className="geo-cross-marks" />
+        </div>
         <div className="view-container">
           <EmptyState
             title="该分类暂无题目"
@@ -159,6 +171,13 @@ export default function PracticeView() {
 
   return (
     <div className="view view-practice">
+      {/* 练习模式装饰层 · 网格底纹 + 平行斜线 + 十字坐标点 */}
+      <div className="geo-bg-decor" aria-hidden="true">
+        <div className="geo-bg-grid" />
+        <div className="geo-parallel-lines" />
+        <div className="geo-cross-marks" />
+        <div className="geo-hatch-block" style={{ top: '12%', right: '4%' }} />
+      </div>
       {/* 移动端顶栏：分类切换按钮 */}
       {isMobile && (
         <div className="practice-mobile-bar">

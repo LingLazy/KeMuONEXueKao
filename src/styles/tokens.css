@@ -160,6 +160,17 @@
     linear-gradient(to right, var(--geo-grid) 1px, transparent 1px),
     linear-gradient(to bottom, var(--geo-grid) 1px, transparent 1px);
   --bg-constructivist-size: 48px 48px;
+
+  /* === 扩展装饰色板 · 多样化背景层 ===
+     - 曲线/波纹:靛蓝/琥珀柔色,用于装饰路径与等高线
+     - 十字标记:墨色细线,工程感坐标锚点
+     - 点阵变体:不同疏密的圆点图案 */
+  --geo-curve: oklch(0.546 0.215 276.8 / 0.08);   /* 曲线主色 (品牌色 8%) */
+  --geo-wave: oklch(0.769 0.188 70.08 / 0.10);    /* 波纹色 (强调色 10%) */
+  --geo-cross: oklch(0.55 0.01 250 / 0.18);       /* 十字标记线 (墨色 18%) */
+  --geo-dot-lg: oklch(0.55 0.01 250 / 0.10);      /* 大点阵 */
+  --geo-dot-sm: oklch(0.55 0.01 250 / 0.06);      /* 小点阵 */
+  --geo-stripe: oklch(0.546 0.215 276.8 / 0.05);  /* 斜纹底纹 */
 }
 
 /* ========== 深色主题 · 真正的暗色（非灰色）
@@ -228,4 +239,12 @@
   --geo-blue: oklch(0.60 0.16 250);
   --geo-line: oklch(1 0 0 / 0.10);
   --geo-grid: oklch(1 0 0 / 0.05);
+
+  /* 扩展装饰色板 · 暗色（提亮维持可见度） */
+  --geo-curve: oklch(0.62 0.19 276.8 / 0.16);   /* 曲线主色 */
+  --geo-wave: oklch(0.828 0.189 84.429 / 0.18); /* 波纹色 */
+  --geo-cross: oklch(1 0 0 / 0.16);             /* 十字标记线 */
+  --geo-dot-lg: oklch(1 0 0 / 0.10);            /* 大点阵 */
+  --geo-dot-sm: oklch(1 0 0 / 0.06);            /* 小点阵 */
+  --geo-stripe: oklch(0.62 0.19 276.8 / 0.08);  /* 斜纹底纹 */
 }
