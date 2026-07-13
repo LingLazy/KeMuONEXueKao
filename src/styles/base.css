@@ -15,6 +15,9 @@ html {
   scrollbar-gutter: stable;
   /* 启用滚动锚定，避免上方内容高度变化导致当前可视区跳动 */
   overflow-anchor: auto;
+  /* 禁止水平滚动条：clip 不创建 BFC，不影响子元素 sticky 定位；hidden 作为旧浏览器 fallback */
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {

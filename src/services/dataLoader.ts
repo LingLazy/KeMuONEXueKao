@@ -84,7 +84,7 @@ function normalizeQuestion(raw: RawQuestion): Question {
  * 按需加载完整题库
  * 首次调用动态 import questions.json，后续返回缓存
  * 加载后对判断题做归一化：补齐 ["正确","错误"] 选项、布尔答案转数字索引
- * 返回：Question[] 1964道题目
+ * 返回：Question[] 1861道题目（判断题914 + 单选题843 + 多选题104）
  */
 export async function loadQuestions(): Promise<Question[]> {
   if (questionsCache) return questionsCache;
@@ -102,7 +102,7 @@ export async function loadQuestions(): Promise<Question[]> {
 /**
  * 按需加载完整口诀列表
  * 首次调用动态 import mnemonics.json，后续返回缓存
- * 返回：Mnemonic[] 119条口诀
+ * 返回：Mnemonic[] 155条口诀
  */
 export async function loadMnemonics(): Promise<Mnemonic[]> {
   if (mnemonicsCache) return mnemonicsCache;
