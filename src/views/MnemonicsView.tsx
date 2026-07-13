@@ -187,14 +187,28 @@ export default function MnemonicsView() {
 
   // 动态计算虚拟滚动容器高度：占满视口剩余空间，替代硬编码魔术数字
   // 监听窗口尺寸变化与上方元素高度变化，确保列表始终占满可用高度
+  // 关键：底部预留空间必须计入视图与容器的 padding-bottom，否则页面可滚动，
+  // 导致左侧 aside（position: sticky）跟随页面滚动，无法真正固定
   useEffect(() => {
     if (studyMode) return; // 学习模式使用页面滚动，无需固定高度
     const el = parentRef.current;
     if (!el) return;
     const updateHeight = () => {
       const rect = el.getBoundingClientRect();
-      // 视口高度减去列表顶部偏移，再预留底部间距
-      const available = window.innerHeight - rect.top - 24;
+      // 读取实际底部预留：视图 padding-bottom + 容器 padding-bottom
+      const viewEl = el.closest('.view-mnemonics');
+      const containerEl = el.closest('.view-container');
+      let bottomReserve = 80; // 默认回退值（sp-12 48px + sp-8 32px）
+      if (viewEl && containerEl) {
+        const vs = getComputedStyle(viewEl);
+        const cs = getComputedStyle(containerEl);
+        const vp = parseFloat(vs.paddingBottom);
+        const cp = parseFloat(cs.paddingBottom);
+        if (!Number.isNaN(vp) && !Number.isNaN(cp)) {
+          bottomReserve = vp + cp;
+        }
+      }
+      const available = window.innerHeight - rect.top - bottomReserve;
       el.style.height = `${Math.max(360, available)}px`;
     };
     updateHeight();

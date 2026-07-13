@@ -73,6 +73,7 @@ export default function ExamView() {
     {
       prev: () => exam.prev(),
       next: () => exam.next(),
+      select: (idx) => exam.select(exam.currentIndex, idx),
       toggleMark: () => exam.toggleMark(exam.currentIndex),
       hint: () => {
         const item = exam.questions[exam.currentIndex];
@@ -169,6 +170,21 @@ export default function ExamView() {
     exam.reset();
   };
 
+  // 缓存统计计算，避免每次渲染都对 100 题 filter
+  // 关键：必须放在所有条件 return 之前，否则违反 Rules of Hooks
+  // （exam.running 从 false 变 true 时 Hook 数量会变化，导致 React 崩溃）
+  const { answeredCount, markedCount } = useMemo(() => {
+    let answered = 0;
+    let marked = 0;
+    for (const q of exam.questions) {
+      // 多选题空数组 [] 视为未答
+      const isAnswered = Array.isArray(q.selected) ? q.selected.length > 0 : q.selected >= 0;
+      if (isAnswered) answered++;
+      if (q.marked) marked++;
+    }
+    return { answeredCount: answered, markedCount: marked };
+  }, [exam.questions]);
+
   // 加载失败：错误态优先于加载态
   if (error) {
     return (
@@ -224,18 +240,7 @@ export default function ExamView() {
     );
   }
 
-  // 缓存统计计算，避免每次渲染都对 100 题 filter
-  const { answeredCount, markedCount } = useMemo(() => {
-    let answered = 0;
-    let marked = 0;
-    for (const q of exam.questions) {
-      // 多选题空数组 [] 视为未答
-      const isAnswered = Array.isArray(q.selected) ? q.selected.length > 0 : q.selected >= 0;
-      if (isAnswered) answered++;
-      if (q.marked) marked++;
-    }
-    return { answeredCount: answered, markedCount: marked };
-  }, [exam.questions]);
+  // 统计已由上方 useMemo 计算（早返回前），此处直接使用
   const remainingSec = Math.floor(exam.remaining / 1000);
   const lowTime = remainingSec <= 300;
 

@@ -78,16 +78,12 @@ export default function KnowledgeView() {
   }, [markdown]);
 
   // 渲染 HTML
+  // 关键：搜索高亮在 renderMarkdown 的 inline 函数内对已转义的文本节点做替换，
+  // 而非在 raw markdown 上替换，避免破坏代码块、URL、表格分隔符等语法
   const html = useMemo(() => {
     if (!markdown) return '';
-    let result = markdown;
-    if (search.trim()) {
-      const kw = search.trim();
-      // 仅在文本节点中高亮（避免破坏 markdown 语法）
-      const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      result = result.replace(new RegExp(`(${escaped})`, 'g'), '==$1==');
-    }
-    return renderMarkdown(result);
+    const kw = search.trim();
+    return renderMarkdown(markdown, kw || null);
   }, [markdown, search]);
 
   // 滚动监听：高亮当前章节 + 阅读进度（使用 rAF 节流避免长文档卡顿）
@@ -332,8 +328,10 @@ export default function KnowledgeView() {
 /**
  * 轻量级 Markdown 渲染器
  * 支持标题、段落、列表、代码块、引用、表格、加粗、行内代码、链接、分割线
+ * @param md 原始 Markdown 文本
+ * @param searchKw 搜索关键字（可选）：在已转义的文本节点上做高亮，不破坏 Markdown 语法
  */
-function renderMarkdown(md: string): string {
+function renderMarkdown(md: string, searchKw: string | null = null): string {
   const lines = md.split('\n');
   const html: string[] = [];
   let i = 0;
@@ -346,10 +344,17 @@ function renderMarkdown(md: string): string {
   let chapterIdSet = new Set<string>();
   let chapterCount = 0;
 
+  // 预编译搜索高亮正则（对已转义文本生效，避免破坏 markdown 语法）
+  const kwRegex = searchKw
+    ? new RegExp(`(${searchKw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi')
+    : null;
+
   const inline = (s: string): string => {
     let r = escapeHtml(s);
-    // 搜索高亮
-    r = r.replace(/==(.+?)==/g, '<mark class="kw search-hit">$1</mark>');
+    // 搜索高亮：在已转义的文本节点上替换，不会影响代码块/URL/表格等 markdown 结构
+    if (kwRegex) {
+      r = r.replace(kwRegex, '<mark class="kw search-hit">$1</mark>');
+    }
     // 术语 tooltip：?[术语](解释)? → 悬停弹窗
     r = r.replace(/\?\[([^\]]+)\]\(([^)]+)\)\?/g, (_m, term: string, tip: string) => {
       return `<span class="term">${term}<span class="term-popup">${tip}</span></span>`;
@@ -362,10 +367,13 @@ function renderMarkdown(md: string): string {
     // 行内代码
     r = r.replace(/`([^`]+)`/g, '<code>$1</code>');
     // 链接 [text](url) - 仅允许安全协议（http/https/mailto/tel/相对路径/锚点）
+    // 关键：对 url 做 HTML 属性转义，防止 " 闭合 href 注入任意属性（XSS）
     r = r.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text: string, url: string) => {
       const trimmedUrl = url.trim();
       const isSafe = /^(https?:|mailto:|tel:|\/|#|\.\/|\.\.\/)/i.test(trimmedUrl);
       if (!isSafe) return match; // 不安全协议不转换，保留原文
+      // 校验 url 不含可破坏属性的字符
+      if (/["'<>]/.test(trimmedUrl)) return match;
       return `<a href="${trimmedUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`;
     });
     // 删除线

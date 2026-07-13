@@ -46,8 +46,16 @@ export default function PracticeView() {
   };
 
   useEffect(() => {
-    loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // 卸载保护：避免组件卸载后仍 setState 触发警告
+    let cancelled = false;
+    setError(null);
+    Promise.all([
+      loadQuestions().then((qs) => { if (!cancelled) setQuestions(qs); }),
+      loadMnemonics().then((ms) => { if (!cancelled) setMnemonics(ms); })
+    ]).catch((err) => {
+      if (!cancelled) setError(err instanceof Error ? err.message : '数据加载失败');
+    });
+    return () => { cancelled = true; };
   }, []);
 
   // 错题ID集合
@@ -86,6 +94,8 @@ export default function PracticeView() {
   }, [currentQuestion, mnemonics]);
 
   // 键盘快捷键
+  // 注：练习模式下选项选择逻辑封装在 QuestionCard 内部（含 localSelected/answered 状态），
+  // 外部无法直接触发，因此未接入 select 快捷键；考试模式由 ExamView 接入 exam.select
   useHotkeys({
     prev: () => practice.prev(),
     next: () => practice.next(),

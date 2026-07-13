@@ -39,6 +39,16 @@ function isInputTarget(t: EventTarget | null): boolean {
 }
 
 /**
+ * 判断目标是否为可激活元素（按钮、链接等）
+ * 用于空格键例外：聚焦按钮时按空格应激活按钮而非"下一题"
+ */
+function isActivatableTarget(t: EventTarget | null): boolean {
+  if (!(t instanceof HTMLElement)) return false;
+  const tag = t.tagName;
+  return tag === 'BUTTON' || tag === 'A' || tag === 'SUMMARY';
+}
+
+/**
  * 绑定键盘快捷键
  * 输入：handlers 回调集合，options 配置
  */
@@ -62,7 +72,12 @@ export function useHotkeys(handlers: HotkeyHandlers, options: HotkeyOptions = {}
           break;
         case 'ArrowRight':
         case 'ArrowDown':
+          e.preventDefault();
+          h.next?.();
+          break;
         case ' ':
+          // 聚焦按钮/链接时放行空格，让浏览器激活元素（可访问性）
+          if (isActivatableTarget(e.target)) return;
           e.preventDefault();
           h.next?.();
           break;

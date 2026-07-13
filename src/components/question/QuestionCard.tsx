@@ -22,6 +22,21 @@ import Modal from '@/components/common/Modal';
 /** 选项字母常量（模块级，避免每次渲染重建） */
 const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'] as const;
 
+/**
+ * 安全 URL 校验：仅允许 http/https 协议
+ * - 拒绝 javascript:/data:/vbscript: 等危险协议，防止 XSS
+ * - 拒绝空白字符串与非法格式
+ * @param url 待校验的 URL 字符串
+ * @returns 是否为安全的可跳转 URL
+ */
+function isSafeUrl(url: string): boolean {
+  if (!url || typeof url !== 'string') return false;
+  const trimmed = url.trim();
+  if (!trimmed) return false;
+  // 仅允许 http/https 协议，禁止任何可能注入脚本的协议
+  return /^https?:\/\//i.test(trimmed);
+}
+
 interface QuestionCardProps {
   /** 题目数据 */
   question: Question;
@@ -408,9 +423,10 @@ export default function QuestionCard({
                 transition={{ duration: 0.2, ease: 'easeOut' }}
               >
                 <p className="qcard-analysis-text">{question.analysis}</p>
-                {question.analysis_url && (
+                {/* 安全校验：仅渲染 http/https 协议的链接，防止 javascript: 等协议注入 */}
+                {question.analysis_url && isSafeUrl(question.analysis_url) && (
                   <a
-                    href={question.analysis_url}
+                    href={question.analysis_url.trim()}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="qcard-analysis-link"

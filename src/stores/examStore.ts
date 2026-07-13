@@ -83,7 +83,12 @@ function gradeExam(questions: ExamQuestionState[], usedTimeSec: number): ExamRes
     const isCorrect = Array.isArray(correctAns)
       ? Array.isArray(q.selected) &&
         q.selected.length === correctAns.length &&
-        [...q.selected].sort((a, b) => a - b).every((v, i) => v === [...correctAns].sort((a, b) => a - b)[i])
+        (() => {
+          // 将 correctAns 排序提取到 every 外部，避免每个元素比较都重复排序
+          const sortedCorrect = [...correctAns].sort((a, b) => a - b);
+          const sortedSelected = [...q.selected].sort((a, b) => a - b);
+          return sortedSelected.every((v, i) => v === sortedCorrect[i]);
+        })()
       : !Array.isArray(q.selected) && q.selected === correctAns;
     if (isCorrect) {
       correct++;
@@ -216,15 +221,18 @@ export const useExamStore = create<ExamState>((set, get) => ({
   },
 
   tick: () => {
-    const { remaining, timerId } = get();
-    if (remaining <= 1000) {
+    // 基于时间戳计算剩余时间，避免后台标签页 setInterval 节流导致计时漂移
+    const { startTime, duration, timerId } = get();
+    const elapsed = Date.now() - startTime;
+    const remaining = Math.max(0, duration - elapsed);
+    if (remaining <= 0) {
       // 时间到，自动交卷
       if (timerId) clearInterval(timerId);
       set({ remaining: 0 });
       get().submit();
       return;
     }
-    set({ remaining: remaining - 1000 });
+    set({ remaining });
   },
 
   submit: () => {
@@ -282,6 +290,10 @@ export const useExamStore = create<ExamState>((set, get) => ({
       remaining: number;
     } | null>(STORAGE_KEYS.examState, null);
     if (!saved || !saved.questions || saved.questions.length === 0) return false;
+    // 数据合法性校验：startTime 不能为未来、remaining 不能为负、currentIndex 不能越界
+    if (saved.startTime > Date.now()) return false;
+    if (saved.remaining < 0) return false;
+    if (saved.currentIndex < 0 || saved.currentIndex >= saved.questions.length) return false;
     // 重建完整考试题目
     const qMap = new Map(allQuestions.map((q) => [q.id, q]));
     const examQuestions: ExamQuestionState[] = saved.questions
@@ -298,6 +310,13 @@ export const useExamStore = create<ExamState>((set, get) => ({
       })
       .filter((x): x is ExamQuestionState => x !== null);
     if (examQuestions.length === 0) return false;
+    // 清理已有计时器，避免 restore 重复创建 interval 导致双倍速倒计时
+    const { timerId: oldTimerId } = get();
+    if (oldTimerId) clearInterval(oldTimerId);
+    // 基于时间戳重算 remaining，避免恢复时使用过期的 remaining
+    const elapsed = Date.now() - saved.startTime;
+    const realRemaining = Math.max(0, saved.duration - elapsed);
+    if (realRemaining <= 0) return false; // 已超时，不再恢复
     const timerId = setInterval(() => get().tick(), 1000);
     set({
       running: true,
@@ -305,7 +324,7 @@ export const useExamStore = create<ExamState>((set, get) => ({
       currentIndex: saved.currentIndex,
       startTime: saved.startTime,
       duration: saved.duration,
-      remaining: saved.remaining,
+      remaining: realRemaining,
       timerId,
       result: null
     });

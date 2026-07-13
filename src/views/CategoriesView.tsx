@@ -12,16 +12,32 @@ import { CATEGORIES, loadQuestions, hexToRgba } from '@/services/dataLoader';
 import { CATEGORY_GROUPS, GROUP_KEYS } from '@/data/categoryGroups';
 import { useProgressStore } from '@/stores/progressStore';
 import { useIsMobile } from '@/hooks';
+import EmptyState from '@/components/common/EmptyState';
 import type { Question } from '@/types';
 
 export default function CategoriesView() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const [questions, setQuestions] = useState<Question[]>([]);
+  // null 表示加载中，[] 表示已加载但为空，与 PracticeView/ExamView 保持一致
+  const [questions, setQuestions] = useState<Question[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const answered = useProgressStore((s) => s.answered);
 
+  // 数据加载：带错误状态与卸载保护，便于 UI 反馈与重试
+  const loadData = () => {
+    setError(null);
+    let cancelled = false;
+    loadQuestions()
+      .then((qs) => { if (!cancelled) setQuestions(qs); })
+      .catch((err) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : '数据加载失败');
+      });
+    return () => { cancelled = true; };
+  };
+
   useEffect(() => {
-    loadQuestions().then(setQuestions).catch(console.error);
+    const cleanup = loadData();
+    return cleanup;
   }, []);
 
   // 各分类的题数与正确率
@@ -58,7 +74,8 @@ export default function CategoriesView() {
         CATEGORIES[ck]?.ids.forEach((id) => ids.add(id));
       });
       if (group.dynamic === 'image') {
-        questions.forEach((q) => {
+        // questions 可能未加载完成（null），此时跳过动态聚合，待加载后重算
+        questions?.forEach((q) => {
           if (q.is_image_question) ids.add(q.id);
         });
       }
@@ -89,6 +106,62 @@ export default function CategoriesView() {
   const enterCategory = (cat: string) => {
     navigate(`/practice/${cat}`);
   };
+
+  // 错误态：优先于其他分支返回，提供重试入口
+  if (error) {
+    return (
+      <div className="view view-categories">
+        <div className="view-container">
+          <EmptyState
+            title="数据加载失败"
+            description={error}
+            action={
+              <button type="button" className="btn btn-primary" onClick={loadData}>
+                重试加载
+              </button>
+            }
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // 加载中：题库未加载完成时显示骨架占位
+  if (!questions) {
+    return (
+      <div className="view view-categories">
+        <div className="view-container">
+          <div
+            className="cats-loading"
+            role="status"
+            aria-live="polite"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 16,
+              padding: '80px 24px',
+              color: 'var(--text-secondary, #6b7280)'
+            }}
+          >
+            <div
+              aria-hidden="true"
+              style={{
+                width: 40,
+                height: 40,
+                border: '3px solid var(--border, rgba(0,0,0,0.08))',
+                borderTopColor: 'var(--primary, #0d9488)',
+                borderRadius: '50%',
+                animation: 'spin 0.8s linear infinite'
+              }}
+            />
+            <p style={{ margin: 0, fontSize: 14 }}>正在加载分类数据…</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="view view-categories">

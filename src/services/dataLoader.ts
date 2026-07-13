@@ -74,8 +74,10 @@ function normalizeQuestion(raw: RawQuestion): Question {
     }
     return { ...raw, options, answer } as Question;
   }
-  // 单选题：原样返回
-  return raw as Question;
+  // 单选题：保证 options 非空，避免数据缺失导致下游 options.map 崩溃
+  const options = Array.isArray(raw.options) ? raw.options : [];
+  const answer = typeof raw.answer === 'number' ? raw.answer : Number(raw.answer);
+  return { ...raw, options, answer } as Question;
 }
 
 /**
@@ -104,9 +106,13 @@ export async function loadQuestions(): Promise<Question[]> {
  */
 export async function loadMnemonics(): Promise<Mnemonic[]> {
   if (mnemonicsCache) return mnemonicsCache;
-  const module = await import('@/data/mnemonics.json');
-  mnemonicsCache = module.default as Mnemonic[];
-  return mnemonicsCache;
+  try {
+    const module = await import('@/data/mnemonics.json');
+    mnemonicsCache = module.default as Mnemonic[];
+    return mnemonicsCache;
+  } catch (err) {
+    throw new Error(`口诀数据加载失败：${err instanceof Error ? err.message : String(err)}`);
+  }
 }
 
 /**

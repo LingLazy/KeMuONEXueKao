@@ -4,6 +4,9 @@
  * - 加载中显示骨架屏
  * - 加载失败显示占位图
  * - 支持 loading="lazy" 原生懒加载兜底
+ *
+ * 关键设计：IntersectionObserver 观察外层容器 div 而非 img 元素，
+ * 避免 nativeLazy=false 时 "img 未渲染 → ref 为 null → IO 不创建" 的死锁
  */
 import { useEffect, useRef, useState } from 'react';
 
@@ -33,29 +36,32 @@ export default function LazyImage({
   fallback,
   nativeLazy = true
 }: LazyImageProps) {
-  const ref = useRef<HTMLImageElement>(null);
+  // 容器 ref：始终渲染，保证 IntersectionObserver 能观察到目标
+  const containerRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
-  // 修复：nativeLazy=true 时初始 inView=true，直接渲染让浏览器原生 lazy 处理；
+  // nativeLazy=true 时初始 inView=true，直接渲染让浏览器原生 lazy 处理；
   // nativeLazy=false 时初始 inView=false，等 IntersectionObserver 触发后置为 true
   const [inView, setInView] = useState(nativeLazy);
 
   // 视口检测（仅 nativeLazy=false 时启用）
+  // 关键：观察容器 div（始终存在），而非 img（条件渲染可能不存在）
   useEffect(() => {
-    if (!nativeLazy && ref.current) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setInView(true);
-              io.disconnect();
-            }
-          });
-        },
-        { rootMargin: '120px' }
-      );
-      io.observe(ref.current);
-      return () => io.disconnect();
-    }
+    if (nativeLazy) return;
+    const el = containerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setInView(true);
+            io.disconnect();
+          }
+        });
+      },
+      { rootMargin: '120px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, [nativeLazy]);
 
   useEffect(() => {
@@ -78,6 +84,7 @@ export default function LazyImage({
 
   return (
     <div
+      ref={containerRef}
       className={`lazy-img${skeletonClass}${statusClass} ${className}`}
       style={{ width, height }}
       role="img"
@@ -86,7 +93,6 @@ export default function LazyImage({
     >
       {inView && src && status !== 'error' && (
         <img
-          ref={ref}
           src={src}
           alt={alt}
           loading={nativeLazy ? 'lazy' : 'eager'}

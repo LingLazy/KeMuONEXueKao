@@ -11,6 +11,15 @@ import { useEffect, useId, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
+/**
+ * 模块级 body 滚动锁引用计数
+ * - 多个 Modal 同时打开时，仅第一个 Modal 记录原始 overflow 并设置 hidden
+ * - 仅当最后一个 Modal 关闭（计数归零）时才恢复原始 overflow
+ * - 避免中间某个 Modal 关闭时错误恢复 overflow，导致仍存在的 Modal 期间 body 可滚动
+ */
+let bodyLockCount = 0;
+let prevBodyOverflow = '';
+
 interface ModalProps {
   /** 是否显示 */
   open: boolean;
@@ -73,8 +82,11 @@ export default function Modal({
       }
     };
     document.addEventListener('keydown', onKey);
-    // 锁定 body 滚动
-    const prevOverflow = document.body.style.overflow;
+    // 锁定 body 滚动：使用引用计数，仅首个 Modal 记录原始值，末个 Modal 关闭时恢复
+    if (bodyLockCount === 0) {
+      prevBodyOverflow = document.body.style.overflow;
+    }
+    bodyLockCount++;
     document.body.style.overflow = 'hidden';
     // 自动聚焦对话框：优先聚焦第一个可聚焦子元素（如带 autoFocus 的按钮），无则聚焦对话框本身
     // 保存 timer id 以便清理，避免组件卸载后触发焦点
@@ -88,7 +100,11 @@ export default function Modal({
     }, 50);
     return () => {
       document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prevOverflow;
+      // 引用计数递减：仅当全部 Modal 关闭时才恢复原始 overflow
+      bodyLockCount = Math.max(0, bodyLockCount - 1);
+      if (bodyLockCount === 0) {
+        document.body.style.overflow = prevBodyOverflow;
+      }
       window.clearTimeout(focusTimer);
       lastFocused.current?.focus();
     };

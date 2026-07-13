@@ -12,6 +12,7 @@ import { create } from 'zustand';
 import type { Question } from '@/types';
 import { Store, STORAGE_KEYS } from '@/services/storage';
 import { shuffle } from '@/utils';
+import { CATEGORY_GROUPS, isGroupKey } from '@/data/categoryGroups';
 
 interface PracticeState {
   /** 当前分类 key */
@@ -79,7 +80,16 @@ function filterQuestions(
   let result = all;
   // 分类筛选
   if (cat !== 'all') {
-    result = result.filter((q) => q.category === cat || q.tags.includes(cat) || (cat === 'image' && q.is_image_question));
+    // 大分类（group key）：聚合其所有子分类，避免大分类入口在练习中返回空列表
+    if (isGroupKey(cat)) {
+      const subCats = new Set<string>(CATEGORY_GROUPS[cat].cats);
+      result = result.filter((q) => subCats.has(q.category) || q.tags.some((t) => subCats.has(t)));
+    } else if (cat === 'image') {
+      // 图片题大分类：dynamic 匹配所有 is_image_question=true 的题目
+      result = result.filter((q) => q.is_image_question);
+    } else {
+      result = result.filter((q) => q.category === cat || q.tags.includes(cat));
+    }
   }
   // 搜索筛选
   if (search.trim()) {
@@ -137,9 +147,10 @@ export const usePracticeStore = create<PracticeState>((set, get) => ({
     if (state.shuffled) {
       // 关闭乱序：基于当前筛选条件重算有序列表
       const list = filterQuestions(state.allQuestions, state.currentCat, state.search, state.onlyWrong, state.onlyBookmark, state.wrongIds, state.bookmarkIds);
-      set({ shuffled: false, list });
+      set({ shuffled: false, list, index: 0 });
     } else {
-      set({ shuffled: true, list: shuffle(state.list) });
+      // 开启乱序：重置 index 到 0，避免题目突变导致体验割裂
+      set({ shuffled: true, list: shuffle(state.list), index: 0 });
     }
   },
 
