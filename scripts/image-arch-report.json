@@ -1,8 +1,8 @@
 {
   "totalFiles": 649,
-  "totalReferenced": 807,
-  "found": 359,
-  "missing": 448,
+  "totalReferenced": 359,
+  "found": 0,
+  "missing": 359,
   "duplicates": {
     "customs.jpg": [
       "auxiliary-signs/customs.jpg",
@@ -11,3593 +11,1441 @@
   },
   "missingList": [
     {
-      "id": 265,
-      "image": "20082.jpg"
-    },
-    {
-      "id": 316,
-      "image": "20421.jpg"
-    },
-    {
-      "id": 318,
-      "image": "20425.jpg"
-    },
-    {
-      "id": 326,
-      "image": "20422.jpg"
-    },
-    {
-      "id": 330,
-      "image": "20544.jpg"
-    },
-    {
-      "id": 341,
-      "image": "20644.jpg"
-    },
-    {
-      "id": 387,
-      "image": "20287.jpg"
-    },
-    {
-      "id": 388,
-      "image": "20335.jpg"
-    },
-    {
-      "id": 400,
-      "image": "20241.jpg"
-    },
-    {
-      "id": 406,
-      "image": "20460.jpg"
-    },
-    {
-      "id": 432,
-      "image": "customs-2.jpg"
-    },
-    {
-      "id": 447,
-      "image": "20265.jpg"
-    },
-    {
-      "id": 454,
-      "image": "20284.jpg"
-    },
-    {
-      "id": 459,
-      "image": "20464.jpg"
-    },
-    {
-      "id": 478,
-      "image": "20456.jpg"
-    },
-    {
-      "id": 482,
-      "image": "20461.jpg"
-    },
-    {
-      "id": 483,
-      "image": "20465.jpg"
-    },
-    {
-      "id": 484,
-      "image": "20336.jpg"
-    },
-    {
-      "id": 511,
-      "image": "20334.jpg"
-    },
-    {
-      "id": 606,
-      "image": "1220.jpg"
-    },
-    {
-      "id": 607,
-      "image": "20329.jpg"
-    },
-    {
-      "id": 608,
-      "image": "20458.jpg"
-    },
-    {
-      "id": 651,
-      "image": "651.jpg"
-    },
-    {
-      "id": 652,
-      "image": "652.jpg"
-    },
-    {
-      "id": 653,
-      "image": "653.jpg"
-    },
-    {
-      "id": 654,
-      "image": "654.jpg"
-    },
-    {
-      "id": 655,
-      "image": "655.jpg"
-    },
-    {
-      "id": 656,
-      "image": "656.jpg"
-    },
-    {
-      "id": 657,
-      "image": "657.jpg"
-    },
-    {
-      "id": 658,
-      "image": "658.jpg"
-    },
-    {
-      "id": 659,
-      "image": "659.jpg"
-    },
-    {
-      "id": 660,
-      "image": "660.jpg"
-    },
-    {
-      "id": 661,
-      "image": "661.jpg"
-    },
-    {
-      "id": 662,
-      "image": "662.jpg"
-    },
-    {
-      "id": 663,
-      "image": "663.jpg"
-    },
-    {
-      "id": 664,
-      "image": "664.jpg"
-    },
-    {
-      "id": 665,
-      "image": "665.jpg"
-    },
-    {
-      "id": 666,
-      "image": "666.jpg"
-    },
-    {
-      "id": 667,
-      "image": "667.jpg"
-    },
-    {
-      "id": 668,
-      "image": "668.jpg"
-    },
-    {
-      "id": 669,
-      "image": "669.jpg"
-    },
-    {
-      "id": 670,
-      "image": "670.jpg"
-    },
-    {
-      "id": 671,
-      "image": "20333.jpg"
-    },
-    {
-      "id": 672,
-      "image": "672.jpg"
-    },
-    {
-      "id": 673,
-      "image": "673.jpg"
-    },
-    {
-      "id": 674,
-      "image": "674.jpg"
-    },
-    {
-      "id": 675,
-      "image": "20296.jpg"
-    },
-    {
-      "id": 676,
-      "image": "20267.jpg"
-    },
-    {
-      "id": 677,
-      "image": "677.jpg"
-    },
-    {
-      "id": 678,
-      "image": "20332.jpg"
-    },
-    {
-      "id": 679,
-      "image": "679.jpg"
-    },
-    {
-      "id": 680,
-      "image": "20217.jpg"
-    },
-    {
-      "id": 681,
-      "image": "681.jpg"
-    },
-    {
-      "id": 682,
-      "image": "682.jpg"
-    },
-    {
-      "id": 683,
-      "image": "683.jpg"
-    },
-    {
-      "id": 684,
-      "image": "684.jpg"
-    },
-    {
-      "id": 687,
-      "image": "687.jpg"
-    },
-    {
-      "id": 688,
-      "image": "688.jpg"
-    },
-    {
-      "id": 693,
-      "image": "20401.jpg"
-    },
-    {
-      "id": 696,
-      "image": "1611.jpg"
-    },
-    {
-      "id": 698,
-      "image": "1207.jpg"
-    },
-    {
-      "id": 713,
-      "image": "20323.jpg"
-    },
-    {
-      "id": 722,
-      "image": "722.jpg"
-    },
-    {
-      "id": 725,
-      "image": "725.jpg"
-    },
-    {
-      "id": 727,
-      "image": "727.jpg"
-    },
-    {
-      "id": 733,
-      "image": "1218.jpg"
-    },
-    {
-      "id": 734,
-      "image": "20406.jpg"
-    },
-    {
-      "id": 735,
-      "image": "735.jpg"
-    },
-    {
-      "id": 736,
-      "image": "1192.jpg"
-    },
-    {
-      "id": 738,
-      "image": "738.jpg"
-    },
-    {
-      "id": 739,
-      "image": "739.jpg"
-    },
-    {
-      "id": 750,
-      "image": "750.jpg"
-    },
-    {
-      "id": 751,
-      "image": "751.jpg"
-    },
-    {
-      "id": 752,
-      "image": "752.jpg"
-    },
-    {
-      "id": 753,
-      "image": "1196.jpg"
-    },
-    {
-      "id": 754,
-      "image": "1197.jpg"
-    },
-    {
-      "id": 756,
-      "image": "756.jpg"
-    },
-    {
-      "id": 758,
-      "image": "758.jpg"
-    },
-    {
-      "id": 759,
-      "image": "20418.jpg"
-    },
-    {
-      "id": 764,
-      "image": "764.jpg"
-    },
-    {
-      "id": 766,
-      "image": "766.jpg"
-    },
-    {
-      "id": 769,
-      "image": "769.jpg"
-    },
-    {
-      "id": 770,
-      "image": "770.jpg"
-    },
-    {
-      "id": 771,
-      "image": "771.jpg"
-    },
-    {
-      "id": 776,
-      "image": "776.jpg"
-    },
-    {
-      "id": 785,
-      "image": "785.jpg"
-    },
-    {
-      "id": 786,
-      "image": "786.jpg"
-    },
-    {
-      "id": 798,
-      "image": "20403.jpg"
-    },
-    {
-      "id": 814,
-      "image": "1235.jpg"
-    },
-    {
-      "id": 818,
-      "image": "1237.jpg"
-    },
-    {
-      "id": 819,
-      "image": "1646.jpg"
-    },
-    {
-      "id": 824,
-      "image": "824.jpg"
-    },
-    {
-      "id": 833,
-      "image": "20396.jpg"
-    },
-    {
-      "id": 834,
-      "image": "834.jpg"
-    },
-    {
-      "id": 835,
-      "image": "835.jpg"
-    },
-    {
-      "id": 838,
-      "image": "1931.jpg"
-    },
-    {
-      "id": 842,
-      "image": "842.jpg"
-    },
-    {
-      "id": 843,
-      "image": "20451.jpg"
-    },
-    {
-      "id": 844,
-      "image": "844.jpg"
-    },
-    {
-      "id": 845,
-      "image": "845.jpg"
-    },
-    {
-      "id": 851,
-      "image": "851.jpg"
-    },
-    {
-      "id": 853,
-      "image": "1527.jpg"
-    },
-    {
-      "id": 855,
-      "image": "1528.jpg"
-    },
-    {
-      "id": 866,
-      "image": "1529.jpg"
-    },
-    {
-      "id": 868,
-      "image": "868.jpg"
-    },
-    {
-      "id": 869,
-      "image": "869.jpg"
-    },
-    {
-      "id": 872,
-      "image": "872.jpg"
-    },
-    {
-      "id": 873,
-      "image": "873.jpg"
-    },
-    {
-      "id": 874,
-      "image": "874.jpg"
-    },
-    {
-      "id": 875,
-      "image": "1534.jpg"
-    },
-    {
-      "id": 886,
-      "image": "20435.jpg"
-    },
-    {
-      "id": 888,
-      "image": "1241.jpg"
-    },
-    {
-      "id": 889,
-      "image": "889.jpg"
-    },
-    {
-      "id": 890,
-      "image": "20436.jpg"
-    },
-    {
-      "id": 891,
-      "image": "1536.jpg"
-    },
-    {
-      "id": 894,
-      "image": "738.jpg"
-    },
-    {
-      "id": 896,
-      "image": "896.jpg"
-    },
-    {
-      "id": 897,
-      "image": "897.jpg"
-    },
-    {
-      "id": 899,
-      "image": "899.jpg"
-    },
-    {
-      "id": 902,
-      "image": "20466.jpg"
-    },
-    {
-      "id": 905,
-      "image": "905.jpg"
-    },
-    {
-      "id": 907,
-      "image": "907.jpg"
-    },
-    {
-      "id": 909,
-      "image": "909.jpg"
-    },
-    {
-      "id": 914,
-      "image": "914.jpg"
-    },
-    {
-      "id": 915,
-      "image": "1207.jpg"
-    },
-    {
-      "id": 917,
-      "image": "1208.jpg"
-    },
-    {
-      "id": 929,
-      "image": "1211.jpg"
-    },
-    {
-      "id": 930,
-      "image": "1540.jpg"
-    },
-    {
-      "id": 931,
-      "image": "931.jpg"
-    },
-    {
-      "id": 937,
-      "image": "937.jpg"
-    },
-    {
-      "id": 938,
-      "image": "938.jpg"
-    },
-    {
-      "id": 939,
-      "image": "939.jpg"
-    },
-    {
-      "id": 949,
-      "image": "1919.jpg"
-    },
-    {
-      "id": 951,
-      "image": "951.jpg"
-    },
-    {
-      "id": 955,
-      "image": "955.jpg"
-    },
-    {
-      "id": 956,
-      "image": "1543.jpg"
-    },
-    {
-      "id": 962,
-      "image": "1922.jpg"
-    },
-    {
-      "id": 965,
-      "image": "781.jpg"
-    },
-    {
-      "id": 967,
-      "image": "967.jpg"
-    },
-    {
-      "id": 968,
-      "image": "20440.jpg"
-    },
-    {
-      "id": 971,
-      "image": "1546.jpg"
-    },
-    {
-      "id": 972,
-      "image": "1547.jpg"
-    },
-    {
-      "id": 974,
-      "image": "1235.jpg"
-    },
-    {
-      "id": 987,
-      "image": "987.jpg"
-    },
-    {
-      "id": 995,
-      "image": "995.jpg"
-    },
-    {
-      "id": 996,
-      "image": "996.jpg"
-    },
-    {
-      "id": 999,
-      "image": "999.jpg"
-    },
-    {
-      "id": 1001,
-      "image": "1001.jpg"
-    },
-    {
-      "id": 1008,
-      "image": "1008.jpg"
-    },
-    {
-      "id": 1015,
-      "image": "1015.jpg"
-    },
-    {
-      "id": 1017,
-      "image": "20411.jpg"
-    },
-    {
-      "id": 1020,
-      "image": "1020.jpg"
-    },
-    {
-      "id": 1021,
-      "image": "1906.jpg"
-    },
-    {
-      "id": 1023,
-      "image": "1023.jpg"
-    },
-    {
-      "id": 1026,
-      "image": "1026.jpg"
-    },
-    {
-      "id": 1027,
-      "image": "1027.jpg"
-    },
-    {
-      "id": 1029,
-      "image": "1029.jpg"
-    },
-    {
-      "id": 1030,
-      "image": "1030.jpg"
-    },
-    {
-      "id": 1031,
-      "image": "1031.jpg"
-    },
-    {
-      "id": 1065,
-      "image": "1065.jpg"
-    },
-    {
-      "id": 1068,
-      "image": "1068.jpg"
-    },
-    {
-      "id": 1070,
-      "image": "1070.jpg"
-    },
-    {
-      "id": 1072,
-      "image": "1072.jpg"
-    },
-    {
-      "id": 1074,
-      "image": "1074.jpg"
-    },
-    {
-      "id": 1075,
-      "image": "1075.jpg"
-    },
-    {
-      "id": 1076,
-      "image": "1076.jpg"
-    },
-    {
-      "id": 1079,
-      "image": "1079.jpg"
-    },
-    {
-      "id": 1080,
-      "image": "1080.jpg"
-    },
-    {
-      "id": 1081,
-      "image": "1194.jpg"
-    },
-    {
-      "id": 1082,
-      "image": "20407.jpg"
-    },
-    {
-      "id": 1088,
-      "image": "1088.jpg"
-    },
-    {
-      "id": 1089,
-      "image": "1089.jpg"
-    },
-    {
-      "id": 1090,
-      "image": "1090.jpg"
-    },
-    {
-      "id": 1091,
-      "image": "1091.jpg"
-    },
-    {
-      "id": 1092,
-      "image": "1092.jpg"
-    },
-    {
-      "id": 1093,
-      "image": "1093.jpg"
-    },
-    {
-      "id": 1094,
-      "image": "20445.jpg"
-    },
-    {
-      "id": 1095,
-      "image": "20400.jpg"
-    },
-    {
-      "id": 1097,
-      "image": "839.jpg"
-    },
-    {
-      "id": 1098,
-      "image": "20454.jpg"
-    },
-    {
-      "id": 1099,
-      "image": "1099.jpg"
-    },
-    {
-      "id": 1100,
-      "image": "20447.jpg"
-    },
-    {
-      "id": 1101,
-      "image": "1101.jpg"
-    },
-    {
-      "id": 1102,
-      "image": "1102.jpg"
-    },
-    {
-      "id": 1103,
-      "image": "1103.jpg"
-    },
-    {
-      "id": 1104,
-      "image": "1104.jpg"
-    },
-    {
-      "id": 1105,
-      "image": "1105.jpg"
-    },
-    {
-      "id": 1106,
-      "image": "20408.jpg"
-    },
-    {
-      "id": 1107,
-      "image": "20446.jpg"
-    },
-    {
-      "id": 1109,
-      "image": "1109.jpg"
-    },
-    {
-      "id": 1110,
-      "image": "20418.jpg"
-    },
-    {
-      "id": 1112,
-      "image": "1112.jpg"
-    },
-    {
-      "id": 1118,
-      "image": "1118.jpg"
-    },
-    {
-      "id": 1123,
-      "image": "1123.jpg"
-    },
-    {
-      "id": 1126,
-      "image": "20542.jpg"
-    },
-    {
-      "id": 1135,
-      "image": "1135.jpg"
-    },
-    {
-      "id": 1144,
-      "image": "1206.jpg"
-    },
-    {
-      "id": 1148,
-      "image": "1148.jpg"
-    },
-    {
-      "id": 1161,
-      "image": "1161.jpg"
-    },
-    {
-      "id": 1167,
-      "image": "1167.jpg"
-    },
-    {
-      "id": 1169,
-      "image": "1169.jpg"
-    },
-    {
-      "id": 1173,
-      "image": "20544.jpg"
-    },
-    {
-      "id": 1175,
-      "image": "1175.jpg"
-    },
-    {
-      "id": 1178,
-      "image": "1178.jpg"
-    },
-    {
-      "id": 1182,
-      "image": "1182.jpg"
-    },
-    {
-      "id": 1183,
-      "image": "1183.jpg"
-    },
-    {
-      "id": 1184,
-      "image": "1530.jpg"
-    },
-    {
-      "id": 1185,
-      "image": "20452.jpg"
-    },
-    {
-      "id": 1188,
-      "image": "1188.jpg"
-    },
-    {
-      "id": 1190,
-      "image": "20467.jpg"
-    },
-    {
-      "id": 1191,
-      "image": "1191.jpg"
-    },
-    {
-      "id": 1197,
-      "image": "1197.jpg"
-    },
-    {
-      "id": 1198,
-      "image": "1198.jpg"
-    },
-    {
-      "id": 1201,
-      "image": "1201.jpg"
-    },
-    {
-      "id": 1203,
-      "image": "2100.jpg"
-    },
-    {
-      "id": 1207,
-      "image": "1207.jpg"
-    },
-    {
-      "id": 1208,
-      "image": "1208.jpg"
-    },
-    {
-      "id": 1209,
-      "image": "20163.jpg"
-    },
-    {
-      "id": 1220,
-      "image": "1220.jpg"
-    },
-    {
-      "id": 1223,
-      "image": "1223.jpg"
-    },
-    {
-      "id": 1225,
-      "image": "1225.jpg"
-    },
-    {
-      "id": 1226,
-      "image": "1226.jpg"
-    },
-    {
-      "id": 1227,
-      "image": "1227.jpg"
-    },
-    {
-      "id": 1238,
-      "image": "1238.jpg"
-    },
-    {
-      "id": 1239,
-      "image": "20450.jpg"
-    },
-    {
-      "id": 1242,
-      "image": "1242.jpg"
-    },
-    {
-      "id": 1250,
-      "image": "1250.jpg"
-    },
-    {
-      "id": 1253,
-      "image": "1253.jpg"
-    },
-    {
-      "id": 1254,
-      "image": "1254.jpg"
-    },
-    {
-      "id": 1255,
-      "image": "1255.jpg"
-    },
-    {
-      "id": 1256,
-      "image": "2070.jpg"
-    },
-    {
-      "id": 1262,
-      "image": "1262.jpg"
-    },
-    {
-      "id": 1263,
-      "image": "1263.jpg"
-    },
-    {
-      "id": 1264,
-      "image": "1264.jpg"
-    },
-    {
-      "id": 1265,
-      "image": "1265.jpg"
-    },
-    {
-      "id": 1266,
-      "image": "1266.jpg"
-    },
-    {
-      "id": 1269,
-      "image": "738.jpg"
-    },
-    {
-      "id": 1271,
-      "image": "1271.jpg"
-    },
-    {
-      "id": 1272,
-      "image": "2067.jpg"
-    },
-    {
-      "id": 1273,
-      "image": "1273.jpg"
-    },
-    {
-      "id": 1277,
-      "image": "1277.jpg"
-    },
-    {
-      "id": 1285,
-      "image": "20294.jpg"
-    },
-    {
-      "id": 1286,
-      "image": "1286.jpg"
-    },
-    {
-      "id": 1287,
-      "image": "1287.jpg"
-    },
-    {
-      "id": 1288,
-      "image": "19984.jpg"
-    },
-    {
-      "id": 1299,
-      "image": "1299.jpg"
-    },
-    {
-      "id": 1300,
-      "image": "1300.jpg"
-    },
-    {
-      "id": 1301,
-      "image": "1301.jpg"
-    },
-    {
-      "id": 1311,
-      "image": "1311.jpg"
-    },
-    {
-      "id": 1312,
-      "image": "2049.jpg"
-    },
-    {
-      "id": 1315,
-      "image": "1315.jpg"
-    },
-    {
-      "id": 1319,
-      "image": "1319.jpg"
-    },
-    {
-      "id": 1321,
-      "image": "1321.jpg"
-    },
-    {
-      "id": 1324,
-      "image": "1324.jpg"
-    },
-    {
-      "id": 1327,
-      "image": "1327.jpg"
-    },
-    {
-      "id": 1329,
-      "image": "20658.jpg"
-    },
-    {
-      "id": 1330,
-      "image": "20646.jpg"
-    },
-    {
-      "id": 1332,
-      "image": "1332.jpg"
-    },
-    {
-      "id": 1334,
-      "image": "1334.jpg"
-    },
-    {
-      "id": 1337,
-      "image": "1337.jpg"
-    },
-    {
-      "id": 1342,
-      "image": "1342.jpg"
-    },
-    {
-      "id": 1343,
-      "image": "2036.jpg"
-    },
-    {
-      "id": 1344,
-      "image": "1344.jpg"
-    },
-    {
-      "id": 1350,
-      "image": "2043.jpg"
-    },
-    {
-      "id": 1351,
-      "image": "1351.jpg"
-    },
-    {
-      "id": 1354,
-      "image": "1354.jpg"
-    },
-    {
-      "id": 1355,
-      "image": "1355.jpg"
-    },
-    {
-      "id": 1356,
-      "image": "1356.jpg"
-    },
-    {
-      "id": 1357,
-      "image": "1357.jpg"
-    },
-    {
-      "id": 1359,
-      "image": "1359.jpg"
-    },
-    {
-      "id": 1360,
-      "image": "2028.jpg"
-    },
-    {
-      "id": 1361,
-      "image": "2055.jpg"
-    },
-    {
-      "id": 1362,
-      "image": "2048.jpg"
-    },
-    {
-      "id": 1364,
-      "image": "1364.jpg"
-    },
-    {
-      "id": 1365,
-      "image": "1365.jpg"
-    },
-    {
-      "id": 1366,
-      "image": "1366.jpg"
-    },
-    {
-      "id": 1376,
-      "image": "1376.jpg"
-    },
-    {
-      "id": 1377,
-      "image": "1377.jpg"
-    },
-    {
-      "id": 1378,
-      "image": "1378.jpg"
-    },
-    {
-      "id": 1386,
-      "image": "1386.jpg"
-    },
-    {
-      "id": 1388,
-      "image": "20661.jpg"
-    },
-    {
-      "id": 1390,
-      "image": "1390.jpg"
-    },
-    {
-      "id": 1394,
-      "image": "1394.jpg"
-    },
-    {
-      "id": 1396,
-      "image": "1396.jpg"
-    },
-    {
-      "id": 1397,
-      "image": "1397.jpg"
-    },
-    {
-      "id": 1398,
-      "image": "1398.jpg"
-    },
-    {
-      "id": 1399,
-      "image": "1399.jpg"
-    },
-    {
-      "id": 1400,
-      "image": "1400.jpg"
-    },
-    {
-      "id": 1403,
-      "image": "1403.jpg"
-    },
-    {
-      "id": 1406,
-      "image": "20426.jpg"
-    },
-    {
-      "id": 1407,
-      "image": "1407.jpg"
-    },
-    {
-      "id": 1409,
-      "image": "1409.jpg"
-    },
-    {
-      "id": 1410,
-      "image": "20648.jpg"
-    },
-    {
-      "id": 1415,
-      "image": "1415.jpg"
-    },
-    {
-      "id": 1416,
-      "image": "1416.jpg"
-    },
-    {
-      "id": 1426,
-      "image": "1426.jpg"
-    },
-    {
-      "id": 1427,
-      "image": "1427.jpg"
-    },
-    {
-      "id": 1428,
-      "image": "1428.jpg"
-    },
-    {
-      "id": 1429,
-      "image": "1429.jpg"
-    },
-    {
-      "id": 1430,
-      "image": "2063.jpg"
-    },
-    {
-      "id": 1438,
-      "image": "1438.jpg"
-    },
-    {
-      "id": 1439,
-      "image": "1439.jpg"
-    },
-    {
-      "id": 1442,
-      "image": "1442.jpg"
-    },
-    {
-      "id": 1443,
-      "image": "1443.jpg"
-    },
-    {
-      "id": 1444,
-      "image": "1444.jpg"
-    },
-    {
-      "id": 1445,
-      "image": "1445.jpg"
-    },
-    {
-      "id": 1446,
-      "image": "1446.jpg"
-    },
-    {
-      "id": 1447,
-      "image": "1447.jpg"
-    },
-    {
-      "id": 1448,
-      "image": "1448.jpg"
-    },
-    {
-      "id": 1449,
-      "image": "1449.jpg"
-    },
-    {
-      "id": 1450,
-      "image": "1450.jpg"
-    },
-    {
-      "id": 1451,
-      "image": "1451.jpg"
-    },
-    {
-      "id": 1452,
-      "image": "1452.jpg"
-    },
-    {
-      "id": 1453,
-      "image": "1453.jpg"
-    },
-    {
-      "id": 1454,
-      "image": "1454.jpg"
-    },
-    {
-      "id": 1455,
-      "image": "1455.jpg"
-    },
-    {
-      "id": 1456,
-      "image": "1456.jpg"
-    },
-    {
-      "id": 1457,
-      "image": "1457.jpg"
-    },
-    {
-      "id": 1458,
-      "image": "1458.jpg"
-    },
-    {
-      "id": 1459,
-      "image": "1459.jpg"
-    },
-    {
-      "id": 1460,
-      "image": "1460.jpg"
-    },
-    {
-      "id": 1461,
-      "image": "1461.jpg"
-    },
-    {
-      "id": 1462,
-      "image": "1462.jpg"
-    },
-    {
-      "id": 1463,
-      "image": "1463.jpg"
-    },
-    {
-      "id": 1468,
-      "image": "1468.jpg"
-    },
-    {
-      "id": 1469,
-      "image": "1469.jpg"
-    },
-    {
-      "id": 1470,
-      "image": "1470.jpg"
-    },
-    {
-      "id": 1471,
-      "image": "1471.jpg"
-    },
-    {
-      "id": 1473,
-      "image": "1473.jpg"
-    },
-    {
-      "id": 1474,
-      "image": "1474.jpg"
-    },
-    {
-      "id": 1476,
-      "image": "1476.jpg"
-    },
-    {
-      "id": 1477,
-      "image": "1477.jpg"
-    },
-    {
-      "id": 1478,
-      "image": "1478.jpg"
-    },
-    {
-      "id": 1479,
-      "image": "1479.jpg"
-    },
-    {
-      "id": 1505,
-      "image": "1505.jpg"
-    },
-    {
-      "id": 1507,
-      "image": "2040.jpg"
-    },
-    {
-      "id": 1509,
-      "image": "1509.jpg"
-    },
-    {
-      "id": 1543,
-      "image": "20444.jpg"
-    },
-    {
-      "id": 1544,
-      "image": "20469.jpg"
-    },
-    {
-      "id": 1567,
-      "image": "1567.jpg"
-    },
-    {
-      "id": 1603,
-      "image": "20327.jpg"
-    },
-    {
-      "id": 1625,
-      "image": "20327.jpg"
-    },
-    {
-      "id": 1630,
-      "image": "1630.jpg"
-    },
-    {
-      "id": 1632,
-      "image": "2050.jpg"
-    },
-    {
-      "id": 1689,
-      "image": "1551.jpg"
-    },
-    {
-      "id": 1692,
-      "image": "1692.jpg"
-    },
-    {
-      "id": 1695,
-      "image": "1554.jpg"
-    },
-    {
-      "id": 1696,
-      "image": "1696.jpg"
-    },
-    {
-      "id": 1711,
-      "image": "1901.jpg"
-    },
-    {
-      "id": 1717,
-      "image": "1925.jpg"
-    },
-    {
-      "id": 1741,
-      "image": "1926.jpg"
-    },
-    {
-      "id": 1747,
-      "image": "1747.jpg"
-    },
-    {
-      "id": 1752,
-      "image": "1752.jpg"
-    },
-    {
-      "id": 1753,
-      "image": "1753.jpg"
-    },
-    {
-      "id": 1754,
-      "image": "1754.jpg"
-    },
-    {
-      "id": 1758,
-      "image": "20656.jpg"
-    },
-    {
-      "id": 1764,
-      "image": "20630.jpg"
-    },
-    {
-      "id": 1765,
-      "image": "20636.jpg"
-    },
-    {
-      "id": 1766,
-      "image": "1766.jpg"
-    },
-    {
-      "id": 1767,
-      "image": "20635.jpg"
-    },
-    {
-      "id": 1768,
-      "image": "20634.jpg"
-    },
-    {
-      "id": 1769,
-      "image": "20632.jpg"
-    },
-    {
-      "id": 1770,
-      "image": "20631.jpg"
-    },
-    {
-      "id": 1771,
-      "image": "1771.jpg"
-    },
-    {
-      "id": 1774,
-      "image": "1774.jpg"
-    },
-    {
-      "id": 1775,
-      "image": "1775.jpg"
-    },
-    {
-      "id": 1776,
-      "image": "1776.jpg"
-    },
-    {
-      "id": 1778,
-      "image": "1778.jpg"
-    },
-    {
-      "id": 1780,
-      "image": "1780.jpg"
-    },
-    {
-      "id": 1781,
-      "image": "1781.jpg"
-    },
-    {
-      "id": 1782,
-      "image": "1782.jpg"
-    },
-    {
-      "id": 1783,
-      "image": "20711.jpg"
-    },
-    {
-      "id": 1785,
-      "image": "1785.jpg"
-    },
-    {
-      "id": 1804,
-      "image": "1804.jpg"
-    },
-    {
-      "id": 1805,
-      "image": "1805.jpg"
-    },
-    {
-      "id": 1807,
-      "image": "1807.jpg"
-    },
-    {
-      "id": 1808,
-      "image": "1808.jpg"
-    },
-    {
-      "id": 1811,
-      "image": "1811.jpg"
-    },
-    {
-      "id": 1812,
-      "image": "1812.jpg"
-    },
-    {
-      "id": 1813,
-      "image": "1813.jpg"
-    },
-    {
-      "id": 1814,
-      "image": "1814.jpg"
-    },
-    {
-      "id": 1815,
-      "image": "1815.jpg"
-    },
-    {
-      "id": 1817,
-      "image": "1817.jpg"
-    },
-    {
-      "id": 1818,
-      "image": "1818.jpg"
-    },
-    {
-      "id": 1819,
-      "image": "1819.jpg"
-    },
-    {
-      "id": 1820,
-      "image": "1820.jpg"
-    },
-    {
-      "id": 1822,
-      "image": "1822.jpg"
-    },
-    {
-      "id": 1823,
-      "image": "1823.jpg"
-    },
-    {
-      "id": 1825,
-      "image": "1825.jpg"
-    },
-    {
-      "id": 1826,
-      "image": "1826.jpg"
-    },
-    {
-      "id": 1829,
-      "image": "1829.jpg"
-    },
-    {
-      "id": 1830,
-      "image": "1830.jpg"
-    },
-    {
-      "id": 1832,
-      "image": "1832.jpg"
-    },
-    {
-      "id": 1833,
-      "image": "1833.jpg"
-    },
-    {
-      "id": 1834,
-      "image": "1834.jpg"
-    },
-    {
-      "id": 1838,
-      "image": "1838.jpg"
-    },
-    {
-      "id": 1846,
-      "image": "1846.jpg"
-    },
-    {
-      "id": 1847,
-      "image": "1847.jpg"
-    },
-    {
-      "id": 1848,
-      "image": "1848.jpg"
-    },
-    {
-      "id": 1849,
-      "image": "1849.jpg"
-    },
-    {
-      "id": 1850,
-      "image": "1850.jpg"
-    },
-    {
-      "id": 1851,
-      "image": "1851.jpg"
-    },
-    {
-      "id": 1852,
-      "image": "1852.jpg"
-    },
-    {
-      "id": 1853,
-      "image": "1853.jpg"
-    },
-    {
-      "id": 1854,
-      "image": "1854.jpg"
-    },
-    {
-      "id": 1855,
-      "image": "1855.jpg"
-    },
-    {
-      "id": 1856,
-      "image": "1856.jpg"
-    },
-    {
-      "id": 1857,
-      "image": "1857.jpg"
-    },
-    {
-      "id": 1872,
-      "image": "1872.jpg"
-    },
-    {
-      "id": 1873,
-      "image": "1873.jpg"
-    },
-    {
-      "id": 1874,
-      "image": "1874.jpg"
-    },
-    {
-      "id": 1887,
-      "image": "customs-2.jpg"
-    },
-    {
-      "id": 1896,
-      "image": "1896.jpg"
-    },
-    {
-      "id": 1897,
-      "image": "1897.jpg"
-    },
-    {
-      "id": 1900,
-      "image": "1927.jpg"
-    },
-    {
-      "id": 1902,
-      "image": "1902.jpg"
-    },
-    {
-      "id": 1903,
-      "image": "1903.jpg"
-    },
-    {
-      "id": 1904,
-      "image": "1904.jpg"
-    },
-    {
-      "id": 1905,
-      "image": "1905.jpg"
-    },
-    {
-      "id": 1906,
-      "image": "1906.jpg"
-    },
-    {
-      "id": 1907,
-      "image": "1907.jpg"
-    },
-    {
-      "id": 1908,
-      "image": "1908.jpg"
-    },
-    {
-      "id": 1909,
-      "image": "1909.jpg"
-    },
-    {
-      "id": 1910,
-      "image": "1910.jpg"
-    },
-    {
-      "id": 1911,
-      "image": "1911.jpg"
-    },
-    {
-      "id": 1912,
-      "image": "1912.jpg"
-    },
-    {
-      "id": 1913,
-      "image": "1913.jpg"
-    },
-    {
-      "id": 1914,
-      "image": "1914.jpg"
-    },
-    {
-      "id": 1915,
-      "image": "1915.jpg"
-    },
-    {
-      "id": 1916,
-      "image": "1916.jpg"
-    },
-    {
-      "id": 1921,
-      "image": "1930.jpg"
-    },
-    {
-      "id": 1923,
-      "image": "1923.jpg"
-    },
-    {
-      "id": 1924,
-      "image": "1924.jpg"
-    },
-    {
-      "id": 1925,
-      "image": "1925.jpg"
-    },
-    {
-      "id": 1926,
-      "image": "1926.jpg"
-    },
-    {
-      "id": 1927,
-      "image": "1927.jpg"
-    },
-    {
-      "id": 1929,
-      "image": "1929.jpg"
-    },
-    {
-      "id": 1931,
-      "image": "1931.jpg"
-    },
-    {
-      "id": 1932,
-      "image": "1932.jpg"
-    },
-    {
-      "id": 1934,
-      "image": "1934.jpg"
-    },
-    {
-      "id": 1935,
-      "image": "1935.jpg"
-    },
-    {
-      "id": 1936,
-      "image": "1936.jpg"
-    },
-    {
-      "id": 1952,
-      "image": "1952.jpg"
-    },
-    {
-      "id": 1960,
-      "image": "1960.jpg"
-    },
-    {
-      "id": 1961,
-      "image": "1961.jpg"
-    },
-    {
-      "id": 1962,
-      "image": "1962.jpg"
-    },
-    {
-      "id": 1963,
-      "image": "1963.jpg"
-    },
-    {
-      "id": 1964,
-      "image": "1964.jpg"
-    }
-  ],
-  "updates": [
-    {
       "id": 50,
-      "old": "stop-and-yield.jpg",
-      "new": "prohibitory-signs/stop-and-yield.jpg"
+      "image": "prohibitory-signs/stop-and-yield.jpg"
     },
     {
       "id": 192,
-      "old": "road-management-boundary.jpg",
-      "new": "guide-signs/road-management-boundary.jpg"
+      "image": "guide-signs/road-management-boundary.jpg"
     },
     {
       "id": 317,
-      "old": "toll-station-no-etc-preview.jpg",
-      "new": "guide-signs/toll-station-no-etc-preview.jpg"
+      "image": "guide-signs/toll-station-no-etc-preview.jpg"
     },
     {
       "id": 319,
-      "old": "toll-station-no-etc-preview-3.jpg",
-      "new": "guide-signs/toll-station-no-etc-preview-3.jpg"
+      "image": "guide-signs/toll-station-no-etc-preview-3.jpg"
     },
     {
       "id": 322,
-      "old": "toll-station-with-etc-preview-2.jpg",
-      "new": "guide-signs/toll-station-with-etc-preview-2.jpg"
+      "image": "guide-signs/toll-station-with-etc-preview-2.jpg"
     },
     {
       "id": 323,
-      "old": "toll-station-with-etc-preview-3.jpg",
-      "new": "guide-signs/toll-station-with-etc-preview-3.jpg"
+      "image": "guide-signs/toll-station-with-etc-preview-3.jpg"
     },
     {
       "id": 324,
-      "old": "toll-station-with-etc-preview-and-station.jpg",
-      "new": "guide-signs/toll-station-with-etc-preview-and-station.jpg"
+      "image": "guide-signs/toll-station-with-etc-preview-and-station.jpg"
     },
     {
       "id": 325,
-      "old": "overload-inspection-station.jpg",
-      "new": "guide-signs/overload-inspection-station.jpg"
+      "image": "guide-signs/overload-inspection-station.jpg"
     },
     {
       "id": 327,
-      "old": "overload-inspection-station-3.jpg",
-      "new": "guide-signs/overload-inspection-station-3.jpg"
+      "image": "guide-signs/overload-inspection-station-3.jpg"
     },
     {
       "id": 328,
-      "old": "overload-inspection-station-4.jpg",
-      "new": "guide-signs/overload-inspection-station-4.jpg"
+      "image": "guide-signs/overload-inspection-station-4.jpg"
     },
     {
       "id": 329,
-      "old": "queue-ahead.jpg",
-      "new": "warning-signs/queue-ahead.jpg"
+      "image": "warning-signs/queue-ahead.jpg"
     },
     {
       "id": 336,
-      "old": "service-area-preview.jpg",
-      "new": "guide-signs/service-area-preview.jpg"
+      "image": "guide-signs/service-area-preview.jpg"
     },
     {
       "id": 337,
-      "old": "service-area-preview-2.jpg",
-      "new": "guide-signs/service-area-preview-2.jpg"
+      "image": "guide-signs/service-area-preview-2.jpg"
     },
     {
       "id": 338,
-      "old": "service-area-preview-3.jpg",
-      "new": "guide-signs/service-area-preview-3.jpg"
+      "image": "guide-signs/service-area-preview-3.jpg"
     },
     {
       "id": 339,
-      "old": "service-area-preview-4.jpg",
-      "new": "guide-signs/service-area-preview-4.jpg"
+      "image": "guide-signs/service-area-preview-4.jpg"
     },
     {
       "id": 340,
-      "old": "service-area-preview-5.jpg",
-      "new": "guide-signs/service-area-preview-5.jpg"
+      "image": "guide-signs/service-area-preview-5.jpg"
     },
     {
       "id": 342,
-      "old": "straight-only.jpg",
-      "new": "mandatory-signs/straight-only.jpg"
+      "image": "mandatory-signs/straight-only.jpg"
     },
     {
       "id": 343,
-      "old": "service-area-preview-8.jpg",
-      "new": "guide-signs/service-area-preview-8.jpg"
+      "image": "guide-signs/service-area-preview-8.jpg"
     },
     {
       "id": 344,
-      "old": "parking-zone-preview.jpg",
-      "new": "guide-signs/parking-zone-preview.jpg"
+      "image": "guide-signs/parking-zone-preview.jpg"
     },
     {
       "id": 345,
-      "old": "parking-zone-preview-2.jpg",
-      "new": "guide-signs/parking-zone-preview-2.jpg"
+      "image": "guide-signs/parking-zone-preview-2.jpg"
     },
     {
       "id": 346,
-      "old": "parking-zone-preview-3.jpg",
-      "new": "guide-signs/parking-zone-preview-3.jpg"
+      "image": "guide-signs/parking-zone-preview-3.jpg"
     },
     {
       "id": 347,
-      "old": "straight-or-right-turn.jpg",
-      "new": "mandatory-signs/straight-or-right-turn.jpg"
+      "image": "mandatory-signs/straight-or-right-turn.jpg"
     },
     {
       "id": 349,
-      "old": "fork-symbol.jpg",
-      "new": "warning-signs/fork-symbol.jpg"
+      "image": "warning-signs/fork-symbol.jpg"
     },
     {
       "id": 350,
-      "old": "parking.jpg",
-      "new": "guide-signs/parking.jpg"
+      "image": "guide-signs/parking.jpg"
     },
     {
       "id": 351,
-      "old": "drive-on-left.jpg",
-      "new": "mandatory-signs/drive-on-left.jpg"
+      "image": "mandatory-signs/drive-on-left.jpg"
     },
     {
       "id": 352,
-      "old": "interchange-straight-or-left.jpg",
-      "new": "mandatory-signs/interchange-straight-or-left.jpg"
+      "image": "mandatory-signs/interchange-straight-or-left.jpg"
     },
     {
       "id": 355,
-      "old": "one-way-straight.jpg",
-      "new": "mandatory-signs/one-way-straight.jpg"
+      "image": "mandatory-signs/one-way-straight.jpg"
     },
     {
       "id": 356,
-      "old": "one-way-left-or-right.jpg",
-      "new": "mandatory-signs/one-way-left-or-right.jpg"
+      "image": "mandatory-signs/one-way-left-or-right.jpg"
     },
     {
       "id": 357,
-      "old": "walking.jpg",
-      "new": "mandatory-signs/walking.jpg"
+      "image": "mandatory-signs/walking.jpg"
     },
     {
       "id": 358,
-      "old": "stop-signal.jpg",
-      "new": "traffic-police-signals/stop-signal.jpg"
+      "image": "traffic-police-signals/stop-signal.jpg"
     },
     {
       "id": 359,
-      "old": "minimum-speed.jpg",
-      "new": "mandatory-signs/minimum-speed.jpg"
+      "image": "mandatory-signs/minimum-speed.jpg"
     },
     {
       "id": 360,
-      "old": "intersection-priority.jpg",
-      "new": "mandatory-signs/intersection-priority.jpg"
+      "image": "mandatory-signs/intersection-priority.jpg"
     },
     {
       "id": 361,
-      "old": "oncoming-priority.jpg",
-      "new": "mandatory-signs/oncoming-priority.jpg"
+      "image": "mandatory-signs/oncoming-priority.jpg"
     },
     {
       "id": 362,
-      "old": "pedestrian-crossing.jpg",
-      "new": "mandatory-signs/pedestrian-crossing.jpg"
+      "image": "mandatory-signs/pedestrian-crossing.jpg"
     },
     {
       "id": 363,
-      "old": "u-turn-lane.jpg",
-      "new": "mandatory-signs/u-turn-lane.jpg"
+      "image": "mandatory-signs/u-turn-lane.jpg"
     },
     {
       "id": 364,
-      "old": "u-turn-or-left-turn-lane.jpg",
-      "new": "mandatory-signs/u-turn-or-left-turn-lane.jpg"
+      "image": "mandatory-signs/u-turn-or-left-turn-lane.jpg"
     },
     {
       "id": 365,
-      "old": "right-turn-lane.jpg",
-      "new": "mandatory-signs/right-turn-lane.jpg"
+      "image": "mandatory-signs/right-turn-lane.jpg"
     },
     {
       "id": 366,
-      "old": "straight-lane.jpg",
-      "new": "mandatory-signs/straight-lane.jpg"
+      "image": "mandatory-signs/straight-lane.jpg"
     },
     {
       "id": 367,
-      "old": "straight-or-right-turn-lane.jpg",
-      "new": "mandatory-signs/straight-or-right-turn-lane.jpg"
+      "image": "mandatory-signs/straight-or-right-turn-lane.jpg"
     },
     {
       "id": 368,
-      "old": "straight-or-left-turn-lane.jpg",
-      "new": "mandatory-signs/straight-or-left-turn-lane.jpg"
+      "image": "mandatory-signs/straight-or-left-turn-lane.jpg"
     },
     {
       "id": 369,
-      "old": "information.jpg",
-      "new": "tourist-area-signs/information.jpg"
+      "image": "tourist-area-signs/information.jpg"
     },
     {
       "id": 370,
-      "old": "motor-vehicle-driving.jpg",
-      "new": "mandatory-signs/motor-vehicle-driving.jpg"
+      "image": "mandatory-signs/motor-vehicle-driving.jpg"
     },
     {
       "id": 371,
-      "old": "motor-vehicle-lane.jpg",
-      "new": "mandatory-signs/motor-vehicle-lane.jpg"
+      "image": "mandatory-signs/motor-vehicle-lane.jpg"
     },
     {
       "id": 372,
-      "old": "campground.jpg",
-      "new": "tourist-area-signs/campground.jpg"
+      "image": "tourist-area-signs/campground.jpg"
     },
     {
       "id": 373,
-      "old": "non-motor-vehicle-lane.jpg",
-      "new": "mandatory-signs/non-motor-vehicle-lane.jpg"
+      "image": "mandatory-signs/non-motor-vehicle-lane.jpg"
     },
     {
       "id": 374,
-      "old": "highway-intersection-preview-with-road-number.jpg",
-      "new": "guide-signs/highway-intersection-preview-with-road-number.jpg"
+      "image": "guide-signs/highway-intersection-preview-with-road-number.jpg"
     },
     {
       "id": 375,
-      "old": "horseback-riding.jpg",
-      "new": "tourist-area-signs/horseback-riding.jpg"
+      "image": "tourist-area-signs/horseback-riding.jpg"
     },
     {
       "id": 376,
-      "old": "high-volume-highway-intersection-preview-2.jpg",
-      "new": "guide-signs/high-volume-highway-intersection-preview-2.jpg"
+      "image": "guide-signs/high-volume-highway-intersection-preview-2.jpg"
     },
     {
       "id": 377,
-      "old": "four-lane-highway-intersection-preview-2.jpg",
-      "new": "guide-signs/four-lane-highway-intersection-preview-2.jpg"
+      "image": "guide-signs/four-lane-highway-intersection-preview-2.jpg"
     },
     {
       "id": 378,
-      "old": "hov-lane.jpg",
-      "new": "mandatory-signs/hov-lane.jpg"
+      "image": "mandatory-signs/hov-lane.jpg"
     },
     {
       "id": 379,
-      "old": "brt-lane.jpg",
-      "new": "mandatory-signs/brt-lane.jpg"
+      "image": "mandatory-signs/brt-lane.jpg"
     },
     {
       "id": 380,
-      "old": "parking-space.jpg",
-      "new": "mandatory-signs/parking-space.jpg"
+      "image": "mandatory-signs/parking-space.jpg"
     },
     {
       "id": 381,
-      "old": "parking-space-2.jpg",
-      "new": "mandatory-signs/parking-space-2.jpg"
+      "image": "mandatory-signs/parking-space-2.jpg"
     },
     {
       "id": 382,
-      "old": "skiing.jpg",
-      "new": "tourist-area-signs/skiing.jpg"
+      "image": "tourist-area-signs/skiing.jpg"
     },
     {
       "id": 383,
-      "old": "parking-space-4.jpg",
-      "new": "mandatory-signs/parking-space-4.jpg"
+      "image": "mandatory-signs/parking-space-4.jpg"
     },
     {
       "id": 384,
-      "old": "u-turn-permitted.jpg",
-      "new": "mandatory-signs/u-turn-permitted.jpg"
+      "image": "mandatory-signs/u-turn-permitted.jpg"
     },
     {
       "id": 385,
-      "old": "construction-barrier-2.jpg",
-      "new": "road-construction-safety-signs/construction-barrier-2.jpg"
+      "image": "road-construction-safety-signs/construction-barrier-2.jpg"
     },
     {
       "id": 386,
-      "old": "four-lane-highway-intersection-preview.jpg",
-      "new": "guide-signs/four-lane-highway-intersection-preview.jpg"
+      "image": "guide-signs/four-lane-highway-intersection-preview.jpg"
     },
     {
       "id": 389,
-      "old": "next-exit-preview.jpg",
-      "new": "guide-signs/next-exit-preview.jpg"
+      "image": "guide-signs/next-exit-preview.jpg"
     },
     {
       "id": 390,
-      "old": "road-construction-300m-ahead.jpg",
-      "new": "road-construction-safety-signs/road-construction-300m-ahead.jpg"
+      "image": "road-construction-safety-signs/road-construction-300m-ahead.jpg"
     },
     {
       "id": 391,
-      "old": "road-construction.jpg",
-      "new": "road-construction-safety-signs/road-construction.jpg"
+      "image": "road-construction-safety-signs/road-construction.jpg"
     },
     {
       "id": 392,
-      "old": "crossroad-intersection.jpg",
-      "new": "guide-signs/crossroad-intersection.jpg"
+      "image": "guide-signs/crossroad-intersection.jpg"
     },
     {
       "id": 393,
-      "old": "crossroad-intersection-3.jpg",
-      "new": "guide-signs/crossroad-intersection-3.jpg"
+      "image": "guide-signs/crossroad-intersection-3.jpg"
     },
     {
       "id": 394,
-      "old": "t-junction-intersection.jpg",
-      "new": "guide-signs/t-junction-intersection.jpg"
+      "image": "guide-signs/t-junction-intersection.jpg"
     },
     {
       "id": 395,
-      "old": "t-junction-intersection-2.jpg",
-      "new": "guide-signs/t-junction-intersection-2.jpg"
+      "image": "guide-signs/t-junction-intersection-2.jpg"
     },
     {
       "id": 396,
-      "old": "t-junction-intersection-4.jpg",
-      "new": "guide-signs/t-junction-intersection-4.jpg"
+      "image": "guide-signs/t-junction-intersection-4.jpg"
     },
     {
       "id": 397,
-      "old": "place-distance-3.jpg",
-      "new": "guide-signs/place-distance-3.jpg"
+      "image": "guide-signs/place-distance-3.jpg"
     },
     {
       "id": 398,
-      "old": "t-junction-intersection-5.jpg",
-      "new": "guide-signs/t-junction-intersection-5.jpg"
+      "image": "guide-signs/t-junction-intersection-5.jpg"
     },
     {
       "id": 399,
-      "old": "high-volume-highway-intersection-preview.jpg",
-      "new": "guide-signs/high-volume-highway-intersection-preview.jpg"
+      "image": "guide-signs/high-volume-highway-intersection-preview.jpg"
     },
     {
       "id": 401,
-      "old": "roundabout-junction.jpg",
-      "new": "guide-signs/roundabout-junction.jpg"
+      "image": "guide-signs/roundabout-junction.jpg"
     },
     {
       "id": 402,
-      "old": "interchange.jpg",
-      "new": "guide-signs/interchange.jpg"
+      "image": "guide-signs/interchange.jpg"
     },
     {
       "id": 403,
-      "old": "interchange-2.jpg",
-      "new": "guide-signs/interchange-2.jpg"
+      "image": "guide-signs/interchange-2.jpg"
     },
     {
       "id": 404,
-      "old": "vehicles-slow-down.jpg",
-      "new": "road-construction-safety-signs/vehicles-slow-down.jpg"
+      "image": "road-construction-safety-signs/vehicles-slow-down.jpg"
     },
     {
       "id": 405,
-      "old": "place-distance.jpg",
-      "new": "guide-signs/place-distance.jpg"
+      "image": "guide-signs/place-distance.jpg"
     },
     {
       "id": 407,
-      "old": "detour-left-route.jpg",
-      "new": "road-construction-safety-signs/detour-left-route.jpg"
+      "image": "road-construction-safety-signs/detour-left-route.jpg"
     },
     {
       "id": 408,
-      "old": "detour-right-route.jpg",
-      "new": "road-construction-safety-signs/detour-right-route.jpg"
+      "image": "road-construction-safety-signs/detour-right-route.jpg"
     },
     {
       "id": 409,
-      "old": "national-highway-number.jpg",
-      "new": "guide-signs/national-highway-number.jpg"
+      "image": "guide-signs/national-highway-number.jpg"
     },
     {
       "id": 410,
-      "old": "provincial-highway-number.jpg",
-      "new": "guide-signs/provincial-highway-number.jpg"
+      "image": "guide-signs/provincial-highway-number.jpg"
     },
     {
       "id": 411,
-      "old": "county-road-number.jpg",
-      "new": "guide-signs/county-road-number.jpg"
+      "image": "guide-signs/county-road-number.jpg"
     },
     {
       "id": 412,
-      "old": "township-road-number.jpg",
-      "new": "guide-signs/township-road-number.jpg"
+      "image": "guide-signs/township-road-number.jpg"
     },
     {
       "id": 413,
-      "old": "street-name.jpg",
-      "new": "guide-signs/street-name.jpg"
+      "image": "guide-signs/street-name.jpg"
     },
     {
       "id": 414,
-      "old": "motor-vehicle.jpg",
-      "new": "auxiliary-signs/motor-vehicle.jpg"
+      "image": "auxiliary-signs/motor-vehicle.jpg"
     },
     {
       "id": 415,
-      "old": "road-name-plate.jpg",
-      "new": "guide-signs/road-name-plate.jpg"
+      "image": "guide-signs/road-name-plate.jpg"
     },
     {
       "id": 416,
-      "old": "private-only.jpg",
-      "new": "auxiliary-signs/private-only.jpg"
+      "image": "auxiliary-signs/private-only.jpg"
     },
     {
       "id": 417,
-      "old": "administrative-boundary.jpg",
-      "new": "guide-signs/administrative-boundary.jpg"
+      "image": "guide-signs/administrative-boundary.jpg"
     },
     {
       "id": 418,
-      "old": "first-aid-station-sign.jpg",
-      "new": "guide-signs/first-aid-station-sign.jpg"
+      "image": "guide-signs/first-aid-station-sign.jpg"
     },
     {
       "id": 419,
-      "old": "road-management-boundary-2.jpg",
-      "new": "guide-signs/road-management-boundary-2.jpg"
+      "image": "guide-signs/road-management-boundary-2.jpg"
     },
     {
       "id": 420,
-      "old": "road-management-boundary.jpg",
-      "new": "guide-signs/road-management-boundary.jpg"
+      "image": "guide-signs/road-management-boundary.jpg"
     },
     {
       "id": 421,
-      "old": "airport-sign.jpg",
-      "new": "guide-signs/airport-sign.jpg"
+      "image": "guide-signs/airport-sign.jpg"
     },
     {
       "id": 423,
-      "old": "parking-zone.jpg",
-      "new": "guide-signs/parking-zone.jpg"
+      "image": "guide-signs/parking-zone.jpg"
     },
     {
       "id": 424,
-      "old": "next-exit-preview-2.jpg",
-      "new": "guide-signs/next-exit-preview-2.jpg"
+      "image": "guide-signs/next-exit-preview-2.jpg"
     },
     {
       "id": 425,
-      "old": "forward-200m.jpg",
-      "new": "auxiliary-signs/forward-200m.jpg"
+      "image": "auxiliary-signs/forward-200m.jpg"
     },
     {
       "id": 426,
-      "old": "left-100m.jpg",
-      "new": "auxiliary-signs/left-100m.jpg"
+      "image": "auxiliary-signs/left-100m.jpg"
     },
     {
       "id": 427,
-      "old": "two-expressways-shared-entrance-preview-3.jpg",
-      "new": "guide-signs/two-expressways-shared-entrance-preview-3.jpg"
+      "image": "guide-signs/two-expressways-shared-entrance-preview-3.jpg"
     },
     {
       "id": 428,
-      "old": "right-100m.jpg",
-      "new": "auxiliary-signs/right-100m.jpg"
+      "image": "auxiliary-signs/right-100m.jpg"
     },
     {
       "id": 429,
-      "old": "within-area.jpg",
-      "new": "auxiliary-signs/within-area.jpg"
+      "image": "auxiliary-signs/within-area.jpg"
     },
     {
       "id": 430,
-      "old": "distance-200m.jpg",
-      "new": "auxiliary-signs/distance-200m.jpg"
+      "image": "auxiliary-signs/distance-200m.jpg"
     },
     {
       "id": 431,
-      "old": "unnumbered-expressway-entrance-preview-2.jpg",
-      "new": "guide-signs/unnumbered-expressway-entrance-preview-2.jpg"
+      "image": "guide-signs/unnumbered-expressway-entrance-preview-2.jpg"
     },
     {
       "id": 433,
-      "old": "accident.jpg",
-      "new": "auxiliary-signs/accident.jpg"
+      "image": "auxiliary-signs/accident.jpg"
     },
     {
       "id": 434,
-      "old": "place-name-sign.jpg",
-      "new": "guide-signs/place-name-sign.jpg"
+      "image": "guide-signs/place-name-sign.jpg"
     },
     {
       "id": 435,
-      "old": "multiple-places-sign.jpg",
-      "new": "guide-signs/multiple-places-sign.jpg"
+      "image": "guide-signs/multiple-places-sign.jpg"
     },
     {
       "id": 436,
-      "old": "hundred-meter-post.jpg",
-      "new": "guide-signs/hundred-meter-post.jpg"
+      "image": "guide-signs/hundred-meter-post.jpg"
     },
     {
       "id": 437,
-      "old": "entrance-preview.jpg",
-      "new": "guide-signs/entrance-preview.jpg"
+      "image": "guide-signs/entrance-preview.jpg"
     },
     {
       "id": 438,
-      "old": "tunnel-exit-distance.jpg",
-      "new": "guide-signs/tunnel-exit-distance.jpg"
+      "image": "guide-signs/tunnel-exit-distance.jpg"
     },
     {
       "id": 439,
-      "old": "alignment-guide-basic-unit.jpg",
-      "new": "guide-signs/alignment-guide-basic-unit.jpg"
+      "image": "guide-signs/alignment-guide-basic-unit.jpg"
     },
     {
       "id": 440,
-      "old": "pedestrian-bridge.jpg",
-      "new": "guide-signs/pedestrian-bridge.jpg"
+      "image": "guide-signs/pedestrian-bridge.jpg"
     },
     {
       "id": 441,
-      "old": "disabled-facility.jpg",
-      "new": "guide-signs/disabled-facility.jpg"
+      "image": "guide-signs/disabled-facility.jpg"
     },
     {
       "id": 442,
-      "old": "viewing-platform.jpg",
-      "new": "guide-signs/viewing-platform.jpg"
+      "image": "guide-signs/viewing-platform.jpg"
     },
     {
       "id": 443,
-      "old": "viewing-platform-2.jpg",
-      "new": "guide-signs/viewing-platform-2.jpg"
+      "image": "guide-signs/viewing-platform-2.jpg"
     },
     {
       "id": 444,
-      "old": "emergency-shelter.jpg",
-      "new": "guide-signs/emergency-shelter.jpg"
+      "image": "guide-signs/emergency-shelter.jpg"
     },
     {
       "id": 445,
-      "old": "detour-sign.jpg",
-      "new": "guide-signs/detour-sign.jpg"
+      "image": "guide-signs/detour-sign.jpg"
     },
     {
       "id": 446,
-      "old": "large-vehicles-keep-right.jpg",
-      "new": "auxiliary-signs/large-vehicles-keep-right.jpg"
+      "image": "auxiliary-signs/large-vehicles-keep-right.jpg"
     },
     {
       "id": 448,
-      "old": "rest-area-2.jpg",
-      "new": "guide-signs/rest-area-2.jpg"
+      "image": "guide-signs/rest-area-2.jpg"
     },
     {
       "id": 449,
-      "old": "detour-sign-3.jpg",
-      "new": "guide-signs/detour-sign-3.jpg"
+      "image": "guide-signs/detour-sign-3.jpg"
     },
     {
       "id": 450,
-      "old": "yellow-dashed-solid-uncrossable-line.jpg",
-      "new": "prohibitory-markings/yellow-dashed-solid-uncrossable-line.jpg"
+      "image": "prohibitory-markings/yellow-dashed-solid-uncrossable-line.jpg"
     },
     {
       "id": 451,
-      "old": "lanes-decrease.jpg",
-      "new": "guide-signs/lanes-decrease.jpg"
+      "image": "guide-signs/lanes-decrease.jpg"
     },
     {
       "id": 452,
-      "old": "lanes-decrease-2.jpg",
-      "new": "guide-signs/lanes-decrease-2.jpg"
+      "image": "guide-signs/lanes-decrease-2.jpg"
     },
     {
       "id": 453,
-      "old": "urban-multi-exit-distance-3.jpg",
-      "new": "guide-signs/urban-multi-exit-distance-3.jpg"
+      "image": "guide-signs/urban-multi-exit-distance-3.jpg"
     },
     {
       "id": 455,
-      "old": "stop-line.jpg",
-      "new": "prohibitory-markings/stop-line.jpg"
+      "image": "prohibitory-markings/stop-line.jpg"
     },
     {
       "id": 456,
-      "old": "lanes-increase.jpg",
-      "new": "guide-signs/lanes-increase.jpg"
+      "image": "guide-signs/lanes-increase.jpg"
     },
     {
       "id": 457,
-      "old": "alignment-guide-basic-unit-2.jpg",
-      "new": "guide-signs/alignment-guide-basic-unit-2.jpg"
+      "image": "guide-signs/alignment-guide-basic-unit-2.jpg"
     },
     {
       "id": 458,
-      "old": "non-motor-vehicle-restricted-area-marking.jpg",
-      "new": "prohibitory-markings/non-motor-vehicle-restricted-area-marking.jpg"
+      "image": "prohibitory-markings/non-motor-vehicle-restricted-area-marking.jpg"
     },
     {
       "id": 460,
-      "old": "number-sign-2.jpg",
-      "new": "guide-signs/number-sign-2.jpg"
+      "image": "guide-signs/number-sign-2.jpg"
     },
     {
       "id": 461,
-      "old": "number-sign.jpg",
-      "new": "guide-signs/number-sign.jpg"
+      "image": "guide-signs/number-sign.jpg"
     },
     {
       "id": 462,
-      "old": "tunnel-exit-distance-2.jpg",
-      "new": "guide-signs/tunnel-exit-distance-2.jpg"
+      "image": "guide-signs/tunnel-exit-distance-2.jpg"
     },
     {
       "id": 463,
-      "old": "place-direction-with-number.jpg",
-      "new": "guide-signs/place-direction-with-number.jpg"
+      "image": "guide-signs/place-direction-with-number.jpg"
     },
     {
       "id": 464,
-      "old": "grid-line.jpg",
-      "new": "prohibitory-markings/grid-line.jpg"
+      "image": "prohibitory-markings/grid-line.jpg"
     },
     {
       "id": 465,
-      "old": "entrance-preview-5.jpg",
-      "new": "guide-signs/entrance-preview-5.jpg"
+      "image": "guide-signs/entrance-preview-5.jpg"
     },
     {
       "id": 466,
-      "old": "basic-unit-combination.jpg",
-      "new": "guide-signs/basic-unit-combination.jpg"
+      "image": "guide-signs/basic-unit-combination.jpg"
     },
     {
       "id": 467,
-      "old": "road-name-sign.jpg",
-      "new": "guide-signs/road-name-sign.jpg"
+      "image": "guide-signs/road-name-sign.jpg"
     },
     {
       "id": 468,
-      "old": "dead-end.jpg",
-      "new": "guide-signs/dead-end.jpg"
+      "image": "guide-signs/dead-end.jpg"
     },
     {
       "id": 469,
-      "old": "traffic-right.jpg",
-      "new": "guide-signs/traffic-right.jpg"
+      "image": "guide-signs/traffic-right.jpg"
     },
     {
       "id": 470,
-      "old": "traffic-left.jpg",
-      "new": "guide-signs/traffic-left.jpg"
+      "image": "guide-signs/traffic-left.jpg"
     },
     {
       "id": 471,
-      "old": "basic-unit-combination-2.jpg",
-      "new": "guide-signs/basic-unit-combination-2.jpg"
+      "image": "guide-signs/basic-unit-combination-2.jpg"
     },
     {
       "id": 472,
-      "old": "no-u-turn-marking.jpg",
-      "new": "prohibitory-markings/no-u-turn-marking.jpg"
+      "image": "prohibitory-markings/no-u-turn-marking.jpg"
     },
     {
       "id": 473,
-      "old": "traffic-both-sides.jpg",
-      "new": "guide-signs/traffic-both-sides.jpg"
+      "image": "guide-signs/traffic-both-sides.jpg"
     },
     {
       "id": 474,
-      "old": "milestone.jpg",
-      "new": "guide-signs/milestone.jpg"
+      "image": "guide-signs/milestone.jpg"
     },
     {
       "id": 475,
-      "old": "four-to-two-lane-taper-example.jpg",
-      "new": "warning-markings/four-to-two-lane-taper-example.jpg"
+      "image": "warning-markings/four-to-two-lane-taper-example.jpg"
     },
     {
       "id": 476,
-      "old": "entrance-preview-2.jpg",
-      "new": "guide-signs/entrance-preview-2.jpg"
+      "image": "guide-signs/entrance-preview-2.jpg"
     },
     {
       "id": 477,
-      "old": "three-lane-fill-line-taper-example.jpg",
-      "new": "warning-markings/three-lane-fill-line-taper-example.jpg"
+      "image": "warning-markings/three-lane-fill-line-taper-example.jpg"
     },
     {
       "id": 479,
-      "old": "two-way-four-lane-approach-center-obstacle-example.jpg",
-      "new": "warning-markings/two-way-four-lane-approach-center-obstacle-example.jpg"
+      "image": "warning-markings/two-way-four-lane-approach-center-obstacle-example.jpg"
     },
     {
       "id": 480,
-      "old": "two-way-two-lane-approach-center-obstacle-example.jpg",
-      "new": "warning-markings/two-way-two-lane-approach-center-obstacle-example.jpg"
+      "image": "warning-markings/two-way-two-lane-approach-center-obstacle-example.jpg"
     },
     {
       "id": 481,
-      "old": "approach-obstacle-marking-example.jpg",
-      "new": "warning-markings/approach-obstacle-marking-example.jpg"
+      "image": "warning-markings/approach-obstacle-marking-example.jpg"
     },
     {
       "id": 485,
-      "old": "toll-plaza-speed-reduction-marking.jpg",
-      "new": "warning-markings/toll-plaza-speed-reduction-marking.jpg"
+      "image": "warning-markings/toll-plaza-speed-reduction-marking.jpg"
     },
     {
       "id": 486,
-      "old": "transverse-speed-reduction-marking.jpg",
-      "new": "warning-markings/transverse-speed-reduction-marking.jpg"
+      "image": "warning-markings/transverse-speed-reduction-marking.jpg"
     },
     {
       "id": 487,
-      "old": "urban-multi-exit-distance.jpg",
-      "new": "guide-signs/urban-multi-exit-distance.jpg"
+      "image": "guide-signs/urban-multi-exit-distance.jpg"
     },
     {
       "id": 488,
-      "old": "longitudinal-speed-reduction-taper.jpg",
-      "new": "warning-markings/longitudinal-speed-reduction-taper.jpg"
+      "image": "warning-markings/longitudinal-speed-reduction-taper.jpg"
     },
     {
       "id": 489,
-      "old": "facade-marking.jpg",
-      "new": "warning-markings/facade-marking.jpg"
+      "image": "warning-markings/facade-marking.jpg"
     },
     {
       "id": 490,
-      "old": "crossable-opposite-direction-lane-line.jpg",
-      "new": "mandatory-markings/crossable-opposite-direction-lane-line.jpg"
+      "image": "mandatory-markings/crossable-opposite-direction-lane-line.jpg"
     },
     {
       "id": 491,
-      "old": "crossable-same-direction-lane-line.jpg",
-      "new": "mandatory-markings/crossable-same-direction-lane-line.jpg"
+      "image": "mandatory-markings/crossable-same-direction-lane-line.jpg"
     },
     {
       "id": 492,
-      "old": "crossable-same-direction-lane-line-2.jpg",
-      "new": "mandatory-markings/crossable-same-direction-lane-line-2.jpg"
+      "image": "mandatory-markings/crossable-same-direction-lane-line-2.jpg"
     },
     {
       "id": 493,
-      "old": "place-direction-without-number-2.jpg",
-      "new": "guide-signs/place-direction-without-number-2.jpg"
+      "image": "guide-signs/place-direction-without-number-2.jpg"
     },
     {
       "id": 494,
-      "old": "unnumbered-expressway-entrance-preview-3.jpg",
-      "new": "guide-signs/unnumbered-expressway-entrance-preview-3.jpg"
+      "image": "guide-signs/unnumbered-expressway-entrance-preview-3.jpg"
     },
     {
       "id": 495,
-      "old": "unnumbered-expressway-entrance-preview-4.jpg",
-      "new": "guide-signs/unnumbered-expressway-entrance-preview-4.jpg"
+      "image": "guide-signs/unnumbered-expressway-entrance-preview-4.jpg"
     },
     {
       "id": 496,
-      "old": "two-expressways-shared-entrance-preview.jpg",
-      "new": "guide-signs/two-expressways-shared-entrance-preview.jpg"
+      "image": "guide-signs/two-expressways-shared-entrance-preview.jpg"
     },
     {
       "id": 497,
-      "old": "yellow-solid-road-edge-line.jpg",
-      "new": "mandatory-markings/yellow-solid-road-edge-line.jpg"
+      "image": "mandatory-markings/yellow-solid-road-edge-line.jpg"
     },
     {
       "id": 498,
-      "old": "left-exit-preview-2.jpg",
-      "new": "guide-signs/left-exit-preview-2.jpg"
+      "image": "guide-signs/left-exit-preview-2.jpg"
     },
     {
       "id": 499,
-      "old": "right-exit-preview-2.jpg",
-      "new": "guide-signs/right-exit-preview-2.jpg"
+      "image": "guide-signs/right-exit-preview-2.jpg"
     },
     {
       "id": 500,
-      "old": "exit-number-sign.jpg",
-      "new": "guide-signs/exit-number-sign.jpg"
+      "image": "guide-signs/exit-number-sign.jpg"
     },
     {
       "id": 501,
-      "old": "exit-number-sign-2.jpg",
-      "new": "guide-signs/exit-number-sign-2.jpg"
+      "image": "guide-signs/exit-number-sign-2.jpg"
     },
     {
       "id": 502,
-      "old": "right-exit-preview.jpg",
-      "new": "guide-signs/right-exit-preview.jpg"
+      "image": "guide-signs/right-exit-preview.jpg"
     },
     {
       "id": 503,
-      "old": "oblique-centerline-crossing-marking.jpg",
-      "new": "mandatory-markings/oblique-centerline-crossing-marking.jpg"
+      "image": "mandatory-markings/oblique-centerline-crossing-marking.jpg"
     },
     {
       "id": 504,
-      "old": "right-exit-preview-3.jpg",
-      "new": "guide-signs/right-exit-preview-3.jpg"
+      "image": "guide-signs/right-exit-preview-3.jpg"
     },
     {
       "id": 505,
-      "old": "right-exit-preview-6.jpg",
-      "new": "guide-signs/right-exit-preview-6.jpg"
+      "image": "guide-signs/right-exit-preview-6.jpg"
     },
     {
       "id": 506,
-      "old": "white-polyline-distance-confirmation-line.jpg",
-      "new": "mandatory-markings/white-polyline-distance-confirmation-line.jpg"
+      "image": "mandatory-markings/white-polyline-distance-confirmation-line.jpg"
     },
     {
       "id": 507,
-      "old": "white-semicircle-distance-confirmation-line.jpg",
-      "new": "mandatory-markings/white-semicircle-distance-confirmation-line.jpg"
+      "image": "mandatory-markings/white-semicircle-distance-confirmation-line.jpg"
     },
     {
       "id": 508,
-      "old": "exit-marking-example.jpg",
-      "new": "mandatory-markings/exit-marking-example.jpg"
+      "image": "mandatory-markings/exit-marking-example.jpg"
     },
     {
       "id": 509,
-      "old": "right-exit-preview-8.jpg",
-      "new": "guide-signs/right-exit-preview-8.jpg"
+      "image": "guide-signs/right-exit-preview-8.jpg"
     },
     {
       "id": 510,
-      "old": "left-exit-preview.jpg",
-      "new": "guide-signs/left-exit-preview.jpg"
+      "image": "guide-signs/left-exit-preview.jpg"
     },
     {
       "id": 512,
-      "old": "left-exit-preview-4.jpg",
-      "new": "guide-signs/left-exit-preview-4.jpg"
+      "image": "guide-signs/left-exit-preview-4.jpg"
     },
     {
       "id": 513,
-      "old": "left-exit-preview-5.jpg",
-      "new": "guide-signs/left-exit-preview-5.jpg"
+      "image": "guide-signs/left-exit-preview-5.jpg"
     },
     {
       "id": 514,
-      "old": "exit-sign-and-direction.jpg",
-      "new": "guide-signs/exit-sign-and-direction.jpg"
+      "image": "guide-signs/exit-sign-and-direction.jpg"
     },
     {
       "id": 515,
-      "old": "exit-sign-and-direction-2.jpg",
-      "new": "guide-signs/exit-sign-and-direction-2.jpg"
+      "image": "guide-signs/exit-sign-and-direction-2.jpg"
     },
     {
       "id": 516,
-      "old": "exit-sign-and-direction-3.jpg",
-      "new": "guide-signs/exit-sign-and-direction-3.jpg"
+      "image": "guide-signs/exit-sign-and-direction-3.jpg"
     },
     {
       "id": 517,
-      "old": "disabled-parking-marking.jpg",
-      "new": "mandatory-markings/disabled-parking-marking.jpg"
+      "image": "mandatory-markings/disabled-parking-marking.jpg"
     },
     {
       "id": 518,
-      "old": "expressway-start.jpg",
-      "new": "guide-signs/expressway-start.jpg"
+      "image": "guide-signs/expressway-start.jpg"
     },
     {
       "id": 519,
-      "old": "parallel-time-limited-parking-marking.jpg",
-      "new": "mandatory-markings/parallel-time-limited-parking-marking.jpg"
+      "image": "mandatory-markings/parallel-time-limited-parking-marking.jpg"
     },
     {
       "id": 524,
-      "old": "unnumbered-expressway-end-preview.jpg",
-      "new": "guide-signs/unnumbered-expressway-end-preview.jpg"
+      "image": "guide-signs/unnumbered-expressway-end-preview.jpg"
     },
     {
       "id": 525,
-      "old": "unnumbered-expressway-end-preview-2.jpg",
-      "new": "guide-signs/unnumbered-expressway-end-preview-2.jpg"
+      "image": "guide-signs/unnumbered-expressway-end-preview-2.jpg"
     },
     {
       "id": 526,
-      "old": "unnumbered-expressway-end-preview-3.jpg",
-      "new": "guide-signs/unnumbered-expressway-end-preview-3.jpg"
+      "image": "guide-signs/unnumbered-expressway-end-preview-3.jpg"
     },
     {
       "id": 527,
-      "old": "destination-hint-sign.jpg",
-      "new": "guide-signs/destination-hint-sign.jpg"
+      "image": "guide-signs/destination-hint-sign.jpg"
     },
     {
       "id": 528,
-      "old": "national-provincial-expressway-end.jpg",
-      "new": "guide-signs/national-provincial-expressway-end.jpg"
+      "image": "guide-signs/national-provincial-expressway-end.jpg"
     },
     {
       "id": 529,
-      "old": "unnumbered-expressway-end.jpg",
-      "new": "guide-signs/unnumbered-expressway-end.jpg"
+      "image": "guide-signs/unnumbered-expressway-end.jpg"
     },
     {
       "id": 530,
-      "old": "mileage-sign-2.jpg",
-      "new": "guide-signs/mileage-sign-2.jpg"
+      "image": "guide-signs/mileage-sign-2.jpg"
     },
     {
       "id": 531,
-      "old": "turn-right-ahead.jpg",
-      "new": "mandatory-markings/turn-right-ahead.jpg"
+      "image": "mandatory-markings/turn-right-ahead.jpg"
     },
     {
       "id": 532,
-      "old": "straight-or-right-turn-ahead.jpg",
-      "new": "mandatory-markings/straight-or-right-turn-ahead.jpg"
+      "image": "mandatory-markings/straight-or-right-turn-ahead.jpg"
     },
     {
       "id": 533,
-      "old": "hundred-meter-marker.jpg",
-      "new": "guide-signs/hundred-meter-marker.jpg"
+      "image": "guide-signs/hundred-meter-marker.jpg"
     },
     {
       "id": 534,
-      "old": "special-weather-advisory-speed.jpg",
-      "new": "guide-signs/special-weather-advisory-speed.jpg"
+      "image": "guide-signs/special-weather-advisory-speed.jpg"
     },
     {
       "id": 535,
-      "old": "special-weather-advisory-speed-2.jpg",
-      "new": "guide-signs/special-weather-advisory-speed-2.jpg"
+      "image": "guide-signs/special-weather-advisory-speed-2.jpg"
     },
     {
       "id": 536,
-      "old": "left-or-right-turn-only-ahead.jpg",
-      "new": "mandatory-markings/left-or-right-turn-only-ahead.jpg"
+      "image": "mandatory-markings/left-or-right-turn-only-ahead.jpg"
     },
     {
       "id": 537,
-      "old": "distance-confirmation.jpg",
-      "new": "guide-signs/distance-confirmation.jpg"
+      "image": "guide-signs/distance-confirmation.jpg"
     },
     {
       "id": 538,
-      "old": "distance-confirmation-2.jpg",
-      "new": "guide-signs/distance-confirmation-2.jpg"
+      "image": "guide-signs/distance-confirmation-2.jpg"
     },
     {
       "id": 539,
-      "old": "distance-confirmation-3.jpg",
-      "new": "guide-signs/distance-confirmation-3.jpg"
+      "image": "guide-signs/distance-confirmation-3.jpg"
     },
     {
       "id": 540,
-      "old": "phone-location-sign.jpg",
-      "new": "guide-signs/phone-location-sign.jpg"
+      "image": "guide-signs/phone-location-sign.jpg"
     },
     {
       "id": 541,
-      "old": "phone-location-sign-2.jpg",
-      "new": "guide-signs/phone-location-sign-2.jpg"
+      "image": "guide-signs/phone-location-sign-2.jpg"
     },
     {
       "id": 542,
-      "old": "phone-location-sign-3.jpg",
-      "new": "guide-signs/phone-location-sign-3.jpg"
+      "image": "guide-signs/phone-location-sign-3.jpg"
     },
     {
       "id": 543,
-      "old": "rescue-phone.jpg",
-      "new": "guide-signs/rescue-phone.jpg"
+      "image": "guide-signs/rescue-phone.jpg"
     },
     {
       "id": 544,
-      "old": "toll-station-no-etc-preview-3.jpg",
-      "new": "guide-signs/toll-station-no-etc-preview-3.jpg"
+      "image": "guide-signs/toll-station-no-etc-preview-3.jpg"
     },
     {
       "id": 545,
-      "old": "toll-station-no-etc-preview-and-station.jpg",
-      "new": "guide-signs/toll-station-no-etc-preview-and-station.jpg"
+      "image": "guide-signs/toll-station-no-etc-preview-and-station.jpg"
     },
     {
       "id": 546,
-      "old": "rescue-phone-2.jpg",
-      "new": "guide-signs/rescue-phone-2.jpg"
+      "image": "guide-signs/rescue-phone-2.jpg"
     },
     {
       "id": 547,
-      "old": "toll-station-no-etc-preview.jpg",
-      "new": "guide-signs/toll-station-no-etc-preview.jpg"
+      "image": "guide-signs/toll-station-no-etc-preview.jpg"
     },
     {
       "id": 548,
-      "old": "toll-station-no-etc-preview-2.jpg",
-      "new": "guide-signs/toll-station-no-etc-preview-2.jpg"
+      "image": "guide-signs/toll-station-no-etc-preview-2.jpg"
     },
     {
       "id": 551,
-      "old": "toll-station-with-etc-preview-2.jpg",
-      "new": "guide-signs/toll-station-with-etc-preview-2.jpg"
+      "image": "guide-signs/toll-station-with-etc-preview-2.jpg"
     },
     {
       "id": 552,
-      "old": "distance-confirmation-4.jpg",
-      "new": "guide-signs/distance-confirmation-4.jpg"
+      "image": "guide-signs/distance-confirmation-4.jpg"
     },
     {
       "id": 553,
-      "old": "distance-confirmation-5.jpg",
-      "new": "guide-signs/distance-confirmation-5.jpg"
+      "image": "guide-signs/distance-confirmation-5.jpg"
     },
     {
       "id": 554,
-      "old": "service-area-preview-7.jpg",
-      "new": "guide-signs/service-area-preview-7.jpg"
+      "image": "guide-signs/service-area-preview-7.jpg"
     },
     {
       "id": 555,
-      "old": "emergency-phone.jpg",
-      "new": "guide-signs/emergency-phone.jpg"
+      "image": "guide-signs/emergency-phone.jpg"
     },
     {
       "id": 556,
-      "old": "scene-13.jpg",
-      "new": "traffic-accident-illustrations/scene-13.jpg"
+      "image": "traffic-accident-illustrations/scene-13.jpg"
     },
     {
       "id": 557,
-      "old": "destination-preview.jpg",
-      "new": "guide-signs/destination-preview.jpg"
+      "image": "guide-signs/destination-preview.jpg"
     },
     {
       "id": 558,
-      "old": "toll-station-with-etc-preview-and-station.jpg",
-      "new": "guide-signs/toll-station-with-etc-preview-and-station.jpg"
+      "image": "guide-signs/toll-station-with-etc-preview-and-station.jpg"
     },
     {
       "id": 559,
-      "old": "overload-inspection-station.jpg",
-      "new": "guide-signs/overload-inspection-station.jpg"
+      "image": "guide-signs/overload-inspection-station.jpg"
     },
     {
       "id": 560,
-      "old": "overload-inspection-station-2.jpg",
-      "new": "guide-signs/overload-inspection-station-2.jpg"
+      "image": "guide-signs/overload-inspection-station-2.jpg"
     },
     {
       "id": 561,
-      "old": "overload-inspection-station-3.jpg",
-      "new": "guide-signs/overload-inspection-station-3.jpg"
+      "image": "guide-signs/overload-inspection-station-3.jpg"
     },
     {
       "id": 562,
-      "old": "scene-19.jpg",
-      "new": "traffic-accident-illustrations/scene-19.jpg"
+      "image": "traffic-accident-illustrations/scene-19.jpg"
     },
     {
       "id": 563,
-      "old": "overload-inspection-station-4.jpg",
-      "new": "guide-signs/overload-inspection-station-4.jpg"
+      "image": "guide-signs/overload-inspection-station-4.jpg"
     },
     {
       "id": 564,
-      "old": "climbing-lane.jpg",
-      "new": "guide-signs/climbing-lane.jpg"
+      "image": "guide-signs/climbing-lane.jpg"
     },
     {
       "id": 565,
-      "old": "scene-22.jpg",
-      "new": "traffic-accident-illustrations/scene-22.jpg"
+      "image": "traffic-accident-illustrations/scene-22.jpg"
     },
     {
       "id": 566,
-      "old": "climbing-lane-3.jpg",
-      "new": "guide-signs/climbing-lane-3.jpg"
+      "image": "guide-signs/climbing-lane-3.jpg"
     },
     {
       "id": 567,
-      "old": "climbing-lane-4.jpg",
-      "new": "guide-signs/climbing-lane-4.jpg"
+      "image": "guide-signs/climbing-lane-4.jpg"
     },
     {
       "id": 568,
-      "old": "weigh-station.jpg",
-      "new": "guide-signs/weigh-station.jpg"
+      "image": "guide-signs/weigh-station.jpg"
     },
     {
       "id": 569,
-      "old": "gas-station.jpg",
-      "new": "guide-signs/gas-station.jpg"
+      "image": "guide-signs/gas-station.jpg"
     },
     {
       "id": 570,
-      "old": "emergency-parking-strip.jpg",
-      "new": "guide-signs/emergency-parking-strip.jpg"
+      "image": "guide-signs/emergency-parking-strip.jpg"
     },
     {
       "id": 571,
-      "old": "scene-28.jpg",
-      "new": "traffic-accident-illustrations/scene-28.jpg"
+      "image": "traffic-accident-illustrations/scene-28.jpg"
     },
     {
       "id": 572,
-      "old": "service-area-preview-2.jpg",
-      "new": "guide-signs/service-area-preview-2.jpg"
+      "image": "guide-signs/service-area-preview-2.jpg"
     },
     {
       "id": 573,
-      "old": "service-area-preview-3.jpg",
-      "new": "guide-signs/service-area-preview-3.jpg"
+      "image": "guide-signs/service-area-preview-3.jpg"
     },
     {
       "id": 575,
-      "old": "service-area-preview-5.jpg",
-      "new": "guide-signs/service-area-preview-5.jpg"
+      "image": "guide-signs/service-area-preview-5.jpg"
     },
     {
       "id": 576,
-      "old": "service-area-preview-6.jpg",
-      "new": "guide-signs/service-area-preview-6.jpg"
+      "image": "guide-signs/service-area-preview-6.jpg"
     },
     {
       "id": 577,
-      "old": "service-area-preview-8.jpg",
-      "new": "guide-signs/service-area-preview-8.jpg"
+      "image": "guide-signs/service-area-preview-8.jpg"
     },
     {
       "id": 578,
-      "old": "parking-zone-preview.jpg",
-      "new": "guide-signs/parking-zone-preview.jpg"
+      "image": "guide-signs/parking-zone-preview.jpg"
     },
     {
       "id": 579,
-      "old": "parking-zone-preview-2.jpg",
-      "new": "guide-signs/parking-zone-preview-2.jpg"
+      "image": "guide-signs/parking-zone-preview-2.jpg"
     },
     {
       "id": 580,
-      "old": "parking-zone-preview-3.jpg",
-      "new": "guide-signs/parking-zone-preview-3.jpg"
+      "image": "guide-signs/parking-zone-preview-3.jpg"
     },
     {
       "id": 581,
-      "old": "parking-preview.jpg",
-      "new": "guide-signs/parking-preview.jpg"
+      "image": "guide-signs/parking-preview.jpg"
     },
     {
       "id": 582,
-      "old": "parking-preview-2.jpg",
-      "new": "guide-signs/parking-preview-2.jpg"
+      "image": "guide-signs/parking-preview-2.jpg"
     },
     {
       "id": 584,
-      "old": "battery-indicator.jpg",
-      "new": "dashboard-indicators/battery-indicator.jpg"
+      "image": "dashboard-indicators/battery-indicator.jpg"
     },
     {
       "id": 585,
-      "old": "brake-disc-indicator.jpg",
-      "new": "dashboard-indicators/brake-disc-indicator.jpg"
+      "image": "dashboard-indicators/brake-disc-indicator.jpg"
     },
     {
       "id": 587,
-      "old": "coolant-temp-indicator.jpg",
-      "new": "dashboard-indicators/coolant-temp-indicator.jpg"
+      "image": "dashboard-indicators/coolant-temp-indicator.jpg"
     },
     {
       "id": 588,
-      "old": "parking.jpg",
-      "new": "guide-signs/parking.jpg"
+      "image": "guide-signs/parking.jpg"
     },
     {
       "id": 589,
-      "old": "parking-2.jpg",
-      "new": "guide-signs/parking-2.jpg"
+      "image": "guide-signs/parking-2.jpg"
     },
     {
       "id": 590,
-      "old": "etc-lane-indicator.jpg",
-      "new": "guide-signs/etc-lane-indicator.jpg"
+      "image": "guide-signs/etc-lane-indicator.jpg"
     },
     {
       "id": 591,
-      "old": "etc-lane-indicator-2.jpg",
-      "new": "guide-signs/etc-lane-indicator-2.jpg"
+      "image": "guide-signs/etc-lane-indicator-2.jpg"
     },
     {
       "id": 592,
-      "old": "direction-outside-guide-sign.jpg",
-      "new": "guide-signs/direction-outside-guide-sign.jpg"
+      "image": "guide-signs/direction-outside-guide-sign.jpg"
     },
     {
       "id": 593,
-      "old": "washer-fluid-indicator.jpg",
-      "new": "dashboard-indicators/washer-fluid-indicator.jpg"
+      "image": "dashboard-indicators/washer-fluid-indicator.jpg"
     },
     {
       "id": 594,
-      "old": "direction-in-guide-sign-3.jpg",
-      "new": "guide-signs/direction-in-guide-sign-3.jpg"
+      "image": "guide-signs/direction-in-guide-sign-3.jpg"
     },
     {
       "id": 595,
-      "old": "direction-in-guide-sign-2.jpg",
-      "new": "guide-signs/direction-in-guide-sign-2.jpg"
+      "image": "guide-signs/direction-in-guide-sign-2.jpg"
     },
     {
       "id": 596,
-      "old": "turn-signal-indicator.jpg",
-      "new": "dashboard-indicators/turn-signal-indicator.jpg"
+      "image": "dashboard-indicators/turn-signal-indicator.jpg"
     },
     {
       "id": 597,
-      "old": "exit-sign-and-direction-4.jpg",
-      "new": "guide-signs/exit-sign-and-direction-4.jpg"
+      "image": "guide-signs/exit-sign-and-direction-4.jpg"
     },
     {
       "id": 598,
-      "old": "rain-or-snow.jpg",
-      "new": "warning-signs/rain-or-snow.jpg"
+      "image": "warning-signs/rain-or-snow.jpg"
     },
     {
       "id": 610,
-      "old": "color-test-1.jpg",
-      "new": "color-vision-test/color-test-1.jpg"
+      "image": "color-vision-test/color-test-1.jpg"
     },
     {
       "id": 611,
-      "old": "color-test-2.jpg",
-      "new": "color-vision-test/color-test-2.jpg"
+      "image": "color-vision-test/color-test-2.jpg"
     },
     {
       "id": 612,
-      "old": "color-test-3.jpg",
-      "new": "color-vision-test/color-test-3.jpg"
+      "image": "color-vision-test/color-test-3.jpg"
     },
     {
       "id": 613,
-      "old": "color-test-4.jpg",
-      "new": "color-vision-test/color-test-4.jpg"
+      "image": "color-vision-test/color-test-4.jpg"
     },
     {
       "id": 614,
-      "old": "color-test-5.jpg",
-      "new": "color-vision-test/color-test-5.jpg"
+      "image": "color-vision-test/color-test-5.jpg"
     },
     {
       "id": 617,
-      "old": "color-test-8.jpg",
-      "new": "color-vision-test/color-test-8.jpg"
+      "image": "color-vision-test/color-test-8.jpg"
     },
     {
       "id": 618,
-      "old": "color-test-9.jpg",
-      "new": "color-vision-test/color-test-9.jpg"
+      "image": "color-vision-test/color-test-9.jpg"
     },
     {
       "id": 619,
-      "old": "color-test-10.jpg",
-      "new": "color-vision-test/color-test-10.jpg"
+      "image": "color-vision-test/color-test-10.jpg"
     },
     {
       "id": 620,
-      "old": "color-test-11.jpg",
-      "new": "color-vision-test/color-test-11.jpg"
+      "image": "color-vision-test/color-test-11.jpg"
     },
     {
       "id": 622,
-      "old": "color-test-13.jpg",
-      "new": "color-vision-test/color-test-13.jpg"
+      "image": "color-vision-test/color-test-13.jpg"
     },
     {
       "id": 623,
-      "old": "color-test-14.jpg",
-      "new": "color-vision-test/color-test-14.jpg"
+      "image": "color-vision-test/color-test-14.jpg"
     },
     {
       "id": 624,
-      "old": "color-test-15.jpg",
-      "new": "color-vision-test/color-test-15.jpg"
+      "image": "color-vision-test/color-test-15.jpg"
     },
     {
       "id": 625,
-      "old": "color-test-16.jpg",
-      "new": "color-vision-test/color-test-16.jpg"
+      "image": "color-vision-test/color-test-16.jpg"
     },
     {
       "id": 626,
-      "old": "color-test-17.jpg",
-      "new": "color-vision-test/color-test-17.jpg"
+      "image": "color-vision-test/color-test-17.jpg"
     },
     {
       "id": 627,
-      "old": "color-test-18.jpg",
-      "new": "color-vision-test/color-test-18.jpg"
+      "image": "color-vision-test/color-test-18.jpg"
     },
     {
       "id": 628,
-      "old": "color-test-19.jpg",
-      "new": "color-vision-test/color-test-19.jpg"
+      "image": "color-vision-test/color-test-19.jpg"
     },
     {
       "id": 629,
-      "old": "color-test-20.jpg",
-      "new": "color-vision-test/color-test-20.jpg"
+      "image": "color-vision-test/color-test-20.jpg"
     },
     {
       "id": 630,
-      "old": "two-lane-local-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/two-lane-local-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/two-lane-local-construction-example.jpg"
     },
     {
       "id": 631,
-      "old": "poor-sight-distance-two-lane-local-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/poor-sight-distance-two-lane-local-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/poor-sight-distance-two-lane-local-construction-example.jpg"
     },
     {
       "id": 632,
-      "old": "detour-construction-facility-example.jpg",
-      "new": "road-construction-safety-facility-examples/detour-construction-facility-example.jpg"
+      "image": "road-construction-safety-facility-examples/detour-construction-facility-example.jpg"
     },
     {
       "id": 633,
-      "old": "four-lane-one-side-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/four-lane-one-side-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/four-lane-one-side-construction-example.jpg"
     },
     {
       "id": 634,
-      "old": "same-direction-one-lane-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/same-direction-one-lane-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/same-direction-one-lane-construction-example.jpg"
     },
     {
       "id": 635,
-      "old": "same-direction-two-or-more-lane-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/same-direction-two-or-more-lane-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/same-direction-two-or-more-lane-construction-example.jpg"
     },
     {
       "id": 636,
-      "old": "expressway-one-side-construction-median-crossover-example.jpg",
-      "new": "road-construction-safety-facility-examples/expressway-one-side-construction-median-crossover-example.jpg"
+      "image": "road-construction-safety-facility-examples/expressway-one-side-construction-median-crossover-example.jpg"
     },
     {
       "id": 637,
-      "old": "urban-intersection-one-side-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/urban-intersection-one-side-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/urban-intersection-one-side-construction-example.jpg"
     },
     {
       "id": 638,
-      "old": "urban-intersection-centerline-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/urban-intersection-centerline-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/urban-intersection-centerline-construction-example.jpg"
     },
     {
       "id": 639,
-      "old": "urban-intersection-centerline-construction-example-2.jpg",
-      "new": "road-construction-safety-facility-examples/urban-intersection-centerline-construction-example-2.jpg"
+      "image": "road-construction-safety-facility-examples/urban-intersection-centerline-construction-example-2.jpg"
     },
     {
       "id": 640,
-      "old": "urban-road-both-sides-one-way-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/urban-road-both-sides-one-way-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/urban-road-both-sides-one-way-construction-example.jpg"
     },
     {
       "id": 641,
-      "old": "expressway-exit-triangle-zone-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/expressway-exit-triangle-zone-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/expressway-exit-triangle-zone-construction-example.jpg"
     },
     {
       "id": 642,
-      "old": "expressway-exit-deceleration-lane-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/expressway-exit-deceleration-lane-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/expressway-exit-deceleration-lane-construction-example.jpg"
     },
     {
       "id": 643,
-      "old": "expressway-entrance-acceleration-lane-edge-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/expressway-entrance-acceleration-lane-edge-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/expressway-entrance-acceleration-lane-edge-construction-example.jpg"
     },
     {
       "id": 644,
-      "old": "expressway-entrance-acceleration-lane-construction-example.jpg",
-      "new": "road-construction-safety-facility-examples/expressway-entrance-acceleration-lane-construction-example.jpg"
+      "image": "road-construction-safety-facility-examples/expressway-entrance-acceleration-lane-construction-example.jpg"
     },
     {
       "id": 645,
-      "old": "raised-marker-with-marking-example.jpg",
-      "new": "other-markings/raised-marker-with-marking-example.jpg"
+      "image": "other-markings/raised-marker-with-marking-example.jpg"
     },
     {
       "id": 646,
-      "old": "exit-ramp-raised-marker-example.jpg",
-      "new": "other-markings/exit-ramp-raised-marker-example.jpg"
+      "image": "other-markings/exit-ramp-raised-marker-example.jpg"
     },
     {
       "id": 647,
-      "old": "raised-marker-dashed-line-example.jpg",
-      "new": "other-markings/raised-marker-dashed-line-example.jpg"
+      "image": "other-markings/raised-marker-dashed-line-example.jpg"
     },
     {
       "id": 648,
-      "old": "raised-marker-single-solid-line-example.jpg",
-      "new": "other-markings/raised-marker-single-solid-line-example.jpg"
+      "image": "other-markings/raised-marker-single-solid-line-example.jpg"
     },
     {
       "id": 649,
-      "old": "raised-marker-double-solid-line-example.jpg",
-      "new": "other-markings/raised-marker-double-solid-line-example.jpg"
+      "image": "other-markings/raised-marker-double-solid-line-example.jpg"
     },
     {
       "id": 650,
-      "old": "curve-outline-marker-spacing-example.jpg",
-      "new": "other-markings/curve-outline-marker-spacing-example.jpg"
+      "image": "other-markings/curve-outline-marker-spacing-example.jpg"
     },
     {
       "id": 685,
-      "old": "no-small-buses.jpg",
-      "new": "prohibitory-signs/no-small-buses.jpg"
+      "image": "prohibitory-signs/no-small-buses.jpg"
     },
     {
       "id": 686,
-      "old": "no-tractors.jpg",
-      "new": "prohibitory-signs/no-tractors.jpg"
+      "image": "prohibitory-signs/no-tractors.jpg"
     },
     {
       "id": 690,
-      "old": "no-large-buses.jpg",
-      "new": "prohibitory-signs/no-large-buses.jpg"
+      "image": "prohibitory-signs/no-large-buses.jpg"
     },
     {
       "id": 700,
-      "old": "no-right-turn.jpg",
-      "new": "prohibitory-signs/no-right-turn.jpg"
+      "image": "prohibitory-signs/no-right-turn.jpg"
     },
     {
       "id": 737,
-      "old": "winding-mountain-road.jpg",
-      "new": "warning-signs/winding-mountain-road.jpg"
+      "image": "warning-signs/winding-mountain-road.jpg"
     },
     {
       "id": 740,
-      "old": "falling-rocks-2.jpg",
-      "new": "warning-signs/falling-rocks-2.jpg"
+      "image": "warning-signs/falling-rocks-2.jpg"
     },
     {
       "id": 741,
-      "old": "crosswinds.jpg",
-      "new": "warning-signs/crosswinds.jpg"
+      "image": "warning-signs/crosswinds.jpg"
     },
     {
       "id": 742,
-      "old": "no-trucks-left-turn.jpg",
-      "new": "prohibitory-signs/no-trucks-left-turn.jpg"
+      "image": "prohibitory-signs/no-trucks-left-turn.jpg"
     },
     {
       "id": 746,
-      "old": "no-straight.jpg",
-      "new": "prohibitory-signs/no-straight.jpg"
+      "image": "prohibitory-signs/no-straight.jpg"
     },
     {
       "id": 768,
-      "old": "hump-bridge.jpg",
-      "new": "warning-signs/hump-bridge.jpg"
+      "image": "warning-signs/hump-bridge.jpg"
     },
     {
       "id": 779,
-      "old": "hazard-ahead.jpg",
-      "new": "warning-signs/hazard-ahead.jpg"
+      "image": "warning-signs/hazard-ahead.jpg"
     },
     {
       "id": 781,
-      "old": "no-small-buses.jpg",
-      "new": "prohibitory-signs/no-small-buses.jpg"
+      "image": "prohibitory-signs/no-small-buses.jpg"
     },
     {
       "id": 800,
-      "old": "no-electric-tricycles.jpg",
-      "new": "prohibitory-signs/no-electric-tricycles.jpg"
+      "image": "prohibitory-signs/no-electric-tricycles.jpg"
     },
     {
       "id": 810,
-      "old": "no-motorcycles.jpg",
-      "new": "prohibitory-signs/no-motorcycles.jpg"
+      "image": "prohibitory-signs/no-motorcycles.jpg"
     },
     {
       "id": 928,
-      "old": "weight-limit.jpg",
-      "new": "prohibitory-signs/weight-limit.jpg"
+      "image": "prohibitory-signs/weight-limit.jpg"
     },
     {
       "id": 954,
-      "old": "reverse-curve.jpg",
-      "new": "warning-signs/reverse-curve.jpg"
+      "image": "warning-signs/reverse-curve.jpg"
     },
     {
       "id": 970,
-      "old": "stop-for-inspection.jpg",
-      "new": "prohibitory-signs/stop-for-inspection.jpg"
+      "image": "prohibitory-signs/stop-for-inspection.jpg"
     },
     {
       "id": 973,
-      "old": "no-hazardous-materials-vehicles.jpg",
-      "new": "prohibitory-signs/no-hazardous-materials-vehicles.jpg"
+      "image": "prohibitory-signs/no-hazardous-materials-vehicles.jpg"
     },
     {
       "id": 985,
-      "old": "end-of-no-overtaking.jpg",
-      "new": "prohibitory-signs/end-of-no-overtaking.jpg"
+      "image": "prohibitory-signs/end-of-no-overtaking.jpg"
     },
     {
       "id": 988,
-      "old": "narrowing-right.jpg",
-      "new": "warning-signs/narrowing-right.jpg"
+      "image": "warning-signs/narrowing-right.jpg"
     },
     {
       "id": 989,
-      "old": "customs.jpg",
-      "new": "auxiliary-signs/customs.jpg"
+      "image": "prohibitory-signs/customs.jpg"
     },
     {
       "id": 991,
-      "old": "continuous-descent.jpg",
-      "new": "warning-signs/continuous-descent.jpg"
+      "image": "warning-signs/continuous-descent.jpg"
     },
     {
       "id": 1034,
-      "old": "children-ahead.jpg",
-      "new": "warning-signs/children-ahead.jpg"
+      "image": "warning-signs/children-ahead.jpg"
     },
     {
       "id": 1111,
-      "old": "fork-symbol.jpg",
-      "new": "warning-signs/fork-symbol.jpg"
+      "image": "warning-signs/fork-symbol.jpg"
     },
     {
       "id": 1113,
-      "old": "drive-on-left.jpg",
-      "new": "mandatory-signs/drive-on-left.jpg"
+      "image": "mandatory-signs/drive-on-left.jpg"
     },
     {
       "id": 1219,
-      "old": "direction-in-guide-sign.jpg",
-      "new": "guide-signs/direction-in-guide-sign.jpg"
+      "image": "guide-signs/direction-in-guide-sign.jpg"
     },
     {
       "id": 1257,
-      "old": "parking-zone-2.jpg",
-      "new": "guide-signs/parking-zone-2.jpg"
+      "image": "guide-signs/parking-zone-2.jpg"
     },
     {
       "id": 1258,
-      "old": "pedestrian-underpass.jpg",
-      "new": "guide-signs/pedestrian-underpass.jpg"
+      "image": "guide-signs/pedestrian-underpass.jpg"
     },
     {
       "id": 1259,
-      "old": "traffic-monitoring-device.jpg",
-      "new": "guide-signs/traffic-monitoring-device.jpg"
+      "image": "guide-signs/traffic-monitoring-device.jpg"
     },
     {
       "id": 1260,
-      "old": "crossroad-intersection-4.jpg",
-      "new": "guide-signs/crossroad-intersection-4.jpg"
+      "image": "guide-signs/crossroad-intersection-4.jpg"
     },
     {
       "id": 1261,
-      "old": "t-junction-intersection-3.jpg",
-      "new": "guide-signs/t-junction-intersection-3.jpg"
+      "image": "guide-signs/t-junction-intersection-3.jpg"
     },
     {
       "id": 1320,
-      "old": "scene-8.jpg",
-      "new": "traffic-accident-illustrations/scene-8.jpg"
+      "image": "traffic-accident-illustrations/scene-8.jpg"
     },
     {
       "id": 1348,
-      "old": "left-exit-preview-7.jpg",
-      "new": "guide-signs/left-exit-preview-7.jpg"
+      "image": "guide-signs/left-exit-preview-7.jpg"
     },
     {
       "id": 1404,
-      "old": "merging-traffic.jpg",
-      "new": "warning-signs/merging-traffic.jpg"
+      "image": "warning-signs/merging-traffic.jpg"
     },
     {
       "id": 1421,
-      "old": "no-trailers.jpg",
-      "new": "prohibitory-signs/no-trailers.jpg"
+      "image": "prohibitory-signs/no-trailers.jpg"
     },
     {
       "id": 1539,
-      "old": "slippery-road.jpg",
-      "new": "warning-signs/slippery-road.jpg"
+      "image": "warning-signs/slippery-road.jpg"
     },
     {
       "id": 1540,
-      "old": "two-way-traffic.jpg",
-      "new": "warning-signs/two-way-traffic.jpg"
+      "image": "warning-signs/two-way-traffic.jpg"
     },
     {
       "id": 1542,
-      "old": "ferry.jpg",
-      "new": "warning-signs/ferry.jpg"
+      "image": "warning-signs/ferry.jpg"
     },
     {
       "id": 1772,
-      "old": "left-turn-wait-signal.jpg",
-      "new": "traffic-police-signals/left-turn-wait-signal.jpg"
+      "image": "traffic-police-signals/left-turn-wait-signal.jpg"
     },
     {
       "id": 1773,
-      "old": "straight-signal.jpg",
-      "new": "traffic-police-signals/straight-signal.jpg"
+      "image": "traffic-police-signals/straight-signal.jpg"
     },
     {
       "id": 1777,
-      "old": "road-closed.jpg",
-      "new": "road-construction-safety-signs/road-closed.jpg"
+      "image": "road-construction-safety-signs/road-closed.jpg"
     },
     {
       "id": 1779,
-      "old": "road-closed-300m-ahead.jpg",
-      "new": "road-construction-safety-signs/road-closed-300m-ahead.jpg"
+      "image": "road-construction-safety-signs/road-closed-300m-ahead.jpg"
     },
     {
       "id": 1784,
-      "old": "right-lane-closed-300m-ahead.jpg",
-      "new": "road-construction-safety-signs/right-lane-closed-300m-ahead.jpg"
+      "image": "road-construction-safety-signs/right-lane-closed-300m-ahead.jpg"
     },
     {
       "id": 1792,
-      "old": "mobile-construction-sign.jpg",
-      "new": "road-construction-safety-signs/mobile-construction-sign.jpg"
+      "image": "road-construction-safety-signs/mobile-construction-sign.jpg"
     },
     {
       "id": 1796,
-      "old": "left-turn-signal.jpg",
-      "new": "traffic-police-signals/left-turn-signal.jpg"
+      "image": "traffic-police-signals/left-turn-signal.jpg"
     },
     {
       "id": 1803,
-      "old": "tourist-area-direction.jpg",
-      "new": "tourist-area-signs/tourist-area-direction.jpg"
+      "image": "tourist-area-signs/tourist-area-direction.jpg"
     },
     {
       "id": 1806,
-      "old": "hiking.jpg",
-      "new": "tourist-area-signs/hiking.jpg"
+      "image": "tourist-area-signs/hiking.jpg"
     },
     {
       "id": 1809,
-      "old": "cableway.jpg",
-      "new": "tourist-area-signs/cableway.jpg"
+      "image": "tourist-area-signs/cableway.jpg"
     },
     {
       "id": 1810,
-      "old": "campfire.jpg",
-      "new": "tourist-area-signs/campfire.jpg"
+      "image": "tourist-area-signs/campfire.jpg"
     },
     {
       "id": 1816,
-      "old": "playground.jpg",
-      "new": "tourist-area-signs/playground.jpg"
+      "image": "tourist-area-signs/playground.jpg"
     },
     {
       "id": 1821,
-      "old": "fishing.jpg",
-      "new": "tourist-area-signs/fishing.jpg"
+      "image": "tourist-area-signs/fishing.jpg"
     },
     {
       "id": 1824,
-      "old": "diving.jpg",
-      "new": "tourist-area-signs/diving.jpg"
+      "image": "tourist-area-signs/diving.jpg"
     },
     {
       "id": 1828,
-      "old": "swimming.jpg",
-      "new": "tourist-area-signs/swimming.jpg"
+      "image": "tourist-area-signs/swimming.jpg"
     },
     {
       "id": 1831,
-      "old": "boating.jpg",
-      "new": "tourist-area-signs/boating.jpg"
+      "image": "tourist-area-signs/boating.jpg"
     },
     {
       "id": 1835,
-      "old": "skiing.jpg",
-      "new": "tourist-area-signs/skiing.jpg"
+      "image": "tourist-area-signs/skiing.jpg"
     },
     {
       "id": 1836,
-      "old": "ice-skating.jpg",
-      "new": "tourist-area-signs/ice-skating.jpg"
+      "image": "tourist-area-signs/ice-skating.jpg"
     },
     {
       "id": 1837,
-      "old": "construction-barrier.jpg",
-      "new": "road-construction-safety-signs/construction-barrier.jpg"
+      "image": "road-construction-safety-signs/construction-barrier.jpg"
     },
     {
       "id": 1839,
-      "old": "conical-traffic-marker.jpg",
-      "new": "road-construction-safety-signs/conical-traffic-marker.jpg"
+      "image": "road-construction-safety-signs/conical-traffic-marker.jpg"
     },
     {
       "id": 1840,
-      "old": "conical-traffic-marker-2.jpg",
-      "new": "road-construction-safety-signs/conical-traffic-marker-2.jpg"
+      "image": "road-construction-safety-signs/conical-traffic-marker-2.jpg"
     },
     {
       "id": 1841,
-      "old": "crossing-marker.jpg",
-      "new": "road-construction-safety-signs/crossing-marker.jpg"
+      "image": "road-construction-safety-signs/crossing-marker.jpg"
     },
     {
       "id": 1842,
-      "old": "road-construction-1km-ahead.jpg",
-      "new": "road-construction-safety-signs/road-construction-1km-ahead.jpg"
+      "image": "road-construction-safety-signs/road-construction-1km-ahead.jpg"
     },
     {
       "id": 1843,
-      "old": "road-construction-300m-ahead.jpg",
-      "new": "road-construction-safety-signs/road-construction-300m-ahead.jpg"
+      "image": "road-construction-safety-signs/road-construction-300m-ahead.jpg"
     },
     {
       "id": 1844,
-      "old": "road-construction.jpg",
-      "new": "road-construction-safety-signs/road-construction.jpg"
+      "image": "road-construction-safety-signs/road-construction.jpg"
     },
     {
       "id": 1845,
-      "old": "road-closed-1km-ahead.jpg",
-      "new": "road-construction-safety-signs/road-closed-1km-ahead.jpg"
+      "image": "road-construction-safety-signs/road-closed-1km-ahead.jpg"
     },
     {
       "id": 1861,
-      "old": "except-buses.jpg",
-      "new": "auxiliary-signs/except-buses.jpg"
+      "image": "auxiliary-signs/except-buses.jpg"
     },
     {
       "id": 1863,
-      "old": "motor-vehicle.jpg",
-      "new": "auxiliary-signs/motor-vehicle.jpg"
+      "image": "auxiliary-signs/motor-vehicle.jpg"
     },
     {
       "id": 1867,
-      "old": "direction-sign-4.jpg",
-      "new": "auxiliary-signs/direction-sign-4.jpg"
+      "image": "auxiliary-signs/direction-sign-4.jpg"
     },
     {
       "id": 1868,
-      "old": "direction-sign-3.jpg",
-      "new": "auxiliary-signs/direction-sign-3.jpg"
+      "image": "auxiliary-signs/direction-sign-3.jpg"
     },
     {
       "id": 1869,
-      "old": "forward-200m.jpg",
-      "new": "auxiliary-signs/forward-200m.jpg"
+      "image": "auxiliary-signs/forward-200m.jpg"
     },
     {
       "id": 1875,
-      "old": "left-right-50m.jpg",
-      "new": "auxiliary-signs/left-right-50m.jpg"
+      "image": "auxiliary-signs/left-right-50m.jpg"
     },
     {
       "id": 1876,
-      "old": "within-area.jpg",
-      "new": "auxiliary-signs/within-area.jpg"
+      "image": "auxiliary-signs/within-area.jpg"
     },
     {
       "id": 1895,
-      "old": "accident.jpg",
-      "new": "auxiliary-signs/accident.jpg"
+      "image": "auxiliary-signs/accident.jpg"
     },
     {
       "id": 1922,
-      "old": "campground.jpg",
-      "new": "tourist-area-signs/campground.jpg"
+      "image": "tourist-area-signs/campground.jpg"
     },
     {
       "id": 1933,
-      "old": "information.jpg",
-      "new": "tourist-area-signs/information.jpg"
+      "image": "tourist-area-signs/information.jpg"
     }
-  ]
+  ],
+  "updates": []
 }
