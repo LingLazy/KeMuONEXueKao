@@ -144,6 +144,22 @@
   --container-md: 768px;
   --container-lg: 1024px;
   --container-xl: 1280px;
+
+  /* === 构成主义几何装饰系统 ===
+     受俄国构成主义 / 包豪斯 / 至上主义启发
+     克制使用:仅在 Hero 区与章节标题做几何点缀,避免满屏装饰
+     色彩取自建构主义海报:墨黑 / 砖红 / 群青 / 米白 */
+  --geo-ink: oklch(0.20 0.01 250);          /* 几何形状墨色 */
+  --geo-red: oklch(0.55 0.19 28);           /* 构成主义砖红 */
+  --geo-blue: oklch(0.45 0.15 250);         /* 群青 */
+  --geo-line: oklch(0.55 0.01 250 / 0.12);  /* 几何辅助线 */
+  --geo-grid: oklch(0.55 0.01 250 / 0.06);  /* 背景网格线 */
+
+  /* 构成主义网格背景 · 径向遮罩聚焦 */
+  --bg-constructivist:
+    linear-gradient(to right, var(--geo-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--geo-grid) 1px, transparent 1px);
+  --bg-constructivist-size: 48px 48px;
 }
 
 /* ========== 深色主题 · 真正的暗色（非灰色）
@@ -205,4 +221,11 @@
   --shadow-xl: 0 24px 48px -12px oklch(0 0 0 / 0.70),
                0 8px 16px -8px oklch(0.62 0.19 276.8 / 0.12);
   --ring-focus: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--primary);
+
+  /* 构成主义几何装饰 · 暗色提亮维持可见度 */
+  --geo-ink: oklch(0.65 0.02 250);
+  --geo-red: oklch(0.65 0.20 28);
+  --geo-blue: oklch(0.60 0.16 250);
+  --geo-line: oklch(1 0 0 / 0.10);
+  --geo-grid: oklch(1 0 0 / 0.05);
 }

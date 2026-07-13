@@ -4,6 +4,8 @@
  * - 右侧：选中分类的口诀列表
  * - 支持搜索关键字
  * - 虚拟滚动优化长列表性能
+ * - 键盘快捷键：J/K 上下导航，Enter 展开/收起，/ 聚焦搜索，Esc 收起
+ * - 学习模式：一键展开全部口诀用于通读复习
  * - 移动端：单栏布局，分类切换为顶部下拉
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -16,12 +18,23 @@ import EmptyState from '@/components/common/EmptyState';
 import { ListItemSkeleton } from '@/components/common/Skeleton';
 import type { Mnemonic } from '@/types';
 
+/** 判断目标是否为可输入元素（聚焦时屏蔽快捷键） */
+function isInputTarget(t: EventTarget | null): boolean {
+  if (!(t instanceof HTMLElement)) return false;
+  const tag = t.tagName;
+  return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || t.isContentEditable;
+}
+
 export default function MnemonicsView() {
   const isMobile = useIsMobile();
   const [mnemonics, setMnemonics] = useState<Mnemonic[] | null>(null);
   const [activeCat, setActiveCat] = useState<string>('all');
   const [search, setSearch] = useState('');
   const [selectedMnemonic, setSelectedMnemonic] = useState<Mnemonic | null>(null);
+  const [studyMode, setStudyMode] = useState(false);
+  const [focusIndex, setFocusIndex] = useState(0);
+
+  const searchRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     loadMnemonics().then(setMnemonics).catch(console.error);
@@ -99,6 +112,79 @@ export default function MnemonicsView() {
     }
   };
 
+  // 学习模式：切换全部展开，退出单选模式
+  const toggleStudyMode = () => {
+    setStudyMode((v) => {
+      const next = !v;
+      if (next) {
+        setSelectedMnemonic(null);
+      }
+      return next;
+    });
+  };
+
+  // 键盘快捷键：J/K 上下导航，Enter 展开/收起，/ 聚焦搜索，Esc 收起
+  useEffect(() => {
+    if (studyMode || filtered.length === 0) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (isInputTarget(e.target)) {
+        if (e.key === 'Escape' && document.activeElement === searchRef.current) {
+          searchRef.current?.blur();
+        }
+        return;
+      }
+      switch (e.key) {
+        case 'j':
+        case 'J':
+        case 'ArrowDown': {
+          e.preventDefault();
+          setFocusIndex((i) => {
+            const next = Math.min(i + 1, filtered.length - 1);
+            virtualizer.scrollToIndex(next, { align: 'center' });
+            return next;
+          });
+          break;
+        }
+        case 'k':
+        case 'K':
+        case 'ArrowUp': {
+          e.preventDefault();
+          setFocusIndex((i) => {
+            const next = Math.max(i - 1, 0);
+            virtualizer.scrollToIndex(next, { align: 'center' });
+            return next;
+          });
+          break;
+        }
+        case 'Enter': {
+          e.preventDefault();
+          const m = filtered[focusIndex];
+          if (m) handleSelect(selectedMnemonic === m ? null : m);
+          break;
+        }
+        case '/': {
+          e.preventDefault();
+          searchRef.current?.focus();
+          searchRef.current?.select();
+          break;
+        }
+        case 'Escape': {
+          if (selectedMnemonic) {
+            setSelectedMnemonic(null);
+          }
+          break;
+        }
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [filtered, focusIndex, selectedMnemonic, studyMode, virtualizer]);
+
+  // 过滤结果变化时重置焦点索引
+  useEffect(() => {
+    setFocusIndex(0);
+  }, [activeCat, search]);
+
   if (!mnemonics) {
     return (
       <div className="view view-mnemonics">
@@ -116,6 +202,13 @@ export default function MnemonicsView() {
 
   return (
     <div className="view view-mnemonics">
+      {/* 构成主义几何背景装饰层 */}
+      <div className="geo-bg-decor" aria-hidden="true">
+        <div className="geo-bg-grid" />
+        <div className="geo-arc-tr" />
+        <div className="geo-diag-line" />
+        <div className="geo-square-bl" />
+      </div>
       <div className="view-container">
         {/* 标题区 */}
         <header className="section-header">
@@ -126,27 +219,51 @@ export default function MnemonicsView() {
           </p>
         </header>
 
-        {/* 搜索栏 */}
-        <div className="mnemonics-search-bar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.3-4.3" />
-          </svg>
-          <input
-            type="search"
-            placeholder="搜索口诀标题、内容、解释…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            aria-label="搜索口诀"
-          />
-          {search && (
-            <button type="button" className="mnemonics-search-clear" onClick={() => setSearch('')} aria-label="清空搜索">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
-            </button>
-          )}
+        {/* 搜索栏 + 工具栏 */}
+        <div className="mnemonics-toolbar">
+          <div className="mnemonics-search-bar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            <input
+              ref={searchRef}
+              type="search"
+              placeholder="搜索口诀标题、内容、解释…（按 / 快速聚焦）"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              aria-label="搜索口诀"
+            />
+            {search && (
+              <button type="button" className="mnemonics-search-clear" onClick={() => setSearch('')} aria-label="清空搜索">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+          </div>
+          {/* 学习模式切换 · 一键展开/收起全部口诀 */}
+          <button
+            type="button"
+            className={`study-mode-btn ${studyMode ? 'active' : ''}`}
+            onClick={toggleStudyMode}
+            aria-pressed={studyMode}
+            title={studyMode ? '退出学习模式' : '学习模式：展开全部口诀'}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+            </svg>
+            <span>{studyMode ? '退出通读' : '通读模式'}</span>
+          </button>
         </div>
+
+        {/* 键盘快捷键提示（桌面端，非学习模式时显示） */}
+        {!isMobile && !studyMode && filtered.length > 0 && (
+          <div className="mnemonics-shortcut-hint" aria-hidden="true">
+            <kbd>J</kbd><kbd>K</kbd> 导航 · <kbd>Enter</kbd> 展开 · <kbd>/</kbd> 搜索 · <kbd>Esc</kbd> 收起
+          </div>
+        )}
 
         <div className="mnemonics-layout">
           {/* 左侧分类导航（桌面） */}
@@ -215,11 +332,35 @@ export default function MnemonicsView() {
                 title="未找到匹配的口诀"
                 description={search ? '尝试更换关键字' : '该分类暂无口诀'}
               />
+            ) : studyMode ? (
+              /* 学习模式：渲染全部口诀（展开态），不使用虚拟滚动 */
+              <div className="mnemonics-study-list">
+                <AnimatePresence mode="popLayout">
+                  {filtered.map((m, i) => (
+                    <motion.div
+                      key={`${m.title}-${i}`}
+                      layout
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.25, delay: Math.min(i * 0.02, 0.3) }}
+                    >
+                      <MnemonicCard
+                        mnemonic={m}
+                        expanded={true}
+                        onToggle={() => {}}
+                        catName={CATEGORIES[m.cat]?.name ?? m.cat}
+                        studyMode
+                      />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
             ) : (
               <div
                 ref={(el) => { parentRef.current = el; }}
                 className="mnemonics-list"
-                style={{ height: 'calc(100vh - 280px)', minHeight: '400px', overflow: 'auto' }}
+                style={{ height: 'calc(100vh - 320px)', minHeight: '400px', overflow: 'auto' }}
               >
                 <div
                   style={{
@@ -231,6 +372,7 @@ export default function MnemonicsView() {
                   {virtualizer.getVirtualItems().map((vi) => {
                     const m = filtered[vi.index];
                     if (!m) return null;
+                    const isFocused = vi.index === focusIndex;
                     return (
                       <div
                         key={vi.key}
@@ -247,6 +389,7 @@ export default function MnemonicsView() {
                         <MnemonicCard
                           mnemonic={m}
                           expanded={selectedMnemonic === m}
+                          focused={isFocused}
                           onToggle={() => handleSelect(selectedMnemonic === m ? null : m)}
                           catName={CATEGORIES[m.cat]?.name ?? m.cat}
                         />
@@ -268,12 +411,16 @@ function MnemonicCard({
   mnemonic,
   expanded,
   onToggle,
-  catName
+  catName,
+  focused = false,
+  studyMode = false
 }: {
   mnemonic: Mnemonic;
   expanded: boolean;
   onToggle: () => void;
   catName: string;
+  focused?: boolean;
+  studyMode?: boolean;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -289,10 +436,17 @@ function MnemonicCard({
     }
   };
 
+  const cardClass = [
+    'mnemonic-card',
+    expanded ? 'expanded' : '',
+    focused ? 'focused' : '',
+    studyMode ? 'study-mode' : ''
+  ].filter(Boolean).join(' ');
+
   return (
     <motion.div
       layout
-      className={`mnemonic-card ${expanded ? 'expanded' : ''}`}
+      className={cardClass}
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}

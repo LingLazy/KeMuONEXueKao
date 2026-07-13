@@ -180,6 +180,13 @@ export default function KnowledgeView() {
 
   return (
     <div className="view view-knowledge">
+      {/* 构成主义几何背景装饰层 */}
+      <div className="geo-bg-decor" aria-hidden="true">
+        <div className="geo-bg-grid" />
+        <div className="geo-arc-tl" />
+        <div className="geo-diag-line" />
+        <div className="geo-square-br" />
+      </div>
       {/* 阅读进度条 · 固定在视图顶部 */}
       <div className="reading-progress-bar" aria-hidden="true">
         <div

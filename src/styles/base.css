@@ -29,6 +29,12 @@ body {
   transition: background-color 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth);
   overflow-x: hidden;
   padding-top: env(safe-area-inset-top);
+  /* 全局构成主义细网格 · 极淡,仅作底纹质感 */
+  background-image:
+    linear-gradient(to right, var(--geo-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--geo-grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -127,14 +133,15 @@ mark.kw.num {
   padding: var(--sp-8) var(--sp-6);
 }
 
-/* 区块标题 · 清晰层次（无装饰短线） */
+/* 区块标题 · 构成主义编号锚点 */
 .section-header {
   margin-bottom: var(--sp-8);
+  position: relative;
 }
 .section-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 600;
@@ -143,24 +150,33 @@ mark.kw.num {
   text-transform: uppercase;
   margin-bottom: var(--sp-2);
 }
+/* 构成主义角标:方块 + 编号感短线(替代装饰短线) */
 .section-eyebrow::before {
   content: '';
-  width: 16px;
-  height: 1.5px;
-  background: var(--primary);
-  border-radius: var(--r-full);
+  width: 8px;
+  height: 8px;
+  background: var(--geo-red);
+  flex-shrink: 0;
+}
+.section-eyebrow::after {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--geo-line);
 }
 .section-title {
   font-family: var(--font-display);
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-1);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   margin-bottom: var(--sp-2);
-  line-height: 1.2;
+  line-height: 1.15;
 }
 .section-title .title-accent {
   color: var(--primary);
+  /* 构成主义:强调词下接极细线 */
+  background-image: linear-gradient(to bottom, transparent 88%, var(--primary) 88%, var(--primary) 94%, transparent 94%);
 }
 .section-desc {
   color: var(--text-3);
