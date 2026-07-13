@@ -54,20 +54,22 @@ export default defineConfig({
         scope: './',
         display: 'standalone',
         orientation: 'portrait-primary',
-        background_color: '#f8faf9',
-        theme_color: '#0d9488',
+        // 工业蚀刻科技派 · 冷调钢灰背景 + 电光蓝主色
+        background_color: '#eef1f5',
+        theme_color: '#1456db',
         lang: 'zh-CN',
         dir: 'ltr',
         categories: ['education', 'productivity', 'utilities'],
         icons: [
           {
-            src: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"%3E%3Crect width="192" height="192" rx="36" fill="%230d9488"/%3E%3Ctext x="96" y="128" font-size="108" font-weight="700" fill="%23fff" text-anchor="middle" font-family="sans-serif"%3E科%3C/text%3E%3C/svg%3E',
+            // 几何方形 logo（rx=8 硬朗棱角，非 36 大圆角）
+            src: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"%3E%3Crect width="192" height="192" rx="8" fill="%231456db"/%3E%3Ctext x="96" y="128" font-size="108" font-weight="700" fill="%23fff" text-anchor="middle" font-family="sans-serif"%3E科%3C/text%3E%3C/svg%3E',
             sizes: '192x192',
             type: 'image/svg+xml',
             purpose: 'any maskable'
           },
           {
-            src: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"%3E%3Crect width="512" height="512" rx="96" fill="%230d9488"/%3E%3Ctext x="256" y="340" font-size="288" font-weight="700" fill="%23fff" text-anchor="middle" font-family="sans-serif"%3E科%3C/text%3E%3C/svg%3E',
+            src: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"%3E%3Crect width="512" height="512" rx="16" fill="%231456db"/%3E%3Ctext x="256" y="340" font-size="288" font-weight="700" fill="%23fff" text-anchor="middle" font-family="sans-serif"%3E科%3C/text%3E%3C/svg%3E',
             sizes: '512x512',
             type: 'image/svg+xml',
             purpose: 'any maskable'

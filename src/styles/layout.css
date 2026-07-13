@@ -1,8 +1,7 @@
 /* ===================================================================
-   布局样式
-   - 顶部导航
-   - 主内容容器
-   - 视图通用容器
+   布局样式 · 工业蚀刻科技派
+   - 顶部导航 · 棱角分明 · 精密机械动效
+   - 主内容容器 · 视图通用容器
    =================================================================== */
 
 #root {
@@ -11,21 +10,24 @@
   flex-direction: column;
 }
 
-/* ========== 顶部导航 ========== */
+/* ========== 顶部导航 · 凸起金属横梁 ========== */
 #topnav {
   position: sticky;
   top: 0;
   z-index: 100;
   background: var(--bg-card);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-strong);
   height: var(--nav-h);
-  transition: box-shadow 0.3s var(--ease-smooth), background 0.3s var(--ease-smooth);
+  /* 底部蚀刻高光边（金属横梁感） */
+  box-shadow: inset 0 -1px 0 var(--edge-light);
+  transition: box-shadow var(--dur-base) var(--ease-smooth),
+              background var(--dur-base) var(--ease-smooth);
 }
 #topnav.scrolled {
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm), inset 0 -1px 0 var(--edge-light);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  background: color-mix(in srgb, var(--bg-card) 92%, transparent);
 }
 
 .nav-inner {
@@ -38,11 +40,12 @@
   gap: var(--sp-4);
 }
 
-/* 品牌 logo */
+/* 品牌 logo · 实色凸起方形（非渐变） */
 .brand {
   display: flex;
   align-items: center;
   gap: var(--sp-2);
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.0625rem;
   letter-spacing: -0.01em;
@@ -54,19 +57,45 @@
   height: 32px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  background: var(--primary);
   color: #fff;
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
   font-size: 1rem;
-  font-weight: 700;
-  box-shadow: 0 2px 6px var(--primary-bg);
+  font-weight: 800;
+  font-family: var(--font-display);
+  /* 凸起金属质感：底部阴影 + 顶部高光边 */
+  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+/* 品牌 mark 角标刻度（几何装饰） */
+.brand-mark::before,
+.brand-mark::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+.brand-mark::before {
+  top: 2px;
+  left: 2px;
+  border-right: none;
+  border-bottom: none;
+}
+.brand-mark::after {
+  bottom: 2px;
+  right: 2px;
+  border-left: none;
+  border-top: none;
 }
 .brand-accent {
   color: var(--accent);
   margin: 0 2px;
+  font-weight: 800;
 }
 
-/* 主导航链接 */
+/* 主导航链接 · 几何刻度感 */
 .nav-links {
   display: flex;
   align-items: center;
@@ -79,8 +108,9 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-3);
-  border-radius: var(--r-md);
-  transition: color 0.2s, background 0.2s;
+  border-radius: var(--r-sm);
+  transition: color var(--dur-fast) var(--ease-precision),
+              background var(--dur-fast) var(--ease-precision);
 }
 .nav-link:hover {
   color: var(--text-1);
@@ -90,16 +120,19 @@
   color: var(--primary);
   font-weight: 600;
 }
+/* 激活态下方刻度线（方形硬朗，非圆形） */
 .nav-link.active::after {
   content: '';
   position: absolute;
   left: 50%;
   bottom: -1px;
   transform: translateX(-50%);
-  width: 24px;
+  width: 20px;
   height: 2px;
   background: var(--primary);
-  border-radius: var(--r-full);
+  border-radius: var(--r-none);
+  /* 刻度高光 */
+  box-shadow: 0 0 0 1px var(--primary-bg);
 }
 
 /* 右侧操作区 */
@@ -121,37 +154,49 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-weight: 700;
   color: var(--text-1);
+  letter-spacing: 0.02em;
 }
 #nav-progress {
   color: var(--primary);
 }
 .nav-stat-divider {
   color: var(--text-mute);
+  margin: 0 2px;
 }
 .nav-stat-sub {
   font-size: 0.6875rem;
   color: var(--text-mute);
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
 }
 
-/* 主题切换按钮 */
+/* 主题切换按钮 · 精密机械动效（非旋转） */
 .theme-toggle {
   width: 36px;
   height: 36px;
   display: grid;
   place-items: center;
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
   color: var(--text-2);
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  transition: all 0.2s var(--ease-smooth);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-xs), inset 0 1px 0 var(--edge-light);
+  transition: all var(--dur-fast) var(--ease-precision);
 }
 .theme-toggle:hover {
   color: var(--accent);
   border-color: var(--accent-border);
   background: var(--accent-bg);
-  transform: rotate(15deg);
+  /* 精密机械感：微缩放 + 阴影变化（非旋转） */
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
+}
+.theme-toggle:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-inset);
 }
 
 /* 移动端菜单切换 */
@@ -160,13 +205,14 @@
   width: 36px;
   height: 36px;
   place-items: center;
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
   color: var(--text-1);
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-xs), inset 0 1px 0 var(--edge-light);
 }
 
-/* 移动端下拉菜单 */
+/* 移动端下拉菜单 · 凹陷面板 */
 .nav-mobile-menu {
   display: none;
   flex-direction: column;
@@ -180,8 +226,8 @@
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--text-2);
-  border-radius: var(--r-md);
-  transition: background 0.2s, color 0.2s;
+  border-radius: var(--r-sm);
+  transition: background var(--dur-fast), color var(--dur-fast);
 }
 .nav-mobile-link:hover {
   background: var(--bg-hover);
@@ -191,6 +237,8 @@
   background: var(--primary-bg);
   color: var(--primary);
   font-weight: 600;
+  /* 左侧刻度指示 */
+  box-shadow: inset 2px 0 0 var(--primary);
 }
 
 /* ========== 主内容区 ========== */
@@ -200,14 +248,14 @@
   width: 100%;
 }
 
-/* 视图通用容器 */
+/* 视图通用容器 · 精密入场动效 */
 .view {
   width: 100%;
   min-height: calc(100vh - var(--nav-h));
-  animation: view-enter 0.4s var(--ease-out);
+  animation: view-enter 0.32s var(--ease-precision);
 }
 @keyframes view-enter {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 

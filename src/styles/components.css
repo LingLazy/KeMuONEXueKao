@@ -1,30 +1,25 @@
 /* ===================================================================
-   组件样式
-   - Modal 模态框
-   - Toast 提示
-   - Skeleton 骨架屏
-   - LazyImage 懒加载图片
-   - EmptyState 空状态
-   - ConfirmDialog 确认对话框
-   - QuestionCard 题目卡片
-   - spinner 加载
+   组件样式 · 工业蚀刻科技派
+   - Modal · Toast · Skeleton · LazyImage · EmptyState · ConfirmDialog
+   - QuestionCard · 雷达图 · 通用工具类
+   - 凹凸阴影 · 蚀刻边框 · 几何刻度 · 精密动效
    =================================================================== */
 
-/* ========== Spinner ========== */
+/* ========== Spinner · 几何旋转（方形非圆形） ========== */
 .spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid var(--border);
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--border);
   border-top-color: var(--primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  border-radius: var(--r-xs);
+  animation: spin 0.7s linear infinite;
   margin: 0 auto var(--sp-3);
 }
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-/* ========== Modal 模态 ========== */
+/* ========== Modal 模态 · 凸起金属面板 ========== */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -33,19 +28,45 @@
   align-items: center;
   justify-content: center;
   padding: var(--sp-4);
-  background: rgba(10, 15, 28, 0.55);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(8, 14, 26, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 .modal {
   width: 100%;
   max-height: 90vh;
   background: var(--bg-card);
-  border-radius: var(--r-xl);
-  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  /* 凸起金属面板：深阴影 + 顶部高光边 */
+  box-shadow: var(--shadow-xl), inset 0 1px 0 var(--edge-light);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+}
+/* 模态角标刻度（几何装饰） */
+.modal::before,
+.modal::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--primary-border);
+  pointer-events: none;
+  z-index: 1;
+}
+.modal::before {
+  top: 6px;
+  left: 6px;
+  border-right: none;
+  border-bottom: none;
+}
+.modal::after {
+  bottom: 6px;
+  right: 6px;
+  border-left: none;
+  border-top: none;
 }
 .modal-sm { max-width: 380px; }
 .modal-md { max-width: 560px; }
@@ -57,24 +78,29 @@
   justify-content: space-between;
   padding: var(--sp-4) var(--sp-5);
   border-bottom: 1px solid var(--divider);
+  /* 底部蚀刻高光 */
+  box-shadow: inset 0 -1px 0 var(--edge-light);
 }
 .modal-title {
+  font-family: var(--font-display);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-1);
+  letter-spacing: -0.01em;
 }
 .modal-close {
   width: 28px;
   height: 28px;
   display: grid;
   place-items: center;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-xs);
   color: var(--text-3);
-  transition: all 0.2s;
+  transition: all var(--dur-fast) var(--ease-precision);
 }
 .modal-close:hover {
   background: var(--bg-hover);
   color: var(--text-1);
+  box-shadow: var(--shadow-inset);
 }
 .modal-body {
   flex: 1;
@@ -99,7 +125,7 @@
   gap: var(--sp-2);
 }
 
-/* ========== Toast 提示 ========== */
+/* ========== Toast 提示 · 凸起金属条 ========== */
 .toast-container {
   position: fixed;
   top: calc(var(--nav-h) + var(--sp-3));
@@ -118,17 +144,34 @@
   gap: var(--sp-2);
   padding: var(--sp-2) var(--sp-4);
   background: var(--bg-elev);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  /* 凸起金属质感 */
+  box-shadow: var(--shadow-lg), inset 0 1px 0 var(--edge-light);
   font-size: 0.875rem;
+  font-weight: 500;
   color: var(--text-1);
   pointer-events: auto;
   cursor: pointer;
   white-space: nowrap;
   max-width: 100%;
   overflow: hidden;
+  /* 左侧刻度指示条 */
+  position: relative;
+  padding-left: var(--sp-5);
 }
+.toast::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--text-3);
+}
+.toast.success::before { background: var(--success); }
+.toast.error::before { background: var(--danger); }
+.toast.info::before { background: var(--info); }
 .toast.success {
   border-color: var(--success);
   color: var(--success);
@@ -154,9 +197,11 @@
   padding: var(--sp-16) var(--sp-6);
   color: var(--text-3);
   font-size: 0.875rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
 }
 
-/* ========== Skeleton 骨架屏 ========== */
+/* ========== Skeleton 骨架屏 · 蚀刻 shimmer ========== */
 .skeleton {
   background: linear-gradient(
     90deg,
@@ -165,7 +210,8 @@
     var(--bg-sunken) 63%
   );
   background-size: 400% 100%;
-  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+  border-radius: var(--r-xs);
 }
 @keyframes skeleton-shimmer {
   0% { background-position: 100% 50%; }
@@ -179,7 +225,8 @@
   padding: var(--sp-5);
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--r-lg);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-convex);
 }
 .list-skeleton {
   display: flex;
@@ -188,7 +235,8 @@
   padding: var(--sp-3);
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-xs);
 }
 .list-skeleton-text {
   flex: 1;
@@ -201,7 +249,7 @@
 .lazy-img {
   position: relative;
   display: inline-block;
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
   overflow: hidden;
   background: var(--bg-sunken);
 }
@@ -238,13 +286,15 @@
 .empty-state-icon {
   color: var(--text-mute);
   margin-bottom: var(--sp-4);
-  opacity: 0.6;
+  opacity: 0.5;
 }
 .empty-state-title {
+  font-family: var(--font-display);
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-2);
   margin-bottom: var(--sp-2);
+  letter-spacing: -0.01em;
 }
 .empty-state-desc {
   font-size: 0.875rem;
@@ -256,17 +306,21 @@
   margin-top: var(--sp-2);
 }
 
-/* ========== QuestionCard 题目卡片 ========== */
+/* ========== QuestionCard 题目卡片 · 凸起金属面板 ========== */
 .qcard {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--r-xl);
+  border-radius: var(--r-md);
   padding: var(--sp-6);
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.3s var(--ease-smooth);
+  /* 凸起金属质感 */
+  box-shadow: var(--shadow-convex);
+  transition: box-shadow var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth);
+  position: relative;
 }
 .qcard:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-light);
+  border-color: var(--border-strong);
 }
 
 /* 题头 */
@@ -289,6 +343,7 @@
   font-family: var(--font-mono);
   font-size: 0.875rem;
   color: var(--text-3);
+  letter-spacing: 0.02em;
 }
 .qcard-index .num {
   font-size: 1rem;
@@ -300,24 +355,32 @@
 }
 .qcard-type {
   padding: 2px 8px;
+  font-family: var(--font-mono);
   font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  border-radius: var(--r-full);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--r-none);
   background: var(--primary-bg);
   color: var(--primary);
+  /* 蚀刻标记边 */
+  box-shadow: inset 0 0 0 1px var(--primary-border);
 }
 .qcard-type.judge {
   background: var(--accent-bg);
   color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-border);
 }
 .qcard-badge {
   padding: 2px 8px;
+  font-family: var(--font-mono);
   font-size: 0.6875rem;
-  font-weight: 600;
-  border-radius: var(--r-full);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: var(--r-none);
   background: var(--info-soft);
   color: var(--info);
+  box-shadow: inset 0 0 0 1px rgba(29, 78, 216, 0.25);
 }
 .qcard-actions {
   display: flex;
@@ -327,6 +390,7 @@
   color: var(--accent);
   border-color: var(--accent-border);
   background: var(--accent-bg);
+  box-shadow: var(--shadow-inset);
 }
 
 /* 题干 */
@@ -341,25 +405,30 @@
   background: var(--primary-soft);
   color: var(--primary);
   padding: 1px 4px;
-  border-radius: var(--r-xs);
+  border-radius: var(--r-none);
   font-weight: 700;
+  box-shadow: inset 0 -1px 0 var(--primary-border);
 }
 .qcard-question mark.kw.danger {
   background: var(--danger-soft);
   color: var(--danger);
+  box-shadow: inset 0 -1px 0 rgba(185, 28, 28, 0.3);
 }
 .qcard-question mark.kw.num {
   background: var(--info-soft);
   color: var(--info);
+  box-shadow: inset 0 -1px 0 rgba(29, 78, 216, 0.3);
 }
 
 /* 图片 */
 .qcard-image {
   margin: 0 0 var(--sp-4);
   max-width: 100%;
-  border-radius: var(--r-lg);
+  border-radius: var(--r-sm);
   overflow: hidden;
   border: 1px solid var(--border);
+  /* 蚀刻凹陷感 */
+  box-shadow: var(--shadow-inset);
 }
 .qcard-image .lazy-img {
   width: 100%;
@@ -372,7 +441,7 @@
   background: var(--bg-sunken);
 }
 
-/* 选项 */
+/* 选项 · 凹凸按钮组 */
 .qcard-options {
   display: flex;
   flex-direction: column;
@@ -386,15 +455,17 @@
   padding: var(--sp-3) var(--sp-4);
   background: var(--bg-card);
   border: 1.5px solid var(--border);
-  border-radius: var(--r-lg);
+  border-radius: var(--r-sm);
   text-align: left;
   font-size: 0.9375rem;
   color: var(--text-1);
-  transition: all 0.2s var(--ease-smooth);
+  transition: all var(--dur-fast) var(--ease-precision);
 }
 .qcard-option:hover:not(:disabled) {
   border-color: var(--primary-border);
   background: var(--primary-bg);
+  /* 凸起感 */
+  box-shadow: var(--shadow-xs), inset 0 1px 0 var(--edge-light);
 }
 .qcard-option:disabled {
   cursor: not-allowed;
@@ -410,9 +481,11 @@
   font-weight: 700;
   color: var(--text-3);
   background: var(--bg-sunken);
-  border-radius: var(--r-sm);
+  border-radius: var(--r-xs);
   flex-shrink: 0;
-  transition: all 0.2s;
+  transition: all var(--dur-fast);
+  /* 凹陷感 */
+  box-shadow: var(--shadow-inset);
 }
 .qcard-option-text {
   flex: 1;
@@ -421,26 +494,32 @@
 .qcard-option.correct {
   border-color: var(--success);
   background: var(--success-soft);
+  box-shadow: inset 0 0 0 1px var(--success), var(--shadow-xs);
 }
 .qcard-option.correct .qcard-option-letter {
   background: var(--success);
   color: #fff;
+  box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .qcard-option.wrong {
   border-color: var(--danger);
   background: var(--danger-soft);
+  box-shadow: inset 0 0 0 1px var(--danger), var(--shadow-xs);
 }
 .qcard-option.wrong .qcard-option-letter {
   background: var(--danger);
   color: #fff;
+  box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .qcard-option.selected {
   border-color: var(--primary);
   background: var(--primary-bg);
+  box-shadow: inset 0 0 0 1px var(--primary), var(--shadow-xs);
 }
 .qcard-option.selected .qcard-option-letter {
   background: var(--primary);
   color: #fff;
+  box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .qcard-option.eliminated {
   opacity: 0.35;
@@ -454,7 +533,7 @@
   place-items: center;
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  border-radius: var(--r-none);
 }
 .qcard-option-icon.correct {
   color: var(--success);
@@ -478,17 +557,21 @@
   gap: var(--sp-2);
   padding: var(--sp-3) var(--sp-4);
   margin-top: var(--sp-3);
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
   font-size: 0.875rem;
   font-weight: 600;
+  /* 蚀刻标记边 */
+  box-shadow: inset 0 0 0 1px;
 }
 .qcard-result.correct {
   background: var(--success-soft);
   color: var(--success);
+  box-shadow: inset 0 0 0 1px var(--success);
 }
 .qcard-result.wrong {
   background: var(--danger-soft);
   color: var(--danger);
+  box-shadow: inset 0 0 0 1px var(--danger);
 }
 
 /* 解析折叠区 */
@@ -505,8 +588,8 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-2);
-  border-radius: var(--r-md);
-  transition: all 0.2s;
+  border-radius: var(--r-sm);
+  transition: all var(--dur-fast);
 }
 .qcard-analysis-toggle:hover {
   background: var(--bg-hover);
@@ -514,7 +597,7 @@
 }
 .qcard-analysis-toggle .chevron {
   margin-left: auto;
-  transition: transform 0.3s var(--ease-smooth);
+  transition: transform 0.3s var(--ease-precision);
 }
 .qcard-analysis-toggle .chevron.open {
   transform: rotate(180deg);
@@ -525,11 +608,13 @@
 .qcard-analysis-text {
   padding: var(--sp-3) var(--sp-4);
   background: var(--bg-sunken);
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
   font-size: 0.875rem;
   line-height: 1.7;
   color: var(--text-2);
   margin-top: var(--sp-2);
+  /* 凹陷蚀刻感 */
+  box-shadow: var(--shadow-inset);
 }
 .qcard-analysis-link {
   display: inline-block;
@@ -537,15 +622,28 @@
   font-size: 0.8125rem;
   color: var(--primary);
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
-/* 口诀常驻显示 */
+/* 口诀常驻显示 · 蚀刻标记面板（非渐变） */
 .qcard-mnemonic {
   margin-top: var(--sp-4);
   padding: var(--sp-3) var(--sp-4);
-  background: linear-gradient(135deg, var(--accent-bg), var(--primary-bg));
+  background: var(--accent-bg);
   border: 1px solid var(--accent-border);
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
+  /* 蚀刻标记边 + 左侧刻度条 */
+  box-shadow: var(--shadow-inset);
+  position: relative;
+}
+.qcard-mnemonic::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
 }
 .qcard-mnemonic-head {
   display: flex;
@@ -555,10 +653,14 @@
   margin-bottom: var(--sp-2);
 }
 .qcard-mnemonic-title {
-  font-size: 0.8125rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .qcard-mnemonic-text {
+  font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 700;
   color: var(--text-1);
@@ -571,7 +673,7 @@
   color: var(--text-3);
 }
 
-/* ========== 雷达图 ========== */
+/* ========== 雷达图 · 几何刻度感 ========== */
 .radar-chart {
   display: block;
   width: 100%;
@@ -587,23 +689,27 @@
 .radar-axis {
   stroke: var(--divider);
   stroke-width: 1;
+  stroke-dasharray: 2 2;
 }
 .radar-polygon {
   fill: var(--primary);
-  fill-opacity: 0.15;
+  fill-opacity: 0.12;
   stroke: var(--primary);
-  stroke-width: 2;
+  stroke-width: 1.5;
 }
 .radar-point {
-  stroke: #fff;
+  stroke: var(--bg-card);
   stroke-width: 2;
 }
 .radar-label {
+  font-family: var(--font-mono);
   font-size: 11px;
   fill: var(--text-2);
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 .radar-label-val {
+  font-family: var(--font-mono);
   font-size: 10px;
   fill: var(--primary);
   font-weight: 700;
@@ -614,21 +720,33 @@
   padding: var(--sp-1) var(--sp-3);
   font-size: 0.8125rem;
   font-weight: 600;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-xs);
   background: var(--primary);
   color: #fff;
-  transition: all 0.2s;
+  transition: all var(--dur-fast) var(--ease-precision);
+  box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+.mini-btn:hover {
+  background: var(--primary-hover);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.mini-btn:active {
+  background: var(--primary-active);
+  box-shadow: var(--shadow-inset);
 }
 .mini-btn.ghost {
   background: var(--bg-card);
   color: var(--text-2);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-xs);
 }
 .mini-btn.ghost:hover {
   background: var(--bg-hover);
+  border-color: var(--primary-border);
+  color: var(--primary);
 }
 
-/* toggle chip 通用 */
+/* toggle chip 通用 · 几何刻度标签（非圆形） */
 .toggle-chip {
   display: inline-flex;
   align-items: center;
@@ -639,8 +757,9 @@
   color: var(--text-3);
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--r-full);
-  transition: all 0.2s var(--ease-smooth);
+  border-radius: var(--r-xs);
+  transition: all var(--dur-fast) var(--ease-precision);
+  box-shadow: var(--shadow-xs);
 }
 .toggle-chip:hover {
   border-color: var(--border-strong);
@@ -651,14 +770,20 @@
   color: var(--primary);
   border-color: var(--primary-border);
   font-weight: 600;
+  /* 蚀刻标记边 */
+  box-shadow: inset 0 0 0 1px var(--primary-border);
 }
 
-/* btn-danger */
+/* btn-danger · 实色凸起 */
 .btn-danger {
   background: var(--danger);
   color: #fff;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 .btn-danger:hover {
   background: #991b1b;
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.btn-danger:active {
+  box-shadow: var(--shadow-inset);
 }

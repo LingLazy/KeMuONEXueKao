@@ -104,9 +104,10 @@
     flex-direction: column;
     padding: var(--sp-3);
     background: var(--bg-card);
-    border-top: 1px solid var(--border);
-    box-shadow: var(--shadow-lg);
-    animation: menu-slide 0.2s var(--ease-out);
+    border-top: 1px solid var(--border-strong);
+    /* 凸起金属面板 + 底部蚀刻高光 */
+    box-shadow: var(--shadow-lg), inset 0 1px 0 var(--edge-light);
+    animation: menu-slide 0.24s var(--ease-precision);
   }
   @keyframes menu-slide {
     from { opacity: 0; transform: translateY(-8px); }
@@ -741,7 +742,8 @@
   .modal-close:hover,
   .knowledge-toc-item:hover {
     transform: none;
-    box-shadow: var(--shadow-sm);
+    /* 触摸设备保留凸起质感，避免粘滞高亮 */
+    box-shadow: var(--shadow-convex);
   }
   .cat-card:hover::before,
   .quick-card:hover::before {
@@ -750,14 +752,15 @@
   .theme-toggle:hover {
     transform: none;
   }
-  /* 触摸设备：按下反馈替代悬浮 */
+  /* 触摸设备：按下凹陷反馈替代悬浮 */
   .cat-card:active,
   .quick-card:active,
   .group-card:active,
   .cat-detail-item:active,
   .qcard-option:active:not(:disabled) {
-    transform: scale(0.98);
-    transition: transform 0.1s;
+    transform: scale(0.985);
+    box-shadow: var(--shadow-inset);
+    transition: transform 0.1s var(--ease-precision), box-shadow 0.1s var(--ease-precision);
   }
 }
 
