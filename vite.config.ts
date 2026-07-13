@@ -28,7 +28,7 @@ export default defineConfig({
         runtimeCaching: [
           {
             // 题目图片：Stale-While-Revalidate（缓存优先，后台更新）
-            urlPattern: ({ url }) => url.pathname.includes('/assets/images/'),
+            urlPattern: ({ url }) => url.pathname.includes('/images/'),
             handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'kemu1-img-cache',

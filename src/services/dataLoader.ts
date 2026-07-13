@@ -151,7 +151,7 @@ export function getImageUrl(image: string): string {
   }
   // 防御性处理：去除首部多余斜杠
   filename = filename.replace(/^\/+/, '');
-  return `${base}assets/images/${filename}`;
+  return `${base}images/${filename}`;
 }
 
 /** 获取分类总数 */
