@@ -644,6 +644,11 @@
       $('#q-image-wrap').style.display = 'none';
       $('#q-guide').style.display = 'none';
       $('#q-result').style.display = 'none';
+      // 清空口诀常驻区
+      const mnemonicInlineEmpty = $('#q-mnemonic-inline');
+      const mnemonicContentEmpty = $('#mnemonic-inline-content');
+      if (mnemonicInlineEmpty) mnemonicInlineEmpty.style.display = 'none';
+      if (mnemonicContentEmpty) mnemonicContentEmpty.innerHTML = '';
       $('#practice-index').textContent = '0';
       $('#practice-total').textContent = '0';
       $('#progress-fill').style.width = '0%';
@@ -768,6 +773,9 @@
       });
     }
 
+    // 口诀常驻区：不论是否答题均立即渲染（永远显示，不隐藏）
+    renderResidentMnemonic(q);
+
     // 引导区与结果区显示控制
     const guideEl = $('#q-guide');
     const resultEl = $('#q-result');
@@ -883,10 +891,9 @@
 
   /**
    * 显示答题结果
-   * - 状态条（正确/错误/查看答案）
-   * - 口诀常驻区（独立，简短不占空间）
-   * - 解析折叠区（独立，默认折叠，点击展开）
-   * 关键：口诀与解析完全独立判别
+   * - 仅渲染状态条（正确/错误/查看答案）
+   * - 口诀常驻区已在 renderQuestion 中渲染，此处不再处理
+   * - 解析折叠区仅在 showResult 时填充内容（默认折叠）
    */
   function showResult(q, record) {
     const resultEl = $('#q-result');
@@ -919,25 +926,6 @@
       statusAnswer.textContent = '正确答案：' + correctText;
     }
 
-    // 口诀常驻区（独立，简短显示）
-    const relatedMnemonics = findRelatedMnemonics(q);
-    const mnemonicInline = $('#q-mnemonic-inline');
-    const mnemonicContent = $('#mnemonic-inline-content');
-
-    if (relatedMnemonics.length && mnemonicInline && mnemonicContent) {
-      const firstMnemonic = relatedMnemonics[0];
-      const extraCount = relatedMnemonics.length - 1;
-      mnemonicContent.innerHTML = `
-        <div class="mnemonic-quick">
-          <span class="mnemonic-quick-text">${escapeHtml(firstMnemonic.text)}</span>
-          ${extraCount > 0 ? `<span class="mnemonic-quick-more" title="共${relatedMnemonics.length}条相关口诀">+${extraCount}</span>` : ''}
-        </div>
-      `;
-      mnemonicInline.style.display = 'flex';
-    } else if (mnemonicInline) {
-      mnemonicInline.style.display = 'none';
-    }
-
     // 解析独立折叠区（默认折叠）
     const analysisText = $('#analysis-text');
     if (q.analysis) {
@@ -947,6 +935,38 @@
     }
     // 确保解析默认折叠
     resetAnalysisToggle();
+  }
+
+  /**
+   * 渲染口诀常驻区（永远显示，不隐藏）
+   * - 不论是否答题，均在 renderQuestion 时立即渲染
+   * - 有关联名口诀：显示首条 + 额外数量徽标
+   * - 无关联口诀：显示"本题暂无关联口诀"占位（仍保持显示，不隐藏）
+   */
+  function renderResidentMnemonic(q) {
+    const mnemonicInline = $('#q-mnemonic-inline');
+    const mnemonicContent = $('#mnemonic-inline-content');
+    if (!mnemonicInline || !mnemonicContent) return;
+
+    const relatedMnemonics = findRelatedMnemonics(q);
+    if (relatedMnemonics.length) {
+      const firstMnemonic = relatedMnemonics[0];
+      const extraCount = relatedMnemonics.length - 1;
+      mnemonicContent.innerHTML = `
+        <div class="mnemonic-quick">
+          <span class="mnemonic-quick-text">${escapeHtml(firstMnemonic.text)}</span>
+          ${extraCount > 0 ? `<span class="mnemonic-quick-more" title="共${relatedMnemonics.length}条相关口诀">+${extraCount}</span>` : ''}
+        </div>
+      `;
+    } else {
+      // 无关联口诀时仍保持常驻显示，展示占位提示
+      mnemonicContent.innerHTML = `
+        <div class="mnemonic-quick mnemonic-quick-empty">
+          <span class="mnemonic-quick-text" style="color:var(--text-mute)">本题暂无关联口诀</span>
+        </div>
+      `;
+    }
+    mnemonicInline.style.display = 'flex';
   }
 
   /** 重置解析折叠状态为收起 */
@@ -1175,12 +1195,13 @@
   const KnowledgeState = {
     chapters: [],       // 章节数据 [{id, title, text, el}]
     loaded: false,      // 是否已加载
-    filter: ''          // 搜索关键词
+    filter: '',          // 搜索关键词
+    currentChapter: 0   // 当前所在章节索引（用于翻页器）
   };
 
   /**
    * 渲染知识学习视图
-   * 流程：从全局 KNOWLEDGE_HTML 写入 DOM → 提取章节 → 渲染目录TOC
+   * 流程：从全局 KNOWLEDGE_HTML 写入 DOM → 提取章节 → 渲染目录TOC + 章节导航卡片 + Hero统计 + 翻页器
    * 支持搜索过滤章节（通过 display:none 隐藏不匹配章节，保留 DOM 避免重复渲染）
    */
   function renderKnowledge() {
@@ -1211,6 +1232,24 @@
         el.classList.add('nf-rise-in');
         el.style.animationDelay = Math.min(i * 50, 400) + 'ms';
       });
+
+      // 更新 Hero 统计：章节数 + 口诀总数
+      const statChapters = $('#kstat-chapters');
+      const statMnemonics = $('#kstat-mnemonics');
+      if (statChapters) statChapters.textContent = KnowledgeState.chapters.length;
+      if (statMnemonics) {
+        const mCount = (typeof MNEMONICS !== 'undefined') ? MNEMONICS.length : 0;
+        statMnemonics.textContent = mCount;
+      }
+
+      // 渲染顶部章节快速导航卡片（横向滚动）
+      renderKnowledgeChapterNav();
+
+      // 绑定翻页器事件（仅绑定一次）
+      bindKnowledgePager();
+
+      // 绑定顶部阅读进度条监听（仅绑定一次）
+      bindReadingProgress();
     }
 
     const chapters = KnowledgeState.chapters;
@@ -1269,7 +1308,7 @@
       return;
     }
 
-    // 滚动监听：高亮当前可见章节的目录项（仅绑定一次）
+    // 滚动监听：高亮当前可见章节的目录项 + 同步翻页器与导航卡片（仅绑定一次）
     if (!KnowledgeState._scrollBound) {
       KnowledgeState._scrollBound = true;
       let scrollTimer = null;
@@ -1279,12 +1318,15 @@
         scrollTimer = setTimeout(() => {
           const navH = 56 + 20;
           let activeId = null;
+          let activeIdx = -1;
           // 遍历当前可见的章节，找出视口内的首个
-          for (const c of KnowledgeState.chapters) {
+          for (let i = 0; i < KnowledgeState.chapters.length; i++) {
+            const c = KnowledgeState.chapters[i];
             if (!c.el || c.el.style.display === 'none') continue;
             const rect = c.el.getBoundingClientRect();
             if (rect.top <= navH && rect.bottom > navH) {
               activeId = c.id;
+              activeIdx = i;
               break;
             }
           }
@@ -1292,10 +1334,119 @@
             $$('.knowledge-toc-item', tocEl).forEach(el => {
               el.classList.toggle('active', el.dataset.target === activeId);
             });
+            // 同步章节导航卡片高亮
+            $$('.kchap-card').forEach(el => {
+              el.classList.toggle('active', el.dataset.target === activeId);
+            });
+            // 同步翻页器信息
+            if (activeIdx >= 0) {
+              KnowledgeState.currentChapter = activeIdx;
+              updateKnowledgePager();
+            }
           }
         }, 80);
       }, { passive: true });
     }
+  }
+
+  /**
+   * 渲染顶部章节快速导航卡片（横向滚动条）
+   */
+  function renderKnowledgeChapterNav() {
+    const navEl = $('#knowledge-chapter-nav');
+    if (!navEl) return;
+    const chapters = KnowledgeState.chapters;
+    if (!chapters.length) return;
+    navEl.innerHTML = chapters.map((c, i) => `
+      <a class="kchap-card${i === 0 ? ' active' : ''}" href="#${c.id}" data-target="${c.id}" role="tab" tabindex="0">
+        <span class="kchap-num">${String(i + 1).padStart(2, '0')}</span>
+        <span class="kchap-title">${escapeHtml(c.title.replace(/^[一二三四五六七八九十]+、/, ''))}</span>
+      </a>
+    `).join('');
+    // 点击卡片：平滑滚动到对应章节
+    navEl.onclick = e => {
+      const card = e.target.closest('.kchap-card');
+      if (!card) return;
+      e.preventDefault();
+      const target = document.getElementById(card.dataset.target);
+      if (target) {
+        const navH = 56;
+        const top = target.getBoundingClientRect().top + window.scrollY - navH - 12;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    };
+  }
+
+  /**
+   * 绑定底部章节翻页器事件
+   */
+  function bindKnowledgePager() {
+    const prevBtn = $('#know-prev');
+    const nextBtn = $('#know-next');
+    if (!prevBtn || !nextBtn) return;
+    prevBtn.addEventListener('click', () => navigateKnowledgeChapter(-1));
+    nextBtn.addEventListener('click', () => navigateKnowledgeChapter(1));
+    updateKnowledgePager();
+  }
+
+  /**
+   * 翻页导航：方向 -1 上一章 / +1 下一章
+   */
+  function navigateKnowledgeChapter(dir) {
+    const chapters = KnowledgeState.chapters;
+    if (!chapters.length) return;
+    let idx = KnowledgeState.currentChapter + dir;
+    idx = Math.max(0, Math.min(chapters.length - 1, idx));
+    KnowledgeState.currentChapter = idx;
+    const target = chapters[idx];
+    if (target && target.el) {
+      const navH = 56;
+      const top = target.el.getBoundingClientRect().top + window.scrollY - navH - 12;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+    updateKnowledgePager();
+  }
+
+  /**
+   * 更新翻页器显示状态（按钮禁用 + 当前章信息）
+   */
+  function updateKnowledgePager() {
+    const prevBtn = $('#know-prev');
+    const nextBtn = $('#know-next');
+    const infoEl = $('#know-pager-info');
+    const chapters = KnowledgeState.chapters;
+    if (!chapters.length) return;
+    const idx = KnowledgeState.currentChapter;
+    if (prevBtn) prevBtn.disabled = (idx <= 0);
+    if (nextBtn) nextBtn.disabled = (idx >= chapters.length - 1);
+    if (infoEl) {
+      const cur = chapters[idx];
+      const title = cur ? cur.title.replace(/^[一二三四五六七八九十]+、/, '') : '';
+      infoEl.innerHTML = `
+        <span class="know-pager-info-current">第 ${idx + 1} / ${chapters.length} 章</span>
+        <span class="know-pager-info-title">${escapeHtml(title)}</span>
+      `;
+    }
+  }
+
+  /**
+   * 绑定顶部阅读进度条监听（基于知识内容区滚动比例）
+   */
+  function bindReadingProgress() {
+    const fillEl = $('#reading-progress-fill');
+    if (!fillEl) return;
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      if (State.view !== 'knowledge') return;
+      if (scrollTimer) clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const doc = document.documentElement;
+        const scrollTop = window.scrollY;
+        const scrollHeight = doc.scrollHeight - doc.clientHeight;
+        const pct = scrollHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100)) : 0;
+        fillEl.style.width = pct + '%';
+      }, 30);
+    }, { passive: true });
   }
 
   // ============ 分类导航（大分类卡片 + 小分类芯片） ============

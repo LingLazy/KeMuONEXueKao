@@ -329,6 +329,15 @@
           </div>
           <div class="q-options" id="q-options" role="radiogroup" aria-label="选项列表"></div>
 
+          <!-- 口诀常驻区（永远显示，独立于答题状态，不隐藏） -->
+          <div class="q-mnemonic-inline" id="q-mnemonic-inline" aria-label="相关口诀">
+            <div class="mnemonic-inline-label">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>口诀</span>
+            </div>
+            <div class="mnemonic-inline-content" id="mnemonic-inline-content"></div>
+          </div>
+
           <!-- 未答题时的引导按钮 -->
           <div class="q-guide" id="q-guide">
             <button class="btn-guide" id="btn-show-answer" type="button" title="直接查看答案与解析">
@@ -338,7 +347,7 @@
             <span class="guide-hint">不记得了？点击直接查看答案与口诀</span>
           </div>
 
-          <!-- 答题后结果区：状态条 + 口诀常驻（独立） + 解析独立展开 -->
+          <!-- 答题后结果区：仅状态条（口诀与解析已独立常驻） -->
           <div class="q-result" id="q-result" style="display:none">
             <div class="q-status-bar" id="q-status-bar" role="status">
               <span class="status-icon" id="status-icon" aria-hidden="true"></span>
@@ -349,26 +358,17 @@
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </button>
             </div>
+          </div>
 
-            <!-- 口诀常驻区（独立于解析，简短不占空间） -->
-            <div class="q-mnemonic-inline" id="q-mnemonic-inline" style="display:none" aria-label="相关口诀">
-              <div class="mnemonic-inline-label">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <span>口诀</span>
-              </div>
-              <div class="mnemonic-inline-content" id="mnemonic-inline-content"></div>
-            </div>
-
-            <!-- 解析独立区（默认折叠，点击展开） -->
-            <div class="q-analysis-wrap" id="q-analysis-wrap">
-              <button class="analysis-toggle" id="analysis-toggle" type="button" aria-expanded="false" aria-controls="analysis-panel">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                <span class="analysis-toggle-text">查看解析</span>
-                <svg class="analysis-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div class="q-analysis-panel" id="analysis-panel" aria-hidden="true">
-                <div class="analysis-text" id="analysis-text"></div>
-              </div>
+          <!-- 解析折叠区（独立常驻，默认折叠，点击展开） -->
+          <div class="q-analysis-wrap" id="q-analysis-wrap">
+            <button class="analysis-toggle" id="analysis-toggle" type="button" aria-expanded="false" aria-controls="analysis-panel">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span class="analysis-toggle-text">查看解析</span>
+              <svg class="analysis-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="q-analysis-panel" id="analysis-panel" aria-hidden="true">
+              <div class="analysis-text" id="analysis-text"></div>
             </div>
           </div>
         </article>
@@ -591,12 +591,36 @@
 
   <!-- ========== 知识学习视图 ========== -->
   <section id="view-knowledge" class="view" aria-labelledby="knowledge-title">
+    <!-- 顶部阅读进度条 -->
+    <div class="reading-progress-bar" aria-hidden="true"><div class="reading-progress-fill" id="reading-progress-fill"></div></div>
+
+    <!-- Hero 区：标题 + 统计卡片 -->
+    <div class="knowledge-hero">
+      <div class="knowledge-hero-inner">
+        <div class="knowledge-hero-meta">
+          <span class="section-eyebrow">KNOWLEDGE · 2026.07</span>
+          <h2 class="section-title" id="knowledge-title">系统<span class="title-accent">知识学习</span></h2>
+          <p class="section-desc">基于公安部令第163号及2026年7月最新驾考大纲，覆盖交通法规、安全驾驶、信号识别、应急处置、新能源汽车、交管新规全领域。</p>
+        </div>
+        <div class="knowledge-hero-stats">
+          <div class="kstat-item"><span class="kstat-num" id="kstat-chapters">12</span><span class="kstat-label">核心章节</span></div>
+          <div class="kstat-item"><span class="kstat-num" id="kstat-mnemonics">83</span><span class="kstat-label">速记口诀</span></div>
+          <div class="kstat-item"><span class="kstat-num">2026.07</span><span class="kstat-label">最新更新</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 章节快速导航条（横向滚动卡片） -->
+    <div class="knowledge-chapter-nav" id="knowledge-chapter-nav" role="tablist" aria-label="章节快速导航">
+      <!-- JS 动态生成横向章节卡片 -->
+    </div>
+
+    <!-- 主内容区：双栏（左侧 sticky 目录 + 右侧内容） -->
     <div class="knowledge-layout">
-      <!-- 左侧目录 -->
       <aside class="knowledge-aside" aria-label="知识目录">
         <div class="knowledge-aside-header">
-          <span class="knowledge-aside-title">知识目录</span>
-          <span class="knowledge-aside-count" id="knowledge-count">10 章</span>
+          <span class="knowledge-aside-title">章节目录</span>
+          <span class="knowledge-aside-count" id="knowledge-count">12 章</span>
         </div>
         <div class="knowledge-aside-search">
           <svg class="search-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -607,16 +631,22 @@
         </nav>
       </aside>
 
-      <!-- 右侧内容 -->
       <div class="knowledge-main">
-        <header class="knowledge-header">
-          <span class="section-eyebrow">KNOWLEDGE</span>
-          <h2 class="section-title" id="knowledge-title">系统<span class="title-accent">知识学习</span></h2>
-          <p class="section-desc">基于公安部令第163号及2026年最新驾考大纲，系统化知识点教学，覆盖交通法规、安全驾驶、信号识别、应急处置全领域。</p>
-        </header>
         <article class="knowledge-content" id="knowledge-content">
           <!-- 内容由JS动态渲染 -->
         </article>
+        <!-- 底部章节翻页导航 -->
+        <nav class="knowledge-pager" id="knowledge-pager" aria-label="章节翻页">
+          <button class="know-pager-btn prev" id="know-prev" type="button">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>上一章</span>
+          </button>
+          <span class="know-pager-info" id="know-pager-info">第 1 / 12 章</span>
+          <button class="know-pager-btn next" id="know-next" type="button">
+            <span>下一章</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </nav>
       </div>
     </div>
   </section>
