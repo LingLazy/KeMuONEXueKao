@@ -508,6 +508,8 @@ button:focus:not(:focus-visible) { outline: none; }
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
   background:
     radial-gradient(ellipse 55% 45% at 12% 18%, var(--primary-bg) 0%, transparent 65%),
     radial-gradient(ellipse 45% 35% at 88% 82%, var(--accent-bg) 0%, transparent 65%);
@@ -517,6 +519,7 @@ button:focus:not(:focus-visible) { outline: none; }
     radial-gradient(ellipse 55% 45% at 12% 18%, rgba(20, 184, 166, 0.10) 0%, transparent 65%),
     radial-gradient(ellipse 45% 35% at 88% 82%, rgba(251, 146, 60, 0.08) 0%, transparent 65%);
 }
+/* 网格背景层（使用独立伪元素，避免与 blob 动画冲突） */
 .hero-bg::before {
   content: '';
   position: absolute;
@@ -528,6 +531,24 @@ button:focus:not(:focus-visible) { outline: none; }
   mask-image: radial-gradient(ellipse at center, black 25%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 70%);
   opacity: 0.6;
+}
+/* 流动 blob 装饰层（独立伪元素，避免与网格冲突） */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.16;
+  background: var(--primary);
+  top: -160px;
+  right: -100px;
+  animation: heroBlob 20s var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+[data-theme="dark"] .hero-bg::after {
+  opacity: 0.22;
 }
 
 .hero-content {
@@ -2723,6 +2744,347 @@ kbd {
   font-size: 0.9rem;
 }
 
+/* ========== 动效工具类（提取自 project-writing，适配本项目设计令牌） ========== */
+
+/* 视图切换入场：淡入上浮 */
+.nf-rise-in {
+  animation: nfRiseIn 0.32s var(--ease-out);
+}
+@keyframes nfRiseIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 对话框/卡片缩放入场 */
+.nf-pop-in {
+  animation: nfPopIn 0.24s var(--ease-spring);
+}
+@keyframes nfPopIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* 横向滑入：抽屉、侧栏 */
+.nf-slide-in {
+  animation: nfSlideIn 0.28s var(--ease-out);
+}
+@keyframes nfSlideIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* 错误抖动：答题错误反馈 */
+.nf-shake {
+  animation: nfShake 0.4s var(--ease-in-out);
+}
+@keyframes nfShake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+/* 骨架屏脉冲：加载占位 */
+.nf-skeleton {
+  animation: nfSkeletonPulse 1.6s var(--ease-in-out) infinite;
+}
+@keyframes nfSkeletonPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* 通用折叠过渡：展开/收起 */
+.nf-collapse {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.32s var(--ease-smooth),
+    opacity 0.24s var(--ease-smooth),
+    margin-top 0.24s var(--ease-smooth);
+}
+.nf-collapse.nf-open {
+  max-height: 1200px;
+  opacity: 1;
+}
+
+/* 卡片光泽扫过：悬停时高光带从左到右划过 */
+.nf-card-sheen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.nf-card-sheen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 100%
+  );
+  transition: left 0.6s var(--ease-smooth);
+  pointer-events: none;
+  z-index: 1;
+}
+.nf-card-sheen:hover::after {
+  left: 120%;
+}
+
+/* 按钮微光扫过：主按钮悬停高光带 */
+.nf-btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.nf-btn-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 70%
+  );
+  transform: skewX(-18deg);
+  transition: left 0.7s var(--ease-smooth);
+  pointer-events: none;
+  z-index: 0;
+}
+.nf-btn-shine > * {
+  position: relative;
+  z-index: 1;
+}
+.nf-btn-shine:hover::before {
+  left: 150%;
+}
+
+/* 图标位移：按钮悬停时图标向右轻移 */
+.nf-icon-slide > svg:first-child {
+  transition: transform 0.22s var(--ease-smooth);
+}
+.nf-icon-slide:hover > svg:first-child {
+  transform: translateX(2px);
+}
+
+/* 微光边框：悬停时渐变光晕边框 */
+.nf-glow-border {
+  position: relative;
+}
+.nf-glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.nf-glow-border:hover::after {
+  opacity: 0.35;
+}
+
+/* ========== 主页 Hero 背景装饰动画（点阵层 + 第二 blob） ========== */
+/* .hero-bg::before 和 .hero-bg::after 已在 .hero-bg 定义处统一规划：
+   ::before = 网格图案；::after = 主 blob 动画。
+   此处仅补充点阵层与第二 blob 装饰，使用独立的 .hero-bg-dotgrid 元素承载。 */
+.hero-bg-dotgrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--border-strong) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.4;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+/* 点阵层承载第二个 blob（accent 色），与主 blob 形成双色流动 */
+.hero-bg-dotgrid::before {
+  content: '';
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.14;
+  background: var(--accent);
+  bottom: -120px;
+  left: -80px;
+  animation: heroBlob 22s var(--ease-in-out) infinite;
+  animation-delay: -10s;
+  pointer-events: none;
+}
+[data-theme="dark"] .hero-bg-dotgrid::before {
+  opacity: 0.18;
+}
+@keyframes heroBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.08); }
+  66% { transform: translate(-20px, 30px) scale(0.95); }
+}
+
+/* ========== 滚动渐入：元素进入视口时淡入 ========== */
+.nf-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+.nf-reveal.nf-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== 数字滚动动画：统计数字 ========== */
+.nf-count-up {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========== 视图切换增强动画 ========== */
+.view.active .nf-rise-in {
+  animation: nfRiseIn 0.4s var(--ease-out);
+}
+
+/* ========== 导航栏滚动阴影增强 ========== */
+#topnav.scrolled {
+  box-shadow: var(--shadow-sm);
+}
+#topnav.scrolled::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary-border), transparent);
+}
+
+/* ========== 选项交互增强 ========== */
+.opt-item, .exam-opt-item {
+  position: relative;
+  overflow: hidden;
+}
+.opt-item::before, .exam-opt-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--primary);
+  transform: scaleY(0);
+  transition: transform 0.2s var(--ease-smooth);
+  transform-origin: center;
+}
+.opt-item:hover::before, .exam-opt-item:hover::before {
+  transform: scaleY(0.6);
+}
+.opt-item.selected::before, .exam-opt-item.selected::before {
+  transform: scaleY(1);
+  background: var(--primary);
+}
+.opt-item.correct::before, .exam-opt-item.correct::before {
+  transform: scaleY(1);
+  background: var(--success);
+}
+.opt-item.wrong::before, .exam-opt-item.wrong::before {
+  transform: scaleY(1);
+  background: var(--danger);
+}
+
+/* ========== 进度条动画增强 ========== */
+.progress-fill, .navcat-bar, .stats-progress-fill {
+  transition: width 0.6s var(--ease-spring);
+  position: relative;
+  overflow: hidden;
+}
+.progress-fill::after, .navcat-bar::after, .stats-progress-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: progressShine 2s var(--ease-in-out) infinite;
+}
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ========== 主题切换过渡增强 ========== */
+.theme-toggle {
+  transition: all 0.25s var(--ease-spring);
+}
+.theme-toggle:hover {
+  transform: rotate(-15deg) scale(1.05);
+}
+
+/* ========== 特性卡片悬停增强 ========== */
+.feature-card {
+  transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth);
+}
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.feature-card:hover .feature-arrow {
+  transform: translateX(4px);
+  color: var(--primary);
+}
+.feature-arrow {
+  transition: transform 0.25s var(--ease-smooth), color 0.25s;
+}
+
+/* ========== 热门分类卡片悬停增强 ========== */
+.hotcat-card {
+  transition: transform 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth);
+  animation: nfRiseIn 0.4s var(--ease-out) both;
+}
+.hotcat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.hotcat-card:hover .hotcat-arrow {
+  transform: translateX(3px);
+}
+.hotcat-arrow {
+  transition: transform 0.25s var(--ease-smooth);
+}
+
+/* 特性卡片交错入场 */
+.feature-card {
+  animation: nfRiseIn 0.45s var(--ease-out) both;
+}
+.feature-card:nth-child(1) { animation-delay: 0.05s; }
+.feature-card:nth-child(2) { animation-delay: 0.12s; }
+.feature-card:nth-child(3) { animation-delay: 0.19s; }
+.feature-card:nth-child(4) { animation-delay: 0.26s; }
+
+/* ========== 答题反馈动画 ========== */
+.question-card.correct-answer {
+  animation: correctPulse 0.5s var(--ease-spring);
+}
+.question-card.wrong-answer {
+  animation: nfShake 0.4s var(--ease-in-out);
+}
+@keyframes correctPulse {
+  0% { box-shadow: 0 0 0 0 var(--success-soft); }
+  50% { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
 /* ========== 移动端响应式 ========== */
 @media (max-width: 1100px) {
   .features-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2886,4 +3248,297 @@ kbd {
   .view { display: block !important; padding-top: 0; }
   body { background: #fff; color: #000; }
   .question-card, .mn-item { box-shadow: none; border: 1px solid #ccc; }
+}
+
+/* ===================================================================
+   视觉优化 v2.4 · 双主题细节增强
+   - 统计卡片悬停 + 数字脉动
+   - 选项双主题反馈
+   - 视图标题装饰
+   - 滚动条主题适配
+   - 焦点可见性
+   =================================================================== */
+
+/* ===== 主页统计卡片悬停效果 ===== */
+.hero-stats-card {
+  transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth);
+}
+.hero-stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-border);
+}
+.stat-item {
+  transition: transform 0.2s var(--ease-smooth), background 0.2s var(--ease-smooth);
+}
+.stat-item:hover {
+  transform: translateY(-1px);
+  background: var(--primary-bg);
+}
+.stat-item:hover .stat-num {
+  color: var(--primary-hover);
+}
+.stat-num {
+  transition: color 0.2s var(--ease-smooth);
+}
+
+/* ===== 主页 Hero 标题渐变装饰 ===== */
+.hero-title .title-accent {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ===== 视图标题装饰条 ===== */
+.view-header .section-title,
+.section-header .section-title {
+  position: relative;
+  display: inline-block;
+}
+.view-header .section-title::after,
+.section-header .section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 32px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: var(--r-full);
+}
+
+/* ===== 选项双主题反馈增强 ===== */
+.opt-item {
+  transition: background 0.18s var(--ease-smooth), border-color 0.18s var(--ease-smooth), transform 0.18s var(--ease-smooth);
+}
+.opt-item:hover:not(.disabled) {
+  background: var(--primary-bg);
+  border-color: var(--primary-border);
+  transform: translateX(2px);
+}
+.opt-item.disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+.opt-item.correct {
+  background: var(--success-soft);
+  border-color: var(--success);
+}
+.opt-item.wrong {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+  animation: nfShake 0.4s var(--ease-in-out);
+}
+
+/* 模拟考试选项同样的反馈 */
+.exam-opt-item {
+  transition: background 0.18s var(--ease-smooth), border-color 0.18s var(--ease-smooth), transform 0.18s var(--ease-smooth);
+}
+.exam-opt-item:hover:not(.disabled) {
+  background: var(--primary-bg);
+  border-color: var(--primary-border);
+}
+.exam-opt-item.disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+.exam-opt-item.selected {
+  background: var(--primary-bg);
+  border-color: var(--primary);
+}
+.exam-opt-item.correct {
+  background: var(--success-soft);
+  border-color: var(--success);
+}
+.exam-opt-item.wrong {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+}
+
+/* ===== 答题卡格子悬停增强 ===== */
+.exam-card-cell {
+  transition: transform 0.15s var(--ease-smooth), box-shadow 0.15s var(--ease-smooth);
+}
+.exam-card-cell:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+/* ===== 导航链接悬停下划线动画 ===== */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.25s var(--ease-smooth), left 0.25s var(--ease-smooth);
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ===== 品牌标记微动效 ===== */
+.brand-mark {
+  transition: transform 0.3s var(--ease-spring);
+}
+.brand:hover .brand-mark {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+/* ===== 滚动条主题适配增强 ===== */
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* ===== 焦点可见性增强（无障碍） ===== */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
+}
+
+/* ===== 主题切换时的过渡（仅切换瞬间启用，避免覆盖子元素 transition） ===== */
+/* JS 在 applyTheme 时临时添加 .theme-transitioning 类到 <html>，350ms 后移除 */
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition: background-color 0.32s var(--ease-smooth),
+              border-color 0.32s var(--ease-smooth),
+              color 0.32s var(--ease-smooth),
+              fill 0.32s var(--ease-smooth),
+              stroke 0.32s var(--ease-smooth) !important;
+}
+
+/* ===== 模态框入场增强 ===== */
+.modal-overlay {
+  animation: overlayIn 0.2s var(--ease-out);
+}
+.modal-box {
+  animation: nfPopIn 0.24s var(--ease-spring);
+}
+
+/* ===== Toast 入场动画 ===== */
+.toast.show {
+  animation: nfSlideIn 0.28s var(--ease-out);
+}
+
+/* ===== 题目卡片入场动画 ===== */
+.question-card.active {
+  animation: nfRiseIn 0.4s var(--ease-out);
+}
+
+/* ===== 答题卡面板入场 ===== */
+.exam-card-panel {
+  animation: nfPopIn 0.24s var(--ease-spring);
+}
+
+/* ===== 模拟考试结果卡片入场 ===== */
+.exam-result-card {
+  animation: nfRiseIn 0.5s var(--ease-out);
+}
+
+/* ===== 知识点章节卡片悬停 ===== */
+.md-chapter {
+  transition: opacity 0.3s var(--ease-smooth);
+}
+.md-chapter:hover .md-h {
+  color: var(--primary);
+}
+.md-h {
+  transition: color 0.2s var(--ease-smooth);
+}
+
+/* ===== 知识点目录项交互增强 ===== */
+.knowledge-toc-item {
+  position: relative;
+  transition: background 0.18s var(--ease-smooth), color 0.18s var(--ease-smooth);
+}
+.knowledge-toc-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 70%;
+  background: var(--primary);
+  border-radius: var(--r-full);
+  transition: transform 0.2s var(--ease-smooth);
+}
+.knowledge-toc-item:hover {
+  background: var(--primary-bg);
+}
+.knowledge-toc-item.active {
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+.knowledge-toc-item.active::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+/* ===== 口诀项悬停增强 ===== */
+.mn-item {
+  transition: transform 0.22s var(--ease-smooth), box-shadow 0.22s var(--ease-smooth), border-color 0.22s var(--ease-smooth);
+}
+.mn-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-border);
+}
+
+/* ===== 分类导航项悬停增强 ===== */
+.navcat-item {
+  transition: background 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth), transform 0.2s var(--ease-smooth);
+}
+.navcat-item:hover {
+  background: var(--primary-bg);
+  border-color: var(--primary-border);
+  transform: translateX(2px);
+}
+.navcat-item:hover .navcat-arrow {
+  color: var(--primary);
+  transform: translateX(3px);
+}
+.navcat-arrow {
+  transition: transform 0.2s var(--ease-smooth), color 0.2s var(--ease-smooth);
+}
+
+/* ===== 分类侧栏项悬停 ===== */
+.cat-item {
+  transition: background 0.18s var(--ease-smooth), border-color 0.18s var(--ease-smooth);
+}
+.cat-item:hover {
+  background: var(--primary-bg);
+}
+.cat-item.active {
+  background: var(--primary-bg);
+  border-color: var(--primary-border);
+}
+
+/* ===== 口诀索引项悬停 ===== */
+.aside-item {
+  transition: background 0.18s var(--ease-smooth), color 0.18s var(--ease-smooth);
+}
+.aside-item:hover {
+  background: var(--primary-bg);
+}
+.aside-item.active {
+  background: var(--primary-bg);
+  color: var(--primary);
 }

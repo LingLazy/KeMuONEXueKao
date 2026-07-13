@@ -73,6 +73,7 @@
   <section id="view-home" class="view active" aria-labelledby="home-title">
     <div class="home-hero">
       <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-bg-dotgrid" aria-hidden="true"></div>
       <div class="hero-content">
         <div class="hero-left">
           <div class="hero-tag">
@@ -85,16 +86,16 @@
           </h1>
           <p class="hero-sub">1964 道完整题库 · 76 条速记口诀 · 24 个精细分类 · 全真模拟考试。关键词智能标注，口诀即时提示，一站式攻克科目一。</p>
           <div class="hero-actions">
-            <button class="btn btn-primary" data-go="practice" type="button">
+            <button class="btn btn-primary nf-btn-shine nf-icon-slide" data-go="practice" type="button">
               <span>开始练习</span>
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
-            <button class="btn btn-ghost" data-go="exam" type="button">
+            <button class="btn btn-ghost nf-icon-slide" data-go="exam" type="button">
               <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               <span>模拟考试</span>
             </button>
-            <button class="btn btn-ghost" data-go="mnemonics" type="button">
-              <span>浏览口诀</span>
+            <button class="btn btn-ghost" data-go="knowledge" type="button">
+              <span>知识学习</span>
             </button>
           </div>
         </div>
@@ -141,13 +142,13 @@
     </div>
 
     <div class="home-features">
-      <div class="section-header">
+      <div class="section-header nf-reveal">
         <span class="section-eyebrow">FEATURES</span>
         <h2 class="section-title">核心功能</h2>
         <p class="section-desc">五大学习模式，覆盖知识、记忆、练习、考试、查阅全场景</p>
       </div>
       <div class="features-grid">
-        <article class="feature-card" data-go="knowledge">
+        <article class="feature-card nf-card-sheen" data-go="knowledge">
           <div class="feature-icon feature-icon-1" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           </div>
@@ -155,7 +156,7 @@
           <p class="feature-desc">系统化知识点教学，覆盖交通法规、安全驾驶、信号识别、应急处置等十大章节，建立完整知识框架。</p>
           <div class="feature-arrow" aria-hidden="true">→</div>
         </article>
-        <article class="feature-card" data-go="practice">
+        <article class="feature-card nf-card-sheen" data-go="practice">
           <div class="feature-icon feature-icon-2" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
@@ -163,7 +164,7 @@
           <p class="feature-desc">1964 道题目按 24 分类精细组织，支持搜索、乱序、跳转。关键词智能高亮，口诀即时提示。</p>
           <div class="feature-arrow" aria-hidden="true">→</div>
         </article>
-        <article class="feature-card feature-card-accent" data-go="exam">
+        <article class="feature-card feature-card-accent nf-card-sheen" data-go="exam">
           <div class="feature-icon feature-icon-3" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
@@ -171,7 +172,7 @@
           <p class="feature-desc">45 分钟限时 · 100 道随机题目 · 全真模拟真实考场。答题卡导航、错题提示、交卷评分一应俱全。</p>
           <div class="feature-arrow" aria-hidden="true">→</div>
         </article>
-        <article class="feature-card" data-go="mnemonics">
+        <article class="feature-card nf-card-sheen" data-go="mnemonics">
           <div class="feature-icon feature-icon-4" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           </div>
@@ -183,7 +184,7 @@
     </div>
 
     <div class="home-hotcats">
-      <div class="section-header">
+      <div class="section-header nf-reveal">
         <span class="section-eyebrow">HOT CATEGORIES</span>
         <h2 class="section-title">热门分类</h2>
         <p class="section-desc">点击卡片快速进入对应分类练习</p>

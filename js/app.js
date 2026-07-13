@@ -167,13 +167,22 @@
   /**
    * 应用主题
    * @param {string} theme 'light' | 'dark'
+   * 流程：临时启用全局颜色过渡类 → 切换 data-theme → 350ms 后移除过渡类
+   * 这样可避免覆盖子元素自身的 transition，仅在切换瞬间统一过渡颜色
    */
   function applyTheme(theme) {
     State.theme = theme;
-    document.documentElement.setAttribute('data-theme', theme);
+    const root = document.documentElement;
+    // 启用全局过渡类（仅过渡颜色相关属性）
+    root.classList.add('theme-transitioning');
+    root.setAttribute('data-theme', theme);
     Store.set('kemu1_theme', theme);
     const btn = $('#theme-toggle');
     if (btn) btn.setAttribute('aria-label', theme === 'dark' ? '切换到浅色主题' : '切换到深色主题');
+    // 过渡结束后移除全局过渡类
+    setTimeout(() => {
+      root.classList.remove('theme-transitioning');
+    }, 360);
   }
 
   /** 切换主题（用户主动切换则写入 localStorage） */
@@ -190,15 +199,29 @@
   /**
    * 切换视图
    * @param {string} name 视图名
+   * 流程：清理旧视图动画类 → 激活新视图 → 触发入场动画 → 初始化视图数据
    */
   function switchView(name) {
     if (!VALID_VIEWS.includes(name)) return;
+    if (State.view === name && $('#view-' + name)?.classList.contains('active')) {
+      // 已在该视图：仅滚动到顶
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     State.view = name;
 
-    // 切换视图激活态
-    $$('.view').forEach(v => v.classList.remove('active'));
+    // 清理所有视图的激活态与入场动画类
+    $$('.view').forEach(v => {
+      v.classList.remove('active', 'nf-rise-in');
+      // 清除残留的动画类避免重渲染冲突
+      void v.offsetWidth;
+    });
+
+    // 激活目标视图
     const target = $('#view-' + name);
-    if (target) target.classList.add('active');
+    if (target) {
+      target.classList.add('active', 'nf-rise-in');
+    }
 
     // 导航链接激活态
     $$('.nav-link').forEach(l => {
@@ -209,12 +232,20 @@
     });
 
     // 滚动到顶
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
 
-    // 视图初始化
-    if (name === 'home') updateHomeStats();
+    // 视图初始化（各视图自管理渲染逻辑）
+    if (name === 'home') {
+      updateHomeStats();
+      // 主页特性卡片重新触发交错入场
+      $$('.feature-card').forEach((card, i) => {
+        card.classList.remove('nf-rise-in');
+        void card.offsetWidth;
+        card.classList.add('nf-rise-in');
+        card.style.animationDelay = `${0.05 + i * 0.07}s`;
+      });
+    }
     else if (name === 'practice') {
-      // 首次进入练习视图时初始化侧栏（若未初始化）
       if (!$('#category-list').children.length) renderSidebar();
     }
     else if (name === 'knowledge') renderKnowledge();
@@ -247,7 +278,7 @@
     container.innerHTML = entries.map(([key, meta], i) => {
       const colorBg = hexToRgba(meta.color, 0.10);
       return `
-        <article class="hotcat-card" data-cat="${key}" style="--cat-color:${meta.color};--cat-color-bg:${colorBg}" tabindex="0" role="button" aria-label="进入${escapeHtml(meta.name)}分类">
+        <article class="hotcat-card nf-card-sheen" data-cat="${key}" style="--cat-color:${meta.color};--cat-color-bg:${colorBg};animation-delay:${i * 40}ms" tabindex="0" role="button" aria-label="进入${escapeHtml(meta.name)}分类">
           <div class="hotcat-icon">
             <span class="hotcat-num">${String(i + 1).padStart(2, '0')}</span>
           </div>
@@ -610,6 +641,14 @@
     updateNavMeta();
     updateHomeStats();
 
+    // 答题反馈动画
+    const cardEl = $('.question-card');
+    if (cardEl) {
+      cardEl.classList.remove('correct-answer', 'wrong-answer');
+      void cardEl.offsetWidth; // 触发重排以重置动画
+      cardEl.classList.add(correct ? 'correct-answer' : 'wrong-answer');
+    }
+
     toast(correct ? '回答正确' : '回答错误', correct ? 'success' : 'error');
   }
 
@@ -871,11 +910,13 @@
     }
 
     // 紧凑双列网格，默认只展示标题+口诀文本，点击展开解释与详情
+    // 添加 nf-rise-in 类 + 交错延迟实现入场动效（每项延迟 30ms，最多前 12 项）
     listEl.innerHTML = list.map((m, i) => {
       const meta = CATEGORIES[m.cat] || { name: m.cat, color: '#f59e0b' };
       const hasDetail = !!(m.explain || (m.details || []).length);
+      const delay = i < 12 ? ` style="--item-color:${meta.color};animation-delay:${i * 30}ms"` : ` style="--item-color:${meta.color}"`;
       return `
-        <article class="mn-item" style="--item-color:${meta.color}" data-idx="${i}">
+        <article class="mn-item nf-rise-in"${delay} data-idx="${i}">
           <div class="mn-item-head">
             <span class="mn-item-num">${String(i + 1).padStart(2, '0')}</span>
             <span class="mn-item-cat">${escapeHtml(meta.name)}</span>
@@ -1198,8 +1239,8 @@
       return;
     }
 
-    contentEl.innerHTML = filtered.map(c => `
-      <section class="md-chapter" id="${c.id}">
+    contentEl.innerHTML = filtered.map((c, i) => `
+      <section class="md-chapter nf-rise-in" id="${c.id}" style="animation-delay:${Math.min(i * 50, 400)}ms">
         ${c.html}
       </section>
     `).join('');
@@ -1247,8 +1288,9 @@
     tableEl.innerHTML = entries.map(([key, meta], i) => {
       const answeredInCat = (meta.ids || []).filter(id => State.answered[id]).length;
       const progressPct = meta.count > 0 ? Math.round(answeredInCat / meta.count * 100) : 0;
+      const delay = i < 16 ? `${i * 25}ms` : '0ms';
       return `
-        <div class="navcat-item" data-cat="${key}" role="listitem" tabindex="0" style="--item-color:${meta.color}">
+        <div class="navcat-item nf-rise-in" data-cat="${key}" role="listitem" tabindex="0" style="--item-color:${meta.color};animation-delay:${delay}">
           <div class="navcat-num">${String(i + 1).padStart(2, '0')}</div>
           <div class="navcat-body">
             <div class="navcat-top">
@@ -2042,6 +2084,24 @@
       else nav.classList.remove('scrolled');
     }, { passive: true });
 
+    // 滚动渐入：元素进入视口时添加 nf-revealed 类触发动画
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('nf-revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      // 观察所有带 nf-reveal 类的元素
+      $$('.nf-reveal').forEach(el => revealObserver.observe(el));
+    } else {
+      // 不支持 IntersectionObserver 的浏览器直接显示
+      $$('.nf-reveal').forEach(el => el.classList.add('nf-revealed'));
+    }
+
     // 键盘快捷键
     document.addEventListener('keydown', e => {
       // ESC 关闭模态/答题卡
@@ -2132,6 +2192,9 @@
     // 根据URL hash决定初始视图，默认主页
     const hash = location.hash.replace('#', '');
     const initialView = VALID_VIEWS.includes(hash) ? hash : 'home';
+
+    // 初始加载：重置 State.view 以强制触发 switchView 入场动画
+    State.view = '';
     switchView(initialView);
   }
 

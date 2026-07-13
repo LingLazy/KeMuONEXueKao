@@ -6,7 +6,7 @@
    =================================================================== */
 'use strict';
 
-const SW_VERSION = 'v2.2.20260713';
+const SW_VERSION = 'v2.4.20260713';
 const CORE_CACHE = `kemu1-core-${SW_VERSION}`;
 const IMG_CACHE = `kemu1-img-${SW_VERSION}`;
 const DATA_CACHE = `kemu1-data-${SW_VERSION}`;
