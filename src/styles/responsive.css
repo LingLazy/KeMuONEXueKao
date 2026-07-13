@@ -1,0 +1,901 @@
+/* ===================================================================
+   响应式样式
+   - 断点：1024px（平板）/ 768px（移动）/ 480px（窄屏）
+   - 与 useMediaQuery hook 断点一致
+   - 移动端布局切换、网格调整、字体缩放、触摸优化
+   - 仅 hover 设备启用悬浮交互
+   - 打印样式
+   =================================================================== */
+
+/* ===================================================================
+   平板断点（≤ 1024px）
+   - 导航折叠统计
+   - 双栏侧栏收窄
+   - 网格列数减少
+   =================================================================== */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-w: 220px;
+    --mnemonics-aside-w: 240px;
+    --container-max: 100%;
+  }
+
+  /* 导航统计简化 */
+  .nav-meta {
+    font-size: 0.6875rem;
+  }
+  .nav-stat-sub {
+    display: none;
+  }
+
+  /* HomeView 网格 */
+  .home-stats {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+  .home-cats-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  .home-quick-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  /* CategoriesView 网格 */
+  .cats-overview {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+  .cat-detail-items {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  /* 考试结果统计：4 列 → 2 列 */
+  .exam-result-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 知识视图目录收窄 */
+  .knowledge-layout {
+    grid-template-columns: 200px 1fr;
+  }
+
+  /* 题目卡片缩小内边距 */
+  .qcard {
+    padding: var(--sp-5);
+  }
+
+  /* 答题卡网格 */
+  .sheet-grid {
+    grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+  }
+}
+
+/* ===================================================================
+   移动端断点（≤ 768px）
+   - 顶部导航折叠
+   - 双栏布局转单栏
+   - 移动端专用控件显示
+   - 网格强制单列或双列
+   =================================================================== */
+@media (max-width: 768px) {
+  :root {
+    --nav-h: 52px;
+    --container-max: 100%;
+  }
+
+  /* ===== 顶部导航：折叠 ===== */
+  .nav-inner {
+    padding: 0 var(--sp-4);
+    gap: var(--sp-2);
+  }
+  .nav-links {
+    display: none;
+  }
+  .nav-meta {
+    display: none;
+  }
+  .nav-menu-toggle {
+    display: grid;
+  }
+  .nav-mobile-menu {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    padding: var(--sp-3);
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    animation: menu-slide 0.2s var(--ease-out);
+  }
+  @keyframes menu-slide {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .brand-text {
+    font-size: 0.9375rem;
+  }
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
+  }
+
+  /* ===== 视图容器 ===== */
+  .view-container,
+  .view-section,
+  .home-section {
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  /* ===== HomeView 主页 ===== */
+  .home-hero {
+    padding: var(--sp-8) var(--sp-4) var(--sp-6);
+  }
+  .home-hero-title {
+    font-size: clamp(1.875rem, 8vw, 2.25rem);
+  }
+  .home-hero-desc {
+    font-size: 0.875rem;
+  }
+  .home-hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .home-hero-actions .btn {
+    width: 100%;
+  }
+
+  .home-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-3);
+    padding: 0 var(--sp-4);
+  }
+  .stat-card {
+    padding: var(--sp-3);
+  }
+  .stat-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .stat-value {
+    font-size: 1.25rem;
+  }
+
+  .home-cats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+  }
+  .cat-card {
+    padding: var(--sp-4);
+  }
+  .home-quick-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 雷达图缩小 */
+  .home-radar {
+    padding: var(--sp-3);
+    overflow-x: auto;
+  }
+
+  /* ===== PracticeView 练习视图 ===== */
+  .practice-mobile-bar {
+    display: flex;
+  }
+  .practice-layout {
+    grid-template-columns: 1fr;
+    padding: var(--sp-4);
+    gap: var(--sp-4);
+  }
+  .practice-sidebar {
+    display: none;
+  }
+  .practice-main {
+    padding-top: var(--sp-2);
+  }
+  .practice-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .practice-toolbar-left {
+    align-items: baseline;
+  }
+  .practice-title {
+    font-size: 1.125rem;
+  }
+  .practice-toolbar-right {
+    justify-content: flex-start;
+  }
+  .practice-search {
+    min-width: 0;
+    flex: 1;
+  }
+  .practice-nav {
+    flex-direction: column;
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+  }
+  .practice-nav-jump {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 跳转网格：小屏单列 */
+  .jump-grid {
+    grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+    gap: 4px;
+  }
+  .jump-cell {
+    font-size: 0.75rem;
+  }
+
+  /* ===== ExamView 考试视图 ===== */
+  .exam-start {
+    padding: var(--sp-5) 0;
+  }
+  .exam-start-icon {
+    width: 72px;
+    height: 72px;
+  }
+  .exam-start-title {
+    font-size: 1.5rem;
+  }
+  .exam-start-rules {
+    padding: var(--sp-4);
+  }
+  .exam-rules-list li {
+    gap: var(--sp-2);
+  }
+  .exam-start-meta {
+    gap: var(--sp-2);
+  }
+
+  /* 答题页头部 */
+  .exam-header {
+    padding: var(--sp-2) var(--sp-3);
+    gap: var(--sp-2);
+    flex-wrap: nowrap;
+  }
+  .exam-header-left,
+  .exam-header-right {
+    gap: var(--sp-2);
+  }
+  .exam-header-center {
+    display: none;
+  }
+  .exam-timer {
+    padding: var(--sp-1) var(--sp-2);
+    font-size: 0.8125rem;
+  }
+  .exam-timer-text {
+    font-size: 0.875rem;
+  }
+  .exam-sheet-btn {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+  .exam-sheet-btn span:not(.exam-sheet-count) {
+    display: none;
+  }
+
+  /* 题目区 */
+  .exam-body {
+    padding: var(--sp-4) var(--sp-3) calc(var(--sp-16) + var(--nav-h) + var(--sp-4));
+  }
+
+  /* 底部操作栏 */
+  .exam-footer {
+    padding: var(--sp-2) var(--sp-3);
+    gap: var(--sp-2);
+  }
+  .exam-footer .btn {
+    padding: var(--sp-2) var(--sp-3);
+    font-size: 0.8125rem;
+  }
+  .exam-footer .btn svg {
+    width: 14px;
+    height: 14px;
+  }
+  .exam-mark-btn,
+  .exam-hint-btn {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+  .exam-mark-btn span:not(.exam-mark-btn-text),
+  .exam-hint-btn span:not(.exam-hint-btn-text) {
+    display: none;
+  }
+
+  /* 答题卡 */
+  .sheet-summary {
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+  }
+  .sheet-stat-val {
+    font-size: 1.25rem;
+  }
+  .sheet-grid {
+    grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+    gap: 4px;
+  }
+
+  /* 结果页 */
+  .exam-result {
+    padding: var(--sp-8) var(--sp-4);
+  }
+  .exam-result-icon {
+    width: 72px;
+    height: 72px;
+  }
+  .exam-result-title {
+    font-size: 1.5rem;
+  }
+  .score-num {
+    font-size: 3rem;
+  }
+  .exam-result-actions {
+    flex-direction: column;
+  }
+  .exam-result-actions .btn {
+    width: 100%;
+  }
+
+  /* ===== MnemonicsView 口诀视图 ===== */
+  .mnemonics-search-bar {
+    max-width: 100%;
+    margin-bottom: var(--sp-4);
+  }
+  .mnemonics-layout {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+  .mnemonics-aside {
+    display: none;
+  }
+  .mnemonics-mobile-cats {
+    display: block;
+  }
+  .mnemonics-list {
+    height: auto !important;
+    max-height: calc(100vh - 320px);
+    min-height: 300px;
+  }
+  .mnemonic-card-head {
+    padding: var(--sp-3);
+  }
+  .mnemonic-card-text {
+    max-width: 180px;
+    font-size: 0.8125rem;
+  }
+  .mnemonic-card-body {
+    padding: 0 var(--sp-3) var(--sp-3);
+  }
+  .mnemonic-section {
+    padding: var(--sp-2) var(--sp-3);
+  }
+
+  /* ===== CategoriesView 分类视图 ===== */
+  .cats-overview {
+    grid-template-columns: 1fr;
+    margin-bottom: var(--sp-8);
+  }
+  .group-card {
+    padding: var(--sp-4);
+  }
+  .group-card-stats {
+    gap: var(--sp-1);
+    padding: var(--sp-2);
+  }
+  .cat-detail-items {
+    grid-template-columns: 1fr;
+  }
+  .cat-detail-group {
+    padding: var(--sp-4);
+  }
+
+  /* ===== KnowledgeView 知识视图 ===== */
+  .knowledge-search-bar {
+    max-width: 100%;
+  }
+  .knowledge-layout {
+    grid-template-columns: 1fr;
+  }
+  .knowledge-toc {
+    display: none;
+  }
+  .knowledge-toc-toggle {
+    display: flex;
+  }
+  .knowledge-content {
+    padding: var(--sp-4);
+    border-radius: var(--r-md);
+  }
+  .markdown-body h1 {
+    font-size: 1.5rem;
+  }
+  .markdown-body h2 {
+    font-size: 1.25rem;
+  }
+  .markdown-body h3 {
+    font-size: 1.0625rem;
+  }
+  .markdown-body .md-p {
+    font-size: 0.875rem;
+  }
+
+  /* ===== QuestionCard 题目卡片 ===== */
+  .qcard {
+    padding: var(--sp-4);
+    border-radius: var(--r-lg);
+  }
+  .qcard-header {
+    margin-bottom: var(--sp-3);
+  }
+  .qcard-question {
+    font-size: 1rem;
+    margin-bottom: var(--sp-3);
+  }
+  .qcard-options {
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-3);
+  }
+  .qcard-option {
+    padding: var(--sp-2) var(--sp-3);
+    font-size: 0.875rem;
+    gap: var(--sp-2);
+  }
+  .qcard-option-letter {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8125rem;
+  }
+  .qcard-image .lazy-img {
+    max-height: 200px;
+  }
+  .qcard-image .lazy-img-tag {
+    max-height: 200px;
+  }
+
+  /* ===== Modal 模态框 ===== */
+  .modal-backdrop {
+    padding: var(--sp-3);
+    align-items: flex-end;
+  }
+  .modal {
+    max-height: 92vh;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    animation: modal-slide-up 0.25s var(--ease-out);
+  }
+  .modal-sm,
+  .modal-md,
+  .modal-lg {
+    max-width: 100%;
+  }
+  @keyframes modal-slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .modal-header {
+    padding: var(--sp-3) var(--sp-4);
+  }
+  .modal-body {
+    padding: var(--sp-4);
+  }
+
+  /* ===== Section 标题 ===== */
+  .section-header {
+    margin-bottom: var(--sp-5);
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .section-desc {
+    font-size: 0.875rem;
+  }
+}
+
+/* ===================================================================
+   窄屏断点（≤ 480px）
+   - 进一步缩小字体
+   - 按钮全宽
+   - 紧凑布局
+   =================================================================== */
+@media (max-width: 480px) {
+  /* 导航 */
+  .brand-text {
+    font-size: 0.875rem;
+  }
+  .brand-accent {
+    display: none;
+  }
+
+  /* 视图容器 */
+  .view-container,
+  .view-section,
+  .home-section {
+    padding: var(--sp-4) var(--sp-3);
+  }
+
+  /* HomeView */
+  .home-hero {
+    padding: var(--sp-6) var(--sp-3) var(--sp-4);
+  }
+  .home-hero-title {
+    font-size: 1.75rem;
+  }
+  .home-hero-desc {
+    font-size: 0.8125rem;
+  }
+  .home-hero-eyebrow {
+    font-size: 0.6875rem;
+    padding: 4px 10px;
+  }
+  .home-stats {
+    grid-template-columns: 1fr;
+    gap: var(--sp-2);
+    padding: 0 var(--sp-3);
+  }
+  .home-progress {
+    padding: 0 var(--sp-3);
+  }
+  .stat-card {
+    padding: var(--sp-3);
+  }
+  .stat-value {
+    font-size: 1.125rem;
+  }
+
+  /* PracticeView */
+  .practice-layout {
+    padding: var(--sp-3);
+  }
+  .practice-title {
+    font-size: 1rem;
+  }
+  .practice-search {
+    padding: 4px 10px;
+    font-size: 0.8125rem;
+  }
+  .jump-grid {
+    grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+  }
+
+  /* ExamView */
+  .exam-start-title {
+    font-size: 1.25rem;
+  }
+  .exam-start-rules {
+    padding: var(--sp-3);
+  }
+  .exam-rules-title {
+    font-size: 1rem;
+  }
+  .exam-timer {
+    font-size: 0.75rem;
+  }
+  .exam-footer {
+    padding: var(--sp-2);
+    gap: var(--sp-1);
+  }
+  .exam-footer .btn {
+    padding: var(--sp-2);
+    font-size: 0.75rem;
+  }
+  .exam-footer .btn svg {
+    width: 12px;
+    height: 12px;
+  }
+  .exam-mark-btn,
+  .exam-hint-btn {
+    padding: 4px 6px;
+    font-size: 0.6875rem;
+  }
+  .exam-result-title {
+    font-size: 1.25rem;
+  }
+  .score-num {
+    font-size: 2.5rem;
+  }
+  .score-unit {
+    font-size: 1rem;
+  }
+  .exam-result-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-2);
+  }
+  .result-stat {
+    padding: var(--sp-2);
+  }
+  .result-stat-num {
+    font-size: 1rem;
+  }
+  .sheet-grid {
+    grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+  }
+
+  /* MnemonicsView */
+  .mnemonic-card-head {
+    padding: var(--sp-2) var(--sp-3);
+  }
+  .mnemonic-card-title {
+    font-size: 0.875rem;
+  }
+  .mnemonic-card-text {
+    max-width: 140px;
+    font-size: 0.75rem;
+  }
+  .mnemonic-section {
+    padding: var(--sp-2);
+  }
+  .mnemonic-explain {
+    font-size: 0.8125rem;
+  }
+
+  /* CategoriesView */
+  .group-card {
+    padding: var(--sp-3);
+  }
+  .group-card-name {
+    font-size: 1rem;
+  }
+
+  /* KnowledgeView */
+  .knowledge-content {
+    padding: var(--sp-3);
+  }
+  .markdown-body h1 {
+    font-size: 1.25rem;
+  }
+  .markdown-body h2 {
+    font-size: 1.125rem;
+  }
+  .markdown-body .md-p {
+    font-size: 0.8125rem;
+  }
+  .md-table {
+    font-size: 0.75rem;
+  }
+  .md-table th,
+  .md-table td {
+    padding: var(--sp-1) var(--sp-2);
+  }
+
+  /* QuestionCard */
+  .qcard {
+    padding: var(--sp-3);
+  }
+  .qcard-question {
+    font-size: 0.9375rem;
+  }
+  .qcard-option {
+    padding: var(--sp-2);
+    font-size: 0.8125rem;
+  }
+  .qcard-option-letter {
+    width: 22px;
+    height: 22px;
+    font-size: 0.75rem;
+  }
+  .qcard-mnemonic-text {
+    font-size: 0.875rem;
+  }
+
+  /* Section */
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  /* Modal */
+  .modal-backdrop {
+    padding: 0;
+  }
+  .modal-body {
+    padding: var(--sp-3);
+  }
+}
+
+/* ===================================================================
+   横屏移动端（高度 ≤ 500px 且宽度 > 768px）
+   - 顶部导航高度压缩
+   - 考试答题区高度优化
+   =================================================================== */
+@media (max-height: 500px) and (orientation: landscape) and (min-width: 600px) {
+  :root {
+    --nav-h: 44px;
+  }
+  .nav-inner {
+    padding: 0 var(--sp-3);
+  }
+  .brand-mark {
+    width: 26px;
+    height: 26px;
+  }
+  .brand-text {
+    font-size: 0.875rem;
+  }
+  .exam-body {
+    padding-top: var(--sp-3);
+    padding-bottom: calc(var(--sp-12) + var(--nav-h));
+  }
+  .exam-footer {
+    padding: var(--sp-2) var(--sp-3);
+  }
+}
+
+/* ===================================================================
+   仅 hover 设备启用悬浮交互
+   - 触摸设备禁用 transform 类悬浮效果，避免粘滞高亮
+   =================================================================== */
+@media (hover: none) {
+  .cat-card:hover,
+  .quick-card:hover,
+  .group-card:hover,
+  .cat-detail-item:hover,
+  .mnemonic-card-head:hover,
+  .qcard:hover,
+  .nav-link:hover,
+  .practice-nav-jump:hover,
+  .jump-cell:hover,
+  .sheet-cell:hover,
+  .modal-close:hover,
+  .knowledge-toc-item:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+  .cat-card:hover::before,
+  .quick-card:hover::before {
+    opacity: 0;
+  }
+  .theme-toggle:hover {
+    transform: none;
+  }
+  /* 触摸设备：按下反馈替代悬浮 */
+  .cat-card:active,
+  .quick-card:active,
+  .group-card:active,
+  .cat-detail-item:active,
+  .qcard-option:active:not(:disabled) {
+    transform: scale(0.98);
+    transition: transform 0.1s;
+  }
+}
+
+/* ===================================================================
+   高分辨率屏幕（Retina）
+   - 细化边框，提升清晰度
+   =================================================================== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .qcard-option {
+    border-width: 1px;
+  }
+  .sheet-cell.current {
+    outline-width: 2px;
+  }
+}
+
+/* ===================================================================
+   打印样式
+   - 隐藏导航、操作栏、模态背景
+   - 优化知识页面打印输出
+   =================================================================== */
+@media print {
+  #topnav,
+  .nav-mobile-menu,
+  .exam-footer,
+  .exam-header,
+  .practice-sidebar,
+  .practice-mobile-bar,
+  .practice-nav,
+  .mnemonics-aside,
+  .mnemonics-mobile-cats,
+  .mnemonics-search-bar,
+  .knowledge-toc,
+  .knowledge-toc-toggle,
+  .knowledge-toc-drawer,
+  .knowledge-search-bar,
+  .qcard-actions,
+  .qcard-option,
+  .modal-backdrop,
+  .toast-container,
+  .global-loading,
+  .skip-link,
+  .theme-toggle,
+  .nav-menu-toggle,
+  .home-hero-actions,
+  .home-quick-grid,
+  .quick-card {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    padding-top: 0 !important;
+  }
+
+  .view,
+  .view-container,
+  .home-section {
+    max-width: 100% !important;
+    padding: 0 !important;
+    min-height: auto !important;
+    animation: none !important;
+  }
+
+  .qcard,
+  .knowledge-content,
+  .mnemonic-card,
+  .cat-detail-group {
+    box-shadow: none !important;
+    border: 1px solid #999 !important;
+    page-break-inside: avoid;
+  }
+
+  .markdown-body h1,
+  .markdown-body h2,
+  .markdown-body h3 {
+    color: #000 !important;
+    page-break-after: avoid;
+  }
+
+  .markdown-body .md-p,
+  .mnemonic-explain,
+  .qcard-question {
+    color: #000 !important;
+  }
+
+  /* 仅显示当前选中视图 */
+  .view {
+    display: none;
+  }
+  .view:target,
+  .view.is-printing {
+    display: block;
+  }
+}
+
+/* ===================================================================
+   低端设备降级（prefers-reduced-data）
+   - 禁用毛玻璃效果，降低 GPU 负载
+   - 禁用复杂阴影
+   =================================================================== */
+@media (prefers-reduced-data: reduce) {
+  .modal-backdrop,
+  .knowledge-toc-drawer {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(10, 15, 28, 0.85);
+  }
+  #topnav.scrolled {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--bg-card);
+  }
+  .qcard-mnemonic {
+    background: var(--accent-bg);
+  }
+}
+
+/* ===================================================================
+   大屏优化（≥ 1600px）
+   - 容器最大宽度提升
+   - 网格列数增加
+   =================================================================== */
+@media (min-width: 1600px) {
+  :root {
+    --container-max: 1440px;
+  }
+  .home-stats {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .home-cats-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+  .cats-overview {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+  .cat-detail-items {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}

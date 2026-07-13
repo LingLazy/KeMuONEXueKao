@@ -1,0 +1,219 @@
+/* ===================================================================
+   布局样式
+   - 顶部导航
+   - 主内容容器
+   - 视图通用容器
+   =================================================================== */
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== 顶部导航 ========== */
+#topnav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-h);
+  transition: box-shadow 0.3s var(--ease-smooth), background 0.3s var(--ease-smooth);
+}
+#topnav.scrolled {
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+}
+
+.nav-inner {
+  max-width: var(--container-max);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+/* 品牌 logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  color: var(--text-1);
+  flex-shrink: 0;
+}
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  color: #fff;
+  border-radius: var(--r-md);
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 2px 6px var(--primary-bg);
+}
+.brand-accent {
+  color: var(--accent);
+  margin: 0 2px;
+}
+
+/* 主导航链接 */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  margin: 0 auto;
+}
+.nav-link {
+  position: relative;
+  padding: var(--sp-2) var(--sp-3);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-3);
+  border-radius: var(--r-md);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover {
+  color: var(--text-1);
+  background: var(--bg-hover);
+}
+.nav-link.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: var(--r-full);
+}
+
+/* 右侧操作区 */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-shrink: 0;
+}
+.nav-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+.nav-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--text-1);
+}
+#nav-progress {
+  color: var(--primary);
+}
+.nav-stat-divider {
+  color: var(--text-mute);
+}
+.nav-stat-sub {
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-md);
+  color: var(--text-2);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  transition: all 0.2s var(--ease-smooth);
+}
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+  transform: rotate(15deg);
+}
+
+/* 移动端菜单切换 */
+.nav-menu-toggle {
+  display: none;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: var(--r-md);
+  color: var(--text-1);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+
+/* 移动端下拉菜单 */
+.nav-mobile-menu {
+  display: none;
+  flex-direction: column;
+  padding: var(--sp-2);
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+.nav-mobile-link {
+  padding: var(--sp-3) var(--sp-4);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-2);
+  border-radius: var(--r-md);
+  transition: background 0.2s, color 0.2s;
+}
+.nav-mobile-link:hover {
+  background: var(--bg-hover);
+  color: var(--text-1);
+}
+.nav-mobile-link.active {
+  background: var(--primary-bg);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ========== 主内容区 ========== */
+.app-main {
+  flex: 1;
+  min-height: calc(100vh - var(--nav-h));
+  width: 100%;
+}
+
+/* 视图通用容器 */
+.view {
+  width: 100%;
+  min-height: calc(100vh - var(--nav-h));
+  animation: view-enter 0.4s var(--ease-out);
+}
+@keyframes view-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 视图内区块 */
+.view-section {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--sp-8) var(--sp-6);
+}
