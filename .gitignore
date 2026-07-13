@@ -45,6 +45,11 @@ image_match_result.json
 # 仅构建用的数据源与参考资料（保留本地，不进入仓库与部署包）
 kemu1_question_bank_full.json
 科目一考试口诀技巧.md
+科目一知识点.txt
+新建 文本文档.txt
+
+# 图片迁移工作目录（中间产物，不进入仓库）
+提取的图标图片/
 
 # Vite 构建产物
 dist/

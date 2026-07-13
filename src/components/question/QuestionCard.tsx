@@ -17,6 +17,7 @@ import { useProgressStore } from '@/stores/progressStore';
 import { usePracticeStore } from '@/stores/practiceStore';
 import { useVibrate, useConfetti, useSwipe, useRipple } from '@/hooks';
 import LazyImage from '@/components/common/LazyImage';
+import Modal from '@/components/common/Modal';
 
 interface QuestionCardProps {
   /** 题目数据 */
@@ -70,6 +71,8 @@ export default function QuestionCard({
   const [localSelected, setLocalSelected] = useState<number>(-1);
   // 是否已答（用于显示解析）
   const [answered, setAnswered] = useState(false);
+  // 图片放大查看模态框状态
+  const [imageZoomOpen, setImageZoomOpen] = useState(false);
 
   const finalSelected = selected ?? localSelected;
   const isAnswered = examMode ? finalSelected >= 0 : answered;
@@ -179,14 +182,54 @@ export default function QuestionCard({
 
       {/* 图片 */}
       {question.is_image_question && question.image && (
-        <div className="qcard-image">
+        <div
+          className="qcard-image qcard-image-clickable"
+          onClick={() => {
+            setImageZoomOpen(true);
+            vibrate([10]);
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label="点击放大查看图片"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setImageZoomOpen(true);
+            }
+          }}
+        >
           <LazyImage
             src={getImageUrl(question.image)}
             alt={`题目 ${question.id} 配图`}
             nativeLazy
           />
+          {/* 点击放大提示标识 */}
+          <span className="qcard-image-zoom-hint" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3M11 8v6M8 11h6" />
+            </svg>
+            <span>点击放大</span>
+          </span>
         </div>
       )}
+
+      {/* 图片放大查看模态框 */}
+      <Modal
+        open={imageZoomOpen}
+        onClose={() => setImageZoomOpen(false)}
+        title={`题目 ${question.id} 配图`}
+        size="lg"
+      >
+        <div className="qcard-image-zoom">
+          <img
+            src={getImageUrl(question.image)}
+            alt={`题目 ${question.id} 配图放大查看`}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </Modal>
 
       {/* 选项 */}
       <div className="qcard-options" role="group" aria-label="选项列表">

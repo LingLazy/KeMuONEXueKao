@@ -6,13 +6,13 @@
    =================================================================== */
 
 :root {
-  /* === 背景层次 · 冷调钢灰（带蓝相染色，非纯白） === */
-  --bg-base: #eef1f5;
-  --bg-sub: #e3e8ee;
+  /* === 背景层次 · 清新钢蓝（提亮+去灰，营造通透质感） === */
+  --bg-base: #f6f8fb;
+  --bg-sub: #eef2f7;
   --bg-card: #ffffff;
   --bg-elev: #ffffff;
-  --bg-hover: #e8ecf2;
-  --bg-sunken: #e1e6ec;
+  --bg-hover: #eef2f7;
+  --bg-sunken: #e5eaf1;
 
   /* === 文字层次 · 冷调近黑 === */
   --text-1: #0a0e14;
@@ -24,18 +24,18 @@
   --primary: #1456db;
   --primary-hover: #0f44b0;
   --primary-active: #0a3a9c;
-  --primary-soft: #d8e6ff;
+  --primary-soft: #dbe7ff;
   --primary-bg: rgba(20, 86, 219, 0.07);
   --primary-border: rgba(20, 86, 219, 0.28);
 
-  /* === 强调 · 工业琥珀（沉稳，取代珊瑚橙） === */
-  --accent: #b4530a;
-  --accent-hover: #92410a;
-  --accent-soft: #fde6d0;
-  --accent-bg: rgba(180, 83, 10, 0.07);
-  --accent-border: rgba(180, 83, 10, 0.28);
+  /* === 强调 · 活力琥珀（提亮，更显温暖与活力） === */
+  --accent: #ea7c1f;
+  --accent-hover: #c2410c;
+  --accent-soft: #fed7aa;
+  --accent-bg: rgba(234, 124, 31, 0.08);
+  --accent-border: rgba(234, 124, 31, 0.30);
 
-  /* === 状态色 · 偏冷工业调 === */
+  /* === 状态色 · 平衡工业调与可读性 === */
   --success: #15803d;
   --success-soft: #d6f0df;
   --danger: #b91c1c;
@@ -46,34 +46,35 @@
   --warn-soft: #faedc4;
 
   /* === 边框与分割 · 冷调带蓝相 === */
-  --border: rgba(10, 30, 60, 0.10);
-  --border-strong: rgba(10, 30, 60, 0.18);
-  --divider: rgba(10, 30, 60, 0.07);
+  --border: rgba(10, 30, 60, 0.08);
+  --border-strong: rgba(10, 30, 60, 0.16);
+  --divider: rgba(10, 30, 60, 0.06);
   /* 蚀刻高光边（凹凸感核心） */
-  --edge-light: rgba(255, 255, 255, 0.85);
-  --edge-dark: rgba(10, 20, 40, 0.10);
+  --edge-light: rgba(255, 255, 255, 0.88);
+  --edge-dark: rgba(10, 20, 40, 0.08);
 
-  /* === 阴影系统 · 染色阴影（带主色温度，非纯黑） === */
-  --shadow-xs: 0 1px 2px rgba(20, 40, 80, 0.05);
-  --shadow-sm: 0 1px 3px rgba(20, 40, 80, 0.06), 0 0 0 1px rgba(20, 40, 80, 0.02);
-  --shadow-md: 0 4px 12px rgba(20, 40, 80, 0.08), 0 1px 3px rgba(20, 40, 80, 0.04);
-  --shadow-lg: 0 10px 28px rgba(20, 40, 80, 0.10), 0 2px 6px rgba(20, 40, 80, 0.06);
-  --shadow-xl: 0 16px 40px rgba(20, 40, 80, 0.12), 0 4px 10px rgba(20, 40, 80, 0.08);
+  /* === 阴影系统 · 染色阴影（降透明度，更细腻柔和） === */
+  --shadow-xs: 0 1px 2px rgba(20, 40, 80, 0.04);
+  --shadow-sm: 0 1px 3px rgba(20, 40, 80, 0.05), 0 0 0 1px rgba(20, 40, 80, 0.02);
+  --shadow-md: 0 4px 12px rgba(20, 40, 80, 0.06), 0 1px 3px rgba(20, 40, 80, 0.03);
+  --shadow-lg: 0 8px 24px rgba(20, 40, 80, 0.08), 0 2px 6px rgba(20, 40, 80, 0.05);
+  --shadow-xl: 0 14px 36px rgba(20, 40, 80, 0.10), 0 4px 10px rgba(20, 40, 80, 0.06);
   /* 凹陷阴影（输入框、按下态、sunken区） */
-  --shadow-inset: inset 0 1px 2px rgba(10, 20, 40, 0.10), inset 0 0 0 1px rgba(10, 20, 40, 0.04);
+  --shadow-inset: inset 0 1px 2px rgba(10, 20, 40, 0.08), inset 0 0 0 1px rgba(10, 20, 40, 0.03);
   /* 凸起高光（卡片顶部亮边，制造金属凹凸） */
-  --shadow-convex: 0 1px 3px rgba(20, 40, 80, 0.06), inset 0 1px 0 var(--edge-light);
+  --shadow-convex: 0 1px 3px rgba(20, 40, 80, 0.05), inset 0 1px 0 var(--edge-light);
   /* 焦点环 */
   --ring-focus: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--primary);
 
-  /* === 圆角 · 棱角分明（克制使用，最大6px） === */
+  /* === 圆角 · 柔和棱角（提升至 8-14px，更具现代质感） === */
   --r-none: 0px;
-  --r-xs: 2px;
-  --r-sm: 3px;
-  --r-md: 4px;
-  --r-lg: 5px;
-  --r-xl: 6px;
-  --r-2xl: 8px;
+  --r-xs: 3px;
+  --r-sm: 5px;
+  --r-md: 7px;
+  --r-lg: 8px;
+  --r-xl: 10px;
+  --r-2xl: 14px;
+  --r-3xl: 20px;
   --r-full: 9999px;
 
   /* === 字体 · 几何科技感（拒绝Inter作主标题） === */

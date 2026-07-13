@@ -525,6 +525,78 @@
   background: var(--bg-sunken);
 }
 
+/* 可点击图片容器 · 悬停反馈与聚焦态 */
+.qcard-image-clickable {
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow var(--dur-fast) var(--ease-precision),
+              border-color var(--dur-fast) var(--ease-precision),
+              transform var(--dur-fast) var(--ease-precision);
+  outline: none;
+}
+.qcard-image-clickable:hover {
+  border-color: var(--primary-border);
+  box-shadow: var(--shadow-md), inset 0 0 0 1px var(--primary-border);
+  transform: translateY(-1px);
+}
+.qcard-image-clickable:focus-visible {
+  box-shadow: var(--ring-focus);
+}
+.qcard-image-clickable:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-inset);
+}
+
+/* 点击放大提示标识 · 右下角浮动标签 */
+.qcard-image-zoom-hint {
+  position: absolute;
+  right: var(--sp-2);
+  bottom: var(--sp-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-1);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-xs);
+  box-shadow: var(--shadow-sm);
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity var(--dur-fast) var(--ease-smooth);
+}
+.qcard-image-clickable:hover .qcard-image-zoom-hint {
+  opacity: 1;
+  color: var(--primary);
+  border-color: var(--primary-border);
+}
+
+/* 模态框内图片放大查看 · 居中、最大尺寸约束 */
+.qcard-image-zoom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-sunken);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  padding: var(--sp-3);
+}
+.qcard-image-zoom img {
+  max-width: 100%;
+  max-height: 72vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--r-xs);
+  box-shadow: var(--shadow-sm);
+}
+
 /* 选项 · 凹凸按钮组 */
 .qcard-options {
   display: flex;
