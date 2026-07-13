@@ -11,6 +11,10 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* 始终保留滚动条空间，防止内容超出视口时滚动条出现导致页面宽度抖动 */
+  scrollbar-gutter: stable;
+  /* 启用滚动锚定，避免上方内容高度变化导致当前可视区跳动 */
+  overflow-anchor: auto;
 }
 
 body {

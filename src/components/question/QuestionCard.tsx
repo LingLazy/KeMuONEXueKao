@@ -8,7 +8,7 @@
  * - 收藏切换
  * - 移动端左右滑动切题
  */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Question, Mnemonic } from '@/types';
 import { highlightKeywords } from '@/services/highlight';
@@ -18,6 +18,9 @@ import { usePracticeStore } from '@/stores/practiceStore';
 import { useVibrate, useConfetti, useSwipe, useRipple } from '@/hooks';
 import LazyImage from '@/components/common/LazyImage';
 import Modal from '@/components/common/Modal';
+
+/** 选项字母常量（模块级，避免每次渲染重建） */
+const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'] as const;
 
 interface QuestionCardProps {
   /** 题目数据 */
@@ -130,9 +133,6 @@ export default function QuestionCard({
     [question.question, question.keywords]
   );
 
-  // 选项字母 A/B/C/D
-  const optionLetters = ['A', 'B', 'C', 'D', 'E', 'F'];
-
   // 收藏切换
   const handleBookmark = () => {
     toggleBookmark(question.id);
@@ -180,23 +180,16 @@ export default function QuestionCard({
       {/* 题干 */}
       <h3 id={`q-${question.id}-title`} className="qcard-question" dangerouslySetInnerHTML={{ __html: questionHtml }} />
 
-      {/* 图片 */}
+      {/* 图片 · 使用原生 button 包裹，确保键盘/触屏/屏幕阅读器一致体验 */}
       {question.is_image_question && question.image && (
-        <div
+        <button
+          type="button"
           className="qcard-image qcard-image-clickable"
           onClick={() => {
             setImageZoomOpen(true);
             vibrate([10]);
           }}
-          role="button"
-          tabIndex={0}
           aria-label="点击放大查看图片"
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              setImageZoomOpen(true);
-            }
-          }}
         >
           <LazyImage
             src={getImageUrl(question.image)}
@@ -211,7 +204,7 @@ export default function QuestionCard({
             </svg>
             <span>点击放大</span>
           </span>
-        </div>
+        </button>
       )}
 
       {/* 图片放大查看模态框 */}
@@ -231,8 +224,8 @@ export default function QuestionCard({
         </div>
       </Modal>
 
-      {/* 选项 */}
-      <div className="qcard-options" role="group" aria-label="选项列表">
+      {/* 选项 · 单选题使用 radiogroup 语义，屏幕阅读器可正确传达互斥单选 */}
+      <div className="qcard-options" role="radiogroup" aria-label="选项列表">
         {question.options.map((opt, i) => {
           const isSelected = finalSelected === i;
           const isCorrect = i === question.answer;
@@ -249,8 +242,8 @@ export default function QuestionCard({
 
           return (
             <OptionButton
-              key={i}
-              letter={optionLetters[i] ?? ''}
+              key={`${OPTION_LETTERS[i] ?? i}-${opt.slice(0, 8)}`}
+              letter={OPTION_LETTERS[i] ?? ''}
               text={opt}
               stateClass={stateClass}
               isSelected={isSelected}
@@ -264,15 +257,15 @@ export default function QuestionCard({
         })}
       </div>
 
-      {/* 答题反馈与解析 */}
+      {/* 答题反馈与解析 · 使用 opacity + translateY 避免高度突变导致页面跳动 */}
       <AnimatePresence>
         {(showCorrect || (examMode && finalSelected >= 0)) && (
           <motion.div
             className="qcard-feedback"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             {showCorrect && (
               <div className={`qcard-result ${finalSelected === question.answer ? 'correct' : 'wrong'}`}>
@@ -290,7 +283,7 @@ export default function QuestionCard({
                       <circle cx="12" cy="12" r="10" />
                       <path d="M15 9l-6 6M9 9l6 6" />
                     </svg>
-                    <span>回答错误，正确答案是 {optionLetters[question.answer]}</span>
+                    <span>回答错误，正确答案是 {OPTION_LETTERS[question.answer]}</span>
                   </>
                 )}
               </div>
@@ -321,10 +314,10 @@ export default function QuestionCard({
             {analysisVisible && (
               <motion.div
                 className="qcard-analysis"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.25 }}
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
               >
                 <p className="qcard-analysis-text">{question.analysis}</p>
                 {question.analysis_url && (
@@ -387,7 +380,7 @@ interface OptionButtonProps {
   onClick: () => void;
 }
 
-function OptionButton({
+function OptionButtonImpl({
   letter,
   text,
   stateClass,
@@ -409,7 +402,8 @@ function OptionButton({
       className={`qcard-option ripple-host ${stateClass}`}
       onClick={onClick}
       disabled={disabled}
-      aria-pressed={isSelected}
+      role="radio"
+      aria-checked={isSelected}
       aria-label={`选项 ${letter}：${text}`}
     >
       <span className="qcard-option-letter" aria-hidden="true">
@@ -452,3 +446,6 @@ function OptionButton({
     </button>
   );
 }
+
+// memo 包裹：父组件状态变化（收藏、解析展开）时避免所有选项重渲染
+const OptionButton = memo(OptionButtonImpl);

@@ -26,14 +26,26 @@ let knowledgeCache: string | null = null;
 const JUDGE_OPTIONS = ['正确', '错误'];
 
 /**
+ * 原始题目类型（questions.json 中的实际结构）
+ * - 判断题 answer 可能为 boolean
+ * - options 可能为空数组
+ * 与 Question 类型（answer: number）的区别在此显式声明，
+ * 避免类型系统无法捕获数据层与消费层的不一致
+ */
+interface RawQuestion extends Omit<Question, 'answer' | 'options'> {
+  answer: number | boolean;
+  options?: string[];
+}
+
+/**
  * 归一化单道题目
  * - 判断题：补齐选项、布尔答案转数字索引
  * - 单选题：原样返回
  * 输入：原始题目（可能含布尔 answer / 空 options）
  * 返回：与 Question 类型完全一致的题目
  */
-function normalizeQuestion(raw: Question): Question {
-  if (raw.type !== 'judge') return raw;
+function normalizeQuestion(raw: RawQuestion): Question {
+  if (raw.type !== 'judge') return raw as Question;
   // 仅当 options 缺失或为空时补齐，避免覆盖已有数据
   const options =
     Array.isArray(raw.options) && raw.options.length >= 2
@@ -47,7 +59,7 @@ function normalizeQuestion(raw: Question): Question {
   } else {
     answer = Number(raw.answer);
   }
-  return { ...raw, options, answer };
+  return { ...raw, options, answer } as Question;
 }
 
 /**
@@ -58,10 +70,15 @@ function normalizeQuestion(raw: Question): Question {
  */
 export async function loadQuestions(): Promise<Question[]> {
   if (questionsCache) return questionsCache;
-  const module = await import('@/data/questions.json');
-  const rawList = module.default as Question[];
-  questionsCache = rawList.map(normalizeQuestion);
-  return questionsCache;
+  try {
+    const module = await import('@/data/questions.json');
+    const rawList = module.default as RawQuestion[];
+    questionsCache = rawList.map(normalizeQuestion);
+    return questionsCache;
+  } catch (err) {
+    // 包裹更友好的错误信息，便于上层 UI 提示
+    throw new Error(`题库数据加载失败：${err instanceof Error ? err.message : String(err)}`);
+  }
 }
 
 /**
@@ -106,14 +123,35 @@ export async function loadKnowledge(): Promise<string> {
 }
 
 /**
- * 根据题目ID获取图片URL
- * 输入：图片文件名（如 "123.jpg"）
+ * 根据图片字段获取完整 URL
+ * 输入：图片文件名，支持以下格式（容错性归一化）
+ *   - "123.jpg"               （推荐格式，纯文件名）
+ *   - "assets/images/123.jpg" （历史格式，自动剥离前缀避免双重拼接）
+ *   - "/assets/images/123.jpg"
+ *   - "https://example.com/a.jpg" （完整 URL，原样返回）
  * 返回：完整的图片资源路径
+ *
+ * 实现要点：自动剥离可能存在的 "assets/images/" 前缀，
+ * 防止数据层与该函数同时拼接前缀导致 "/assets/images/assets/images/xxx.jpg" 双重前缀 bug
  */
 export function getImageUrl(image: string): string {
   if (!image) return '';
+  // 完整 URL（含协议头）直接返回，避免破坏外链
+  if (/^https?:\/\//i.test(image) || image.startsWith('//')) return image;
+  // 以 data: 开头的内联资源原样返回
+  if (image.startsWith('data:')) return image;
   const base = import.meta.env.BASE_URL;
-  return `${base}assets/images/${image}`;
+  // 归一化：剥离可能存在的前缀，统一为纯文件名
+  let filename = image;
+  const PREFIX = 'assets/images/';
+  if (filename.startsWith(PREFIX)) {
+    filename = filename.slice(PREFIX.length);
+  } else if (filename.startsWith('/' + PREFIX)) {
+    filename = filename.slice(('/' + PREFIX).length);
+  }
+  // 防御性处理：去除首部多余斜杠
+  filename = filename.replace(/^\/+/, '');
+  return `${base}assets/images/${filename}`;
 }
 
 /** 获取分类总数 */

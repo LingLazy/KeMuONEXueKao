@@ -8,7 +8,7 @@
  * - 中途刷新自动恢复（sessionStorage 持久化）
  * - 通过时撒花庆祝 + 震动反馈
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useExamStore, EXAM_COUNT, EXAM_DURATION, EXAM_PASS_SCORE } from '@/stores/examStore';
 import { toast } from '@/stores/toastStore';
@@ -23,6 +23,7 @@ import type { Question } from '@/types';
 
 export default function ExamView() {
   const [questions, setQuestions] = useState<Question[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [showSheet, setShowSheet] = useState(false);
   const [restored, setRestored] = useState(false);
 
@@ -32,9 +33,19 @@ export default function ExamView() {
   const { celebrate } = useConfetti();
   const isMobile = useIsMobile();
 
-  // 加载题库
+  // 加载题库（带错误状态，便于 UI 反馈与重试）
+  const loadData = () => {
+    setError(null);
+    loadQuestions()
+      .then(setQuestions)
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : '题库加载失败');
+      });
+  };
+
   useEffect(() => {
-    loadQuestions().then(setQuestions).catch(console.error);
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 恢复未完成考试
@@ -71,7 +82,7 @@ export default function ExamView() {
           return;
         }
         if (item.hintUsed) {
-          toast.info('已使用过提示或不可用');
+          toast.info('本题已使用过提示');
           return;
         }
         exam.useHint(exam.currentIndex);
@@ -152,6 +163,25 @@ export default function ExamView() {
     exam.reset();
   };
 
+  // 加载失败：错误态优先于加载态
+  if (error) {
+    return (
+      <div className="view view-exam">
+        <div className="view-container">
+          <EmptyState
+            title="题库加载失败"
+            description={error}
+            action={
+              <button type="button" className="btn btn-primary" onClick={loadData}>
+                重试加载
+              </button>
+            }
+          />
+        </div>
+      </div>
+    );
+  }
+
   // 加载中
   if (!questions) {
     return (
@@ -188,8 +218,16 @@ export default function ExamView() {
     );
   }
 
-  const answeredCount = exam.questions.filter((q) => q.selected >= 0).length;
-  const markedCount = exam.questions.filter((q) => q.marked).length;
+  // 缓存统计计算，避免每次渲染都对 100 题 filter
+  const { answeredCount, markedCount } = useMemo(() => {
+    let answered = 0;
+    let marked = 0;
+    for (const q of exam.questions) {
+      if (q.selected >= 0) answered++;
+      if (q.marked) marked++;
+    }
+    return { answeredCount: answered, markedCount: marked };
+  }, [exam.questions]);
   const remainingSec = Math.floor(exam.remaining / 1000);
   const lowTime = remainingSec <= 300;
 
@@ -203,13 +241,24 @@ export default function ExamView() {
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
           </button>
-          <div className="exam-timer" aria-label="剩余时间">
+          <div
+            className="exam-timer"
+            role="timer"
+            aria-label={`剩余时间 ${formatTime(remainingSec)}`}
+            aria-live="off"
+          >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="10" />
               <path d="M12 6v6l4 2" />
             </svg>
             <span className="exam-timer-text">{formatTime(remainingSec)}</span>
           </div>
+          {/* 低时间无障碍提示：仅进入低时间状态时播报一次 */}
+          {lowTime && (
+            <span className="sr-only" aria-live="polite">
+              剩余时间不足 5 分钟，请加快答题进度
+            </span>
+          )}
         </div>
         <div className="exam-header-center">
           <span className="exam-progress-label">

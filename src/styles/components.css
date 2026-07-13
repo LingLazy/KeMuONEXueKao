@@ -355,6 +355,10 @@
   transition: box-shadow var(--dur-base) var(--ease-smooth),
               border-color var(--dur-base) var(--ease-smooth);
   position: relative;
+  /* 隔离卡片内部重排，避免高度变化影响外部布局抖动 */
+  contain: content;
+  /* 题目卡片作为滚动锚点，防止答题后页面跳动 */
+  overflow-anchor: none;
 }
 .qcard:hover {
   box-shadow: var(--shadow-md);
@@ -458,9 +462,13 @@
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--bg-sub);
+  /* 预留图片区高度，避免图片加载完成后高度突变引起页面跳动 */
+  min-height: 120px;
 }
 .qcard-image .lazy-img {
   width: 100%;
+  /* 通过 aspect-ratio 占位，避免图片加载前高度为 0 导致布局抖动 */
+  aspect-ratio: 16 / 9;
   max-height: 280px;
   border-radius: 0;
 }
@@ -470,7 +478,7 @@
   background: var(--bg-sub);
 }
 
-/* 可点击图片容器 · 悬停反馈与聚焦态 */
+/* 可点击图片容器 · 悬停反馈与聚焦态（原生 button 元素重置） */
 .qcard-image-clickable {
   position: relative;
   cursor: pointer;
@@ -478,6 +486,14 @@
               border-color var(--dur-fast) var(--ease-out),
               transform var(--dur-fast) var(--ease-out);
   outline: none;
+  /* button 元素重置：消除默认样式干扰 */
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .qcard-image-clickable:hover {
   border-color: var(--primary);
@@ -645,9 +661,11 @@
   flex-shrink: 0;
 }
 
-/* 反馈与解析 */
+/* 反馈与解析 · 隔离布局重排，避免高度变化影响外部 */
 .qcard-feedback {
   overflow: hidden;
+  contain: layout style;
+  overflow-anchor: none;
 }
 .qcard-result {
   display: flex;
@@ -659,6 +677,8 @@
   font-size: 0.875rem;
   font-weight: 600;
   border: 1px solid;
+  /* 预留单行高度，避免反馈出现时高度从 0 突变 */
+  min-height: 44px;
 }
 .qcard-result.correct {
   background: var(--success-soft);
@@ -671,11 +691,13 @@
   border-color: var(--danger);
 }
 
-/* 解析折叠区 */
+/* 解析折叠区 · 隔离布局重排 */
 .qcard-analysis-wrap {
   margin-top: var(--sp-3);
   border-top: 1px solid var(--divider);
   padding-top: var(--sp-3);
+  contain: layout style;
+  overflow-anchor: none;
 }
 .qcard-analysis-toggle {
   display: flex;
@@ -702,6 +724,8 @@
 }
 .qcard-analysis {
   overflow: hidden;
+  contain: layout style;
+  overflow-anchor: none;
 }
 .qcard-analysis-text {
   padding: var(--sp-3) var(--sp-4);

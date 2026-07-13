@@ -27,16 +27,27 @@ export default function PracticeView() {
 
   const [questions, setQuestions] = useState<Question[] | null>(null);
   const [mnemonics, setMnemonics] = useState<Mnemonic[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const [showSidebar, setShowSidebar] = useState(false);
   const [showJumpModal, setShowJumpModal] = useState(false);
 
   const practice = usePracticeStore();
   const progress = useProgressStore();
 
-  // 加载题库与口诀
+  // 加载题库与口诀（带错误状态，便于 UI 反馈与重试）
+  const loadData = () => {
+    setError(null);
+    Promise.all([
+      loadQuestions().then(setQuestions),
+      loadMnemonics().then(setMnemonics)
+    ]).catch((err) => {
+      setError(err instanceof Error ? err.message : '数据加载失败');
+    });
+  };
+
   useEffect(() => {
-    loadQuestions().then(setQuestions).catch(console.error);
-    loadMnemonics().then(setMnemonics).catch(console.error);
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 错题ID集合
@@ -86,6 +97,25 @@ export default function PracticeView() {
     navigate(`/practice/${newCat}`);
     setShowSidebar(false);
   };
+
+  // 加载失败：错误态优先于其他分支
+  if (error) {
+    return (
+      <div className="view view-practice">
+        <div className="view-container">
+          <EmptyState
+            title="数据加载失败"
+            description={error}
+            action={
+              <button type="button" className="btn btn-primary" onClick={loadData}>
+                重试加载
+              </button>
+            }
+          />
+        </div>
+      </div>
+    );
+  }
 
   // 加载中
   if (!questions) {
@@ -333,16 +363,18 @@ function CategoryTree({
   counts: Record<string, number>;
 }) {
   return (
-    <div className="category-tree">
+    <div className="category-tree" role="list">
       {GROUP_KEYS.map((gk) => {
         const group = CATEGORY_GROUPS[gk];
         const groupCount = group.cats.reduce((sum, ck) => sum + (counts[ck] ?? 0), 0);
+        const isGroupActive = currentCat === gk;
         return (
-          <div key={gk} className="cat-group" data-group={gk}>
+          <div key={gk} className="cat-group" data-group={gk} role="listitem">
             <button
               type="button"
-              className={`cat-group-head ${currentCat === gk ? 'active' : ''}`}
+              className={`cat-group-head ${isGroupActive ? 'active' : ''}`}
               onClick={() => onSelect(gk)}
+              aria-current={isGroupActive ? 'true' : undefined}
               style={{ '--cat-color': group.color } as React.CSSProperties}
             >
               <span className="cat-group-name">{group.name}</span>
@@ -352,12 +384,14 @@ function CategoryTree({
               {group.cats.map((ck) => {
                 const cat = CATEGORIES[ck];
                 if (!cat) return null;
+                const isCatActive = currentCat === ck;
                 return (
                   <button
                     key={ck}
                     type="button"
-                    className={`cat-item ${currentCat === ck ? 'active' : ''}`}
+                    className={`cat-item ${isCatActive ? 'active' : ''}`}
                     onClick={() => onSelect(ck)}
+                    aria-current={isCatActive ? 'true' : undefined}
                   >
                     <span className="cat-item-name">{cat.name}</span>
                     <span className="cat-item-count">{cat.ids.length}</span>

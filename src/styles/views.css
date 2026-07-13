@@ -562,7 +562,7 @@
   box-shadow: 0 0 0 3px var(--primary-bg);
 }
 
-/* 底部导航 · 简洁面板 */
+/* 底部导航 · 简洁面板（sticky + 安全区域适配） */
 .practice-nav {
   display: flex;
   align-items: center;
@@ -574,6 +574,15 @@
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-xs);
+  /* 粘性定位：长内容时浮动在视口底部，避免来回滚动 */
+  position: sticky;
+  bottom: var(--sp-3);
+  z-index: 20;
+  /* 隔离布局重排，避免按钮状态变化引起跳动 */
+  contain: layout style;
+  /* 背景模糊，确保浮层下方内容可读 */
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
 }
 .practice-nav-jump {
   display: flex;
@@ -868,14 +877,14 @@
   transition: width 0.4s var(--ease-out);
 }
 
-/* 题目区 */
+/* 题目区 · 预留底部固定栏空间（含安全区域） */
 .exam-body {
   max-width: 820px;
   margin: 0 auto;
-  padding: var(--sp-6) var(--sp-4) calc(var(--sp-16) + var(--nav-h));
+  padding: var(--sp-6) var(--sp-4) calc(var(--sp-16) + var(--nav-h) + env(safe-area-inset-bottom));
 }
 
-/* 底部操作栏 · 简洁浮层 */
+/* 底部操作栏 · 简洁浮层（适配安全区域 + 隔离布局重排） */
 .exam-footer {
   position: fixed;
   bottom: 0;
@@ -887,11 +896,18 @@
   justify-content: space-between;
   gap: var(--sp-3);
   padding: var(--sp-3) var(--sp-4);
+  /* 适配移动端底部安全区域（刘海屏/Home Indicator） */
+  padding-bottom: calc(var(--sp-3) + env(safe-area-inset-bottom));
   background: var(--bg-card);
   border-top: 1px solid var(--border);
   box-shadow: var(--shadow-lg);
   max-width: var(--container-max);
   margin: 0 auto;
+  /* 隔离布局重排，避免按钮状态变化引起跳动 */
+  contain: layout style;
+  /* 背景模糊，确保浮层下方内容可读 */
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
 }
 .exam-footer-center {
   display: flex;

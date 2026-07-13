@@ -35,9 +35,11 @@ export default function LazyImage({
 }: LazyImageProps) {
   const ref = useRef<HTMLImageElement>(null);
   const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
-  const [inView, setInView] = useState(!nativeLazy);
+  // 修复：nativeLazy=true 时初始 inView=true，直接渲染让浏览器原生 lazy 处理；
+  // nativeLazy=false 时初始 inView=false，等 IntersectionObserver 触发后置为 true
+  const [inView, setInView] = useState(nativeLazy);
 
-  // 视口检测
+  // 视口检测（仅 nativeLazy=false 时启用）
   useEffect(() => {
     if (!nativeLazy && ref.current) {
       const io = new IntersectionObserver(
@@ -70,10 +72,17 @@ export default function LazyImage({
   const skeletonClass = status === 'loading' ? ' lazy-img-skeleton' : '';
   const statusClass = ` lazy-img-${status}`;
 
+  // 无障碍：根据状态动态生成 aria-label
+  const ariaLabel = status === 'error' ? `图片加载失败：${alt}` : alt;
+  const ariaBusy = status === 'loading';
+
   return (
     <div
       className={`lazy-img${skeletonClass}${statusClass} ${className}`}
       style={{ width, height }}
+      role="img"
+      aria-label={ariaLabel}
+      aria-busy={ariaBusy}
     >
       {inView && src && status !== 'error' && (
         <img
