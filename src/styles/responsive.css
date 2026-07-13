@@ -133,6 +133,11 @@
   .home-hero {
     padding: var(--sp-8) var(--sp-4) var(--sp-6);
   }
+  /* 移动端隐藏大型几何装饰，仅保留点阵底纹，避免与文字重叠 */
+  .home-hero-bg::before,
+  .home-hero-bg::after {
+    display: none;
+  }
   .home-hero-title {
     font-size: clamp(1.875rem, 8vw, 2.25rem);
   }
