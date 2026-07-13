@@ -1,7 +1,8 @@
 /* ===================================================================
    科目一教考 · 应用逻辑 v2
-   - 五视图SPA：主页 / 题库练习 / 模拟考试 / 口诀总览 / 分类导航
-   - 1964题完整题库 + 76条口诀 + 24分类
+   - 六视图SPA：主页 / 知识学习 / 题库练习 / 模拟考试 / 口诀总览 / 分类导航
+   - 1964题完整题库 + 76条口诀 + 6大分类(24小分类)
+   - 大分类聚合小分类，题目可在多分类出现（多对多关系）
    - 关键词高亮(mark.kw) + 口诀常驻 + 解析独立折叠
    - 模拟考试(倒计时+答题卡+五五提示+评分+错题回顾)
    - PWA支持 + 双主题 + 自定义模态
@@ -136,6 +137,110 @@
     return a;
   }
 
+  // ============ 大分类系统：大分类聚合多个小分类，题目可在多分类出现 ============
+  /**
+   * 大分类定义
+   * 每个大分类包含 cats（引用CATEGORIES的key数组）和可选的 dynamic（动态匹配规则）
+   * 图片题大分类通过 is_image_question 动态匹配，允许题目同时出现在图片题和其他分类中
+   */
+  const CATEGORY_GROUPS = {
+    image: {
+      name: '图片题',
+      icon: 'image',
+      color: '#0ea5e9',
+      desc: '交通标志、道路标线、交警手势、仪表信号等图像题目',
+      cats: ['sign', 'mark', 'police'],
+      dynamic: 'image'
+    },
+    penalty: {
+      name: '记分处罚',
+      icon: 'star',
+      color: '#ea580c',
+      desc: '违法记分、罚款处罚、酒驾醉驾',
+      cats: ['score', 'fine', 'drink']
+    },
+    scenario: {
+      name: '驾驶情境',
+      icon: 'road',
+      color: '#14b8a6',
+      desc: '高速公路、夜间、恶劣天气、紧急情况等场景题',
+      cats: ['highway', 'night', 'weather', 'emergency', 'fault', 'accident']
+    },
+    rules: {
+      name: '行车规则',
+      icon: 'traffic',
+      color: '#10b981',
+      desc: '限速、灯光、让行、超车、停车等通行规则',
+      cats: ['speed', 'lights', 'yield', 'overtake', 'park']
+    },
+    vehicle: {
+      name: '车辆常识',
+      icon: 'car',
+      color: '#64748b',
+      desc: '驾驶证、机动车基础、安全装置、安全行车、考试申领',
+      cats: ['license', 'basic', 'install', 'safety', 'exam']
+    },
+    ev: {
+      name: '新能源',
+      icon: 'bolt',
+      color: '#22c55e',
+      desc: '新能源车辆与智能辅助驾驶',
+      cats: ['newenergy', 'intelligent']
+    }
+  };
+
+  /**
+   * 获取大分类下所有题目ID集合
+   * 输入：groupKey 大分类key
+   * 返回：Set<number> 题目ID集合
+   * 对于图片题大分类，额外包含所有 is_image_question=true 的题目
+   */
+  function getGroupQuestionIds(groupKey) {
+    const group = CATEGORY_GROUPS[groupKey];
+    if (!group) return new Set();
+    const idSet = new Set();
+    // 聚合所有小分类的ids
+    (group.cats || []).forEach(catKey => {
+      const cat = CATEGORIES[catKey];
+      if (cat && cat.ids) {
+        cat.ids.forEach(id => idSet.add(id));
+      }
+    });
+    // 动态匹配：图片题
+    if (group.dynamic === 'image') {
+      QUESTIONS.forEach(q => {
+        if (q.is_image_question) idSet.add(q.id);
+      });
+    }
+    return idSet;
+  }
+
+  /**
+   * 获取大分类的题目总数
+   * 输入：groupKey 大分类key
+   * 返回：number 题目数量
+   */
+  function getGroupCount(groupKey) {
+    return getGroupQuestionIds(groupKey).size;
+  }
+
+  /**
+   * 判断key是否为大分类key
+   */
+  function isGroupKey(key) {
+    return Object.prototype.hasOwnProperty.call(CATEGORY_GROUPS, key);
+  }
+
+  /**
+   * 获取分类显示名（兼容大分类和小分类）
+   */
+  function getCatDisplayName(cat) {
+    if (cat === 'all') return '全部题目';
+    if (isGroupKey(cat)) return CATEGORY_GROUPS[cat].name;
+    if (CATEGORIES[cat]) return CATEGORIES[cat].name;
+    return '分类';
+  }
+
   // ============ 应用状态 ============
   const State = {
     view: 'home',                   // 当前视图 home/practice/exam/mnemonics/categories
@@ -266,24 +371,27 @@
     updateHomeStats();
   }
 
-  /** 渲染热门分类（取题目数最多的8个分类） */
+  /**
+   * 渲染主页热门分类（6 个大分类）
+   * 点击任意大分类卡片进入对应练习
+   */
   function renderHotCats() {
     const container = $('#home-hotcats');
     if (!container) return;
-    const entries = Object.entries(CATEGORIES)
-      .filter(([k, m]) => m.count > 0)
-      .sort((a, b) => b[1].count - a[1].count)
-      .slice(0, 8);
+    const entries = Object.entries(CATEGORY_GROUPS)
+      .filter(([gk, g]) => getGroupCount(gk) > 0)
+      .sort((a, b) => getGroupCount(b[0]) - getGroupCount(a[0]));
 
-    container.innerHTML = entries.map(([key, meta], i) => {
-      const colorBg = hexToRgba(meta.color, 0.10);
+    container.innerHTML = entries.map(([key, group], i) => {
+      const count = getGroupCount(key);
+      const colorBg = hexToRgba(group.color, 0.10);
       return `
-        <article class="hotcat-card nf-card-sheen" data-cat="${key}" style="--cat-color:${meta.color};--cat-color-bg:${colorBg};animation-delay:${i * 40}ms" tabindex="0" role="button" aria-label="进入${escapeHtml(meta.name)}分类">
+        <article class="hotcat-card nf-card-sheen" data-cat="${key}" style="--cat-color:${group.color};--cat-color-bg:${colorBg};animation-delay:${i * 40}ms" tabindex="0" role="button" aria-label="进入${escapeHtml(group.name)}分类">
           <div class="hotcat-icon">
             <span class="hotcat-num">${String(i + 1).padStart(2, '0')}</span>
           </div>
-          <h3 class="hotcat-name">${escapeHtml(meta.name)}</h3>
-          <div class="hotcat-count"><span class="num">${meta.count}</span> 题</div>
+          <h3 class="hotcat-name">${escapeHtml(group.name)}</h3>
+          <div class="hotcat-count"><span class="num">${count}</span> 题</div>
           <div class="hotcat-arrow" aria-hidden="true">→</div>
         </article>
       `;
@@ -302,13 +410,28 @@
     };
   }
 
-  /** 进入指定分类练习 */
+  /**
+   * 进入指定分类练习
+   * @param {string} cat 分类key（支持 'all'、大分类key、小分类key）
+   * 流程：记录分类 → 切换视图 → 同步侧栏激活态 → 加载题目列表
+   */
   function enterCategory(cat) {
     State.currentCat = cat;
     switchView('practice');
-    $$('.cat-item').forEach(c => c.classList.toggle('active', c.dataset.cat === cat));
+    // 同步侧栏激活态：同时处理大分类项和小分类项
+    $$('.cat-item, .cat-group-head').forEach(el => {
+      el.classList.toggle('active', el.dataset.cat === cat);
+    });
+    // 若进入的是小分类，展开其所属大分类
+    if (CATEGORIES[cat]) {
+      const groupEntry = Object.entries(CATEGORY_GROUPS).find(([gk, g]) => (g.cats || []).includes(cat));
+      if (groupEntry) {
+        const groupEl = $(`.cat-group[data-group="${groupEntry[0]}"]`);
+        if (groupEl) groupEl.classList.add('expanded');
+      }
+    }
     loadQuestionList();
-    toast(`已切换至「${CATEGORIES[cat]?.name || '分类'}」`);
+    toast(`已切换至「${getCatDisplayName(cat)}」`);
   }
 
   /** 更新主页与导航的统计数据 */
@@ -324,7 +447,7 @@
     const mEl = $('#home-stat-mnemonics');
     if (mEl) mEl.textContent = MNEMONICS.length;
     const cEl = $('#home-stat-categories');
-    if (cEl) cEl.textContent = Object.keys(CATEGORIES).length;
+    if (cEl) cEl.textContent = Object.keys(CATEGORY_GROUPS).length;
     const iEl = $('#home-stat-images');
     if (iEl) iEl.textContent = QUESTIONS.filter(q => q.image || q.is_image_question).length;
 
@@ -342,14 +465,18 @@
     updateNavMeta();
   }
 
-  // ============ 练习视图：分类侧栏 ============
-  /** 渲染分类侧栏 */
+  // ============ 练习视图：分类侧栏（大分类+小分类层级） ============
+  /**
+   * 渲染分类侧栏
+   * 结构：「全部」项 → 6个大分类组（可展开/折叠小分类）
+   * 交互：点击大分类头部 → 进入该大分类练习；点击 chevron → 展开/折叠小分类列表
+   */
   function renderSidebar() {
     const list = $('#category-list');
     const total = $('#sidebar-total');
     if (!list) return;
     const totalQ = QUESTIONS.length;
-    if (total) total.textContent = `${Object.keys(CATEGORIES).length} 个分类 / ${totalQ} 题`;
+    if (total) total.textContent = `${Object.keys(CATEGORY_GROUPS).length} 大分类 / ${totalQ} 题`;
 
     list.innerHTML = '';
 
@@ -366,38 +493,100 @@
     `;
     list.appendChild(allItem);
 
-    // 24分类
-    Object.entries(CATEGORIES).forEach(([key, meta]) => {
-      if (meta.count === 0) return;
-      const item = document.createElement('div');
-      item.className = 'cat-item' + (State.currentCat === key ? ' active' : '');
-      item.dataset.cat = key;
-      item.setAttribute('role', 'option');
-      item.tabIndex = 0;
-      item.innerHTML = `
-        <span class="cat-dot" style="background:${meta.color}"></span>
-        <span class="cat-name">${escapeHtml(meta.name)}</span>
-        <span class="cat-count">${meta.count}</span>
+    // 6 个大分类组
+    Object.entries(CATEGORY_GROUPS).forEach(([gKey, group]) => {
+      const groupCount = getGroupCount(gKey);
+      if (groupCount === 0) return;
+      const isActive = State.currentCat === gKey;
+      // 判断是否需要默认展开（当前选中的小分类属于该组）
+      const childActive = group.cats.some(c => c === State.currentCat);
+      const expanded = isActive || childActive;
+
+      const groupEl = document.createElement('div');
+      groupEl.className = 'cat-group' + (expanded ? ' expanded' : '');
+      groupEl.dataset.group = gKey;
+      groupEl.style.setProperty('--group-color', group.color);
+
+      // 大分类头部（点击进入大分类练习）
+      const head = document.createElement('div');
+      head.className = 'cat-group-head' + (isActive ? ' active' : '');
+      head.dataset.cat = gKey;
+      head.setAttribute('role', 'option');
+      head.tabIndex = 0;
+      head.innerHTML = `
+        <span class="cat-chevron" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+        </span>
+        <span class="cat-dot" style="background:${group.color}"></span>
+        <span class="cat-name">${escapeHtml(group.name)}</span>
+        <span class="cat-count">${groupCount}</span>
       `;
-      list.appendChild(item);
+      groupEl.appendChild(head);
+
+      // 小分类列表（可折叠）
+      const body = document.createElement('div');
+      body.className = 'cat-group-body';
+      group.cats.forEach(cKey => {
+        const cat = CATEGORIES[cKey];
+        if (!cat || cat.count === 0) return;
+        const subActive = State.currentCat === cKey;
+        const sub = document.createElement('div');
+        sub.className = 'cat-item cat-sub' + (subActive ? ' active' : '');
+        sub.dataset.cat = cKey;
+        sub.setAttribute('role', 'option');
+        sub.tabIndex = 0;
+        sub.innerHTML = `
+          <span class="cat-dot" style="background:${cat.color}"></span>
+          <span class="cat-name">${escapeHtml(cat.name)}</span>
+          <span class="cat-count">${cat.count}</span>
+        `;
+        body.appendChild(sub);
+      });
+      groupEl.appendChild(body);
+      list.appendChild(groupEl);
     });
 
-    // 点击事件（通过 dataset.bound 标记避免重复绑定）
+    // 事件绑定（仅一次）
     if (list.dataset.bound === '1') return;
     list.addEventListener('click', e => {
-      const item = e.target.closest('.cat-item');
+      // 优先处理 chevron 展开/折叠
+      const chevron = e.target.closest('.cat-chevron');
+      if (chevron) {
+        const groupEl = chevron.closest('.cat-group');
+        if (groupEl) {
+          groupEl.classList.toggle('expanded');
+          e.stopPropagation();
+          return;
+        }
+      }
+      // 处理分类项点击（大分类头部 + 小分类项 + 全部）
+      const item = e.target.closest('.cat-item, .cat-group-head');
       if (!item) return;
       const cat = item.dataset.cat;
-      if (cat === State.currentCat) return;
+      if (!cat || cat === State.currentCat) {
+        // 相同分类但点击的是 head：切换展开态
+        if (item.classList.contains('cat-group-head')) {
+          const groupEl = item.closest('.cat-group');
+          if (groupEl) groupEl.classList.toggle('expanded');
+        }
+        return;
+      }
       State.currentCat = cat;
-      $$('.cat-item').forEach(c => c.classList.toggle('active', c.dataset.cat === State.currentCat));
+      $$('.cat-item, .cat-group-head').forEach(c => c.classList.toggle('active', c.dataset.cat === State.currentCat));
+      // 若选中小分类，自动展开其所属大分类
+      if (CATEGORIES[cat]) {
+        const groupEntry = Object.entries(CATEGORY_GROUPS).find(([gk, g]) => (g.cats || []).includes(cat));
+        if (groupEntry) {
+          const ge = $(`.cat-group[data-group="${groupEntry[0]}"]`);
+          if (ge) ge.classList.add('expanded');
+        }
+      }
       loadQuestionList();
-      const catName = cat === 'all' ? '全部题目' : (CATEGORIES[cat]?.name || '分类');
-      toast(`已切换至「${catName}」`);
+      toast(`已切换至「${getCatDisplayName(cat)}」`);
     });
     list.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
-        const item = e.target.closest('.cat-item');
+        const item = e.target.closest('.cat-item, .cat-group-head');
         if (item) { e.preventDefault(); item.click(); }
       }
     });
@@ -405,12 +594,20 @@
   }
 
   // ============ 练习视图：题目加载与渲染 ============
-  /** 按分类/搜索/乱序加载题目列表 */
+  /**
+   * 按分类/搜索/乱序加载题目列表
+   * 支持三种分类模式：all（全部）、大分类key（聚合多小分类）、小分类key（单分类）
+   */
   function loadQuestionList() {
     let list;
     if (State.currentCat === 'all') {
       list = QUESTIONS.slice();
+    } else if (isGroupKey(State.currentCat)) {
+      // 大分类：聚合旗下所有小分类的题目（含动态匹配）
+      const idSet = getGroupQuestionIds(State.currentCat);
+      list = QUESTIONS.filter(q => idSet.has(q.id));
     } else {
+      // 小分类：直接按 ids 过滤
       const ids = CATEGORIES[State.currentCat]?.ids || [];
       const idSet = new Set(ids);
       list = QUESTIONS.filter(q => idSet.has(q.id));
@@ -460,9 +657,7 @@
     // 头部
     $('#practice-index').textContent = idx + 1;
     $('#practice-total').textContent = total;
-    const catName = State.currentCat === 'all'
-      ? '全部题目'
-      : (CATEGORIES[State.currentCat]?.name || '全部');
+    const catName = getCatDisplayName(State.currentCat);
     $('#practice-cat-tag').textContent = catName;
 
     // 进度条
@@ -978,236 +1173,66 @@
   // ============ 知识学习（系统化知识点教学） ============
   /** 知识学习视图状态 */
   const KnowledgeState = {
-    raw: '',            // 原始 markdown 文本
-    chapters: [],       // 解析后的章节 [{id, title, html, text}]
+    chapters: [],       // 章节数据 [{id, title, text, el}]
     loaded: false,      // 是否已加载
     filter: ''          // 搜索关键词
   };
 
   /**
-   * 轻量 Markdown 解析器
-   * 支持：标题(h1-h4)、无序列表、有序列表、引用块、分割线、表格、加粗、行内代码、段落
-   * 输入：md 原始 markdown 字符串
-   * 返回：HTML 字符串
-   */
-  function parseMarkdown(md) {
-    if (!md) return '';
-    const lines = md.split('\n');
-    const html = [];
-    let i = 0;
-    let inList = false;       // 当前是否在无序列表中
-    let inOrderedList = false; // 当前是否在有序列表中
-    let listType = '';        // 'ul' | 'ol'
-
-    /** 关闭当前列表 */
-    const closeList = () => {
-      if (inList || inOrderedList) {
-        html.push(`</${listType}>`);
-        inList = false;
-        inOrderedList = false;
-      }
-    };
-
-    /** 行内格式化：加粗、行内代码、链接 */
-    const inline = (text) => {
-      let s = escapeHtml(text);
-      // 行内代码 `code`
-      s = s.replace(/`([^`]+)`/g, '<code class="md-code">$1</code>');
-      // 加粗 **text**
-      s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-      return s;
-    };
-
-    while (i < lines.length) {
-      const line = lines[i];
-      const trimmed = line.trim();
-
-      // 空行
-      if (!trimmed) {
-        closeList();
-        i++;
-        continue;
-      }
-
-      // 分割线 ---
-      if (/^---+$/.test(trimmed)) {
-        closeList();
-        html.push('<hr class="md-hr">');
-        i++;
-        continue;
-      }
-
-      // 标题 # ## ### ####
-      const headingMatch = trimmed.match(/^(#{1,4})\s+(.+)$/);
-      if (headingMatch) {
-        closeList();
-        const level = headingMatch[1].length;
-        const text = headingMatch[2];
-        // 生成锚点ID（去除特殊字符）
-        const id = text.replace(/[<>！？，。、（）【】《》""'']/g, '').replace(/\s+/g, '-').substring(0, 40);
-        html.push(`<h${level} class="md-h md-h${level}" id="md-${id}">${inline(text)}</h${level}>`);
-        i++;
-        continue;
-      }
-
-      // 引用块 >
-      if (trimmed.startsWith('>')) {
-        closeList();
-        const quoteText = trimmed.replace(/^>\s?/, '');
-        html.push(`<blockquote class="md-quote">${inline(quoteText)}</blockquote>`);
-        i++;
-        continue;
-      }
-
-      // 表格 | a | b |
-      if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
-        closeList();
-        // 检查下一行是否是分隔行 |---|---|
-        const nextLine = (lines[i + 1] || '').trim();
-        if (/^\|[\s-:|]+\|$/.test(nextLine)) {
-          const headers = trimmed.split('|').slice(1, -1).map(c => c.trim());
-          const rows = [];
-          i += 2;
-          while (i < lines.length && lines[i].trim().startsWith('|') && lines[i].trim().endsWith('|')) {
-            rows.push(lines[i].trim().split('|').slice(1, -1).map(c => c.trim()));
-            i++;
-          }
-          let tableHtml = '<div class="md-table-wrap"><table class="md-table"><thead><tr>';
-          headers.forEach(h => { tableHtml += `<th>${inline(h)}</th>`; });
-          tableHtml += '</tr></thead><tbody>';
-          rows.forEach(row => {
-            tableHtml += '<tr>';
-            row.forEach(cell => { tableHtml += `<td>${inline(cell)}</td>`; });
-            tableHtml += '</tr>';
-          });
-          tableHtml += '</tbody></table></div>';
-          html.push(tableHtml);
-          continue;
-        }
-      }
-
-      // 无序列表 - * +
-      const ulMatch = trimmed.match(/^[-*+]\s+(.+)$/);
-      if (ulMatch) {
-        if (!inList) {
-          closeList();
-          html.push('<ul class="md-ul">');
-          inList = true;
-          listType = 'ul';
-        }
-        html.push(`<li>${inline(ulMatch[1])}</li>`);
-        i++;
-        continue;
-      }
-
-      // 有序列表 1. 2.
-      const olMatch = trimmed.match(/^\d+\.\s+(.+)$/);
-      if (olMatch) {
-        if (!inOrderedList) {
-          closeList();
-          html.push('<ol class="md-ol">');
-          inOrderedList = true;
-          listType = 'ol';
-        }
-        html.push(`<li>${inline(olMatch[1])}</li>`);
-        i++;
-        continue;
-      }
-
-      // 普通段落
-      closeList();
-      html.push(`<p class="md-p">${inline(trimmed)}</p>`);
-      i++;
-    }
-    closeList();
-    return html.join('\n');
-  }
-
-  /**
-   * 从 markdown 中提取章节（## 二级标题）
-   * 返回：[{id, title, html, text}] 数组
-   */
-  function extractChapters(md) {
-    if (!md) return [];
-    const lines = md.split('\n');
-    const chapters = [];
-    let current = null;     // 当前章节 {title, startLine}
-    let buffer = [];        // 当前章节内容行
-
-    lines.forEach((line, idx) => {
-      const match = line.match(/^##\s+(.+)$/);
-      if (match) {
-        // 保存上一章
-        if (current) {
-          const content = buffer.join('\n');
-          chapters.push({
-            id: 'md-' + current.title.replace(/[<>！？，。、（）【】《》""'']/g, '').replace(/\s+/g, '-').substring(0, 40),
-            title: current.title,
-            html: parseMarkdown(content),
-            text: content.replace(/[#*>`|]/g, '').trim()
-          });
-        }
-        current = { title: match[1].trim(), startLine: idx };
-        buffer = [];
-      } else if (current) {
-        buffer.push(line);
-      }
-    });
-    // 保存最后一章
-    if (current) {
-      const content = buffer.join('\n');
-      chapters.push({
-        id: 'md-' + current.title.replace(/[<>！？，。、（）【】《》""'']/g, '').replace(/\s+/g, '-').substring(0, 40),
-        title: current.title,
-        html: parseMarkdown(content),
-        text: content.replace(/[#*>`|]/g, '').trim()
-      });
-    }
-    return chapters;
-  }
-
-  /**
    * 渲染知识学习视图
-   * 流程：加载markdown → 解析章节 → 渲染目录TOC + 内容
-   * 支持搜索过滤章节
+   * 流程：从全局 KNOWLEDGE_HTML 写入 DOM → 提取章节 → 渲染目录TOC
+   * 支持搜索过滤章节（通过 display:none 隐藏不匹配章节，保留 DOM 避免重复渲染）
    */
-  async function renderKnowledge() {
+  function renderKnowledge() {
     const contentEl = $('#knowledge-content');
     const tocEl = $('#knowledge-toc');
     const countEl = $('#knowledge-count');
     if (!contentEl || !tocEl) return;
 
-    // 首次进入：加载并解析 markdown
+    // 首次进入：从全局 KNOWLEDGE_HTML 读取并写入 DOM
     if (!KnowledgeState.loaded) {
-      contentEl.innerHTML = '<div class="loading-state">正在加载知识点...</div>';
-      try {
-        const resp = await fetch('docs/knowledge.md');
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        KnowledgeState.raw = await resp.text();
-        KnowledgeState.chapters = extractChapters(KnowledgeState.raw);
-        KnowledgeState.loaded = true;
-      } catch (err) {
-        contentEl.innerHTML = '<div class="empty-state">知识点加载失败：' + escapeHtml(err.message) + '<br>请刷新页面重试。</div>';
+      const html = (typeof window !== 'undefined' && window.KNOWLEDGE_HTML) ? window.KNOWLEDGE_HTML : '';
+      if (!html) {
+        contentEl.innerHTML = '<div class="empty-state">知识点加载失败：KNOWLEDGE_HTML 未定义<br>请检查 js/knowledge.js 是否正确加载。</div>';
         return;
       }
+      contentEl.innerHTML = html;
+      // 从 DOM 中提取章节信息（用于目录、搜索、滚动监听）
+      const sectionEls = $$('.know-chapter', contentEl);
+      KnowledgeState.chapters = sectionEls.map(sec => ({
+        id: sec.id || '',
+        title: (sec.querySelector('h2') || { textContent: '' }).textContent.trim(),
+        text: sec.textContent.trim(),
+        el: sec
+      }));
+      KnowledgeState.loaded = true;
+      // 添加交错入场动画
+      sectionEls.forEach((el, i) => {
+        el.classList.add('nf-rise-in');
+        el.style.animationDelay = Math.min(i * 50, 400) + 'ms';
+      });
     }
 
     const chapters = KnowledgeState.chapters;
     if (!chapters.length) {
-      contentEl.innerHTML = '<div class="empty-state">暂无知识点内容</div>';
+      if (countEl) countEl.textContent = '0 章';
       return;
     }
 
     // 更新章节计数
     if (countEl) countEl.textContent = chapters.length + ' 章';
 
-    // 搜索过滤
+    // 搜索过滤：切换章节可见性（保留 DOM，仅切换 display）
     const q = KnowledgeState.filter.trim().toLowerCase();
     const filtered = q
       ? chapters.filter(c =>
           c.title.toLowerCase().includes(q) || c.text.toLowerCase().includes(q)
         )
       : chapters;
+
+    chapters.forEach(c => {
+      if (c.el) c.el.style.display = filtered.includes(c) ? '' : 'none';
+    });
 
     // 渲染左侧目录TOC
     tocEl.innerHTML = filtered.map((c, i) => `
@@ -1233,19 +1258,18 @@
       }
     };
 
-    // 渲染右侧内容
+    // 空结果提示
     if (!filtered.length) {
-      contentEl.innerHTML = '<div class="empty-state">未找到匹配的知识点</div>';
+      const hint = document.createElement('div');
+      hint.className = 'empty-state';
+      hint.textContent = '未找到匹配的知识点';
+      // 仅在内容区末尾追加提示，不破坏已有 DOM
+      const existing = contentEl.querySelector('.empty-state');
+      if (!existing) contentEl.appendChild(hint);
       return;
     }
 
-    contentEl.innerHTML = filtered.map((c, i) => `
-      <section class="md-chapter nf-rise-in" id="${c.id}" style="animation-delay:${Math.min(i * 50, 400)}ms">
-        ${c.html}
-      </section>
-    `).join('');
-
-    // 滚动监听：高亮当前可见章节的目录项
+    // 滚动监听：高亮当前可见章节的目录项（仅绑定一次）
     if (!KnowledgeState._scrollBound) {
       KnowledgeState._scrollBound = true;
       let scrollTimer = null;
@@ -1255,10 +1279,10 @@
         scrollTimer = setTimeout(() => {
           const navH = 56 + 20;
           let activeId = null;
-          for (const c of filtered) {
-            const el = document.getElementById(c.id);
-            if (!el) continue;
-            const rect = el.getBoundingClientRect();
+          // 遍历当前可见的章节，找出视口内的首个
+          for (const c of KnowledgeState.chapters) {
+            if (!c.el || c.el.style.display === 'none') continue;
+            const rect = c.el.getBoundingClientRect();
             if (rect.top <= navH && rect.bottom > navH) {
               activeId = c.id;
               break;
@@ -1274,52 +1298,94 @@
     }
   }
 
-  // ============ 分类导航（紧凑双列网格，非卡片堆砌） ============
+  // ============ 分类导航（大分类卡片 + 小分类芯片） ============
   /**
-   * 渲染分类导航
-   * 设计：桌面双列网格，每行紧凑展示编号+名称+题数+进度条
-   * 去AI味：无卡片化、无translateX位移、用分隔线而非阴影
+   * 渲染分类导航页
+   * 设计：6 个大分类卡片（双列网格），每卡内嵌小分类芯片
+   * 交互：点大分类卡片 → 进入大分类练习；点小分类芯片 → 进入该小分类练习
+   * 题目可在多分类出现（多对多关系）
    */
+  // 大分类图标 SVG 集
+  const GROUP_ICONS = {
+    image: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+    penalty: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    scenario: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="18" cy="18" r="1" fill="currentColor"/></svg>',
+    rules: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="12" y1="6" x2="12" y2="6"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="13" r="1.5" fill="currentColor"/><circle cx="12" cy="18" r="1.5" fill="currentColor"/></svg>',
+    vehicle: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 1 1 0-4h14a2 2 0 1 1 0 4M7 13l1.5-5h7L17 13"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg>',
+    ev: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>'
+  };
+
   function renderCategories() {
     const tableEl = $('#categories-table');
     if (!tableEl) return;
-    const entries = Object.entries(CATEGORIES).filter(([k, m]) => m.count > 0);
 
-    tableEl.innerHTML = entries.map(([key, meta], i) => {
-      const answeredInCat = (meta.ids || []).filter(id => State.answered[id]).length;
-      const progressPct = meta.count > 0 ? Math.round(answeredInCat / meta.count * 100) : 0;
-      const delay = i < 16 ? `${i * 25}ms` : '0ms';
+    const groups = Object.entries(CATEGORY_GROUPS).filter(([gk, g]) => getGroupCount(gk) > 0);
+
+    tableEl.innerHTML = groups.map(([gKey, group], i) => {
+      const totalCount = getGroupCount(gKey);
+      // 统计该大分类下已答题数（去重，因为题目可能在多小分类出现）
+      const idSet = getGroupQuestionIds(gKey);
+      const answeredCount = Array.from(idSet).filter(id => State.answered[id]).length;
+      const progressPct = totalCount > 0 ? Math.round(answeredCount / totalCount * 100) : 0;
+      const delay = `${i * 60}ms`;
+
+      // 小分类芯片
+      const subs = group.cats
+        .map(cKey => {
+          const cat = CATEGORIES[cKey];
+          if (!cat || cat.count === 0) return null;
+          const subAnswered = (cat.ids || []).filter(id => State.answered[id]).length;
+          return `<button class="catgrp-sub" data-cat="${cKey}" type="button" style="--sub-color:${cat.color}">
+            <span class="catgrp-sub-dot"></span>
+            <span class="catgrp-sub-name">${escapeHtml(cat.name)}</span>
+            <span class="catgrp-sub-count">${cat.count}</span>
+            <span class="catgrp-sub-done">${subAnswered}</span>
+          </button>`;
+        })
+        .filter(Boolean)
+        .join('');
+
       return `
-        <div class="navcat-item nf-rise-in" data-cat="${key}" role="listitem" tabindex="0" style="--item-color:${meta.color};animation-delay:${delay}">
-          <div class="navcat-num">${String(i + 1).padStart(2, '0')}</div>
-          <div class="navcat-body">
-            <div class="navcat-top">
-              <span class="navcat-name">${escapeHtml(meta.name)}</span>
-              <span class="navcat-count">${meta.count}<span class="navcat-unit">题</span></span>
+        <article class="catgrp-card nf-rise-in" data-group="${gKey}" style="--group-color:${group.color};animation-delay:${delay}">
+          <div class="catgrp-head" data-cat="${gKey}" role="button" tabindex="0" aria-label="进入${escapeHtml(group.name)}练习">
+            <div class="catgrp-icon">${GROUP_ICONS[group.icon] || GROUP_ICONS.image}</div>
+            <div class="catgrp-meta">
+              <h3 class="catgrp-name">${escapeHtml(group.name)}</h3>
+              <p class="catgrp-desc">${escapeHtml(group.desc)}</p>
             </div>
-            <div class="navcat-progress">
-              <div class="navcat-track" role="progressbar" aria-label="${escapeHtml(meta.name)}练习进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${progressPct}">
-                <div class="navcat-bar" style="width:${progressPct}%"></div>
-              </div>
-              <span class="navcat-done">${answeredInCat}/${meta.count}</span>
+            <div class="catgrp-count">
+              <span class="catgrp-count-num">${totalCount}</span>
+              <span class="catgrp-count-unit">题</span>
             </div>
           </div>
-          <div class="navcat-arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <div class="catgrp-progress">
+            <div class="catgrp-track" role="progressbar" aria-label="${escapeHtml(group.name)}练习进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${progressPct}">
+              <div class="catgrp-bar" style="width:${progressPct}%"></div>
+            </div>
+            <span class="catgrp-done">${answeredCount}/${totalCount}</span>
           </div>
-        </div>
+          <div class="catgrp-subs">${subs}</div>
+          <button class="catgrp-enter" data-cat="${gKey}" type="button">
+            <span>进入大分类练习</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </article>
       `;
     }).join('');
 
+    // 事件委托：大分类头部点击 + 小分类芯片点击 + 进入按钮点击
     tableEl.onclick = e => {
-      const row = e.target.closest('.navcat-item');
-      if (!row) return;
-      enterCategory(row.dataset.cat);
+      const sub = e.target.closest('.catgrp-sub');
+      if (sub) { enterCategory(sub.dataset.cat); return; }
+      const head = e.target.closest('.catgrp-head');
+      if (head) { enterCategory(head.dataset.cat); return; }
+      const enterBtn = e.target.closest('.catgrp-enter');
+      if (enterBtn) { enterCategory(enterBtn.dataset.cat); return; }
     };
     tableEl.onkeydown = e => {
       if (e.key === 'Enter' || e.key === ' ') {
-        const row = e.target.closest('.navcat-item');
-        if (row) { e.preventDefault(); enterCategory(row.dataset.cat); }
+        const target = e.target.closest('.catgrp-head, .catgrp-sub, .catgrp-enter');
+        if (target) { e.preventDefault(); enterCategory(target.dataset.cat); }
       }
     };
   }

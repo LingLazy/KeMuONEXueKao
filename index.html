@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="科目一教考 · 1964道完整题库 · 24分类 · 76条口诀 · 模拟考试 · 公安部令第163号 · 2026年7月最新版">
+<meta name="description" content="科目一教考 · 1964道完整题库 · 6大分类24细分 · 76条口诀 · 模拟考试 · 公安部令第163号 · 2026年7月最新版">
 <meta name="keywords" content="科目一,驾考,1964题,口诀,模拟考试,记分管理,公安部令第163号,2026">
 <meta name="theme-color" content="#0d9488" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)">
@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="科目一教考">
 <meta property="og:title" content="科目一教考 · 1964题完整题库 · 模拟考试 · 速记口诀">
-<meta property="og:description" content="2026年7月最新版 · 1964道完整题库 · 76条速记口诀 · 24个精细分类 · 全真模拟考试">
+<meta property="og:description" content="2026年7月最新版 · 1964道完整题库 · 76条速记口诀 · 6大分类24细分 · 全真模拟考试">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://fanquanpp.github.io/KeMuONEXueKao/">
 <link rel="manifest" href="manifest.json">
@@ -84,7 +84,7 @@
             <span class="title-line">驾考科目一</span>
             <span class="title-line title-accent">速记通</span>
           </h1>
-          <p class="hero-sub">1964 道完整题库 · 76 条速记口诀 · 24 个精细分类 · 全真模拟考试。关键词智能标注，口诀即时提示，一站式攻克科目一。</p>
+          <p class="hero-sub">1964 道完整题库 · 76 条速记口诀 · 6 大分类 24 细分 · 全真模拟考试。关键词智能标注，口诀即时提示，一站式攻克科目一。</p>
           <div class="hero-actions">
             <button class="btn btn-primary nf-btn-shine nf-icon-slide" data-go="practice" type="button">
               <span>开始练习</span>
@@ -115,8 +115,8 @@
                 <div class="stat-name">速记口诀</div>
               </div>
               <div class="stat-item">
-                <div class="stat-num" id="home-stat-categories">24</div>
-                <div class="stat-name">精细分类</div>
+                <div class="stat-num" id="home-stat-categories">6</div>
+                <div class="stat-name">大分类</div>
               </div>
               <div class="stat-item">
                 <div class="stat-num" id="home-stat-images">371</div>
@@ -505,13 +505,13 @@
     </div>
   </section>
 
-  <!-- ========== 分类导航视图（列表式，非卡片堆砌） ========== -->
+  <!-- ========== 分类导航视图（大分类卡片 + 小分类芯片） ========== -->
   <section id="view-categories" class="view" aria-labelledby="categories-title">
     <div class="view-container">
       <header class="view-header">
         <span class="section-eyebrow">CATEGORIES</span>
-        <h2 class="section-title" id="categories-title">24 个<span class="title-accent">分类导航</span></h2>
-        <p class="section-desc">点击任意分类进入对应题目练习，列表式浏览更高效。</p>
+        <h2 class="section-title" id="categories-title">6 大<span class="title-accent">分类导航</span></h2>
+        <p class="section-desc">大分类聚合小分类，题目可在多分类出现。点击卡片进入大分类练习，点击芯片进入细分练习。</p>
       </header>
       <div class="categories-table" id="categories-table" role="list"></div>
     </div>
@@ -567,6 +567,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <script src="js/data.js"></script>
+<script src="js/knowledge.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

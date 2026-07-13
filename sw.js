@@ -6,7 +6,7 @@
    =================================================================== */
 'use strict';
 
-const SW_VERSION = 'v2.5.20260713';
+const SW_VERSION = 'v2.7.20260713';
 const CORE_CACHE = `kemu1-core-${SW_VERSION}`;
 const IMG_CACHE = `kemu1-img-${SW_VERSION}`;
 const DATA_CACHE = `kemu1-data-${SW_VERSION}`;
@@ -18,7 +18,7 @@ const CORE_ASSETS = [
   './css/style.css',
   './js/app.js',
   './js/data.js',
-  './docs/knowledge.md',
+  './js/knowledge.js',
   './manifest.json'
 ];
 
