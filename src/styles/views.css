@@ -1476,6 +1476,30 @@
 }
 .mnemonics-list {
   scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  min-height: 360px;
+  overflow: auto;
+  /* 平滑滚动 + 惯性 */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* 自定义滚动条（WebKit） */
+}
+.mnemonics-list::-webkit-scrollbar {
+  width: 6px;
+}
+.mnemonics-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mnemonics-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+.mnemonics-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-mute);
+}
+/* 右侧内边距预留滚动条空间，避免内容被遮挡 */
+.mnemonics-list > div {
+  padding-right: 4px;
 }
 
 /* 口诀卡片 · 构成主义信息卡 */
@@ -1595,10 +1619,32 @@
   transform: rotate(180deg);
   color: var(--primary);
 }
+/* 展开内容容器：CSS grid-template-rows 0fr→1fr 实现 GPU 友好的高度过渡 */
+/* 相比 framer-motion height:auto，避免逐帧布局测量，过渡更顺滑 */
+.mnemonic-card-body-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s var(--ease-smooth),
+              opacity 0.25s var(--ease-out);
+  opacity: 0;
+}
+.mnemonic-card-body-wrap.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
 .mnemonic-card-body {
   overflow: hidden;
+  min-height: 0; /* grid 子元素必须 min-height:0 才能正确收缩 */
   padding: 0 var(--sp-4) var(--sp-4);
   padding-left: var(--sp-5);
+}
+/* 收起态时隐藏 body 内部内容，避免 tab 聚焦 */
+.mnemonic-card-body-wrap:not(.open) .mnemonic-card-body {
+  visibility: hidden;
+  transition: visibility 0s linear 0.3s; /* 过渡结束后才隐藏 */
+}
+.mnemonic-card-body-wrap.open .mnemonic-card-body {
+  visibility: visible;
 }
 .mnemonic-section {
   padding: var(--sp-3) var(--sp-4);

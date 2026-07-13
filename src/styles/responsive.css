@@ -367,9 +367,8 @@
     display: block;
   }
   .mnemonics-list {
-    height: auto !important;
-    max-height: calc(100vh - 320px);
-    min-height: 300px;
+    /* 移动端：由 JS 动态测量高度占满视口，此处仅设最小高度兜底 */
+    min-height: 280px;
   }
   .mnemonic-card-head {
     padding: var(--sp-3);

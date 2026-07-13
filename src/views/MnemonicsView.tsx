@@ -185,6 +185,38 @@ export default function MnemonicsView() {
     setFocusIndex(0);
   }, [activeCat, search]);
 
+  // 动态计算虚拟滚动容器高度：占满视口剩余空间，替代硬编码魔术数字
+  // 监听窗口尺寸变化与上方元素高度变化，确保列表始终占满可用高度
+  useEffect(() => {
+    if (studyMode) return; // 学习模式使用页面滚动，无需固定高度
+    const el = parentRef.current;
+    if (!el) return;
+    const updateHeight = () => {
+      const rect = el.getBoundingClientRect();
+      // 视口高度减去列表顶部偏移，再预留底部间距
+      const available = window.innerHeight - rect.top - 24;
+      el.style.height = `${Math.max(360, available)}px`;
+    };
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    window.addEventListener('orientationchange', updateHeight);
+    // ResizeObserver 监听上方兄弟元素高度变化（如快捷键提示显示/隐藏）
+    const layoutEl = el.closest('.mnemonics-layout');
+    let observer: ResizeObserver | null = null;
+    if (layoutEl && layoutEl.parentElement) {
+      observer = new ResizeObserver(updateHeight);
+      // 观察布局容器内的所有兄弟区块
+      Array.from(layoutEl.parentElement.children).forEach((sib) => {
+        if (sib !== layoutEl) observer?.observe(sib);
+      });
+    }
+    return () => {
+      window.removeEventListener('resize', updateHeight);
+      window.removeEventListener('orientationchange', updateHeight);
+      observer?.disconnect();
+    };
+  }, [studyMode, mnemonics]);
+
   if (!mnemonics) {
     return (
       <div className="view view-mnemonics">
@@ -360,7 +392,6 @@ export default function MnemonicsView() {
               <div
                 ref={(el) => { parentRef.current = el; }}
                 className="mnemonics-list"
-                style={{ height: 'calc(100vh - 320px)', minHeight: '400px', overflow: 'auto' }}
               >
                 <div
                   style={{
@@ -444,13 +475,7 @@ function MnemonicCard({
   ].filter(Boolean).join(' ');
 
   return (
-    <motion.div
-      layout
-      className={cardClass}
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2 }}
-    >
+    <div className={cardClass}>
       <button type="button" className="mnemonic-card-head" onClick={onToggle} aria-expanded={expanded}>
         <div className="mnemonic-card-head-left">
           <span className="mnemonic-card-cat">{catName}</span>
@@ -474,15 +499,9 @@ function MnemonicCard({
           </svg>
         </div>
       </button>
-      <AnimatePresence>
-        {expanded && (
-          <motion.div
-            className="mnemonic-card-body"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-          >
+      {/* 展开内容：CSS grid-template-rows 0fr→1fr 过渡，GPU 友好，避免 height:auto 布局抖动 */}
+      <div className={`mnemonic-card-body-wrap ${expanded ? 'open' : ''}`}>
+        <div className="mnemonic-card-body">
             {mnemonic.explain && (
               <div className="mnemonic-section">
                 <span className="mnemonic-section-label">解释</span>
@@ -528,9 +547,8 @@ function MnemonicCard({
                 )}
               </button>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+        </div>
+      </div>
+    </div>
   );
 }
