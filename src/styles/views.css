@@ -1225,7 +1225,9 @@
 /* 紧凑布局：最大化列表可视高度，减少上下预留空间 */
 /* 非学习模式：CSS Flexbox 撑满视口，取代 JS 高度计算，兼容所有缩放比例 */
 .view-mnemonics:not(.study-mode-active) {
+  /* dvh 动态视口高度，更准确适配系统缩放与浏览器缩放，避免 100vh 偏差；vh 作为旧浏览器 fallback */
   height: calc(100vh - var(--nav-h));
+  height: calc(100dvh - var(--nav-h));
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -1423,18 +1425,25 @@
   overflow: hidden;
 }
 .mnemonics-aside {
-  position: sticky;
-  top: calc(var(--nav-h) + var(--sp-6));
-  align-self: start;
-  max-height: calc(100vh - var(--nav-h) - var(--sp-6));
+  /* 非学习模式：高度由 grid 默认 stretch 自动撑满行高，不依赖 100vh，
+     避免系统缩放/浏览器缩放下视口高度与实际容器高度不一致导致的覆盖遮挡。
+     祖先均为 overflow:hidden 不可滚动，sticky 无效故不使用。 */
+  position: relative;
+  min-height: 0;
   overflow-y: auto;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: var(--sp-4);
   box-shadow: var(--shadow-xs);
+}
+/* 学习模式：layout overflow:visible 可滚动，恢复 sticky 使分类导航固定在视口 */
+.view-mnemonics.study-mode-active .mnemonics-aside {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--sp-6));
+  align-self: start;
+  max-height: calc(100dvh - var(--nav-h) - var(--sp-6));
   z-index: 5;
-  /* position: relative 已包含于 sticky */
 }
 /* 构成主义:右上角三角切片 */
 .mnemonics-aside::before {
