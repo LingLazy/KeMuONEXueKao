@@ -6,7 +6,7 @@
  * - 主题切换按钮
  * - 移动端折叠菜单
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useThemeStore } from '@/stores/themeStore';
 import { useProgressStore } from '@/stores/progressStore';
@@ -30,10 +30,22 @@ const NAV_ITEMS: NavItem[] = [
 export default function TopNav() {
   const theme = useThemeStore((s) => s.theme);
   const toggle = useThemeStore((s) => s.toggle);
-  const stats = useProgressStore((s) => s.getStats());
+  // 选择原始状态引用，避免选择器返回新对象导致 React 19 useSyncExternalStore 无限重渲染
+  const answered = useProgressStore((s) => s.answered);
+  const total = useProgressStore((s) => s.total);
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // 由原始状态派生统计指标（useMemo 保证引用稳定）
+  const stats = useMemo(() => {
+    const answeredList = Object.values(answered);
+    const answeredCount = answeredList.length;
+    const correctCount = answeredList.filter((r) => r.correct).length;
+    const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+    const progress = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
+    return { answered: answeredCount, accuracy, progress, total };
+  }, [answered, total]);
 
   // 监听滚动添加阴影
   useEffect(() => {

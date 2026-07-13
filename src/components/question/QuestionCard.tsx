@@ -58,7 +58,8 @@ export default function QuestionCard({
 }: QuestionCardProps) {
   const recordAnswer = useProgressStore((s) => s.recordAnswer);
   const toggleBookmark = useProgressStore((s) => s.toggleBookmark);
-  const isBookmarked = useProgressStore((s) => s.isBookmarked(question.id));
+  // 直接从状态读取布尔值，避免调用方法导致选择器返回值不稳定
+  const isBookmarked = useProgressStore((s) => Boolean(s.bookmarks[question.id]));
   const analysisVisible = usePracticeStore((s) => s.analysisVisible);
   const toggleAnalysis = usePracticeStore((s) => s.toggleAnalysis);
 

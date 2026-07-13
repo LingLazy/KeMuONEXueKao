@@ -31,11 +31,22 @@ const QUICK_ICONS: Record<string, React.ReactNode> = {
 
 export default function HomeView() {
   const navigate = useNavigate();
-  const stats = useProgressStore((s) => s.getStats());
+  // 选择原始状态引用，避免选择器返回新对象导致 React 19 useSyncExternalStore 无限重渲染
   const answered = useProgressStore((s) => s.answered);
   const bookmarks = useProgressStore((s) => s.bookmarks);
+  const total = useProgressStore((s) => s.total);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [mnemonicCount, setMnemonicCount] = useState(0);
+
+  // 由原始状态派生统计指标（useMemo 保证引用稳定）
+  const stats = useMemo(() => {
+    const answeredList = Object.values(answered);
+    const answeredCount = answeredList.length;
+    const correctCount = answeredList.filter((r) => r.correct).length;
+    const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+    const progress = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
+    return { answered: answeredCount, correct: correctCount, accuracy, total, progress };
+  }, [answered, total]);
 
   // 加载题库与口诀（用于统计）
   useEffect(() => {
