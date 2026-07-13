@@ -198,7 +198,7 @@ export default function MnemonicsView() {
       // 读取实际底部预留：视图 padding-bottom + 容器 padding-bottom
       const viewEl = el.closest('.view-mnemonics');
       const containerEl = el.closest('.view-container');
-      let bottomReserve = 80; // 默认回退值（sp-12 48px + sp-8 32px）
+      let bottomReserve = 16; // 默认回退值（sp-2 8px + sp-2 8px，紧凑布局）
       if (viewEl && containerEl) {
         const vs = getComputedStyle(viewEl);
         const cs = getComputedStyle(containerEl);
