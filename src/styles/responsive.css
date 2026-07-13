@@ -343,9 +343,18 @@
   }
 
   /* ===== MnemonicsView 口诀视图 ===== */
+  .mnemonics-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
   .mnemonics-search-bar {
     max-width: 100%;
-    margin-bottom: var(--sp-4);
+  }
+  .study-mode-btn {
+    justify-content: center;
+  }
+  .mnemonics-shortcut-hint {
+    display: none;
   }
   .mnemonics-layout {
     grid-template-columns: 1fr;
