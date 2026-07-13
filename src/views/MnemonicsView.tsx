@@ -226,6 +226,9 @@ export default function MnemonicsView() {
         <div className="geo-cross-marks" />
         {/* 扩展装饰：倾斜点阵丰富视觉层次 */}
         <div className="geo-dots-tilt" />
+        {/* 扩展装饰 v3.4 · 多位置动态元素 */}
+        <div className="geo-bezier-flow" />
+        <div className="geo-orbit-dots" />
       </div>
       <div className="view-container">
         {/* 标题区 */}

@@ -487,6 +487,9 @@ function ExamStartView({ onStart, total }: { onStart: () => void; total: number 
         <div className="geo-triangle-bl" />
         <div className="geo-curve-s" />
         <div className="geo-cross-marks" />
+        {/* 扩展装饰 v3.4 · 考试开始页动态元素 */}
+        <div className="geo-orbit-dots" />
+        <div className="geo-pulse-ring" />
       </div>
       <div className="view-container">
         <motion.div
@@ -604,6 +607,9 @@ function ExamResultView({
             <div className="geo-glow-primary-tl" />
             <div className="geo-half-rings-br" />
             <div className="geo-curve-s" />
+            {/* 扩展装饰 v3.4 · 通过时漂浮方块与螺旋庆祝感 */}
+            <div className="geo-float-block" />
+            <div className="geo-spiral-ccw" />
           </>
         ) : (
           <>
@@ -611,6 +617,8 @@ function ExamResultView({
             <div className="geo-diag-line" />
             <div className="geo-triangle-rt" />
             <div className="geo-cross-marks" />
+            {/* 扩展装饰 v3.4 · 失败时十字网格强化复盘感 */}
+            <div className="geo-cross-grid" />
           </>
         )}
       </div>

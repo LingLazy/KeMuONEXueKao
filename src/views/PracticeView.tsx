@@ -177,6 +177,10 @@ export default function PracticeView() {
         <div className="geo-parallel-lines" />
         <div className="geo-cross-marks" />
         <div className="geo-hatch-block" style={{ top: '12%', right: '4%' }} />
+        {/* 扩展装饰 v3.4 · 多位置动态元素 */}
+        <div className="geo-dots-radial" />
+        <div className="geo-chevron-stack" />
+        <div className="geo-bezier-flow" />
       </div>
       {/* 移动端顶栏：分类切换按钮 */}
       {isMobile && (

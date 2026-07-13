@@ -182,6 +182,10 @@ export default function CategoriesView() {
         <div className="geo-cross-marks" />
         <div className="geo-hline-dashed" style={{ top: '32%' }} />
         <div className="geo-hline-dashed" style={{ top: '68%' }} />
+        {/* 扩展装饰 v3.4 · 多位置动态元素 */}
+        <div className="geo-dots-radial" />
+        <div className="geo-chevron-stack" />
+        <div className="geo-glow-info-bl" />
       </div>
       <div className="view-container">
         <header className="section-header">

@@ -201,6 +201,10 @@ export default function KnowledgeView() {
         <div className="geo-vline-bundle" />
         {/* 扩展装饰：强调色光晕营造阅读沉浸感 */}
         <div className="geo-glow-accent-br" />
+        {/* 扩展装饰 v3.4 · 多位置动态元素 */}
+        <div className="geo-cross-grid" />
+        <div className="geo-spiral-ccw" />
+        <div className="geo-float-block" />
       </div>
       {/* 阅读进度条 · 固定在视图顶部 */}
       <div className="reading-progress-bar" aria-hidden="true">

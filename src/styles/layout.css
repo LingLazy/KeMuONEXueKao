@@ -163,6 +163,35 @@
   transform: translateY(0);
 }
 
+/* GitHub 仓库外链按钮 · 与主题切换同尺寸方形按钮 */
+.nav-repo-link {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-md);
+  color: var(--text-2);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  transition: color var(--dur-fast) var(--ease-precision),
+              border-color var(--dur-fast) var(--ease-precision),
+              background var(--dur-fast) var(--ease-precision),
+              transform var(--dur-fast) var(--ease-precision);
+}
+.nav-repo-link:hover {
+  color: var(--primary);
+  border-color: var(--primary-border);
+  background: var(--primary-bg);
+  transform: translateY(-1px);
+}
+.nav-repo-link:active {
+  transform: translateY(0);
+}
+.nav-repo-link:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+}
+
 /* 移动端菜单切换 */
 .nav-menu-toggle {
   display: none;
@@ -200,6 +229,20 @@
   color: var(--primary);
   font-weight: 600;
 }
+/* 移动端 GitHub 仓库入口 · 强调色边框区分外链 */
+.nav-mobile-repo {
+  display: flex;
+  align-items: center;
+  margin-top: var(--sp-2);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+.nav-mobile-repo:hover {
+  border-color: var(--primary-border);
+  background: var(--primary-bg);
+  color: var(--primary);
+}
 
 /* ========== 主内容区 ========== */
 .app-main {
@@ -225,3 +268,213 @@
   margin: 0 auto;
   padding: var(--sp-8) var(--sp-6);
 }
+
+/* ========== 全局页脚 ========== */
+#global-footer {
+  position: relative;
+  margin-top: var(--sp-12);
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* 装饰条带 · 构成主义四色 */
+.footer-decor {
+  display: flex;
+  height: 4px;
+  width: 100%;
+}
+.footer-decor-bar {
+  flex: 1;
+  transition: flex var(--dur-slow) var(--ease-smooth);
+}
+.footer-decor .bar-ink {
+  background: var(--geo-ink);
+}
+.footer-decor .bar-red {
+  background: var(--geo-red);
+}
+.footer-decor .bar-blue {
+  background: var(--geo-blue);
+}
+.footer-decor .bar-accent {
+  background: var(--accent);
+}
+.footer-decor:hover .bar-ink {
+  flex: 1.6;
+}
+.footer-decor:hover .bar-red {
+  flex: 1.2;
+}
+.footer-decor:hover .bar-blue {
+  flex: 1.4;
+}
+.footer-decor:hover .bar-accent {
+  flex: 1.8;
+}
+
+.footer-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--sp-10) var(--sp-6) var(--sp-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+/* 品牌区 */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+.footer-brand-mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--r-lg);
+  font-size: 1.375rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.footer-brand-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-1);
+}
+.footer-brand-tag {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+}
+
+/* 链接区 */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5);
+  padding-bottom: var(--sp-6);
+  border-bottom: 1px solid var(--divider);
+}
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-2);
+  transition: color var(--dur-fast) var(--ease-precision),
+              transform var(--dur-fast) var(--ease-precision);
+}
+.footer-link svg {
+  color: var(--text-3);
+  transition: color var(--dur-fast) var(--ease-precision);
+}
+.footer-link:hover {
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+.footer-link:hover svg {
+  color: var(--primary);
+}
+.footer-link:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+  border-radius: var(--r-sm);
+}
+
+/* 免责声明 */
+.footer-disclaimer {
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  border-left: 3px solid var(--geo-red);
+}
+.footer-disclaimer-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: var(--sp-2);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+.footer-disclaimer-text {
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: var(--text-3);
+  margin-bottom: var(--sp-3);
+}
+.footer-disclaimer-more {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--primary);
+  transition: color var(--dur-fast), transform var(--dur-fast);
+}
+.footer-disclaimer-more:hover {
+  color: var(--primary-hover);
+  transform: translateX(2px);
+}
+
+/* 底部版权 */
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--divider);
+}
+.footer-copy {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+.footer-meta {
+  font-size: 0.75rem;
+  color: var(--text-mute);
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+/* 移动端 footer 适配 */
+@media (max-width: 640px) {
+  .footer-inner {
+    padding: var(--sp-8) var(--sp-4) var(--sp-6);
+    gap: var(--sp-6);
+  }
+  .footer-brand-mark {
+    width: 38px;
+    height: 38px;
+    font-size: 1.125rem;
+  }
+  .footer-brand-name {
+    font-size: 1.0625rem;
+  }
+  .footer-links {
+    gap: var(--sp-4);
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-1);
+  }
+}
+

@@ -3183,8 +3183,348 @@
 @media (prefers-reduced-motion: reduce) {
   .geo-curve-s,
   .geo-wave-lines,
-  .geo-ripple-tr {
+  .geo-ripple-tr,
+  .geo-orbit-rotate,
+  .geo-pulse-ring,
+  .geo-float-block,
+  .geo-spiral-ccw,
+  .geo-bezier-flow {
     animation: none;
   }
 }
+
+/* ===================================================================
+   扩展装饰系统 v3.4 · 多位置多形态动态背景
+   - 螺旋/贝塞尔/十字网格/径向点阵/对角线束/轨道点阵/V 形堆叠
+   - 信息光晕/旋转轨道/脉冲环/漂浮方块
+   - 全部遵循构成主义色板，支持双主题与 prefers-reduced-motion
+   =================================================================== */
+
+/* ---------- 逆时针螺旋 · 多层圆环嵌套 ---------- */
+.geo-spiral-ccw {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: 14%;
+  left: 6%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+  animation: spiral-rotate 36s linear infinite;
+}
+.geo-spiral-ccw::before,
+.geo-spiral-ccw::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--geo-curve);
+}
+.geo-spiral-ccw::before {
+  inset: 24px;
+  border-color: var(--geo-wave);
+  border-style: dashed;
+}
+.geo-spiral-ccw::after {
+  inset: 56px;
+  border-color: var(--geo-line);
+  border-width: 1.5px;
+}
+@keyframes spiral-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* ---------- 贝塞尔曲线流 · 双弧线交错 ---------- */
+.geo-bezier-flow {
+  position: absolute;
+  width: 320px;
+  height: 200px;
+  bottom: 18%;
+  right: 8%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+.geo-bezier-flow::before,
+.geo-bezier-flow::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1.5px;
+  background: var(--geo-curve);
+  border-radius: 50%;
+  animation: bezier-flow 8s ease-in-out infinite alternate;
+}
+.geo-bezier-flow::before {
+  top: 30%;
+  transform: scaleX(1);
+}
+.geo-bezier-flow::after {
+  top: 60%;
+  background: var(--geo-wave);
+  animation-delay: -2s;
+  animation-direction: alternate-reverse;
+}
+@keyframes bezier-flow {
+  0% { transform: scaleX(0.6) translateX(-20px); opacity: 0.4; }
+  100% { transform: scaleX(1) translateX(20px); opacity: 0.8; }
+}
+
+/* ---------- 十字网格 · 工程坐标锚点矩阵 ---------- */
+.geo-cross-grid {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  top: 40%;
+  right: 4%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--geo-cross) 1px, transparent 1px),
+    linear-gradient(var(--geo-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--geo-grid) 1px, transparent 1px);
+  background-size: 24px 24px, 48px 48px, 48px 48px;
+  background-position: 0 0, 0 0, 0 0;
+  mask-image: radial-gradient(circle at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at center, #000 30%, transparent 75%);
+}
+
+/* ---------- 径向点阵 · 中心向外渐淡 ---------- */
+.geo-dots-radial {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  bottom: 8%;
+  left: 12%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  background-image: radial-gradient(circle at 1px 1px, var(--geo-dot-lg) 1.5px, transparent 0);
+  background-size: 18px 18px;
+  mask-image: radial-gradient(circle at center, #000 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at center, #000 20%, transparent 70%);
+}
+
+/* ---------- 对角线束 · 重复斜纹 ---------- */
+.geo-diagonal-bundle {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 20%;
+  right: 10%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--geo-line) 0,
+    var(--geo-line) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+  mask-image: linear-gradient(135deg, #000 0%, transparent 80%);
+  -webkit-mask-image: linear-gradient(135deg, #000 0%, transparent 80%);
+  border-radius: var(--r-md);
+}
+
+/* ---------- 轨道点阵 · 椭圆轨道上的小圆点 ---------- */
+.geo-orbit-dots {
+  position: absolute;
+  width: 220px;
+  height: 160px;
+  top: 22%;
+  left: 8%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+.geo-orbit-dots::before,
+.geo-orbit-dots::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px dashed var(--geo-curve);
+  border-radius: 50%;
+}
+.geo-orbit-dots::before {
+  inset: 20px;
+  border-color: var(--geo-wave);
+  border-style: dotted;
+}
+.geo-orbit-dots::after {
+  inset: 50px 60px;
+  border-color: var(--geo-line);
+}
+
+/* ---------- V 形堆叠 · 多层 chevron ---------- */
+.geo-chevron-stack {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  bottom: 22%;
+  right: 6%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background:
+    conic-gradient(from 45deg at 50% 50%,
+      transparent 0deg,
+      var(--geo-curve) 90deg,
+      transparent 90deg,
+      transparent 180deg,
+      var(--geo-wave) 270deg,
+      transparent 270deg);
+  mask-image: radial-gradient(circle at center, #000 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, #000 40%, transparent 80%);
+}
+
+/* ---------- 信息光晕 · 左下角青色径向 ---------- */
+.geo-glow-info-bl {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  bottom: -140px;
+  left: -140px;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle, var(--info) 0%, transparent 70%);
+  opacity: 0.18;
+  filter: blur(50px);
+}
+[data-theme="dark"] .geo-glow-info-bl {
+  opacity: 0.22;
+}
+
+/* ---------- 旋转轨道 · 带动画的椭圆环 ---------- */
+.geo-orbit-rotate {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+  border: 1px solid var(--geo-curve);
+  border-radius: 50%;
+  border-style: dashed;
+  animation: orbit-spin 50s linear infinite;
+}
+.geo-orbit-rotate::before {
+  content: '';
+  position: absolute;
+  inset: 30px;
+  border: 1px dotted var(--geo-wave);
+  border-radius: 50%;
+}
+.geo-orbit-rotate::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--geo-red);
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+@keyframes orbit-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ---------- 脉冲环 · 中心扩散 ---------- */
+.geo-pulse-ring {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  top: 30%;
+  right: 14%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+.geo-pulse-ring::before,
+.geo-pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--geo-curve);
+  border-radius: 50%;
+  animation: pulse-expand 4s ease-out infinite;
+}
+.geo-pulse-ring::after {
+  animation-delay: -2s;
+  border-color: var(--geo-wave);
+}
+@keyframes pulse-expand {
+  0% { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* ---------- 漂浮方块 · 垂直微浮动 ---------- */
+.geo-float-block {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  top: 18%;
+  right: 16%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+  border: 1.5px solid var(--geo-curve);
+  border-radius: var(--r-sm);
+  animation: float-y 6s ease-in-out infinite;
+}
+.geo-float-block::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px dashed var(--geo-wave);
+  border-radius: var(--r-xs);
+}
+.geo-float-block::after {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  background: var(--geo-red);
+  opacity: 0.4;
+  border-radius: var(--r-xs);
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+/* ---------- 扩展装饰的移动端响应式 ---------- */
+@media (max-width: 768px) {
+  .geo-spiral-ccw,
+  .geo-bezier-flow,
+  .geo-cross-grid,
+  .geo-dots-radial,
+  .geo-diagonal-bundle,
+  .geo-orbit-dots,
+  .geo-chevron-stack,
+  .geo-glow-info-bl,
+  .geo-orbit-rotate,
+  .geo-pulse-ring,
+  .geo-float-block {
+    display: none;
+  }
+}
+
+/* ---------- 扩展装饰的运动偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .geo-spiral-ccw,
+  .geo-bezier-flow,
+  .geo-orbit-rotate,
+  .geo-pulse-ring,
+  .geo-float-block {
+    animation: none;
+  }
+}
+
 

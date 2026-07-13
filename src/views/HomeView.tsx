@@ -128,6 +128,11 @@ export default function HomeView() {
         <div className="geo-ripple-tr" />
         <div className="geo-triangle-rt" />
         <div className="geo-cross-marks" />
+        {/* 扩展装饰 v3.4 · 多位置动态元素 */}
+        <div className="geo-spiral-ccw" />
+        <div className="geo-pulse-ring" />
+        <div className="geo-float-block" />
+        <div className="geo-glow-info-bl" />
       </div>
       {/* Hero */}
       <section className="home-hero">
@@ -149,7 +154,7 @@ export default function HomeView() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
           >
-            科目一<span className="title-accent">速记通</span>
+            KeMuONE<span className="title-accent">Xue</span>Kao
           </motion.h1>
           <motion.p
             className="home-hero-desc"

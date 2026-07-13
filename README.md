@@ -1,19 +1,17 @@
-# 科目一教考 · 速记通
+# KeMuONEXueKao
 
-> 2026 年 7 月最新版 · 机动车驾驶证科目一在线学习与速记练习网页
+> 机动车驾驶证科目一在线学习与速记练习网页 · 2026 年 7 月最新版
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Build: Vite](https://img.shields.io/badge/构建-Vite_7-646cff.svg)](https://vitejs.dev/)
-[![Framework: React 19](https://img.shields.io/badge/框架-React_19-61dafb.svg)](https://react.dev/)
-[![Lang: TypeScript](https://img.shields.io/badge/语言-TypeScript_5.9-3178c6.svg)](https://www.typescriptlang.org/)
-[![Questions: 1861](https://img.shields.io/badge/题目-1861-0d9488.svg)](https://fanquanpp.github.io/KeMuONEXueKao/)
-[![Mnemonics: 155](https://img.shields.io/badge/口诀-155-f97316.svg)](https://fanquanpp.github.io/KeMuONEXueKao/#/mnemonics)
-[![PWA: 支持](https://img.shields.io/badge/PWA-支持-9333ea.svg)](https://fanquanpp.github.io/KeMuONEXueKao/)
-[![Deploy: GitHub Pages](https://img.shields.io/badge/部署-GitHub%20Pages-success.svg)](https://docs.github.com/en/pages)
+[![Build: Vite](https://img.shields.io/badge/Build-Vite_7-646cff.svg)](https://vitejs.dev/)
+[![Framework: React 19](https://img.shields.io/badge/Framework-React_19-61dafb.svg)](https://react.dev/)
+[![Lang: TypeScript](https://img.shields.io/badge/Lang-TypeScript_5.9-3178c6.svg)](https://www.typescriptlang.org/)
+[![Questions: 1861](https://img.shields.io/badge/Questions-1861-0d9488.svg)](https://fanquanpp.github.io/KeMuONEXueKao/)
+[![Mnemonics: 155](https://img.shields.io/badge/Mnemonics-155-f97316.svg)](https://fanquanpp.github.io/KeMuONEXueKao/#/mnemonics)
+[![PWA](https://img.shields.io/badge/PWA-enabled-9333ea.svg)](https://fanquanpp.github.io/KeMuONEXueKao/)
+[![Deploy: GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-success.svg)](https://docs.github.com/en/pages)
 
 ## 在线访问
-
-> **提示**：GitHub 仓库主页右侧 **About / 关于** 栏目已配置 Pages 快速访问链接，点击即可直达在线网页。
 
 | 入口 | 地址 |
 |------|------|
@@ -28,7 +26,7 @@
 
 ## 项目简介
 
-本项目是一个面向机动车驾驶证科目一考试的全功能在线学习网页，覆盖**完整 1861 道官方题库**、**155 条精选速记口诀**、**24 个精细分类**与**1031 道图像题**，提供**全真模拟考试**、关键词智能高亮、口诀即时提示、双主题切换、PWA 离线使用等完善功能，助力考生备考。
+KeMuONEXueKao 是一个面向机动车驾驶证科目一考试的全功能在线学习网页，覆盖 **完整 1861 道官方题库**、**155 条精选速记口诀**、**24 个精细分类** 与 **1031 道图像题**，提供 **全真模拟考试**、关键词智能高亮、口诀即时提示、双主题切换、PWA 离线使用等完善功能，助力考生备考。
 
 数据严格依据公安部令第 163 号《道路交通安全违法行为记分管理办法》（2022 年 4 月 1 日施行，现行有效）与 GB 5768.2-2022《道路交通标志和标线》等最新法规标准。
 
@@ -132,9 +130,9 @@
 - **状态保持**：考试进度通过 sessionStorage 保存，切换不丢状态
 - **iOS 安全区适配**：`viewport-fit=cover` + `env(safe-area-inset-*)` 适配刘海屏
 
-### 质感 UI 设计（去 AI 味）
+### 质感 UI 设计
 
-- **克制配色**：薄荷青主色 (#0d9488) + 珊瑚橙强调色 (#ea580c)，避免紫色渐变
+- **克制配色**：Indigo 主色 + Amber 强调色，OKLCH 色彩空间，避免紫色渐变 AI 味
 - **层次布局**：主页 Hero + Stats + Categories + Radar + Quick 多段式结构，避免单一流式滚动
 - **分栏式口诀**：左侧索引 + 右侧详情，Notion 风格编辑式排版，避免卡片堆砌
 - **列表式分类**：表格化布局，含练习进度条，避免卡片堆砌
@@ -151,24 +149,25 @@
 
 | 类别 | 装饰元素 | 用途 |
 |------|----------|------|
-| 曲线波纹类 | `geo-curve-s` · `geo-wave-lines` · `geo-ripple-tr` | 流动感、节奏感 |
-| 十字坐标类 | `geo-cross-marks` · `geo-cross-anchor` | 知识点定位、坐标矩阵 |
-| 点阵变体类 | `geo-dots-lg` · `geo-dots-sm` · `geo-dots-tilt` | 工程感底纹、层次丰富 |
-| 平行线束类 | `geo-parallel-lines` · `geo-vline-bundle` · `geo-hline-dashed` | 分隔感、结构感 |
-| 同心环变体 | `geo-half-rings-br` · `geo-nested-squares-tl` | 层级嵌套、矩阵意象 |
-| 斜纹/三角切片 | `geo-hatch-block` · `geo-triangle-bl` · `geo-triangle-rt` | 几何切片、视觉焦点 |
-| 颜色光晕类 | `geo-glow-primary-tl` · `geo-glow-accent-br` · `geo-glow-success-mr` · `geo-glow-danger-ml` | 品牌沉浸、情绪反馈 |
+| 曲线波纹类 | `geo-curve-s` · `geo-wave-lines` · `geo-ripple-tr` · `geo-spiral-ccw` · `geo-bezier-flow` | 流动感、节奏感 |
+| 十字坐标类 | `geo-cross-marks` · `geo-cross-anchor` · `geo-cross-grid` | 知识点定位、坐标矩阵 |
+| 点阵变体类 | `geo-dots-lg` · `geo-dots-sm` · `geo-dots-tilt` · `geo-dots-radial` | 工程感底纹、层次丰富 |
+| 平行线束类 | `geo-parallel-lines` · `geo-vline-bundle` · `geo-hline-dashed` · `geo-diagonal-bundle` | 分隔感、结构感 |
+| 同心环变体 | `geo-half-rings-br` · `geo-nested-squares-tl` · `geo-orbit-dots` | 层级嵌套、矩阵意象 |
+| 斜纹/三角切片 | `geo-hatch-block` · `geo-triangle-bl` · `geo-triangle-rt` · `geo-chevron-stack` | 几何切片、视觉焦点 |
+| 颜色光晕类 | `geo-glow-primary-tl` · `geo-glow-accent-br` · `geo-glow-success-mr` · `geo-glow-danger-ml` · `geo-glow-info-bl` | 品牌沉浸、情绪反馈 |
+| 动态轨道类 | `geo-orbit-rotate` · `geo-pulse-ring` · `geo-float-block` | 动态轨迹、呼吸节奏 |
 
 **各视图装饰主题**：
 
 | 视图 | 装饰主题 | 核心元素 |
 |------|----------|----------|
-| 主页 | 品牌沉浸 | 品牌光晕 + S 曲线 + 涟漪环 + 三角切片 + 十字坐标 + 波浪线 |
-| 题库练习 | 练习感 | 网格 + 平行斜线 + 十字坐标 + 斜纹方块 |
+| 主页 | 品牌沉浸 | 品牌光晕 + S 曲线 + 涟漪环 + 三角切片 + 十字坐标 + 波浪线 + 旋转轨道 + 浮动方块 |
+| 题库练习 | 练习感 | 网格 + 平行斜线 + 十字坐标 + 斜纹方块 + 对角线束 + 信息光晕 |
 | 模拟考试 | 三阶段差异化 | 开始页丰富装饰 / 答题页极简 / 结果页通过失败光晕差异化 |
-| 口诀总览 | 流动感 | 波浪线 + S 曲线 + 十字坐标 + 倾斜点阵 |
-| 分类导航 | 矩阵感 | 同心环 + 横竖虚线束 + 三角切片 + 双横虚线 |
-| 知识学习 | 结构感 | 嵌套方框 + S 曲线 + 竖排虚线束 + 强调色光晕 |
+| 口诀总览 | 流动感 | 波浪线 + S 曲线 + 十字坐标 + 倾斜点阵 + 螺旋曲线 + 强调光晕 |
+| 分类导航 | 矩阵感 | 同心环 + 横竖虚线束 + 三角切片 + 双横虚线 + 嵌套方框 + 脉冲环 |
+| 知识学习 | 结构感 | 嵌套方框 + S 曲线 + 竖排虚线束 + 强调色光晕 + 贝塞尔流 + 十字网格 |
 
 **工程保障**：
 
@@ -186,17 +185,17 @@ KeMuONEXueKao/
 │   ├── components/                # 通用组件
 │   │   ├── common/               # 基础组件（Modal、LazyImage、EmptyState、Skeleton）
 │   │   ├── feedback/             # 反馈组件（ToastContainer、ConfirmProvider、GlobalLoading）
-│   │   ├── layout/               # 布局组件（TopNav）
+│   │   ├── layout/               # 布局组件（TopNav、GlobalFooter）
 │   │   └── question/             # 题目组件（QuestionCard）
 │   ├── views/                    # 视图层（HomeView、KnowledgeView、PracticeView、ExamView、MnemonicsView、CategoriesView）
 │   ├── stores/                   # Zustand 状态管理（themeStore、progressStore、practiceStore、examStore、toastStore）
 │   ├── services/                 # 服务层（dataLoader、storage、highlight）
 │   ├── hooks/                    # 自定义 Hook（useHotkeys、useSwipe、useVibrate、useConfetti、useMediaQuery）
 │   ├── data/                     # 数据层（questions.json、mnemonics.json、categories.json、categoryGroups.ts）
-│   ├── styles/                   # 样式（tokens、base、layout、components、views、responsive）
+│   ├── styles/                   # 样式（tokens、base、layout、components、views、responsive、animations）
 │   ├── types/                    # TypeScript 类型定义
 │   ├── utils/                    # 纯函数工具（escapeHtml、shuffle、debounce、throttle、formatTime）
-│   ├── App.tsx                   # 应用根组件（路由配置 + 全局布局）
+│   ├── App.tsx                   # 应用根组件（路由配置 + 全局布局 + Footer）
 │   └── main.tsx                  # 应用入口（CSS 引入 + 根渲染）
 ├── public/
 │   ├── docs/
@@ -263,9 +262,6 @@ npm run build
 
 # 预览构建产物
 npm run preview
-
-# 部署至 GitHub Pages
-npm run deploy
 ```
 
 ### 开发提示
@@ -279,30 +275,21 @@ npm run deploy
 
 本项目已部署至 GitHub Pages，在线访问：<https://fanquanpp.github.io/KeMuONEXueKao/>
 
-部署流程已通过 `npm run deploy` 脚本自动化：
+部署流程已通过 GitHub Actions 自动化（`.github/workflows/deploy.yml`）：
 
-1. `npm run build` 构建生产产物至 `dist/`
-2. `gh-pages -d dist` 将 `dist/` 推送至 `gh-pages` 分支
-3. GitHub Pages 自动构建部署，约 1-2 分钟生效
+1. 推送代码至 `main` 分支
+2. GitHub Actions 自动执行 `npm ci` + `npm run build`
+3. 上传构建产物并部署至 GitHub Pages
+4. 约 1-2 分钟生效
 
 如需自行部署：
 
 1. Fork 本仓库至你的 GitHub 账户
 2. 修改 `vite.config.ts` 中的 `base` 字段为你的仓库名（如 `/YourRepoName/`）
 3. 进入仓库 **Settings** → **Pages**
-4. **Source** 选择 `Deploy from a branch`
-5. **Branch** 选择 `gh-pages` / `(root)`，点击 **Save**
+4. **Source** 选择 `GitHub Actions`
+5. 推送代码即可自动构建部署
 6. 等待约 1 分钟，访问 `https://<你的用户名>.github.io/<仓库名>/`
-
-### 配置 GitHub 仓库侧边栏 Pages 链接
-
-在 GitHub 仓库主页右侧 **About / 关于** 栏目点击齿轮图标，在 **Website / 网站** 字段填入 Pages 地址：
-
-```
-https://fanquanpp.github.io/KeMuONEXueKao/
-```
-
-保存后，侧边栏将显示快速访问链接。
 
 ## 数据来源
 
@@ -343,15 +330,26 @@ https://fanquanpp.github.io/KeMuONEXueKao/
 
 推荐使用 Chrome 或 Edge 浏览器获得最佳体验。
 
+## 免责声明
+
+本项目 **KeMuONEXueKao** 仅供学习交流与技术研究的非商业用途，使用者需知悉并遵守以下条款：
+
+1. **数据来源声明**：题库数据、图片资源、口诀内容均综合整理自公开渠道（驾考宝典、官方题库、视频教程、网页资料等），相关权利归原作者所有，本项目不主张任何所有权。
+2. **准确性提示**：尽管已依据公安部令第 163 号、GB 5768.2-2022 等最新法规标准进行核对，但法规会随时间修订更新，本网页内容 **不保证 100% 准确性与时效性**。考试内容以当地车管所官方公布为准。
+3. **非官方性质**：本项目 **非任何政府机关或驾考机构官方产品**，与公安部、交通运输部、车管所等官方组织无任何隶属或合作关系，仅作为个人学习辅助工具。
+4. **使用风险**：使用者因参考本网页内容而产生的任何直接或间接损失（包括但不限于考试未通过、罚款、记分等），项目维护者不承担任何法律责任。
+5. **商业用途禁止**：严禁将本项目用于任何商业用途（包括但不限于付费销售、付费会员、广告引流等）。如需商业使用，需另行取得相关权利方授权。
+6. **内容撤回**：若本项目内容侵犯任何第三方合法权益，请通过 [GitHub Issues](https://github.com/fanquanpp/KeMuONEXueKao/issues) 联系，核实后将立即删除相关内容。
+
 ## 版本信息
 
-- **当前版本**：v3.3.20260714
+- **当前版本**：v3.4.20260714
 - **更新日期**：2026 年 7 月 14 日
 - **架构版本**：Vite + React 19 + TypeScript 重构版（v3.x）
 - **题库规模**：1861 题（判断题 914 + 单选题 843 + 多选题 104）
 - **口诀数量**：155 条
 - **分类数量**：24 个
-- **本次更新**：扩展构成主义背景装饰系统为六个核心视图差异化增强 · 新增曲线波纹 / 十字坐标 / 点阵变体 / 平行线束 / 同心环 / 嵌套方框 / 斜纹方块 / 三角切片 / 颜色光晕等装饰元素类 · 双主题色板适配 · 移动端响应式与无障碍保障
+- **本次更新**：统一项目命名为仓库名 KeMuONEXueKao · 新增 GitHub 仓库入口与免责声明 · 全局 Footer 信息架构 · 扩展构成主义背景装饰系统新增动态轨道/螺旋曲线/贝塞尔流/脉冲环/浮动方块等动态装饰元素 · 六视图多位置装饰增强
 
 ## License
 
@@ -362,5 +360,7 @@ https://fanquanpp.github.io/KeMuONEXueKao/
 ---
 
 **在线体验**：<https://fanquanpp.github.io/KeMuONEXueKao/>
+
+**源代码**：<https://github.com/fanquanpp/KeMuONEXueKao>
 
 如果本项目对你有帮助，欢迎 Star 支持！
