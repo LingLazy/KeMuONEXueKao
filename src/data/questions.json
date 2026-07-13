@@ -1462,7 +1462,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通信号。红色信号禁止通行，绿色信号可以通行。只有右转是绿色信号，所以可以向右转弯。因此选择“向右转弯”。\n\n相关法规参考：《道路交通安全法实施条例》第三十八条，机动车信号灯和非机动车信号灯表示：（一）绿灯亮时，准许车辆通行，但转弯的车辆不得妨碍被放行的直行车辆、行人通行；（二）黄灯亮时，已越过停止线的车辆可以继续通行；（三）红灯亮时，禁止车辆通行。在未设置非机动车信号灯和人行横道信号灯的路口，非机动车和行人应当按照机动车信号灯的表示通行。红灯亮时，右转弯的车辆在不妨碍被放行的车辆、行人通行的情况下，可以通行。",
     "analysis_url": "",
-    "image": "mandatory-signs/turn-left.jpg",
+    "image": "mandatory-signs/turn-right.jpg",
     "is_image_question": true,
     "keywords": [
       "可以"
@@ -10374,7 +10374,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通信号。绿色箭头亮的车道允许通行，图中只有右转车道的箭头是绿色，所以只能向右转弯。因此选择“向右转弯”。\n\n相关法规参考：《道路交通安全法实施条例》第三十八条，机动车信号灯和非机动车信号灯表示：（一）绿灯亮时，准许车辆通行，但转弯的车辆不得妨碍被放行的直行车辆、行人通行；（二）黄灯亮时，已越过停止线的车辆可以继续通行；（三）红灯亮时，禁止车辆通行。在未设置非机动车信号灯和人行横道信号灯的路口，非机动车和行人应当按照机动车信号灯的表示通行。红灯亮时，右转弯的车辆在不妨碍被放行的车辆、行人通行的情况下，可以通行。",
     "analysis_url": "",
-    "image": "mandatory-signs/straight-only.jpg",
+    "image": "mandatory-signs/turn-right.jpg",
     "is_image_question": true,
     "keywords": [
       "向右转弯"
@@ -10666,7 +10666,7 @@
     "answer": 2,
     "analysis": "<p>本题主要考察道路交通标志。黄色三角里面有个黑色十字，代表警告前方是十字路口，路况复杂，需要谨慎驾驶。因此选择“十字交叉路口”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.2交叉路口标志，用以警告车辆驾驶人前方有交叉路口，注意横向来车。被交路比当前道路窄时，可用图形中的线条粗细示意相交道路的宽度。设在平面交叉路口前适当位置。如果两相邻平面交叉路口中心点的距离小于安全停车视距，宜合并为一个图形，并根据道路的实际情况可以将标志的尺寸适当放大。</p>",
     "analysis_url": "",
-    "image": "guide-signs/y-junction.jpg",
+    "image": "guide-signs/crossroad-intersection.jpg",
     "is_image_question": true,
     "keywords": [
       "十字",
@@ -10698,7 +10698,7 @@
     "answer": 0,
     "analysis": "<p>本题主要考察道路交通标志。黄色三角警告标志内见到一个向左倒的T字，是T形交叉路口警告标志。因此选择“T形交叉路口”。\n相关法规参考：\nGB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.2交叉路口标志，用以警告车辆驾驶人前方有交叉路口，注意横向来车。被交路比当前道路窄时，可用图形中的线条粗细示意相交道路的宽度。设在平面交叉路口前适当位置。</p>",
     "analysis_url": "",
-    "image": "guide-signs/y-junction.jpg",
+    "image": "guide-signs/t-junction-intersection.jpg",
     "is_image_question": true,
     "keywords": [
       "向左倒的T字",
@@ -10762,7 +10762,7 @@
     "answer": 0,
     "analysis": "<p>本题主要考察道路交通标志。急转弯标志：箭头向左是向左急转弯，箭头向右是向右急转弯。该标志设在左急转弯的道路前方适当位置。因此选择“向左急转弯”。\n相关法规参考：\nGB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.3急弯路标志，用以警告车辆驾驶人前方有急弯。设计车速小于60km/h的道路上，圆曲线半径小于规定且停车视距小于规定时应设急弯路标志。设置位置为圆曲线起点前，但不应进入相邻的圆曲线内。此标志可与“建议速度标志”联合使用。</p>",
     "analysis_url": "",
-    "image": "warning-signs/sharp-right-turn.jpg",
+    "image": "warning-signs/sharp-left-curve.jpg",
     "is_image_question": true,
     "keywords": [
       "指向左的箭头",
@@ -10826,7 +10826,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。连续弯路标志设在有连续三个以上弯路的道路以前适当位置。可以和斜着的“N”反向弯路区分记忆。连续弯路弯道更多。因此选择“连续弯路”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.5连续弯路标志，用以警告车辆驾驶人前方有连续弯路。设计车速小于60km/h的道路上，连续有三个或三个以上反向平曲线，其圆曲线半径均小于或有两个半径小于规定，且各圆曲线间的距离均不大于规定时设置连续弯路标志。设置位置为连续弯路起点前，当连续弯路总长度大于500m时，应重复设置。此标志可与“建议速度标志”联合使用；也可与说明连续弯路长度的辅助标志共同使用。</p>",
     "analysis_url": "",
-    "image": "warning-signs/reverse-curve.jpg",
+    "image": "warning-signs/continuous-curves.jpg",
     "is_image_question": true,
     "keywords": [
       "三个弯",
@@ -10858,7 +10858,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标志。一个箭头向上是上陡坡，一个箭头向下是下陡坡。两个箭头向上是连续上坡，两个箭头向下是连续下坡。在上坡时会有视觉上的盲点，应减速慢行。因此选择“上陡坡”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.6陡坡标志，用以提醒车辆驾驶人前方有陡坡。当纵坡坡度大于规定时，在纵坡坡脚或坡顶前适当位置设置。纵坡坡度小于规定，经常发生制动失效事故的下坡路段也可以根据现场条件设置“下陡坡标志”。可用辅助标志说明陡坡的坡度和坡长，也可将坡度值标在警告标志图形上。",
     "analysis_url": "",
-    "image": "warning-signs/dam-road.jpg",
+    "image": "warning-signs/steep-ascent.jpg",
     "is_image_question": true,
     "keywords": [
       "一个斜向上箭头",
@@ -10890,7 +10890,7 @@
     "answer": 2,
     "analysis": "<p>本题主要考察道路交通标志。一个箭头向上是上陡坡，一个箭头向下是下陡坡。两个箭头向上是连续上坡，两个箭头向下是连续下坡。因此选择“下陡坡”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.6陡坡标志，用以提醒车辆驾驶人前方有陡坡。当纵坡坡度大于规定时，在纵坡坡脚或坡顶前适当位置设置。纵坡坡度小于规定，经常发生制动失效事故的下坡路段也可以根据现场条件设置“下陡坡标志”。可用辅助标志说明陡坡的坡度和坡长，也可将坡度值标在警告标志图形上。</p>",
     "analysis_url": "",
-    "image": "warning-signs/dam-road.jpg",
+    "image": "warning-signs/steep-descent.jpg",
     "is_image_question": true,
     "keywords": [
       "一个斜向下箭头",
@@ -10922,7 +10922,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标志。一个箭头向上是上陡坡，一个箭头向下是下陡坡。两个箭头向上是连续上坡，两个箭头向下是连续下坡。在上坡时会有视觉上的盲点，应减速慢行。因此选择“连续下坡”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.6陡坡标志，用以提醒车辆驾驶人前方有陡坡。当纵坡坡度大于规定时，在纵坡坡脚或坡顶前适当位置设置。纵坡坡度小于规定，经常发生制动失效事故的下坡路段也可以根据现场条件设置“下陡坡标志”。可用辅助标志说明陡坡的坡度和坡长，也可将坡度值标在警告标志图形上。",
     "analysis_url": "",
-    "image": "warning-signs/steep-ascent.jpg",
+    "image": "warning-signs/continuous-descent.jpg",
     "is_image_question": true,
     "keywords": [
       "两个斜向下箭头",
@@ -10986,7 +10986,7 @@
     "answer": 1,
     "analysis": "<p>本题主要考察道路交通标志。右侧变窄：警告车辆驾驶人注意前方右侧车行道或路面狭窄情况，遇有来车应减速避让。因此选择“右侧变窄”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.8窄路标志，用以警告车辆驾驶人注意前方车行道或路面狭窄情况，遇有来车应予减速避让。设在双车道路面宽度缩减为6m以下的路段起点前。此标志可与“建议速度标志”联合使用；可用辅助标志说明窄路的长度。</p>",
     "analysis_url": "",
-    "image": "warning-signs/narrowing-both-sides.jpg",
+    "image": "warning-signs/narrowing-right.jpg",
     "is_image_question": true,
     "keywords": [
       "左侧不变",
@@ -11019,7 +11019,7 @@
     "answer": 2,
     "analysis": "<p>本题主要考察道路交通标志。左侧变窄：用以警告车辆驾驶人注意前方左侧车行道或路面狭窄情况，遇有来车应减速避让。因此选择“左侧变窄”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.8窄路标志，用以警告车辆驾驶人注意前方车行道或路面狭窄情况，遇有来车应予减速避让。设在双车道路面宽度缩减为6m以下的路段起点前。此标志可与“建议速度标志”联合使用；可用辅助标志说明窄路的长度。</p>",
     "analysis_url": "",
-    "image": "warning-signs/narrowing-both-sides.jpg",
+    "image": "warning-signs/narrowing-left.jpg",
     "is_image_question": true,
     "keywords": [
       "右侧不变",
@@ -11052,7 +11052,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。窄桥警告标志，用以警告车辆驾驶人注意前方桥面宽度变窄，应谨慎驾驶。设置在桥面宽度小于路面宽度、且桥的宽度小于6米的窄桥前面适当位置的交通安全标志。因此选择“窄桥”。\n相关法规参考：\nGB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.9窄桥标志，用以警告车辆驾驶人注意前方桥面宽度变窄。设在桥面净宽较两端路面宽度变窄，且桥的净宽小于6m的桥梁前适当位置。</p>",
     "analysis_url": "",
-    "image": "warning-signs/narrowing-right.jpg",
+    "image": "warning-signs/narrow-bridge.jpg",
     "is_image_question": true,
     "keywords": [
       "两头宽中间窄",
@@ -11116,7 +11116,7 @@
     "answer": 1,
     "analysis": "<p>本题主要考察道路交通标志。黄色是警告标志，黄色三角形里面有人在人行横道上行走，是注意行人标志，提醒驾驶人减速慢行。因此选择“注意行人”。\n相关法规参考：\nGB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.11注意行人标志，用以警告车辆驾驶人减速慢行，注意行人。标志底色可采用荧光黄绿色。设在行人密集，或不易被驾驶人发现的人行横道线前适当位置。城市中心区街道或设有信号灯处可不设。</p>",
     "analysis_url": "",
-    "image": "mandatory-signs/pedestrian-crossing.jpg",
+    "image": "warning-signs/pedestrian-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "行人",
@@ -11148,7 +11148,7 @@
     "answer": 2,
     "analysis": "<p>本题主要考察道路交通标志。背包的儿童在奔跑，是注意儿童标志。用以警告车辆驾驶人减速慢行，注意儿童。设在小学、幼儿园、少年宫等儿童经常出入地点前适当位置。因此选择“注意儿童”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.12注意儿童标志，用以警告车辆驾驶人减速慢行，注意儿童。标志底色宜采用荧光黄绿色。设在小学、幼儿园、少年宫等儿童经常出入地点前适当位置。可用辅助标志说明设置此标志原因。</p>",
     "analysis_url": "",
-    "image": "warning-signs/pedestrian-ahead.jpg",
+    "image": "warning-signs/children-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "两个背书包的儿童",
@@ -11180,7 +11180,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标志。牛表示注意牲畜，鹿表示注意野生动物。此标志表示注意牲畜。因此选择“注意牲畜”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.16注意牲畜标志，用以提醒车辆驾驶人谨慎驾驶，注意牲畜。标志上的动物图形可用该地区最常出现的、可能发生碰撞的牲畜表示。设在经过放牧区、畜牧场等的公路上，经常有牲畜横穿、出入的地点前适当位置。",
     "analysis_url": "",
-    "image": "warning-signs/wild-animals-ahead.jpg",
+    "image": "warning-signs/livestock-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "一头牛",
@@ -11276,7 +11276,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。有石头从山上落下来，是注意落石标志。此标志设在左侧有落石危险的傍山路段之前适当位置。因此选择“注意落石”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.19注意落石标志，用以提醒车辆驾驶人谨慎驾驶，注意落石。使用时应根据可能落石的不同方向选择左侧落石或者右侧落石。设在有落石危险的傍山路段前适当位置。",
     "analysis_url": "",
-    "image": "warning-signs/winding-mountain-road.jpg",
+    "image": "warning-signs/falling-rocks.jpg",
     "is_image_question": true,
     "keywords": [
       "石头",
@@ -11373,7 +11373,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。很形象的一座山，表示傍山险路标志。用以提醒车辆驾驶人小心驾驶。设在傍山险路路段以前适当位置。因此选择“傍山险路”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.22傍山险路标志，用以提醒车辆驾驶人谨慎驾驶，注意路侧危险。使用时应根据傍山险路的不同朝向选择左侧傍山险路或者右侧傍山险路。设在傍山险路路段前适当位置。",
     "analysis_url": "",
-    "image": "warning-signs/dam-road.jpg",
+    "image": "warning-signs/winding-mountain-road.jpg",
     "is_image_question": true,
     "keywords": [
       "大山",
@@ -11437,7 +11437,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。房前一棵树，是村庄或集镇标志。用以提醒车辆驾驶人小心驾驶。设在紧靠村庄、集镇且视线不良的路段以前适当位置。因此选择“村庄或集镇”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.24村庄标志，用以提醒车辆驾驶人谨慎驾驶，注意前方为村庄。设在紧靠村庄、集镇且视线不良的路段前适当位置。",
     "analysis_url": "",
-    "image": "warning-signs/pedestrian-ahead.jpg",
+    "image": "warning-signs/village.jpg",
     "is_image_question": true,
     "keywords": [
       "房子和树",
@@ -11501,7 +11501,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。水上有船，船上有辆车，渡口标志。渡口：用以提醒车辆驾驶人谨慎驾驶，设在车辆渡口以前适当位置。因此选择“渡口”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，4.23渡口标志，用以提醒车辆驾驶人谨慎驾驶。设在车辆渡口以前适当位置。",
     "analysis_url": "",
-    "image": "warning-signs/water-on-road.jpg",
+    "image": "warning-signs/ferry.jpg",
     "is_image_question": true,
     "keywords": [
       "水上有船",
@@ -11566,7 +11566,7 @@
     "answer": 2,
     "analysis": "<p>本题主要考察道路交通标志。凹凸起伏，路面不平标志。一个坡是高突，一个坑是低洼，一个凸中间有空间是驼峰桥，两个凸肯定是不平。因此选择“路面不平”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.27路面不平标志，用以提醒车辆驾驶人减速慢行，注意路面颠簸。设在路面颠簸路段或桥头跳车较严重的地点前适当位置。该标志可作为临时性标志使用。使用此标志时注意以下要求：a）路面颠簸或桥头跳车的情况修复改善后，应及时拆除此标志；b）通车路面存在坍塌、坑槽、水毁、隆起等病害，可设置此警告标志，但路面状况修复改善后应及时拆除；c）局部路段为块石路面$铺砌路面，应设置此警告标志，并在标志下方设置辅助标志说明。</p>",
     "analysis_url": "",
-    "image": "warning-signs/road-dip.jpg",
+    "image": "warning-signs/uneven-road.jpg",
     "is_image_question": true,
     "keywords": [
       "两个凸起",
@@ -11598,7 +11598,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。一个凸起是减速丘，一个坑是低洼，一个凸中间有空间是驼峰桥，中间是实心的是减速丘，两个凸肯定是不平。因此选择“减速丘”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.2.8减速丘标志。用以提醒车辆驾驶人减速，注意前方路段设有减速丘。设在减速丘前适当位置。此标志可与“建议速度标志”联合使用。</p>",
     "analysis_url": "",
-    "image": "warning-signs/road-dip.jpg",
+    "image": "warning-signs/road-bump.jpg",
     "is_image_question": true,
     "keywords": [
       "一个凸起",
@@ -11630,7 +11630,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。一个凸起是减速丘，一个坑是低洼，一个凸中间有空间是驼峰桥，中间是实心的是减速丘，两个凸肯定是不平。因此选择“路面低洼”。\n\n相关法规参考：GB5768.2-2009《道路交通标志和标线第2部分：道路交通标志》，4.27路面低洼标志，用以提醒车辆驾驶人减速慢行。设在路面突然低洼以前适当位置。</p>",
     "analysis_url": "",
-    "image": "warning-signs/road-bump.jpg",
+    "image": "warning-signs/road-dip.jpg",
     "is_image_question": true,
     "keywords": [
       "中间向下凹",
@@ -11695,7 +11695,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标志。栅栏标志表示有人看守，只有火车标志表示无人看守。此标志为有人看守铁路道口。因此选择“有人看守铁路道口”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.30铁路道口标志，用以警告车辆驾驶人注意前方有铁路道口，应减速慢行或及时停车。有人看守铁路道口标志，设在车辆驾驶人不易发现的道口前适当位置；无人看守铁路道口标志，设在无人看守铁路道口前适当位置。如果多股铁路与道路相交，则应在铁路道口标志上方设置叉形符号。",
     "analysis_url": "",
-    "image": "warning-signs/railway-crossing-unmanned.jpg",
+    "image": "warning-signs/railway-crossing-manned.jpg",
     "is_image_question": true,
     "keywords": [
       "栅栏",
@@ -11727,7 +11727,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。栅栏标志表示有人看守，只有火车标志表示无人看守。此标志为无人看守铁路道口。因此选择“无人看守铁路道口”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.30铁路道口标志，用以警告车辆驾驶人注意前方有铁路道口，应减速慢行或及时停车。有人看守铁路道口标志，设在车辆驾驶人不易发现的道口前适当位置；无人看守铁路道口标志，设在无人看守铁路道口前适当位置。如果多股铁路与道路相交，则应在铁路道口标志上方设置叉形符号。",
     "analysis_url": "",
-    "image": "warning-signs/railway-crossing-manned.jpg",
+    "image": "warning-signs/railway-crossing-unmanned.jpg",
     "is_image_question": true,
     "keywords": [
       "火车",
@@ -11856,7 +11856,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标志。黄色警告标志中栅栏表示有人看守，只有火车表示无人看守。警告标志下面的长方形，一条红杠杠代表50米，两条100米...以此类推。此标志为距无人看守铁路道口150米。因此选择“距无人看守铁路道口150米”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.30铁路道口标志，用以警告车辆驾驶人注意前方有铁路道口，应减速慢行或及时停车。有人看守铁路道口标志，设在车辆驾驶人不易发现的道口前适当位置：无人看守铁路道口标志，设在无人看守铁路道口前适当位置。如果多股铁路与道路相交，则应在铁路道口标志上方设置叉形符号。如果未设置“铁路平交道口标线”，则需要在“无人看守铁路道口”标志下设置斜杠符号，表示距铁路道口的距离。应设置的斜杠符号共有三块，一道斜杠的标志设在距铁路道口50m的位置，二道、三道斜杠标志分别设在距铁路道口100m和150m位置。铁路道口标志和叉形符号、斜杠符号应联合使用。",
     "analysis_url": "",
-    "image": "warning-signs/railway-crossing-manned.jpg",
+    "image": "warning-signs/railway-crossing-unmanned.jpg",
     "is_image_question": true,
     "keywords": [
       "火车和三道斜杠",
@@ -12017,7 +12017,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标志。此图标为警告标志，左右绕行，箭头往左是左侧绕行，往右是右侧绕行，同时往左右两边就是左右绕行。车辆应按照指示标志减速慢行，绕行通过，注意行车安全。箭头所指方向就是行驶方向。因此选择“左右绕行”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.32注意障碍物标志，用以提醒前方道路有障碍物，车辆驾驶人应谨慎驾驶。设在障碍物前适当位置，视具体情况选用左右绕行、左侧绕行或者右侧绕行标志。",
     "analysis_url": "",
-    "image": "warning-signs/two-way-traffic.jpg",
+    "image": "warning-signs/detour-both-sides.jpg",
     "is_image_question": true,
     "keywords": [
       "障碍物和左右绕行箭头",
@@ -12504,7 +12504,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。图中倒三角里面一个“让”字，是减速让行标志。因此选择“减速让行”。\n相关法规参考：\nGB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，5.3减速让行标志，表示相交道路有优先通行权，车辆应慢行或停车，观察相交道路行车情况，让相交道路车辆优先通行和确认安全时，方可通行。减速让行标志宜单独设置，标志形状为倒等边三角形，颜色为白底，红边，黑字。减速让行标志设置位置宜靠近减速让行标线，当路口设有人行横道线时，减速让行标志应设置在人行横道线前，距离人行横道线边缘，并不应妨碍交叉口通视三角区视距。</p>",
     "analysis_url": "",
-    "image": "prohibitory-signs/yield-to-oncoming.jpg",
+    "image": "prohibitory-signs/yield.jpg",
     "is_image_question": true,
     "keywords": [
       "三角形",
@@ -12570,7 +12570,7 @@
     "answer": 1,
     "analysis": "<p>本题主要考察道路交通标志。空心红色的圆圈表示禁止通行，禁止一切车辆和行人通行。因此选择“禁止通行”。\n相关法规参考：\nGB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，5.5禁止通行标志，表示禁止一切车辆和行人通行。设在禁止一切车辆和行人通行的道路入口附近。</p>",
     "analysis_url": "",
-    "image": "prohibitory-signs/no-entry.jpg",
+    "image": "prohibitory-signs/no-thoroughfare.jpg",
     "is_image_question": true,
     "keywords": [
       "一片空白",
@@ -12700,7 +12700,7 @@
     "answer": 2,
     "analysis": "<p>本题主要考察道路交通标志。红圈禁令，箭头指示直行，合起来就是禁止直行，禁止一切车辆直行。因此选择“禁止直行”。\n相关法规参考：\nGB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，5.23禁止直行标志，表示前方路口禁止一切车辆直行。设在禁止直行的路口前。有时间、车种等特殊规定时，应用辅助标志说明，也可附加图形。</p>",
     "analysis_url": "",
-    "image": "prohibitory-signs/no-u-turn.jpg",
+    "image": "prohibitory-signs/no-straight.jpg",
     "is_image_question": true,
     "keywords": [
       "红圈斜杠",
@@ -12733,7 +12733,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。红圈禁令，箭头指示左转和右转，合起来就是禁止向左向右转弯。因此选择“禁止向左和向右转弯”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，5.24禁止向左和向右转弯标志，表示前方路口禁止一切车辆向左向右转弯。设在禁止向左向右转弯的路口前。有时间、车种等特殊规定时，应用辅助标志说明，也可附加图形。</p>",
     "analysis_url": "",
-    "image": "mandatory-signs/turn-right.jpg",
+    "image": "prohibitory-signs/no-left-or-right-turn.jpg",
     "is_image_question": true,
     "keywords": [
       "红圈斜杠",
@@ -12832,7 +12832,7 @@
     "answer": 1,
     "analysis": "<p>本题主要考察道路交通标志。红圈是禁令标志，箭头指示掉头，合起来就是禁止掉头，禁止在当前路段掉头。因此选择“禁止掉头”。\n相关法规参考：\nGB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，5.26禁止掉头标志，表示禁止机动车掉头。设在禁止机动车掉头路段的起点和路口前。</p>",
     "analysis_url": "",
-    "image": "prohibitory-signs/no-straight.jpg",
+    "image": "prohibitory-signs/no-u-turn.jpg",
     "is_image_question": true,
     "keywords": [
       "红圈斜杠",
@@ -13033,7 +13033,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。限制宽度标志：表示禁止装载宽度超过标志所示数值的车辆通行。此标志设在最大允许宽度受限制的地方。以图为例：装载宽度不得超过3米。两个黑色三角在两边是限宽，在上下是限高。因此选择“限制宽度为3米”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，5.32限制宽度标志，表示禁止车货总体外廓宽度超过标志所示数值的车辆通行，表示禁止车货总体外廓宽度超过3m的车辆进入。设在最大容许宽度受限制的地方。道路净宽符合标准规范时不需设此标志。设置此标志的路段，在进入此路段的路口前宜设置相应的指路标志提示绕道行驶。</p>",
     "analysis_url": "",
-    "image": "prohibitory-signs/height-limit.jpg",
+    "image": "prohibitory-signs/width-limit.jpg",
     "is_image_question": true,
     "keywords": [
       "黑角在左右",
@@ -13167,7 +13167,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。停车检查：表示机动车必须停车接受检查。此标志设在关卡将近处，以便要求车辆接受检查或缴费等手续。标志中可加注说明检查事项。因此选择“停车检查”。\n相关法规参考：\nGB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，5.38停车检查标志，表示机动车应停车接受检查。设在需要机动车停车接受检查的地点。有车种规定、停车检查的原因时，应用辅助标志或在标志上附加说明，保持横杠不变，表示机动车需停车接受口岸检查。</p>",
     "analysis_url": "",
-    "image": "prohibitory-signs/no-thoroughfare.jpg",
+    "image": "prohibitory-signs/stop-for-inspection.jpg",
     "is_image_question": true,
     "keywords": [
       "红圈黑横杠",
@@ -13295,7 +13295,7 @@
     "answer": 1,
     "analysis": "<p>本题主要考察道路交通标志。蓝色-指示，此标志表示一切车辆只准直行。因此选择“只准直行”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.2直行标志，表示一切车辆只准直行。设在应直行的路口前。有时段、车种等特殊规定时，应用辅助标志说明。</p>",
     "analysis_url": "",
-    "image": "mandatory-signs/straight-lane.jpg",
+    "image": "mandatory-signs/straight-only.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13328,7 +13328,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。蓝色-指示，向左转弯：表示只准一切车辆向左转弯。此标志设在车辆必须向左转弯的路口以前适当位置。因此选择“向左转弯”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.3向左（或向右）转弯标志，表示一切车辆只准向左（或向右）转弯。设在车辆应向左（或向右）转弯的路口前。有时段、车种等特殊规定时，应用辅助标志说明，也可附加图形。",
     "analysis_url": "",
-    "image": "mandatory-signs/straight-lane.jpg",
+    "image": "mandatory-signs/turn-left.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13361,7 +13361,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标志。向右转弯：此标志表示一切车辆只准向右转弯。此标志设在车辆必须向右转弯的路口以前适当位置。因此选择“向右转弯”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.3向左（或向右）转弯标志，表示一切车辆只准向左（或向右）转弯。设在车辆应向左（或向右）转弯的路口前。有时段、车种等特殊规定时，应用辅助标志说明，也可附加图形。",
     "analysis_url": "",
-    "image": "mandatory-signs/straight-lane.jpg",
+    "image": "mandatory-signs/turn-right.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13427,7 +13427,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标志。直行和向左转弯指示标志：表示只准一切车辆直行和向左转弯。此标志设在车辆必须直行和向左转弯的路口以前适当位置。因此选择“直行和向左转弯”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.4直行和向左转弯（或直行和向右转弯）标志，表示一切车辆只准直行和向左转弯（或直行和向右转弯）。设在车辆应直行和向左转弯（或直行和向右转弯）的路口前。有时段、车种等特殊规定时，应用辅助标志说明，也可附加图形。版面附加图形时，保持箭头的位置不变。如果指示两种以上（含两种）车辆时，应用辅助标志说明。",
     "analysis_url": "",
-    "image": "mandatory-signs/straight-or-right-turn.jpg",
+    "image": "mandatory-signs/straight-or-left-turn.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13460,7 +13460,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。向左和向右转弯：表示只准一切车辆向左和向右转弯。此标志设在车辆必须向左和向右转弯的路口以前适当位置。因此选择“向左和向右转弯”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.5向左和向右转弯标志，表示一切车辆只准向左和向右转弯。设在车辆应向左和向右转弯的路口前。有时段、车种等特殊规定时，应用辅助标志说明，也可附加图形。",
     "analysis_url": "",
-    "image": "prohibitory-signs/no-right-turn.jpg",
+    "image": "mandatory-signs/turn-left-or-right.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13494,7 +13494,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。分隔带右侧行驶：表示只准一切车辆靠右侧道路行驶。此标志设在车辆必须靠右侧行驶的路口以前适当位置。因此选择“分隔带右侧行驶”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.6分隔带右侧（或左侧）行驶标志，表示一切车辆只准在分隔设施的右侧（或左侧）行驶。设在交通岛、行人二次过街安全岛、中央分隔带等设施的端部。</p>",
     "analysis_url": "",
-    "image": "mandatory-signs/turn-right.jpg",
+    "image": "mandatory-signs/drive-on-right.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13528,7 +13528,7 @@
     "answer": 0,
     "analysis": "<p>本题主要考察道路交通标志。分隔带左侧行驶：表示只准一切车辆靠左侧道路行驶。此标志设在车辆必须靠左侧行驶的路口以前适当位置。因此选择“分隔带左侧行驶”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.6分隔带右侧（或左侧）行驶标志，表示一切车辆只准在分隔设施的右侧（或左侧）行驶。设在交通岛、行人二次过街安全岛、中央分隔带等设施的端部。</p>",
     "analysis_url": "",
-    "image": "mandatory-signs/turn-left.jpg",
+    "image": "mandatory-signs/drive-on-left.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13561,7 +13561,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标志。此标志是“立体交叉直行和左转弯行驶”，表示一切车辆在立体交叉处可以直行和按图示路线左转弯行驶。通常设置在立交桥转弯出口处适当位置。因此选择“立体交叉直行和左转弯行驶”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.7立体交叉行驶路线标志，表示一切车辆在立体交叉处可以直行和按图示路线左转弯（或直行和右转弯）行驶。设在立体交叉左转弯（或右转弯）出口处适当位置。",
     "analysis_url": "",
-    "image": "mandatory-signs/interchange-straight-or-right.jpg",
+    "image": "mandatory-signs/interchange-straight-or-left.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13627,7 +13627,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标志。环岛行驶：表示只准车辆靠右环行。此标志设在环岛面向路口来车方向适当位置。因此选择“环岛行驶”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.7环岛行驶标志，表示一切车辆只准靠右环行，环内车辆具有优先权，车辆进入环岛时应让环内车辆优先通行。设在进入环岛前、面向路口来车方向的适当位置。",
     "analysis_url": "",
-    "image": "guide-signs/traffic-right.jpg",
+    "image": "mandatory-signs/roundabout-driving.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13759,7 +13759,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。此标志表示该段道路只供行人步行，任何车辆不准进入。因此选择“步行”。\n\n相关法规参考：GB5768.2-2009《道路交通标志和标线第2部分：道路交通标志》，6.10步行标志，表示该段道路只供步行，任何车辆不准进入。设在步行街的两端。有时间规定时，应用辅助标志说明。</p>",
     "analysis_url": "",
-    "image": "warning-signs/pedestrian-ahead.jpg",
+    "image": "mandatory-signs/walking.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13792,7 +13792,7 @@
     "answer": 0,
     "analysis": "本题主要考察道路交通标志。此标志表示机动车行至该标志处应鸣喇叭，以提醒对向车辆驾驶人或路边行人注意并减速慢行。一般设在公路的急转弯处、陡坡等视线不良路段的起点。因此选择“应当鸣喇叭”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.9鸣喇叭标志，表示机动车行至该标志处应鸣喇叭，以提醒其他道路使用者注意。",
     "analysis_url": "",
-    "image": "prohibitory-signs/no-horn.jpg",
+    "image": "mandatory-signs/sound-horn.jpg",
     "is_image_question": true,
     "keywords": [
       "圆形蓝底",
@@ -13892,7 +13892,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。图中正方形蓝底标志，中间有个粗箭头加一横线，是路口优先通行标志，表示主干路上行驶的车辆享有优先通行权，即干路先行。因此选择“干路先行”。\n\n相关内容拓展：干路指主路，一般交叉路口，行驶在干路的车辆有优先通行权，支路车辆需避让干路车辆。从支路进入干路的机动车在无交通警察指挥和交通信号灯的情况下要避让在干路上行驶的机动车，让干路上行驶的机动车先行。",
     "analysis_url": "",
-    "image": "prohibitory-signs/stop-and-yield.jpg",
+    "image": "mandatory-signs/intersection-priority.jpg",
     "is_image_question": true,
     "keywords": [
       "正方形蓝底",
@@ -13926,7 +13926,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。会车先行，表示双向车辆在会车时享有优先通行权利。箭头小的一方需要让行，我方的箭头大，是会车先行。因此选择“会车先行”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.12会车先行标志，表示车辆在会车时享有优先通行权利，与会车让行标志配合使用。设在有会车让行标志路段的另一端。标志颜色为蓝底，对向来车方向为红色箭头，优先行进方向为白色箭头。</p>",
     "analysis_url": "",
-    "image": "prohibitory-signs/stop-and-yield.jpg",
+    "image": "mandatory-signs/oncoming-priority.jpg",
     "is_image_question": true,
     "keywords": [
       "一红一白",
@@ -13992,7 +13992,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标志。有两条虚线的是车道，图中箭头向左，是左转车道。表示在该车道一切车辆只准向左转弯。因此选择“左转车道”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.14车道行驶方向标志，表示交叉口的车道行驶方向。宜设在导向车道前适当位置。设置车道行驶方向标志的同时，车道路面需施划直行、转弯、掉头等导向箭头，地面导向箭头应与标志上的指示一致。",
     "analysis_url": "",
-    "image": "mandatory-signs/right-turn-lane.jpg",
+    "image": "mandatory-signs/left-turn-lane.jpg",
     "is_image_question": true,
     "keywords": [
       "正方形蓝底",
@@ -14122,7 +14122,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标志。有两条虚线的是车道，此标志是掉头车道。因此选择“掉头车道”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.14车道行驶方向标志，表示交叉口的车道行驶方向。宜设在导向车道前适当位置。设置车道行驶方向标志的同时，车道路面需施划直行、转弯、掉头等导向箭头，地面导向箭头应与标志上的指示一致。",
     "analysis_url": "",
-    "image": "mandatory-signs/left-turn-lane.jpg",
+    "image": "mandatory-signs/u-turn-lane.jpg",
     "is_image_question": true,
     "keywords": [
       "正方形蓝底",
@@ -14156,7 +14156,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。有两条虚线的是车道，图中有左转和掉头标志，所以此标志是掉头和左转合用车道。因此选择“掉头和左转合用车道”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.14车道行驶方向标志，表示交叉口的车道行驶方向。宜设在导向车道前适当位置。设置车道行驶方向标志的同时，车道路面需施划直行、转弯、掉头等导向箭头，地面导向箭头应与标志上的指示一致。",
     "analysis_url": "",
-    "image": "mandatory-signs/straight-or-left-turn-lane.jpg",
+    "image": "mandatory-signs/u-turn-or-left-turn-lane.jpg",
     "is_image_question": true,
     "keywords": [
       "此标志是掉头和左转合用车道。"
@@ -14221,7 +14221,7 @@
     "answer": 0,
     "analysis": "<p>本题主要考察道路交通标志。此标志为公交专用车道，表示此车道只允许公交车行驶。因此选择“公交专用车道”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，6.18公交专用车道标志，表示该车道仅供公交车辆、通勤班车等大型载客汽车通行。当该车道仅供公交车辆通行时；该车道公交车辆和通勤班车均可通行时。设在进入该车道的起点及各交叉口的入口，宜设置在车道的正上方。公交专用车道标志设置在车道正上方时，向下的箭头可以省略；在标志无法正对车道时，可调整箭头方向，指向车道。有时段规定时，应用辅助标志说明。</p>",
     "analysis_url": "",
-    "image": "mandatory-signs/brt-lane.jpg",
+    "image": "mandatory-signs/bus-lane.jpg",
     "is_image_question": true,
     "keywords": [
       "长方形蓝底",
@@ -14624,7 +14624,7 @@
     "answer": 2,
     "analysis": "<p>本题主要考察道路交通标志。此标志为丁字交叉路口预告，路很明显组成一个“丁”字。因此选择“丁字交叉路口预告”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，8.3.2交叉路口预告标志，8.3.2.1，用以预告前方交叉路口形式、交叉道路的编号或名称、通往方向、路线方向等信息。8.3.2.2交叉路口预告标志版面形式有三种形式：图形式、堆叠式、车道式。</p>",
     "analysis_url": "",
-    "image": "guide-signs/y-junction.jpg",
+    "image": "guide-signs/t-junction-intersection.jpg",
     "is_image_question": true,
     "keywords": [
       "蓝牌",
@@ -14658,7 +14658,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。此标志为Y型交叉路口预告，两个箭头加上你所处的道路形成一个Y字。因此选择“Y型交叉路口告知”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.2.2.3Y型交叉路口标志，面积较大的Y型交叉口，宜同时在分岔点处设置指引路线或方向的标志，起到辅助指引作用。</p>",
     "analysis_url": "",
-    "image": "guide-signs/crossroad-intersection.jpg",
+    "image": "guide-signs/y-junction.jpg",
     "is_image_question": true,
     "keywords": [
       "蓝牌",
@@ -14726,7 +14726,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标志。此标志是互通式立体交叉预告。由直行车道，匝道，匝道连接部，立体交叉跨线桥和其他交通设施等组成。因此选择“互通式立体交叉告知”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，7.2.2.3e）互通式立体交叉标志，设在互通式立体交叉以前的适当位置。复杂立体交叉或连续立体交叉，可将标志信息分解，逐步指引。",
     "analysis_url": "",
-    "image": "guide-signs/crossroad-intersection.jpg",
+    "image": "guide-signs/interchange.jpg",
     "is_image_question": true,
     "keywords": [
       "蓝牌",
@@ -14793,7 +14793,7 @@
     "answer": 1,
     "analysis": "<p>本题主要考察道路交通标志。此标志为省道编号。国道标志红底白字G开头，省道标志黄底黑字S开头，县道标志X开头，乡道标志白底黑字Y开头。因此选择“省道编号”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，8.3.3.4道路编号标志。国道编号标志，颜色应为红底白字白边框；省道编号标志，颜色应为黄底黑字黑边框；县道编号标志，颜色应为白底黑字黑边框；乡道编号标志，颜色应为白底黑字黑边框。</p>",
     "analysis_url": "",
-    "image": "guide-signs/national-highway-number.jpg",
+    "image": "guide-signs/provincial-highway-number.jpg",
     "is_image_question": true,
     "keywords": [
       "黄牌黑字",
@@ -14826,7 +14826,7 @@
     "answer": 2,
     "analysis": "<p>本题主要考察道路交通标志。此标志为县道编号。国道标志红底白字G开头，省道标志黄底黑字S开头，县道标志X开头，乡道标志白底黑字Y开头。因此选择“县道编号”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，8.3.3.4道路编号标志。国道编号标志，颜色应为红底白字白边框；省道编号标志，颜色应为黄底黑字黑边框；县道编号标志，颜色应为白底黑字黑边框；乡道编号标志，颜色应为白底黑字黑边框。</p>",
     "analysis_url": "",
-    "image": "guide-signs/national-highway-number.jpg",
+    "image": "guide-signs/county-road-number.jpg",
     "is_image_question": true,
     "keywords": [
       "白牌黑字",
@@ -14859,7 +14859,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。此标志为乡道编号。国道标志红底白字G开头，省道标志黄底黑字S开头，县道标志X开头，乡道标志白底黑字Y开头。因此选择“乡道编号”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，8.3.3.4道路编号标志。国道编号标志，颜色应为红底白字白边框；省道编号标志，颜色应为黄底黑字黑边框；县道编号标志，颜色应为白底黑字黑边框；乡道编号标志，颜色应为白底黑字黑边框。</p>",
     "analysis_url": "",
-    "image": "guide-signs/national-highway-number.jpg",
+    "image": "guide-signs/township-road-number.jpg",
     "is_image_question": true,
     "keywords": [
       "白牌黑字",
@@ -14994,7 +14994,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。错车道指的是在单车道道路上，可通过的一定距离内，供车辆交错避让用的一段加宽车道。因此选择“错车道”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，8.5.2错车道标志，用以指引前方设有避让来车的处所。宜设在双向错车困难路段上错车道起点处。</p>",
     "analysis_url": "",
-    "image": "guide-signs/emergency-parking-strip.jpg",
+    "image": "guide-signs/passing-place.jpg",
     "is_image_question": true,
     "keywords": [
       "正方形蓝底",
@@ -15094,7 +15094,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。此标志是休息区，很明显的“休息区”三个字。服务区是有加油、停车、吃饭的组合标志，停车场就是一个P，图中没有加油站和吃饭的，所以它只是一个休息区。因此选择“休息区”。\n\n相关法规参考：GB5768.2-2009《道路交通标志和标线第2部分：道路交通标志》，7.2.4.7休息区标志，一般设置在路侧休息区的两侧，必要时，可设置预告标志。",
     "analysis_url": "",
-    "image": "guide-signs/parking.jpg",
+    "image": "guide-signs/rest-area.jpg",
     "is_image_question": true,
     "keywords": [
       "蓝底",
@@ -15126,7 +15126,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标志。根据图中所知，高度超过4米的车辆被禁止直行，箭头指引绕行路线。而低于4米的车辆依然可以直行，因此图中是超高绕行标志。因此选择“超高绕行”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，8.6.1绕行标志，用以指引前方路口车辆需绕行的路线。设在路口前适当位置。标志为蓝底、白色道路图案，绕行路线为黑色。根据需要可在绕行标志上绘制相应的禁令标志和指示标志图形。",
     "analysis_url": "",
-    "image": "guide-signs/dead-end.jpg",
+    "image": "guide-signs/detour-sign.jpg",
     "is_image_question": true,
     "keywords": [
       "蓝牌",
@@ -15359,7 +15359,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。此标志是两侧通行。“∧”表示两侧通行，“\\”这个方向表示右侧通行，“/”这个方向的表示左侧通行。因此选择“两侧通行”。\n\n相关法规参考：GB5768.2-2009《道路交通标志和标线第2部分：道路交通标志》，7.44线形诱导标志，7.44.1用以引导行车方向，提醒驾驶人谨慎驾驶，注意前方线形变化。线形诱导标为黄底黑图形、无边框，形状为矩形，尺寸应符合规定。",
     "analysis_url": "",
-    "image": "guide-signs/traffic-left.jpg",
+    "image": "guide-signs/traffic-both-sides.jpg",
     "is_image_question": true,
     "keywords": [
       "红底白色",
@@ -15392,7 +15392,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。此标志是右侧通行，“∧”表示两侧通行，“\\”这个方向表示右侧通行，“/”这个方向的表示左侧通行。因此选择“右侧通行”。\n\n相关法规参考：GB5768.2-2009《道路交通标志和标线第2部分：道路交通标志》，7.44线形诱导标志，7.44.1用以引导行车方向，提醒驾驶人谨慎驾驶，注意前方线形变化。线形诱导标为黄底黑图形、无边框，形状为矩形，尺寸应符合规定。</p>",
     "analysis_url": "",
-    "image": "guide-signs/traffic-left.jpg",
+    "image": "guide-signs/traffic-right.jpg",
     "is_image_question": true,
     "keywords": [
       "红底白色",
@@ -15459,7 +15459,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标志。绿底的是高速公路指路标志，明显的“入口”二字，此标志为高速公路入口预告。因此选择“高速公路入口预告”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，9.3.1入口预告标志，9.3.1.1用以指引进入高速公路或城市快速路的入口，设在驶入高速公路或城市快速路前的一般道路上适当位置，也可以在一般道路上的指路标志上指引。入口预告标志第一行是进入高速公路的编号或城市快速路的名称；第二行是进入道路的方向，一般以A层信息要素为主。如果进入的道路是到达一个方向的，应取1个地名，地名后宜增加“方向”；如果进入的道路是到达两个方向的，应取2个地名。",
     "analysis_url": "",
-    "image": "guide-signs/destination-preview.jpg",
+    "image": "guide-signs/entrance-preview.jpg",
     "is_image_question": true,
     "keywords": [
       "绿牌",
@@ -15632,7 +15632,7 @@
     "answer": 1,
     "analysis": "<p>本题主要考察道路交通标志。绿牌标志代表高速公路，有指向右的箭头+出口编号、地名，是高速公路右侧出口预告标志，预告前方出口信息。因此选择“高速公路右侧出口预告”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，9.3.8出口预告标志及出口方向标志，9.3.8.1用以预告和指引出口，在距离基准点2km、1km、500m和基准点处应分别设置2km、1km、500m出口预告标志，出口方向标志；并应同时附着出口编号标志。</p>",
     "analysis_url": "",
-    "image": "guide-signs/next-exit-preview.jpg",
+    "image": "guide-signs/right-exit-preview.jpg",
     "is_image_question": true,
     "keywords": [
       "绿牌",
@@ -15667,7 +15667,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。绿牌标志代表高速公路，有指向左的箭头+出口编号、地名，是高速公路左侧出口预告标志，预告前方出口信息。因此选择“高速公路左侧出口预告”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，9.3.8出口预告标志及出口方向标志，9.3.8.1用以预告和指引出口，在距离基准点2km、1km、500m和基准点处应分别设置2km、1km、500m出口预告标志，出口方向标志；并应同时附着出口编号标志。</p>",
     "analysis_url": "",
-    "image": "guide-signs/next-exit-preview.jpg",
+    "image": "guide-signs/left-exit-preview.jpg",
     "is_image_question": true,
     "keywords": [
       "绿牌",
@@ -15735,7 +15735,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标志。此标志是高速公路终点，没有红色斜线的是高速公路起点。因此选择“高速公路终点”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，9.4.2终点预告标志，用以预告高速公路或城市快速路终点。设在距离高速公路或城市快速路终点前2km、1km、500m处。</p>",
     "analysis_url": "",
-    "image": "guide-signs/expressway-start.jpg",
+    "image": "guide-signs/unnumbered-expressway-end.jpg",
     "is_image_question": true,
     "keywords": [
       "有红色斜线",
@@ -15973,7 +15973,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标志。一个电话加上救援二字，此标志表示高速公路救援电话。因此选择“高速公路救援电话”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，9.5.2救援电话标志，用以指示救援电话号码。未设置紧急电话的高速公路上应设置救援电话标志。",
     "analysis_url": "",
-    "image": "guide-signs/emergency-phone.jpg",
+    "image": "guide-signs/rescue-phone.jpg",
     "is_image_question": true,
     "keywords": [
       "绿牌",
@@ -16148,7 +16148,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标志。图中只有一个P表示停车地方，上图标志为高速公路停车场预告，只提供停车服务。因此选择“高速公路停车场预告”。\n\n相关法规参考：GB5768.2-2009《道路交通标志和标线第2部分：道路交通标志》，7.3.4.10停车场预告及停车场标志，用于预告停车场的距离和位置。",
     "analysis_url": "",
-    "image": "guide-signs/service-area-preview.jpg",
+    "image": "guide-signs/parking-preview.jpg",
     "is_image_question": true,
     "keywords": [
       "绿牌",
@@ -16250,7 +16250,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标志。箭头指向右侧，此标志是旅游区方向。箭头指向水平方向才是旅游区标志。因此选择“旅游区方向”。\n\n相关法规参考：GB5768.2-2022《道路交通标志和标线第2部分：道路交通标志》，10.2旅游指引标志，10.2.1高速公路或城市快速路沿线可直接到达AAAA级及以上旅游景区可设置旅游指引标志，一般道路沿线AAA级及以上旅游景区可设置旅游指引标志。其他级旅游景区不应设置旅游指引标志。10.2.3旅游区方向标志，设在通往旅游区连接道路的交叉口处、高速公路或城市快速路出口的减速车道起点附近，不应影响交叉口指路标志或高速公路出口指路标志。",
     "analysis_url": "",
-    "image": "tourist-area-signs/tourist-area-distance.jpg",
+    "image": "tourist-area-signs/tourist-area-direction.jpg",
     "is_image_question": true,
     "keywords": [
       "棕牌",
@@ -17975,7 +17975,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标线。车距确认线有两种类型，一种是白色折线，一种是白色半圆状，用于车距确认，帮助驾驶人保持安全车距。仔细看图可以看出右侧有车距距离数值。因此选择“车距确认线”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.10车距确认标线，4.10.1车距确认标线作为车辆驾驶人保持行车安全距离的参考，视需要设于较长直线段、易发生追尾事故或其他需要的路段，应与车距确认标志配合使用。",
     "analysis_url": "",
-    "image": "guide-signs/distance-confirmation.jpg",
+    "image": "mandatory-markings/white-polyline-distance-confirmation-line.jpg",
     "is_image_question": true,
     "keywords": [
       "白色折线"
@@ -18006,7 +18006,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标线。车距确认线有两种类型，一种是白色折线，一种是白色半圆状，用于车距确认，帮助驾驶人保持安全车距。仔细看图可以看出右侧有车距距离数值。因此选择“车距确认线”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.10车距确认标线，4.10.1车距确认标线作为车辆驾驶人保持行车安全距离的参考，视需要设于较长直线段、易发生追尾事故或其他需要的路段，应与车距确认标志配合使用。4.10.2车距确认标线有两种类型：a）白色折线：标线总宽300cm线条宽40cm或45cm，从确认基点0m开始，每隔5m设置一道标线，连续设置两道为一组，间隔50m重复设置五组，也可在较长路段内连续设置多组。b）白色半圆状车距确认标线：设置于气象条件复杂，影响安全行车的路段两侧，半圆半径为30cm，间隔50m设置，一般在一定路段内连续设置。",
     "analysis_url": "",
-    "image": "guide-signs/distance-confirmation.jpg",
+    "image": "mandatory-markings/white-polyline-distance-confirmation-line.jpg",
     "is_image_question": true,
     "keywords": [
       "白色半圆状"
@@ -18261,7 +18261,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标线。标线一般施划在路面，箭头指示标线代表应该按照指示的方向行驶，图中箭头平直向前，代表指示直行。因此选择“指示直行”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.15导向箭头，4.15.1导向箭头用以指示车辆的行驶方向。4.15.2在行驶方向受限制的交叉入口车道内，车道数减少路段的缩减车道内，设有专用车道的交叉口或路段，畸形、复杂的交叉口，渠化后的车道内应设置导向箭头。（其中“导向箭头的基本形状及含义”白色直行箭头表示指示直行。）",
     "analysis_url": "",
-    "image": "mandatory-markings/go-straight.jpg",
+    "image": "mandatory-markings/straight-or-right-turn-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "前方直行"
@@ -18291,7 +18291,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标线。标线一般施划在路面，箭头指示标线代表应该按照指示的方向行驶，图中箭头除了向前的直行箭头，还有向左的箭头，代表直行或左转弯。因此选择“指示直行或左转弯”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.15导向箭头，4.15.1导向箭头用以指示车辆的行驶方向。4.15.2在行驶方向受限制的交叉入口车道内，车道数减少路段的缩减车道内，设有专用车道的交叉口或路段，畸形、复杂的交叉口，渠化后的车道内应设置导向箭头。（其中“导向箭头的基本形状及含义”白色直行和左转箭头表示指示前方可直行或左转。）",
     "analysis_url": "",
-    "image": "mandatory-signs/turn-left.jpg",
+    "image": "mandatory-markings/straight-or-left-turn-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "直行或左转弯"
@@ -18321,7 +18321,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标线。标线一般施划在路面，箭头指示标线代表应该按照指示的方向行驶，图中箭头除了向前的直行箭头，还有向右的箭头，代表直行或右转弯。因此选择“指示直行或右转弯”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.15导向箭头，4.15.1导向箭头用以指示车辆的行驶方向。4.15.2在行驶方向受限制的交叉入口车道内，车道数减少路段的缩减车道内，设有专用车道的交叉口或路段，畸形、复杂的交叉口，渠化后的车道内应设置导向箭头。（其中“导向箭头的基本形状及含义”白色直行和右转箭头表示指示前方可直行或右转。）",
     "analysis_url": "",
-    "image": "mandatory-signs/turn-right.jpg",
+    "image": "mandatory-markings/straight-or-right-turn-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "直行或右转弯"
@@ -18351,7 +18351,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标线。标线一般施划在路面，箭头指示标线代表应该按照指示的方向行驶，图中箭头指向左方，代表左转弯。因此选择“指示前方左转弯”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.15导向箭头，4.15.1导向箭头用以指示车辆的行驶方向。4.15.2在行驶方向受限制的交叉入口车道内，车道数减少路段的缩减车道内，设有专用车道的交叉口或路段，畸形、复杂的交叉口，渠化后的车道内应设置导向箭头。（其中“导向箭头的基本形状及含义”白色左转箭头表示指示前方左转。）",
     "analysis_url": "",
-    "image": "mandatory-markings/turn-right-ahead.jpg",
+    "image": "mandatory-markings/turn-left-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "前方左转弯"
@@ -18381,7 +18381,7 @@
     "answer": 0,
     "analysis": "本题主要考察道路交通标线。标线一般施划在路面，箭头指示标线代表应该按照指示的方向行驶，图中箭头指向右方，代表右转弯。因此选择“指示前方右转弯”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.15导向箭头，4.15.1导向箭头用以指示车辆的行驶方向。4.15.2在行驶方向受限制的交叉入口车道内，车道数减少路段的缩减车道内，设有专用车道的交叉口或路段，畸形、复杂的交叉口，渠化后的车道内应设置导向箭头。（其中“导向箭头的基本形状及含义”白色右转箭头表示指示前方右转。）",
     "analysis_url": "",
-    "image": "mandatory-markings/u-turn-ahead.jpg",
+    "image": "mandatory-markings/turn-right-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "前方右转弯"
@@ -18411,7 +18411,7 @@
     "answer": 1,
     "analysis": "本题主要考察道路交通标线。标线一般施划在路面，箭头指示标线代表应该按照指示的方向行驶，图中箭头指向后方，代表掉头。因此选择“指示前方掉头”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.15导向箭头，4.15.1导向箭头用以指示车辆的行驶方向。4.15.2在行驶方向受限制的交叉入口车道内，车道数减少路段的缩减车道内，设有专用车道的交叉口或路段，畸形、复杂的交叉口，渠化后的车道内应设置导向箭头。（其中“导向箭头的基本形状及含义”白色掉头箭头表示指示前方掉头。）",
     "analysis_url": "",
-    "image": "mandatory-markings/turn-right-ahead.jpg",
+    "image": "mandatory-markings/u-turn-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "前方掉头"
@@ -18441,7 +18441,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标线。标线一般施划在路面，箭头指示标线代表应该按照指示的方向行驶，图中箭头除了直行，还指向后方，代表直行和掉头都可。因此选择“指示前方可直行或掉头”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.15导向箭头，4.15.1导向箭头用以指示车辆的行驶方向。4.15.2在行驶方向受限制的交叉入口车道内，车道数减少路段的缩减车道内，设有专用车道的交叉口或路段，畸形、复杂的交叉口，渠化后的车道内应设置导向箭头。（其中“导向箭头的基本形状及含义”白色直行和掉头箭头表示指示前方可直行或掉头。）",
     "analysis_url": "",
-    "image": "mandatory-markings/left-turn-or-u-turn-ahead.jpg",
+    "image": "mandatory-markings/straight-or-u-turn-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "直行或掉头"
@@ -18471,7 +18471,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标线。标线一般施划在路面，箭头指示标线代表应该按照指示的方向行驶，图中箭头除了左方，还指向后方，代表左转和掉头都可。因此选择“指示前方可左转或掉头”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.15导向箭头，4.15.1导向箭头用以指示车辆的行驶方向。4.15.2在行驶方向受限制的交叉入口车道内，车道数减少路段的缩减车道内，设有专用车道的交叉口或路段，畸形、复杂的交叉口，渠化后的车道内应设置导向箭头。（其中“导向箭头的基本形状及含义”白色左转和掉头箭头表示指示前方可左转或掉头。）",
     "analysis_url": "",
-    "image": "mandatory-markings/straight-or-left-turn-ahead.jpg",
+    "image": "mandatory-markings/left-turn-or-u-turn-ahead.jpg",
     "is_image_question": true,
     "keywords": [
       "左转或掉头"
@@ -18623,7 +18623,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标线。图中的数字是标记在路面上的，黄色是最高限速，白色是最低限速，代表速度限制标记。图中黄色数字100代表最高限速100公里/小时。因此选择“最高限速为100公里/小时”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，4.16.2速度限制标记表示车辆行驶的限制车速，用于需要限制车辆最高行驶速度或最低行驶速度的车道起点和其他适当位置。表示最高限速值数字的颜色为黄色，可单独使用；表示最低限速值数字的颜色为白色，应和最高限速值数字同时使用。",
     "analysis_url": "",
-    "image": "mandatory-signs/minimum-speed.jpg",
+    "image": "prohibitory-signs/speed-limit.jpg",
     "is_image_question": true,
     "keywords": [
       "路面标记"
@@ -18990,7 +18990,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标线。减速让行线表示车辆在此路口应减速让干道车辆先行，呈两条平行的虚线和一个倒三角形，颜色为白色。因此选择“减速让行线”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，5.6.2减速让行线表示车辆在此路口应减速让干道车辆先行。设有“减速让行”标志的路口，除路面条件无法施划标线外均应设置减速让行标线。减速让行线为两条平行的虚线和一个倒三角形，颜色为白色。双向行驶的路口，白色虚线长度应与对向车行道分界线连接；单向行驶的路口，白色虚线长度应横跨整个路面。",
     "analysis_url": "",
-    "image": "prohibitory-markings/stop-and-yield-line.jpg",
+    "image": "prohibitory-markings/yield-line.jpg",
     "is_image_question": true,
     "keywords": [
       "双白虚线"
@@ -19022,7 +19022,7 @@
     "answer": 3,
     "analysis": "本题主要考察道路交通标线。导流线的主要形式为一个或几个根据路口地形设置的白色V形线或斜纹线区域，表示车辆必须按照规定路线行驶，不得压线或越线行驶。因此选择“导流线”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，5.8导流线，5.8.1表示车辆需按规定的路线行驶，不得压线或越线行驶。5.8.2主要用于过宽、不规则或行驶条件比较复杂的交叉路口，立体交叉的匝道口或其他特殊地点。导流线应根据交叉路口的地形和交通流量、流向情况进行设计。5.8.3导流线的颜色为白色，与道路中心线相连时，也可用黄色。标线形式可分为单实线、V型线和斜纹线三种。",
     "analysis_url": "",
-    "image": "prohibitory-markings/grid-line.jpg",
+    "image": "prohibitory-markings/simplified-grid-line.jpg",
     "is_image_question": true,
     "keywords": [
       "三角填充"
@@ -19053,7 +19053,7 @@
     "answer": 3,
     "analysis": "<p>本题主要考察道路交通标线。中心圈是白色斜纹填充的圆形或者菱形区域，设在交叉路口的中心，用以区分车辆大、小转弯或作为交叉口车辆左右转弯的指示，车辆不得压线行驶。因此选择“中心圈”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，5.9中心圈，5.9.1可设在平面交叉路口的中心，用以区分车辆大、小转弯或作为交叉口车辆左右转弯的指示，车辆不得压线行驶。5.9.2中心圈有圆形和菱形两种形式，颜色为白色。</p>",
     "analysis_url": "",
-    "image": "prohibitory-markings/grid-line.jpg",
+    "image": "prohibitory-markings/center-circle.jpg",
     "is_image_question": true,
     "keywords": [
       "路面标记"
@@ -19084,7 +19084,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标线。中心圈是白色斜纹填充的圆形或者菱形区域，设在交叉路口的中心，用以区分车辆大、小转弯或作为交叉口车辆左右转弯的指示，车辆不得压线行驶。因此选择“中心圈”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，5.9中心圈，5.9.1可设在平面交叉路口的中心，用以区分车辆大、小转弯或作为交叉口车辆左右转弯的指示，车辆不得压线行驶。5.9.2中心圈有圆形和菱形两种形式，颜色为白色。",
     "analysis_url": "",
-    "image": "prohibitory-markings/grid-line.jpg",
+    "image": "prohibitory-markings/center-circle.jpg",
     "is_image_question": true,
     "keywords": [
       "路面标记"
@@ -19116,7 +19116,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标线。网状线用以标示禁止以任何原因停车的区域，划设于易发生临时停车造成堵塞的交叉路口、出入口及其他需要设置的位置，呈黄色交织的网状线。因此选择“网状线”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，5.10网状线，5.10.1用以标示禁止以任何原因停车的区域，视需要划设于易发生临时停车造成堵塞的交叉路口、出入口及其他需要设置的位置。",
     "analysis_url": "",
-    "image": "prohibitory-markings/center-circle.jpg",
+    "image": "prohibitory-markings/grid-line.jpg",
     "is_image_question": true,
     "keywords": [
       "黄色路面标记"
@@ -19236,7 +19236,7 @@
     "answer": 2,
     "analysis": "本题主要考察道路交通标线。由黄色叉形标记和黄色右转的箭头左右组合而成，黄色叉形标记位于左侧，表示本路口或区间禁止车辆右转。因此选择“禁止右转”。\n\n相关法规参考：GB5768.3-2009《道路交通标志和标线第3部分：道路交通标线》，5.12禁止掉头（转弯）标记，用于禁止车辆掉头或转弯的路口或区间。禁止掉头（转弯）标记由黄色导向箭头和黄色叉形标记左右组合而成，黄色叉形标记位于左侧，如本车道为限时禁止掉头（转弯）车道，应在禁止掉头（转弯）标记下附加禁止掉头（转弯）时间段的黄色文字。",
     "analysis_url": "",
-    "image": "prohibitory-signs/no-u-turn.jpg",
+    "image": "prohibitory-signs/no-right-turn.jpg",
     "is_image_question": true,
     "keywords": [
       "黄色标记"
@@ -19422,7 +19422,7 @@
     "answer": 1,
     "analysis": "本题主要考察交通警察手势的辨识。左手高举过肩，举手朝向前方，无其他动作时是停止信号，表示交警面向的车辆不准通行。因此选择“停止信号”。\n\n相关内容拓展：各手势信号：1.停止信号：左臂向前上方直伸，掌心向前，不准前方车辆通行。2.直行信号：左臂向左平伸，掌心向前；右臂向右平伸，掌心向前，向左摆动，准许右方直行的车辆通行。3.左转弯信号：右臂向前平伸，掌心向前；左臂与手掌平直向右前方摆动，掌心向右，准许车辆左转弯，在不妨碍被放行车辆通行的情况下可以掉头。4.左转弯待转信号：左臂向左下方平伸，掌心向下；左臂与手掌平直向下方摆动，准许左方左转弯的车辆进入路口，沿左转弯行驶方向靠近路口中心，等候左转弯信号。5.右转弯信号：左臂向前平伸，掌心向前；右臂与手掌平直向左前方摆动，手掌向左，准许右方的车辆右转弯。6.变道信号：右臂向前平伸，掌心向左；右臂向左水平摆动，车辆应当腾空指定的车道，减速慢行。7.减速慢行信号：右臂向右前方平伸，掌心向下；右臂与手掌平直向下方摆动，车辆应当减速慢行。8.示意车辆靠边停车信号：左臂向前上方平伸，掌心向前；右臂向前下方平伸，掌心向左；右臂向左水平摆动，车辆应当靠边停车。",
     "analysis_url": "",
-    "image": "traffic-police-signals/left-turn-signal.jpg",
+    "image": "traffic-police-signals/stop-signal.jpg",
     "is_image_question": true,
     "keywords": [
       "警察手势"
@@ -19486,7 +19486,7 @@
     "answer": 2,
     "analysis": "<p>本题主要考察交通警察手势的辨识。图中是左转弯信号，与交警右手相对的方向车辆停车等待，交警左手摆动，交警面向方向的车辆左转弯。因此选择“左转弯信号”。\n\n相关内容拓展：各手势信号：1.停止信号：左臂向前上方直伸，掌心向前，不准前方车辆通行。2.直行信号：左臂向左平伸，掌心向前；右臂向右平伸，掌心向前，向左摆动，准许右方直行的车辆通行。3.左转弯信号：右臂向前平伸，掌心向前；左臂与手掌平直向右前方摆动，掌心向右，准许车辆左转弯，在不妨碍被放行车辆通行的情况下可以掉头。4.左转弯待转信号：左臂向左下方平伸，掌心向下；左臂与手掌平直向下方摆动，准许左方左转弯的车辆进入路口，沿左转弯行驶方向靠近路口中心，等候左转弯信号。5.右转弯信号：左臂向前平伸，掌心向前；右臂与手掌平直向左前方摆动，手掌向左，准许右方的车辆右转弯。6.变道信号：右臂向前平伸，掌心向左；右臂向左水平摆动，车辆应当腾空指定的车道，减速慢行。7.减速慢行信号：右臂向右前方平伸，掌心向下；右臂与手掌平直向下方摆动，车辆应当减速慢行。8.示意车辆靠边停车信号：左臂向前上方平伸，掌心向前；右臂向前下方平伸，掌心向左；右臂向左水平摆动，车辆应当靠边停车。</p>",
     "analysis_url": "",
-    "image": "traffic-police-signals/left-turn-wait-signal.jpg",
+    "image": "traffic-police-signals/left-turn-signal.jpg",
     "is_image_question": true,
     "keywords": [
       "警察手势"
@@ -19518,7 +19518,7 @@
     "answer": 3,
     "analysis": "本题主要考察交通警察手势的辨识。左转弯信号：右臂向前平伸，掌心向前；左臂与手掌平直向右前方摆动，掌心向右，准许车辆左转弯，在不妨碍被放行车辆通行的情况下可以掉头。图中警察明显右臂是向前伸的，左臂在摆动，因此选择“左转弯信号”。\n\n相关内容拓展：各手势信号：1.停止信号：左臂向前上方直伸，掌心向前，不准前方车辆通行。2.直行信号：左臂向左平伸，掌心向前；右臂向右平伸，掌心向前，向左摆动，准许右方直行的车辆通行。3.左转弯信号：右臂向前平伸，掌心向前；左臂与手掌平直向右前方摆动，掌心向右，准许车辆左转弯，在不妨碍被放行车辆通行的情况下可以掉头。4.左转弯待转信号：左臂向左下方平伸，掌心向下；左臂与手掌平直向下方摆动，准许左方左转弯的车辆进入路口，沿左转弯行驶方向靠近路口中心，等候左转弯信号。5.右转弯信号：左臂向前平伸，掌心向前；右臂与手掌平直向左前方摆动，手掌向左，准许右方的车辆右转弯。6.变道信号：右臂向前平伸，掌心向左；右臂向左水平摆动，车辆应当腾空指定的车道，减速慢行。7.减速慢行信号：右臂向右前方平伸，掌心向下；右臂与手掌平直向下方摆动，车辆应当减速慢行。8.示意车辆靠边停车信号：左臂向前上方平伸，掌心向前；右臂向前下方平伸，掌心向左；右臂向左水平摆动，车辆应当靠边停车。",
     "analysis_url": "",
-    "image": "traffic-police-signals/left-turn-wait-signal.jpg",
+    "image": "traffic-police-signals/left-turn-signal.jpg",
     "is_image_question": true,
     "keywords": [
       "警察手势"
@@ -19581,7 +19581,7 @@
     "answer": 3,
     "analysis": "本题主要考察交通警察手势的辨识。交警面向哪个方向就是在指挥哪个方向的车辆，此图交警右手在摆动，交警面向方向的车辆右转弯。因此选择“右转弯信号”。\n\n相关内容拓展：各手势信号：1.停止信号：左臂向前上方直伸，掌心向前，不准前方车辆通行。2.直行信号：左臂向左平伸，掌心向前；右臂向右平伸，掌心向前，向左摆动，准许右方直行的车辆通行。3.左转弯信号：右臂向前平伸，掌心向前；左臂与手掌平直向右前方摆动，掌心向右，准许车辆左转弯，在不妨碍被放行车辆通行的情况下可以掉头。4.左转弯待转信号：左臂向左下方平伸，掌心向下；左臂与手掌平直向下方摆动，准许左方左转弯的车辆进入路口，沿左转弯行驶方向靠近路口中心，等候左转弯信号。5.右转弯信号：左臂向前平伸，掌心向前；右臂与手掌平直向左前方摆动，手掌向左，准许右方的车辆右转弯。6.变道信号：右臂向前平伸，掌心向左；右臂向左水平摆动，车辆应当腾空指定的车道，减速慢行。7.减速慢行信号：右臂向右前方平伸，掌心向下；右臂与手掌平直向下方摆动，车辆应当减速慢行。8.示意车辆靠边停车信号：左臂向前上方平伸，掌心向前；右臂向前下方平伸，掌心向左；右臂向左水平摆动，车辆应当靠边停车。",
     "analysis_url": "",
-    "image": "traffic-police-signals/slow-down-signal.jpg",
+    "image": "traffic-police-signals/right-turn-signal.jpg",
     "is_image_question": true,
     "keywords": [
       "警察手势"
@@ -19645,7 +19645,7 @@
     "answer": 2,
     "analysis": "本题主要考察交通警察手势的辨识。变道信号：右臂向前平伸，掌心向左；右臂向左水平摆动，车辆应当腾空指定的车道，减速慢行。图中警察明显右手向左摆动，其他身体部位没有变化，因此选择“变道信号”。\n\n相关内容拓展：各手势信号：1.停止信号：左臂向前上方直伸，掌心向前，不准前方车辆通行。2.直行信号：左臂向左平伸，掌心向前；右臂向右平伸，掌心向前，向左摆动，准许右方直行的车辆通行。3.左转弯信号：右臂向前平伸，掌心向前；左臂与手掌平直向右前方摆动，掌心向右，准许车辆左转弯，在不妨碍被放行车辆通行的情况下可以掉头。4.左转弯待转信号：左臂向左下方平伸，掌心向下；左臂与手掌平直向下方摆动，准许左方左转弯的车辆进入路口，沿左转弯行驶方向靠近路口中心，等候左转弯信号。5.右转弯信号：左臂向前平伸，掌心向前；右臂与手掌平直向左前方摆动，手掌向左，准许右方的车辆右转弯。6.变道信号：右臂向前平伸，掌心向左；右臂向左水平摆动，车辆应当腾空指定的车道，减速慢行。7.减速慢行信号：右臂向右前方平伸，掌心向下；右臂与手掌平直向下方摆动，车辆应当减速慢行。8.示意车辆靠边停车信号：左臂向前上方平伸，掌心向前；右臂向前下方平伸，掌心向左；右臂向左水平摆动，车辆应当靠边停车。",
     "analysis_url": "",
-    "image": "traffic-police-signals/right-turn-signal.jpg",
+    "image": "traffic-police-signals/lane-change-signal.jpg",
     "is_image_question": true,
     "keywords": [
       "警察手势"
