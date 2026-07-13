@@ -1,13 +1,12 @@
 /**
  * 应用根组件
  * - HashRouter 路由配置
- * - 全局布局：TopNav + Toast + ConfirmDialog + 主内容区 + GlobalFooter
+ * - 全局布局：TopNav + Toast + ConfirmDialog + 主内容区
  * - 视图懒加载（按需 import）实现代码分割
  */
 import { Suspense, lazy, useEffect } from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import TopNav from '@/components/layout/TopNav';
-import GlobalFooter from '@/components/layout/GlobalFooter';
 import ToastContainer from '@/components/feedback/ToastContainer';
 import ConfirmProvider from '@/components/feedback/ConfirmProvider';
 import GlobalLoading from '@/components/feedback/GlobalLoading';
@@ -60,7 +59,6 @@ export default function App() {
             </Routes>
           </Suspense>
         </main>
-        <GlobalFooter />
         <ToastContainer />
       </ConfirmProvider>
     </HashRouter>

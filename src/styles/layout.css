@@ -269,19 +269,19 @@
   padding: var(--sp-8) var(--sp-6);
 }
 
-/* ========== 全局页脚 ========== */
+/* ========== 主页页脚 · 紧凑单行布局 ========== */
 #global-footer {
   position: relative;
-  margin-top: var(--sp-12);
+  margin-top: var(--sp-8);
   background: var(--bg-card);
   border-top: 1px solid var(--border);
   overflow: hidden;
 }
 
-/* 装饰条带 · 构成主义四色 */
+/* 装饰条带 · 构成主义四色 3px 细带 */
 .footer-decor {
   display: flex;
-  height: 4px;
+  height: 3px;
   width: 100%;
 }
 .footer-decor-bar {
@@ -301,90 +301,79 @@
   background: var(--accent);
 }
 .footer-decor:hover .bar-ink {
-  flex: 1.6;
+  flex: 1.5;
 }
 .footer-decor:hover .bar-red {
   flex: 1.2;
 }
 .footer-decor:hover .bar-blue {
-  flex: 1.4;
+  flex: 1.3;
 }
 .footer-decor:hover .bar-accent {
-  flex: 1.8;
+  flex: 1.6;
 }
 
+/* 主体单行：品牌 + 链接 + 版权 */
 .footer-inner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: var(--sp-10) var(--sp-6) var(--sp-8);
+  padding: var(--sp-4) var(--sp-6);
   display: flex;
-  flex-direction: column;
-  gap: var(--sp-8);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-5);
 }
 
-/* 品牌区 */
+/* 品牌区 · 小尺寸标记 + 名称 */
 .footer-brand {
   display: flex;
   align-items: center;
-  gap: var(--sp-4);
+  gap: var(--sp-2);
+  flex-shrink: 0;
 }
 .footer-brand-mark {
-  width: 44px;
-  height: 44px;
+  width: 24px;
+  height: 24px;
   display: grid;
   place-items: center;
   background: var(--primary);
   color: #fff;
-  border-radius: var(--r-lg);
-  font-size: 1.375rem;
+  border-radius: var(--r-sm);
+  font-size: 0.75rem;
   font-weight: 800;
   font-family: var(--font-display);
-  box-shadow: var(--shadow-sm);
   flex-shrink: 0;
-}
-.footer-brand-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
 }
 .footer-brand-name {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--text-1);
 }
-.footer-brand-tag {
-  font-size: 0.8125rem;
-  color: var(--text-3);
-  letter-spacing: 0.02em;
-}
 
-/* 链接区 */
+/* 链接区 · 紧凑图标 + 短文本 */
 .footer-links {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-5);
-  padding-bottom: var(--sp-6);
-  border-bottom: 1px solid var(--divider);
+  align-items: center;
+  gap: var(--sp-4);
+  flex-shrink: 0;
 }
 .footer-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.875rem;
+  gap: 4px;
+  font-size: 0.75rem;
   font-weight: 500;
-  color: var(--text-2);
-  transition: color var(--dur-fast) var(--ease-precision),
-              transform var(--dur-fast) var(--ease-precision);
+  color: var(--text-3);
+  transition: color var(--dur-fast) var(--ease-precision);
 }
 .footer-link svg {
-  color: var(--text-3);
+  color: var(--text-mute);
   transition: color var(--dur-fast) var(--ease-precision);
 }
 .footer-link:hover {
   color: var(--primary);
-  transform: translateY(-1px);
 }
 .footer-link:hover svg {
   color: var(--primary);
@@ -392,89 +381,83 @@
 .footer-link:focus-visible {
   outline: none;
   box-shadow: var(--ring-focus);
-  border-radius: var(--r-sm);
+  border-radius: var(--r-xs);
 }
 
-/* 免责声明 */
-.footer-disclaimer {
-  padding: var(--sp-5) var(--sp-6);
-  background: var(--bg-sub);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  border-left: 3px solid var(--geo-red);
-}
-.footer-disclaimer-title {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--text-1);
-  margin-bottom: var(--sp-2);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-family: var(--font-mono);
-}
-.footer-disclaimer-text {
-  font-size: 0.8125rem;
-  line-height: 1.65;
-  color: var(--text-3);
-  margin-bottom: var(--sp-3);
-}
-.footer-disclaimer-more {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--primary);
-  transition: color var(--dur-fast), transform var(--dur-fast);
-}
-.footer-disclaimer-more:hover {
-  color: var(--primary-hover);
-  transform: translateX(2px);
-}
-
-/* 底部版权 */
-.footer-bottom {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--sp-3);
-  padding-top: var(--sp-2);
-  border-top: 1px solid var(--divider);
-}
+/* 版权 · 单色小字 */
 .footer-copy {
-  font-size: 0.8125rem;
-  color: var(--text-3);
-  font-family: var(--font-mono);
-  letter-spacing: 0.02em;
-}
-.footer-meta {
   font-size: 0.75rem;
   color: var(--text-mute);
   font-family: var(--font-mono);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
 }
 
-/* 移动端 footer 适配 */
+/* 免责声明 · 单行简短提示 */
+.footer-disclaimer-row {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--sp-6) var(--sp-3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+.footer-disclaimer-text {
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+}
+.footer-disclaimer-more {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text-3);
+  transition: color var(--dur-fast);
+  white-space: nowrap;
+}
+.footer-disclaimer-more:hover {
+  color: var(--primary);
+}
+
+/* 移动端 footer 适配 · 折叠为多行 */
 @media (max-width: 640px) {
   .footer-inner {
-    padding: var(--sp-8) var(--sp-4) var(--sp-6);
-    gap: var(--sp-6);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sp-3);
+    padding: var(--sp-3) var(--sp-4);
   }
   .footer-brand-mark {
-    width: 38px;
-    height: 38px;
-    font-size: 1.125rem;
+    width: 22px;
+    height: 22px;
+    font-size: 0.6875rem;
   }
   .footer-brand-name {
-    font-size: 1.0625rem;
+    font-size: 0.8125rem;
   }
   .footer-links {
-    gap: var(--sp-4);
+    gap: var(--sp-3);
   }
-  .footer-bottom {
+  .footer-link {
+    font-size: 0.6875rem;
+  }
+  .footer-copy {
+    font-size: 0.6875rem;
+    width: 100%;
+    text-align: center;
+  }
+  .footer-disclaimer-row {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: var(--sp-1);
+    padding: 0 var(--sp-4) var(--sp-3);
+    text-align: center;
+  }
+  .footer-disclaimer-text {
+    font-size: 0.625rem;
   }
 }
+
 

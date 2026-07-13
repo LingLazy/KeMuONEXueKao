@@ -13,6 +13,7 @@ import { useProgressStore } from '@/stores/progressStore';
 import { CATEGORIES, loadQuestions, loadMnemonics, hexToRgba } from '@/services/dataLoader';
 import { CATEGORY_GROUPS, GROUP_KEYS } from '@/data/categoryGroups';
 import { useTilt } from '@/hooks';
+import GlobalFooter from '@/components/layout/GlobalFooter';
 import type { Question } from '@/types';
 
 // 图标路径常量（模块级，避免每次渲染重建）
@@ -287,6 +288,8 @@ export default function HomeView() {
           />
         </div>
       </section>
+      {/* 主页页脚 · 品牌信息 + 仓库链接 + 免责声明（紧凑单行） */}
+      <GlobalFooter />
     </div>
   );
 }
