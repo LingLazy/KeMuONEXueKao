@@ -6,11 +6,12 @@
  * - 主题切换按钮
  * - 移动端折叠菜单
  */
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useThemeStore } from '@/stores/themeStore';
 import { useProgressStore } from '@/stores/progressStore';
 import { toast } from '@/stores/toastStore';
+import { useMagnetic } from '@/hooks';
 
 interface NavItem {
   to: string;
@@ -36,6 +37,9 @@ export default function TopNav() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  // 主题切换按钮磁吸 ref
+  const themeToggleRef = useRef<HTMLButtonElement>(null);
+  useMagnetic(themeToggleRef, { strength: 0.4 });
 
   // 由原始状态派生统计指标（useMemo 保证引用稳定）
   const stats = useMemo(() => {
@@ -60,8 +64,9 @@ export default function TopNav() {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  const handleToggleTheme = () => {
-    toggle();
+  const handleToggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // 将点击坐标传递给 themeStore，用于 View Transitions API 圆形扩散原点
+    toggle({ x: e.clientX, y: e.clientY });
     toast.show(theme === 'dark' ? '已切换浅色主题' : '已切换深色主题');
   };
 
@@ -101,7 +106,8 @@ export default function TopNav() {
           </div>
           <button
             type="button"
-            className="theme-toggle"
+            ref={themeToggleRef}
+            className="theme-toggle btn-shine btn-magnetic"
             onClick={handleToggleTheme}
             aria-label={theme === 'dark' ? '切换到浅色主题' : '切换到深色主题'}
           >

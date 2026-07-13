@@ -6,12 +6,13 @@
  * - 快捷功能入口：开始练习 / 模拟考试 / 知识学习 / 口诀速记
  * - 学习雷达图（按大分类统计正确率）
  */
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useProgressStore } from '@/stores/progressStore';
 import { CATEGORIES, loadQuestions, loadMnemonics, hexToRgba } from '@/services/dataLoader';
 import { CATEGORY_GROUPS, GROUP_KEYS } from '@/data/categoryGroups';
+import { useTilt } from '@/hooks';
 import type { Question } from '@/types';
 
 // 图标路径常量（模块级，避免每次渲染重建）
@@ -153,13 +154,13 @@ export default function HomeView() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            <button type="button" className="btn btn-primary btn-lg" onClick={() => navigate('/practice/all')}>
+            <button type="button" className="btn btn-primary btn-lg btn-shine" onClick={() => navigate('/practice/all')}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
               开始练习
             </button>
-            <button type="button" className="btn btn-ghost btn-lg" onClick={() => navigate('/exam')}>
+            <button type="button" className="btn btn-ghost btn-lg btn-shine" onClick={() => navigate('/exam')}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
               </svg>
@@ -204,56 +205,16 @@ export default function HomeView() {
             const radar = radarData.find((r) => r.key === gk);
             const colorBg = hexToRgba(group.color, 0.1);
             return (
-              <motion.button
+              <CatCard
                 key={gk}
-                type="button"
-                className="cat-card card-hover-target"
-                data-cat={gk}
-                style={{
-                  '--cat-color': group.color,
-                  '--cat-color-bg': colorBg,
-                  '--deco-opacity': 0.1
-                } as React.CSSProperties}
+                gk={gk}
+                index={i}
+                group={group}
+                count={count}
+                radar={radar}
+                colorBg={colorBg}
                 onClick={() => enterCategory(gk)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-                whileHover={{ y: -4 }}
-                aria-label={`进入${group.name}分类，共${count}题`}
-              >
-                {/* 右下角同心圆装饰（hover 透明度倍增） */}
-                <svg
-                  className="deco-circles"
-                  style={{ right: '-24px', bottom: '-24px', width: '128px', height: '128px', color: group.color }}
-                  viewBox="0 0 128 128"
-                  aria-hidden="true"
-                >
-                  <circle cx="64" cy="64" r="56" stroke="currentColor" strokeWidth="1" fill="none" />
-                  <circle cx="64" cy="64" r="40" stroke="currentColor" strokeWidth="1" fill="none" />
-                  <circle cx="64" cy="64" r="24" stroke="currentColor" strokeWidth="1" fill="none" />
-                  <circle cx="64" cy="64" r="8" stroke="currentColor" strokeWidth="1" fill="none" />
-                </svg>
-                <div className="cat-card-index">{String(i + 1).padStart(2, '0')}</div>
-                <div className="cat-card-body">
-                  <h3 className="cat-card-name">{group.name}</h3>
-                  <p className="cat-card-desc">{group.desc}</p>
-                  <div className="cat-card-meta">
-                    <span className="cat-card-count">
-                      <span className="num">{count}</span> 题
-                    </span>
-                    {radar && radar.answered > 0 && (
-                      <span className="cat-card-acc">正确率 {radar.accuracy}%</span>
-                    )}
-                  </div>
-                </div>
-                <div className="cat-card-arrow" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </div>
-                {/* 底部三色彩带（hover 显示） */}
-                <span className="card-strip" aria-hidden="true" />
-              </motion.button>
+              />
             );
           })}
         </div>
@@ -330,7 +291,7 @@ function StatCard({
 }) {
   return (
     <motion.div
-      className={`stat-card stat-${color} card-hover-target`}
+      className={`stat-card stat-${color} card-hover-target btn-shine`}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -2 }}
@@ -364,13 +325,19 @@ function QuickCard({
   icon: 'book' | 'star' | 'grid' | 'check';
   onClick: () => void;
 }) {
+  const ref = useRef<HTMLButtonElement>(null);
+  // 快捷卡片附加 3D 倾斜效果（桌面端悬停时跟随鼠标轻微倾斜）
+  useTilt(ref, { max: 0.7 });
   return (
     <motion.button
+      ref={ref}
       type="button"
-      className="quick-card card-hover-target"
+      className="quick-card card-hover-target tilt-card btn-shine"
       style={{ '--qc-color': color, '--deco-opacity': 0.1 } as React.CSSProperties}
       onClick={onClick}
-      whileHover={{ y: -3 }}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
     >
       {/* 左上角菱形几何装饰（hover 透明度倍增） */}
       <svg
@@ -382,13 +349,82 @@ function QuickCard({
         <rect x="5" y="0" width="14.14" height="14.14" transform="rotate(45 5 0)" stroke="currentColor" strokeWidth="1" fill="none" />
         <rect x="9" y="4" width="5.66" height="5.66" transform="rotate(45 9 4)" stroke="currentColor" strokeWidth="1" fill="none" />
       </svg>
-      <div className="quick-card-icon" aria-hidden="true">
+      <div className="quick-card-icon tilt-layer" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           {QUICK_ICONS[icon]}
         </svg>
       </div>
       <h3 className="quick-card-title">{title}</h3>
       <p className="quick-card-desc">{desc}</p>
+      {/* 底部三色彩带（hover 显示） */}
+      <span className="card-strip" aria-hidden="true" />
+    </motion.button>
+  );
+}
+
+/** 分类入口卡片（封装 tilt-card + btn-shine） */
+interface CatCardProps {
+  gk: string;
+  index: number;
+  group: typeof CATEGORY_GROUPS[keyof typeof CATEGORY_GROUPS];
+  count: number;
+  radar: { accuracy: number; answered: number } | undefined;
+  colorBg: string;
+  onClick: () => void;
+}
+
+function CatCard({ gk, index, group, count, radar, colorBg, onClick }: CatCardProps) {
+  const ref = useRef<HTMLButtonElement>(null);
+  // 分类大卡片附加 3D 倾斜（强度略大，呈现金属面板视差感）
+  useTilt(ref, { max: 0.85 });
+  return (
+    <motion.button
+      ref={ref}
+      key={gk}
+      type="button"
+      className="cat-card card-hover-target tilt-card btn-shine"
+      data-cat={gk}
+      style={{
+        '--cat-color': group.color,
+        '--cat-color-bg': colorBg,
+        '--deco-opacity': 0.1
+      } as React.CSSProperties}
+      onClick={onClick}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+      aria-label={`进入${group.name}分类，共${count}题`}
+    >
+      {/* 右下角同心圆装饰（hover 透明度倍增） */}
+      <svg
+        className="deco-circles"
+        style={{ right: '-24px', bottom: '-24px', width: '128px', height: '128px', color: group.color }}
+        viewBox="0 0 128 128"
+        aria-hidden="true"
+      >
+        <circle cx="64" cy="64" r="56" stroke="currentColor" strokeWidth="1" fill="none" />
+        <circle cx="64" cy="64" r="40" stroke="currentColor" strokeWidth="1" fill="none" />
+        <circle cx="64" cy="64" r="24" stroke="currentColor" strokeWidth="1" fill="none" />
+        <circle cx="64" cy="64" r="8" stroke="currentColor" strokeWidth="1" fill="none" />
+      </svg>
+      <div className="cat-card-index tilt-layer">{String(index + 1).padStart(2, '0')}</div>
+      <div className="cat-card-body tilt-layer">
+        <h3 className="cat-card-name">{group.name}</h3>
+        <p className="cat-card-desc">{group.desc}</p>
+        <div className="cat-card-meta">
+          <span className="cat-card-count">
+            <span className="num">{count}</span> 题
+          </span>
+          {radar && radar.answered > 0 && (
+            <span className="cat-card-acc">正确率 {radar.accuracy}%</span>
+          )}
+        </div>
+      </div>
+      <div className="cat-card-arrow" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </div>
       {/* 底部三色彩带（hover 显示） */}
       <span className="card-strip" aria-hidden="true" />
     </motion.button>

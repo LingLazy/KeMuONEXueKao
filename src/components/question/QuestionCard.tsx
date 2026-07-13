@@ -8,14 +8,14 @@
  * - 收藏切换
  * - 移动端左右滑动切题
  */
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Question, Mnemonic } from '@/types';
 import { highlightKeywords } from '@/services/highlight';
 import { getImageUrl } from '@/services/dataLoader';
 import { useProgressStore } from '@/stores/progressStore';
 import { usePracticeStore } from '@/stores/practiceStore';
-import { useVibrate, useConfetti, useSwipe } from '@/hooks';
+import { useVibrate, useConfetti, useSwipe, useRipple } from '@/hooks';
 import LazyImage from '@/components/common/LazyImage';
 
 interface QuestionCardProps {
@@ -205,53 +205,18 @@ export default function QuestionCard({
           if (isEliminated) stateClass += ' eliminated';
 
           return (
-            <button
+            <OptionButton
               key={i}
-              type="button"
-              className={`qcard-option ${stateClass}`}
-              onClick={() => handleSelect(i)}
+              letter={optionLetters[i] ?? ''}
+              text={opt}
+              stateClass={stateClass}
+              isSelected={isSelected}
               disabled={isAnswered && !examMode}
-              aria-pressed={isSelected}
-              aria-label={`选项 ${optionLetters[i]}：${opt}`}
-            >
-              <span className="qcard-option-letter" aria-hidden="true">
-                {optionLetters[i]}
-              </span>
-              <span className="qcard-option-text">{opt}</span>
-              {showCorrect && isCorrect && (
-                <motion.span
-                  className="qcard-option-icon correct"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  aria-hidden="true"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
-                </motion.span>
-              )}
-              {showCorrect && isSelected && !isCorrect && (
-                <motion.span
-                  className="qcard-option-icon wrong"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  aria-hidden="true"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 6 6 18M6 6l12 12" />
-                  </svg>
-                </motion.span>
-              )}
-              {isEliminated && (
-                <span className="qcard-option-eliminated" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                    <path d="M18 6 6 18M6 6l12 12" />
-                  </svg>
-                </span>
-              )}
-            </button>
+              showCorrect={showCorrect}
+              isCorrect={isCorrect}
+              isEliminated={isEliminated}
+              onClick={() => handleSelect(i)}
+            />
           );
         })}
       </div>
@@ -349,5 +314,98 @@ export default function QuestionCard({
         </aside>
       )}
     </article>
+  );
+}
+
+/**
+ * 选项按钮子组件
+ * - 封装涟漪点击反馈（ripple-host）
+ * - 保留原有的 correct/wrong/selected/eliminated 状态样式
+ * - framer-motion 弹性图标入场
+ */
+interface OptionButtonProps {
+  /** 选项字母（A/B/C/D...） */
+  letter: string;
+  /** 选项文本 */
+  text: string;
+  /** 状态类名（correct/wrong/selected/eliminated 组合） */
+  stateClass: string;
+  /** 是否选中 */
+  isSelected: boolean;
+  /** 是否禁用 */
+  disabled: boolean;
+  /** 是否显示正确答案 */
+  showCorrect: boolean;
+  /** 是否为正确选项 */
+  isCorrect: boolean;
+  /** 是否已剔除 */
+  isEliminated: boolean;
+  /** 点击回调 */
+  onClick: () => void;
+}
+
+function OptionButton({
+  letter,
+  text,
+  stateClass,
+  isSelected,
+  disabled,
+  showCorrect,
+  isCorrect,
+  isEliminated,
+  onClick
+}: OptionButtonProps) {
+  const ref = useRef<HTMLButtonElement>(null);
+  // 选项按钮附加涟漪点击反馈（仅未作答时启用）
+  useRipple(ref, { enabled: !disabled });
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      className={`qcard-option ripple-host ${stateClass}`}
+      onClick={onClick}
+      disabled={disabled}
+      aria-pressed={isSelected}
+      aria-label={`选项 ${letter}：${text}`}
+    >
+      <span className="qcard-option-letter" aria-hidden="true">
+        {letter}
+      </span>
+      <span className="qcard-option-text">{text}</span>
+      {showCorrect && isCorrect && (
+        <motion.span
+          className="qcard-option-icon correct"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+          aria-hidden="true"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </motion.span>
+      )}
+      {showCorrect && isSelected && !isCorrect && (
+        <motion.span
+          className="qcard-option-icon wrong"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+          aria-hidden="true"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </motion.span>
+      )}
+      {isEliminated && (
+        <span className="qcard-option-eliminated" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </span>
+      )}
+    </button>
   );
 }
