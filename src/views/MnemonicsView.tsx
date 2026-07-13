@@ -185,51 +185,9 @@ export default function MnemonicsView() {
     setFocusIndex(0);
   }, [activeCat, search]);
 
-  // 动态计算虚拟滚动容器高度：占满视口剩余空间，替代硬编码魔术数字
-  // 监听窗口尺寸变化与上方元素高度变化，确保列表始终占满可用高度
-  // 关键：底部预留空间必须计入视图与容器的 padding-bottom，否则页面可滚动，
-  // 导致左侧 aside（position: sticky）跟随页面滚动，无法真正固定
-  useEffect(() => {
-    if (studyMode) return; // 学习模式使用页面滚动，无需固定高度
-    const el = parentRef.current;
-    if (!el) return;
-    const updateHeight = () => {
-      const rect = el.getBoundingClientRect();
-      // 读取实际底部预留：视图 padding-bottom + 容器 padding-bottom
-      const viewEl = el.closest('.view-mnemonics');
-      const containerEl = el.closest('.view-container');
-      let bottomReserve = 16; // 默认回退值（sp-2 8px + sp-2 8px，紧凑布局）
-      if (viewEl && containerEl) {
-        const vs = getComputedStyle(viewEl);
-        const cs = getComputedStyle(containerEl);
-        const vp = parseFloat(vs.paddingBottom);
-        const cp = parseFloat(cs.paddingBottom);
-        if (!Number.isNaN(vp) && !Number.isNaN(cp)) {
-          bottomReserve = vp + cp;
-        }
-      }
-      const available = window.innerHeight - rect.top - bottomReserve;
-      el.style.height = `${Math.max(360, available)}px`;
-    };
-    updateHeight();
-    window.addEventListener('resize', updateHeight);
-    window.addEventListener('orientationchange', updateHeight);
-    // ResizeObserver 监听上方兄弟元素高度变化（如快捷键提示显示/隐藏）
-    const layoutEl = el.closest('.mnemonics-layout');
-    let observer: ResizeObserver | null = null;
-    if (layoutEl && layoutEl.parentElement) {
-      observer = new ResizeObserver(updateHeight);
-      // 观察布局容器内的所有兄弟区块
-      Array.from(layoutEl.parentElement.children).forEach((sib) => {
-        if (sib !== layoutEl) observer?.observe(sib);
-      });
-    }
-    return () => {
-      window.removeEventListener('resize', updateHeight);
-      window.removeEventListener('orientationchange', updateHeight);
-      observer?.disconnect();
-    };
-  }, [studyMode, mnemonics]);
+  // 列表高度由 CSS Flexbox 自动撑满视口（.view-mnemonics:not(.study-mode-active)）
+  // 无需 JS 动态计算，兼容所有缩放比例，避免 100% 缩放时的截断问题
+  // 虚拟滚动器通过 getScrollElement 读取实际 clientHeight 自动适配
 
   if (!mnemonics) {
     return (
@@ -247,7 +205,7 @@ export default function MnemonicsView() {
   }
 
   return (
-    <div className="view view-mnemonics">
+    <div className={`view view-mnemonics ${studyMode ? 'study-mode-active' : ''}`}>
       {/* 构成主义几何背景装饰层 */}
       <div className="geo-bg-decor" aria-hidden="true">
         <div className="geo-bg-grid" />

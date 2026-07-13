@@ -1169,17 +1169,35 @@
 
 /* ========== MnemonicsView 口诀视图 ========== */
 /* 紧凑布局：最大化列表可视高度，减少上下预留空间 */
-.view-mnemonics {
+/* 非学习模式：CSS Flexbox 撑满视口，取代 JS 高度计算，兼容所有缩放比例 */
+.view-mnemonics:not(.study-mode-active) {
+  height: calc(100vh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   padding-bottom: var(--sp-2);
+}
+/* 学习模式：恢复正常页面滚动 */
+.view-mnemonics.study-mode-active {
+  padding-bottom: var(--sp-12);
 }
 /* 缩减视图容器上下内边距，为列表腾出更多可视高度 */
 .view-mnemonics > .view-container {
   padding-top: var(--sp-4);
   padding-bottom: var(--sp-2);
 }
+/* 非学习模式：容器作为 flex 子项撑满，内部纵向排列 */
+.view-mnemonics:not(.study-mode-active) > .view-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
 /* 紧凑区块标题：缩小下边距 */
 .view-mnemonics .section-header {
   margin-bottom: var(--sp-3);
+  flex-shrink: 0;
 }
 .view-mnemonics .section-title {
   font-size: 1.375rem;
@@ -1201,6 +1219,7 @@
   gap: var(--sp-3);
   margin-bottom: var(--sp-2);
   flex-wrap: wrap;
+  flex-shrink: 0;
 }
 .mnemonics-search-bar {
   position: relative;
@@ -1290,6 +1309,7 @@
   color: var(--text-mute);
   font-family: var(--font-mono);
   letter-spacing: 0.02em;
+  flex-shrink: 0;
 }
 .mnemonics-shortcut-hint kbd {
   display: inline-block;
@@ -1333,12 +1353,15 @@
   display: grid;
   grid-template-columns: var(--mnemonics-aside-w) 1fr;
   gap: var(--sp-6);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 .mnemonics-aside {
   position: sticky;
   top: calc(var(--nav-h) + var(--sp-6));
   align-self: start;
-  max-height: calc(100vh - var(--nav-h) - var(--sp-12));
+  max-height: calc(100vh - var(--nav-h) - var(--sp-6));
   overflow-y: auto;
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -1473,12 +1496,17 @@
 
 .mnemonics-main {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 }
 .mnemonics-list-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   margin-bottom: var(--sp-2);
+  flex-shrink: 0;
 }
 .mnemonics-list-title {
   font-family: var(--font-display);
@@ -1496,7 +1524,8 @@
 .mnemonics-list {
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
-  min-height: 360px;
+  flex: 1;
+  min-height: 0;
   overflow: auto;
   /* 平滑滚动 + 惯性 */
   scroll-behavior: smooth;

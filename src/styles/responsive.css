@@ -358,6 +358,7 @@
   }
   .mnemonics-layout {
     grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
     gap: var(--sp-4);
   }
   .mnemonics-aside {
@@ -367,7 +368,7 @@
     display: block;
   }
   .mnemonics-list {
-    /* 移动端：由 JS 动态测量高度占满视口，此处仅设最小高度兜底 */
+    /* 移动端：CSS Flexbox 自动撑满，保留最小高度兜底 */
     min-height: 280px;
   }
   .mnemonic-card-head {
@@ -867,6 +868,18 @@
   .view:target,
   .view.is-printing {
     display: block;
+  }
+  /* 打印时解除口诀视图的 Flexbox 高度约束与溢出隐藏 */
+  .view-mnemonics,
+  .view-mnemonics > .view-container,
+  .mnemonics-layout,
+  .mnemonics-main,
+  .mnemonics-list {
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+    flex: none !important;
+    min-height: 0 !important;
   }
 }
 
