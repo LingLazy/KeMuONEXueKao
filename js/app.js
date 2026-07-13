@@ -514,7 +514,7 @@
     } else if (q.is_image_question) {
       imgWrap.style.display = 'block';
       imgWrap.classList.add('q-image-placeholder');
-      imgWrap.innerHTML = '[ 图像题 · 图片暂缺 ]';
+      imgWrap.innerHTML = '<div class="placeholder-icon" aria-hidden="true">[ ]</div><div>图像题 · 图片暂缺</div><div class="placeholder-hint">请根据题目文字描述和选项作答</div>';
     } else {
       imgWrap.style.display = 'none';
     }
@@ -1513,6 +1513,7 @@
     const imgWrap = $('#exam-q-image-wrap');
     if (q.image) {
       imgWrap.style.display = 'block';
+      imgWrap.className = 'exam-q-image-wrap';
       imgWrap.innerHTML = '';
       const imgEl = document.createElement('img');
       imgEl.className = 'exam-q-image';
@@ -1520,9 +1521,14 @@
       imgEl.alt = '题目图片';
       imgEl.loading = 'lazy';
       imgEl.addEventListener('error', () => {
-        imgWrap.innerHTML = '[ 图片加载失败 ]';
+        imgWrap.className = 'exam-q-image-wrap q-image-placeholder';
+        imgWrap.innerHTML = '<div class="placeholder-icon" aria-hidden="true">[ ]</div><div>图片加载失败</div>';
       });
       imgWrap.appendChild(imgEl);
+    } else if (q.is_image_question) {
+      imgWrap.style.display = 'block';
+      imgWrap.className = 'exam-q-image-wrap q-image-placeholder';
+      imgWrap.innerHTML = '<div class="placeholder-icon" aria-hidden="true">[ ]</div><div>图像题 · 图片暂缺</div><div class="placeholder-hint">请根据题目文字描述和选项作答</div>';
     } else {
       imgWrap.style.display = 'none';
     }
