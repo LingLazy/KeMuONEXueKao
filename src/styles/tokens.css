@@ -1,89 +1,102 @@
 /* ===================================================================
    科目一教考 · 设计令牌（Design Tokens）
-   - 工业蚀刻科技派视觉系统
-   - 棱角分明 · 几何突出 · 质感细腻 · 科技感 · 点线面凹凸
-   - 冷调钢蓝 + 工业琥珀 · 染色阴影 · 蚀刻纹理
+   - 现代企业级视觉系统（参考 Vercel Geist / Radix Colors / shadcn/ui）
+   - 克制 · 专注 · 层次清晰 · 反 AI slop
+   - 靛蓝（Indigo）+ 琥珀（Amber）+ 暖中性（Stone）· OKLCH 色彩空间
+   - 单一基准半径 + 倍数派生 · 染色阴影 · 语义化 Token
    =================================================================== */
 
 :root {
-  /* === 背景层次 · 清新钢蓝（提亮+去灰，营造通透质感） === */
-  --bg-base: #f6f8fb;
-  --bg-sub: #eef2f7;
-  --bg-card: #ffffff;
-  --bg-elev: #ffffff;
-  --bg-hover: #eef2f7;
-  --bg-sunken: #e5eaf1;
+  /* === 背景层次 · 暖中性 Stone（亮色） ===
+     借鉴 shadcn/ui：仅 2 层背景（page + card），不引入第三层 */
+  --bg-base: oklch(0.985 0 0);           /* App 背景 */
+  --bg-sub: oklch(0.97 0 0);             /* 次级背景（极少使用） */
+  --bg-card: oklch(1 0 0);               /* 卡片背景 */
+  --bg-elev: oklch(1 0 0);               /* 浮层背景（弹窗/菜单） */
+  --bg-hover: oklch(0.97 0 0);           /* 交互 hover 背景 */
+  --bg-sunken: oklch(0.97 0 0);          /* 凹陷区域（输入框内等，不使用 inset shadow） */
 
-  /* === 文字层次 · 冷调近黑 === */
-  --text-1: #0a0e14;
-  --text-2: #3a4250;
-  --text-3: #626a78;
-  --text-mute: #8a93a1;
+  /* === 文字层次 · 暖中性近黑 === */
+  --text-1: oklch(0.145 0 0);            /* 高对比主文本 */
+  --text-2: oklch(0.32 0 0);             /* 次级文本 */
+  --text-3: oklch(0.55 0 0);             /* 辅助文本 */
+  --text-mute: oklch(0.7 0 0);           /* 静音/占位 */
 
-  /* === 主色 · 深电光蓝（科技感，取代薄荷绿） === */
-  --primary: #1456db;
-  --primary-hover: #0f44b0;
-  --primary-active: #0a3a9c;
-  --primary-soft: #dbe7ff;
-  --primary-bg: rgba(20, 86, 219, 0.07);
-  --primary-border: rgba(20, 86, 219, 0.28);
+  /* === 主色 · Indigo 12 步色阶（亮色）
+     借鉴 Radix Colors Indigo Step 9：oklch(0.546 0.215 276.8) #3F51D9
+     选用 Indigo 而非 Blue：暗色下不偏青，更沉稳，适合教育/考试专注感 === */
+  --primary: oklch(0.546 0.215 276.8);           /* 主操作实色（Step 9） */
+  --primary-hover: oklch(0.48 0.21 276.8);       /* Hover 实色（Step 10） */
+  --primary-active: oklch(0.42 0.18 276.8);      /* Active 实色（Step 11） */
+  --primary-soft: oklch(0.93 0.04 276.8);        /* 浅底色（Step 3） */
+  --primary-bg: oklch(0.97 0.01 276.8);          /* 极浅底色（Step 2，10% 等价） */
+  --primary-border: oklch(0.78 0.08 276.8);      /* Subtle border（Step 6） */
 
-  /* === 强调 · 活力琥珀（提亮，更显温暖与活力） === */
-  --accent: #ea7c1f;
-  --accent-hover: #c2410c;
-  --accent-soft: #fed7aa;
-  --accent-bg: rgba(234, 124, 31, 0.08);
-  --accent-border: rgba(234, 124, 31, 0.30);
+  /* === 强调色 · Amber（Step 9）
+     借鉴 shadcn chart-4/5：成就/奖励语义，仅用于口诀、收藏等"正向反馈" === */
+  --accent: oklch(0.769 0.188 70.08);            /* Amber Step 9 */
+  --accent-hover: oklch(0.72 0.19 70.08);        /* Hover */
+  --accent-soft: oklch(0.93 0.05 70.08);         /* 浅底 */
+  --accent-bg: oklch(0.97 0.02 70.08);           /* 极浅底 */
+  --accent-border: oklch(0.8 0.06 70.08);        /* Subtle border */
 
-  /* === 状态色 · 平衡工业调与可读性 === */
-  --success: #15803d;
-  --success-soft: #d6f0df;
-  --danger: #b91c1c;
-  --danger-soft: #fadcdc;
-  --info: #1d4ed8;
-  --info-soft: #dae4ff;
-  --warn: #a16207;
-  --warn-soft: #faedc4;
+  /* === 功能状态色 · 语义化分配（OKLCH）
+     借鉴 Ant Design functional color 概念 + shadcn chart 调色板 === */
+  --success: oklch(0.70 0.17 162.48);            /* 答对、完成 */
+  --success-soft: oklch(0.95 0.03 162.48);       /* 浅底 */
+  --success-bg: oklch(0.97 0.02 162.48);
+  --danger: oklch(0.577 0.245 27.325);           /* 答错、删除 */
+  --danger-soft: oklch(0.95 0.03 27.325);
+  --danger-bg: oklch(0.97 0.02 27.325);
+  --info: oklch(0.6 0.118 184.704);              /* 提示信息 */
+  --info-soft: oklch(0.95 0.03 184.704);
+  --info-bg: oklch(0.97 0.02 184.704);
+  --warn: oklch(0.769 0.188 70.08);              /* 接近时间到（与 accent 同色族） */
+  --warn-soft: oklch(0.95 0.04 70.08);
 
-  /* === 边框与分割 · 冷调带蓝相 === */
-  --border: rgba(10, 30, 60, 0.08);
-  --border-strong: rgba(10, 30, 60, 0.16);
-  --divider: rgba(10, 30, 60, 0.06);
-  /* 蚀刻高光边（凹凸感核心） */
-  --edge-light: rgba(255, 255, 255, 0.88);
-  --edge-dark: rgba(10, 20, 40, 0.08);
+  /* === 边框与分割 · 统一使用 var(--border)
+     借鉴 shadcn：亮色用淡灰、暗色用 10% 白色 === */
+  --border: oklch(0.922 0 0);                    /* 默认边框 */
+  --border-strong: oklch(0.85 0 0);              /* 强调边框（hover 态） */
+  --divider: oklch(0.92 0 0);                     /* 分割线 */
 
-  /* === 阴影系统 · 染色阴影（降透明度，更细腻柔和） === */
-  --shadow-xs: 0 1px 2px rgba(20, 40, 80, 0.04);
-  --shadow-sm: 0 1px 3px rgba(20, 40, 80, 0.05), 0 0 0 1px rgba(20, 40, 80, 0.02);
-  --shadow-md: 0 4px 12px rgba(20, 40, 80, 0.06), 0 1px 3px rgba(20, 40, 80, 0.03);
-  --shadow-lg: 0 8px 24px rgba(20, 40, 80, 0.08), 0 2px 6px rgba(20, 40, 80, 0.05);
-  --shadow-xl: 0 14px 36px rgba(20, 40, 80, 0.10), 0 4px 10px rgba(20, 40, 80, 0.06);
-  /* 凹陷阴影（输入框、按下态、sunken区） */
-  --shadow-inset: inset 0 1px 2px rgba(10, 20, 40, 0.08), inset 0 0 0 1px rgba(10, 20, 40, 0.03);
-  /* 凸起高光（卡片顶部亮边，制造金属凹凸） */
-  --shadow-convex: 0 1px 3px rgba(20, 40, 80, 0.05), inset 0 1px 0 var(--edge-light);
-  /* 焦点环 */
+  /* === 阴影系统 · 4 级分层 + 品牌色光晕
+     借鉴 Geist Materials：Surface（on page）+ Floating（above page）
+     关键：hover 时用 4-8% 品牌色光晕取代灰色阴影，杜绝 inset 凹凸 === */
+  --shadow-xs: 0 1px 2px 0 oklch(0.21 0 0 / 0.04);
+  --shadow-sm: 0 1px 3px 0 oklch(0.21 0 0 / 0.05), 0 1px 2px -1px oklch(0.21 0 0 / 0.04);
+  --shadow-md: 0 4px 8px -2px oklch(0.546 0.215 276.8 / 0.06),
+               0 2px 4px -2px oklch(0.21 0 0 / 0.05);
+  --shadow-lg: 0 12px 24px -6px oklch(0.546 0.215 276.8 / 0.08),
+               0 4px 8px -4px oklch(0.21 0 0 / 0.06);
+  --shadow-xl: 0 24px 48px -12px oklch(0.21 0 0 / 0.18),
+               0 8px 16px -8px oklch(0.546 0.215 276.8 / 0.08);
+
+  /* 焦点环：2px 间隔 + 4px 品牌色环（无障碍规范） */
   --ring-focus: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--primary);
 
-  /* === 圆角 · 柔和棱角（提升至 8-14px，更具现代质感） === */
+  /* === 圆角 · 单一基准 + 倍数派生（shadcn 体系）
+     教育应用基准 --radius: 0.625rem (10px)，平衡克制与亲和 === */
+  --radius: 0.625rem;
   --r-none: 0px;
-  --r-xs: 3px;
-  --r-sm: 5px;
-  --r-md: 7px;
-  --r-lg: 8px;
-  --r-xl: 10px;
-  --r-2xl: 14px;
-  --r-3xl: 20px;
+  --r-xs: calc(var(--radius) * 0.4);     /* 4px - 标签、徽章 */
+  --r-sm: calc(var(--radius) * 0.6);     /* 6px - 小按钮、tag */
+  --r-md: calc(var(--radius) * 0.8);     /* 8px - 按钮、输入框 */
+  --r-lg: var(--radius);                 /* 10px - 卡片（默认） */
+  --r-xl: calc(var(--radius) * 1.4);     /* 14px - 模态、大卡片 */
+  --r-2xl: calc(var(--radius) * 1.8);    /* 18px - Hero 区 */
+  --r-3xl: calc(var(--radius) * 2.2);    /* 22px - 大型容器 */
   --r-full: 9999px;
 
-  /* === 字体 · 几何科技感（拒绝Inter作主标题） === */
-  --font-display: 'Space Grotesk', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', Consolas, monospace;
-  --font-serif: 'Source Han Serif SC', 'Noto Serif CJK SC', 'Songti SC', 'STSong', serif;
+  /* === 字体 · Geist + 思源黑体（中文 Web 优化）
+     借鉴 Vercel Geist：瑞士国际主义风格，9 种字重，小字号清晰
+     中文用 Noto Sans SC variable font，避免大字体阻塞 === */
+  --font-display: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-sans: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', 'Cascadia Code', Consolas, monospace;
+  --font-serif: 'Source Han Serif SC', 'Noto Serif CJK SC', 'Songti SC', Georgia, serif;
 
-  /* === 字重对比 · 强层级 === */
+  /* === 字重 · 严格 4 档（Geist 含 9 档，但教育应用应克制） === */
   --fw-light: 300;
   --fw-regular: 400;
   --fw-medium: 500;
@@ -91,16 +104,18 @@
   --fw-bold: 700;
   --fw-black: 800;
 
-  /* === 动效曲线 · 精密机械感（硬切+微过渡） === */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  /* === 动效曲线 · Tailwind v4 预置（默认 snappy） ===
+     --ease-snappy: UI 微交互（按钮、卡片 hover）
+     --ease-fluid: 大位移、视图切换
+     --ease-emphasized: 答对/答错反馈（略带回弹） */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);          /* = ease-snappy，默认 */
+  --ease-in-out: cubic-bezier(0.3, 0, 0, 1);       /* = ease-fluid */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* = ease-emphasized */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);     /* Tailwind 默认 */
   --ease-quick: cubic-bezier(0.3, 0, 0.8, 0.15);
-  /* 精密机械曲线（更硬朗） */
-  --ease-precision: cubic-bezier(0.33, 0, 0.2, 1);
+  --ease-precision: cubic-bezier(0.2, 0, 0, 1);    /* = ease-snappy（保留别名兼容） */
 
-  /* === 间距 token（4/8/12/16/24/32/48 系统化） === */
+  /* === 间距 token（沿用 Tailwind 0.25rem 基准） === */
   --sp-1: 4px;
   --sp-2: 8px;
   --sp-3: 12px;
@@ -117,69 +132,77 @@
   --sidebar-w: 260px;
   --mnemonics-aside-w: 280px;
   --container-max: 1280px;
+  --container-question: 720px;  /* 题目区建议宽度，避免长题干换行过多 */
 
-  /* === 动效时长 · 偏快（机械响应感） === */
-  --dur-fast: 0.12s;
-  --dur-base: 0.2s;
-  --dur-slow: 0.35s;
+  /* === 动效时长 · 6 档（Framer Motion 默认 0.3s） === */
+  --dur-fast: 0.15s;    /* 边框、背景色变化 */
+  --dur-base: 0.2s;     /* 卡片 hover 抬升 */
+  --dur-slow: 0.3s;     /* 视图切换、模态淡入 */
 
-  /* === 几何装饰 · 蚀刻网格底纹 === */
-  --grid-line: rgba(20, 86, 219, 0.025);
-  --grid-size: 32px;
-  --tick-color: rgba(10, 30, 60, 0.12);
+  /* === 内容宽度（容器响应式） === */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
 }
 
-/* ========== 深色主题 · 深钢蓝工业暗色 ========== */
+/* ========== 深色主题 · 真正的暗色（非灰色）
+   借鉴 shadcn dark：background oklch(0.145 0 0)，card oklch(0.205 0 0)
+   Indigo Step 9 在暗色下提亮至 oklch(0.62 0.19 276.8) 维持对比度 ========== */
 [data-theme="dark"] {
-  --bg-base: #0a0e16;
-  --bg-sub: #0f1420;
-  --bg-card: #141a26;
-  --bg-elev: #1a2230;
-  --bg-hover: #1f2838;
-  --bg-sunken: #080c14;
+  --bg-base: oklch(0.145 0 0);
+  --bg-sub: oklch(0.18 0 0);
+  --bg-card: oklch(0.205 0 0);
+  --bg-elev: oklch(0.205 0 0);
+  --bg-hover: oklch(0.269 0 0);
+  --bg-sunken: oklch(0.18 0 0);
 
-  --text-1: #e6edf6;
-  --text-2: #a8b3c4;
-  --text-3: #7a8499;
-  --text-mute: #525c70;
+  --text-1: oklch(0.985 0 0);
+  --text-2: oklch(0.85 0 0);
+  --text-3: oklch(0.7 0 0);
+  --text-mute: oklch(0.55 0 0);
 
-  --primary: #3b82f6;
-  --primary-hover: #60a5fa;
-  --primary-active: #2563eb;
-  --primary-soft: rgba(59, 130, 246, 0.18);
-  --primary-bg: rgba(59, 130, 246, 0.10);
-  --primary-border: rgba(59, 130, 246, 0.35);
+  /* Indigo 暗色 12 步（Step 9 提亮维持对比度） */
+  --primary: oklch(0.62 0.19 276.8);
+  --primary-hover: oklch(0.68 0.17 276.8);
+  --primary-active: oklch(0.55 0.18 276.8);
+  --primary-soft: oklch(0.30 0.05 276.8);
+  --primary-bg: oklch(0.22 0.03 276.8);
+  --primary-border: oklch(0.48 0.13 276.8);
 
-  --accent: #ea7c1f;
-  --accent-hover: #f59e42;
-  --accent-soft: rgba(234, 124, 31, 0.18);
-  --accent-bg: rgba(234, 124, 31, 0.10);
-  --accent-border: rgba(234, 124, 31, 0.35);
+  /* Amber 暗色 */
+  --accent: oklch(0.828 0.189 84.429);
+  --accent-hover: oklch(0.85 0.18 84.429);
+  --accent-soft: oklch(0.30 0.06 84.429);
+  --accent-bg: oklch(0.22 0.04 84.429);
+  --accent-border: oklch(0.55 0.10 84.429);
 
-  --success: #3fd06a;
-  --success-soft: rgba(63, 208, 106, 0.16);
-  --danger: #f56161;
-  --danger-soft: rgba(245, 97, 97, 0.16);
-  --info: #5b8def;
-  --info-soft: rgba(91, 141, 239, 0.16);
-  --warn: #f0c041;
-  --warn-soft: rgba(240, 192, 65, 0.16);
+  /* 功能色暗色（提亮维持对比度） */
+  --success: oklch(0.696 0.17 162.48);
+  --success-soft: oklch(0.30 0.06 162.48);
+  --success-bg: oklch(0.22 0.04 162.48);
+  --danger: oklch(0.704 0.191 22.216);
+  --danger-soft: oklch(0.30 0.06 22.216);
+  --danger-bg: oklch(0.22 0.04 22.216);
+  --info: oklch(0.7 0.10 200);
+  --info-soft: oklch(0.30 0.05 200);
+  --info-bg: oklch(0.22 0.03 200);
+  --warn: oklch(0.828 0.189 84.429);
+  --warn-soft: oklch(0.30 0.06 84.429);
 
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --divider: rgba(255, 255, 255, 0.06);
-  --edge-light: rgba(255, 255, 255, 0.06);
-  --edge-dark: rgba(0, 0, 0, 0.30);
+  /* 暗色边框：10% 白色（shadcn 规范） */
+  --border: oklch(1 0 0 / 0.10);
+  --border-strong: oklch(1 0 0 / 0.16);
+  --divider: oklch(1 0 0 / 0.08);
 
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.35);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.40), 0 0 0 1px rgba(0, 0, 0, 0.20);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.50), 0 1px 3px rgba(0, 0, 0, 0.30);
-  --shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.60), 0 2px 6px rgba(0, 0, 0, 0.40);
-  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.70), 0 4px 10px rgba(0, 0, 0, 0.50);
-  --shadow-inset: inset 0 1px 3px rgba(0, 0, 0, 0.50), inset 0 0 0 1px rgba(0, 0, 0, 0.30);
-  --shadow-convex: 0 1px 3px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  /* 暗色阴影：加深 + 品牌色光晕饱和度提高 */
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.30);
+  --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.40), 0 1px 2px -1px oklch(0 0 0 / 0.30);
+  --shadow-md: 0 4px 8px -2px oklch(0.62 0.19 276.8 / 0.12),
+               0 2px 4px -2px oklch(0 0 0 / 0.40);
+  --shadow-lg: 0 12px 24px -6px oklch(0.62 0.19 276.8 / 0.16),
+               0 4px 8px -4px oklch(0 0 0 / 0.50);
+  --shadow-xl: 0 24px 48px -12px oklch(0 0 0 / 0.70),
+               0 8px 16px -8px oklch(0.62 0.19 276.8 / 0.12);
   --ring-focus: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--primary);
-
-  --grid-line: rgba(59, 130, 246, 0.04);
-  --tick-color: rgba(255, 255, 255, 0.10);
 }

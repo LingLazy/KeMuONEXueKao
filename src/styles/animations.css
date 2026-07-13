@@ -1,9 +1,7 @@
 /* ===================================================================
-   动效系统 · 工业蚀刻科技派
+   动效系统 · 现代企业级视觉
    - Scroll-Driven 入场动画（view timeline，主线程外）
    - 微交互反馈（按钮按压、卡片浮起、图标缩放）
-   - 装饰几何图案（同心圆、菱形、刻度网格）
-   - 三色彩带、左侧色条、顶部条带
    - 触控设备适配（移除粘滞 hover）
    - View Transitions API 路由过渡
    =================================================================== */
@@ -43,25 +41,13 @@
     from { opacity: 0; transform: scale(0.94) translateY(16px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
   }
-
-  /* 滚动入场：右下角装饰图案旋转出现 */
-  .scroll-in-rotate {
-    animation: scroll-in-rotate linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 30%;
-  }
-  @keyframes scroll-in-rotate {
-    from { opacity: 0; transform: rotate(-12deg) scale(0.8); }
-    to { opacity: var(--deco-opacity, 0.08); transform: rotate(0) scale(1); }
-  }
 }
 
 /* 不支持 animation-timeline 的浏览器：直接显示 */
 @supports not (animation-timeline: view()) {
   .scroll-in-up,
   .scroll-in-left,
-  .scroll-in-scale,
-  .scroll-in-rotate {
+  .scroll-in-scale {
     opacity: 1;
     transform: none;
   }
@@ -86,10 +72,10 @@
   transition: transform 0ms, box-shadow 0ms;
 }
 .btn-primary:not(:disabled):active {
-  box-shadow: var(--shadow-inset), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-xs);
 }
 .btn-ghost:not(:disabled):active {
-  background: var(--bg-sunken);
+  background: var(--bg-hover);
 }
 
 /* ========== 微交互 · 图标按钮缩放反馈 ========== */
@@ -97,7 +83,7 @@
   transition: transform var(--dur-fast) var(--ease-precision),
               color var(--dur-fast) var(--ease-precision),
               background-color var(--dur-fast) var(--ease-precision),
-              box-shadow var(--dur-fast) var(--ease-precision);
+              border-color var(--dur-fast) var(--ease-precision);
 }
 .icon-btn:not(:disabled):hover {
   transform: scale(1.08);
@@ -118,9 +104,9 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--text-3);
-  background: var(--bg-sunken);
+  background: var(--bg-sub);
   border: 1px solid var(--border);
-  border-radius: var(--r-xs);
+  border-radius: var(--r-sm);
   cursor: pointer;
   transition: all var(--dur-fast) var(--ease-precision);
 }
@@ -145,97 +131,6 @@
   100% { transform: scale(1); }
 }
 
-/* ========== 装饰几何图案 · 卡片右下角同心圆 ========== */
-.deco-circles {
-  position: absolute;
-  pointer-events: none;
-  opacity: var(--deco-opacity, 0.08);
-  transition: opacity var(--dur-slow) var(--ease-smooth);
-  z-index: 0;
-}
-.deco-circles svg {
-  width: 100%;
-  height: 100%;
-}
-.group:hover .deco-circles,
-.card-hover-target:hover .deco-circles {
-  opacity: calc(var(--deco-opacity, 0.08) * 2);
-}
-
-/* 装饰几何图案 · 卡片右上角菱形 */
-.deco-diamond {
-  position: absolute;
-  pointer-events: none;
-  opacity: calc(var(--deco-opacity, 0.08) * 0.75);
-  transition: opacity var(--dur-slow) var(--ease-smooth);
-  z-index: 0;
-}
-.group:hover .deco-diamond,
-.card-hover-target:hover .deco-diamond {
-  opacity: calc(var(--deco-opacity, 0.08) * 1.5);
-}
-
-/* ========== 三色彩带 · 卡片底部装饰 ========== */
-.card-strip {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg,
-    var(--primary) 0%,
-    var(--primary) 33%,
-    var(--accent) 33%,
-    var(--accent) 66%,
-    var(--info) 66%,
-    var(--info) 100%);
-  opacity: 0;
-  transition: opacity var(--dur-base) var(--ease-smooth);
-  pointer-events: none;
-  z-index: 1;
-}
-.group:hover .card-strip,
-.card-hover-target:hover .card-strip {
-  opacity: 1;
-}
-
-/* 顶部三色彩带（导航/模态顶部装饰） */
-.top-strip {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg,
-    var(--primary) 0%,
-    var(--primary) 33%,
-    var(--accent) 33%,
-    var(--accent) 66%,
-    var(--info) 66%,
-    var(--info) 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* ========== 左侧色条 · 卡片左侧装饰 ========== */
-.card-bar {
-  position: relative;
-  flex-shrink: 0;
-  width: 4px;
-  background: var(--card-bar-color, var(--primary));
-  border-radius: var(--r-xs);
-  overflow: hidden;
-}
-.card-bar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    transparent 30%);
-  pointer-events: none;
-}
-
 /* ========== Hover 显示操作按钮（卡片场景） ========== */
 .hover-show {
   opacity: 0;
@@ -249,7 +144,7 @@
   pointer-events: auto;
 }
 
-/* ========== 键盘提示 kbd · 几何键帽 ========== */
+/* ========== 键盘提示 kbd · 简洁键帽 ========== */
 kbd {
   display: inline-flex;
   align-items: center;
@@ -260,11 +155,9 @@ kbd {
   font-size: 0.72rem;
   font-weight: 600;
   color: var(--text-2);
-  background: var(--bg-sunken);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--r-xs);
-  /* 凹凸键帽质感 */
-  box-shadow: var(--shadow-inset), inset 0 -1px 0 var(--edge-dark);
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
   line-height: 1;
   letter-spacing: 0;
 }
@@ -296,9 +189,8 @@ kbd + kbd {
   padding: var(--sp-3) var(--sp-4);
   background: var(--bg-elev);
   border: 1px solid var(--border-strong);
-  border-radius: var(--r-sm);
-  /* 凸起金属质感 */
-  box-shadow: var(--shadow-lg), inset 0 1px 0 var(--edge-light);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
   color: var(--text-2);
   font-size: 0.85rem;
   line-height: 1.55;
@@ -331,10 +223,9 @@ kbd + kbd {
 /* ========== 折叠面板 details · 知识章节 ========== */
 details.accordion {
   border: 1px solid var(--border);
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   background: var(--bg-card);
-  /* 凸起金属质感 */
-  box-shadow: var(--shadow-convex);
+  box-shadow: var(--shadow-xs);
   overflow: hidden;
   transition: box-shadow var(--dur-base) var(--ease-smooth),
               border-color var(--dur-base) var(--ease-smooth);
@@ -343,7 +234,7 @@ details.accordion + details.accordion {
   margin-top: var(--sp-3);
 }
 details.accordion[open] {
-  box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-light);
+  box-shadow: var(--shadow-sm);
   border-color: var(--border-strong);
 }
 details.accordion > summary {
@@ -371,7 +262,7 @@ details.accordion > summary:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: -2px;
 }
-/* 折叠指示器 · 几何加号转叉号 */
+/* 折叠指示器 · 加号转叉号 */
 details.accordion > summary .accordion-icon {
   position: relative;
   width: 16px;
@@ -419,7 +310,6 @@ details.accordion > .accordion-body {
 
 /* ========== 触控设备适配 · 移除粘滞 hover ========== */
 @media (hover: none) and (pointer: coarse) {
-  /* 触屏设备上 hover 状态不可控，统一移除以避免"粘滞悬停"问题 */
   .btn:hover:not(:disabled),
   .icon-btn:hover:not(:disabled),
   .cat-card:hover,
@@ -438,11 +328,6 @@ details.accordion > .accordion-body {
   .hover-show {
     opacity: 1;
     pointer-events: auto;
-  }
-  /* 装饰图案在触屏上保持基础透明度 */
-  .deco-circles,
-  .deco-diamond {
-    opacity: var(--deco-opacity, 0.08) !important;
   }
   /* 术语 tooltip 在触屏改为点击触发（由 JS 控制） */
   .term-popup {
@@ -501,7 +386,7 @@ details.accordion > .accordion-body {
   50% { opacity: 0.5; }
 }
 
-/* ========== 数据加载骨架闪烁（已在 components.css 中定义，此处增强方向感） ========== */
+/* ========== 数据加载骨架闪烁 ========== */
 .skeleton {
   position: relative;
   overflow: hidden;
@@ -523,20 +408,18 @@ details.accordion > .accordion-body {
 }
 
 /* ===================================================================
-   v3.2 动效增强 · 海内外优秀案例融合
-   - 光泽扫过（CSS-Tricks shimmer 思路 + @property 角度注册）
+   动效增强 · 现代企业级交互
+   - 光泽扫过（@property 角度注册）
    - 磁吸按钮（鼠标位置驱动 transform）
    - 3D 倾斜卡片（Atropos/vanilla-tilt 思路，零依赖 CSS+JS）
    - 文字渐变描边悬停（background-clip: text）
    - 下划线生长（scaleX 共享布局动画）
-   - 涟漪点击反馈（Material Design 涟漪 + 工业蚀刻调色）
-   - 选项卡片左侧滑入指示器
+   - 涟漪点击反馈（Material Design 涟漪）
    - 折叠面板高度过渡（grid-template-rows 0fr→1fr）
    - 阶梯入场动画（stagger，配合 AnimatePresence）
    =================================================================== */
 
 /* ========== @property 注册可动画自定义属性 ========== */
-/* 让线性渐变角度可参与 transition，解决传统渐变无法过渡的痛点 */
 @property --shine-angle {
   syntax: '<angle>';
   initial-value: 110deg;
@@ -563,8 +446,7 @@ details.accordion > .accordion-body {
   inherits: false;
 }
 
-/* ========== 按钮光泽扫过 · 工业蚀刻调色 ========== */
-/* 用于主按钮与凸起卡片，鼠标悬停时光带从左上扫向右下 */
+/* ========== 按钮光泽扫过 ========== */
 .btn-shine {
   position: relative;
   overflow: hidden;
@@ -574,7 +456,6 @@ details.accordion > .accordion-body {
   content: '';
   position: absolute;
   inset: 0;
-  /* 高光带：从透明 → 半透白 → 透明，角度可过渡 */
   background: linear-gradient(
     var(--shine-angle),
     transparent 0%,
@@ -585,7 +466,6 @@ details.accordion > .accordion-body {
   );
   background-size: 250% 100%;
   background-position: 200% 0;
-  /* 初始不可见 */
   opacity: 0;
   transition: opacity var(--dur-fast) var(--ease-precision),
               --shine-angle var(--dur-slow) var(--ease-smooth);
@@ -614,7 +494,6 @@ details.accordion > .accordion-body {
 }
 
 /* ========== 磁吸按钮 · 鼠标位置驱动（需配合 useMagnetic Hook） ========== */
-/* 由 JS 在 mousemove 时设置 --magnet-x / --magnet-y（单位 px） */
 .btn-magnetic {
   transition: transform var(--dur-base) var(--ease-spring),
               box-shadow var(--dur-base) var(--ease-smooth),
@@ -624,15 +503,13 @@ details.accordion > .accordion-body {
   will-change: transform;
 }
 .btn-magnetic:not(:disabled):active {
-  /* 按压时 magnet 重置（避免与 click 反馈冲突） */
   --magnet-x: 0px;
   --magnet-y: 0px;
   transform: translate(0, 1px) scale(0.985);
   transition: transform 0ms;
 }
 
-/* ========== 3D 倾斜卡片 · 凸起金属面板视差（配合 useTilt Hook） ========== */
-/* 由 JS 在 mousemove 时设置 --tilt-x / --tilt-y（范围 -1 ~ 1） */
+/* ========== 3D 倾斜卡片（配合 useTilt Hook） ========== */
 .tilt-card {
   transform-style: preserve-3d;
   transform:
@@ -644,18 +521,16 @@ details.accordion > .accordion-body {
               box-shadow var(--dur-base) var(--ease-smooth);
   will-change: transform;
 }
-/* 倾斜时增强阴影偏移，强化立体感 */
+/* 倾斜时增强阴影偏移，强化立体感（仅柔和投影，无顶部高光边） */
 .tilt-card.is-tilting {
   box-shadow:
     calc(var(--tilt-x) * -10px) calc(var(--tilt-y) * 10px) 24px rgba(20, 40, 80, 0.14),
-    0 1px 3px rgba(20, 40, 80, 0.06),
-    inset 0 1px 0 var(--edge-light);
+    var(--shadow-sm);
 }
 [data-theme="dark"] .tilt-card.is-tilting {
   box-shadow:
     calc(var(--tilt-x) * -10px) calc(var(--tilt-y) * 10px) 24px rgba(0, 0, 0, 0.55),
-    0 1px 3px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    var(--shadow-sm);
 }
 /* 倾斜卡片内部内容上浮（视差层） */
 .tilt-card > .tilt-layer {
@@ -703,7 +578,7 @@ details.accordion > .accordion-body {
   bottom: 2px;
   height: 2px;
   background: var(--primary);
-  border-radius: var(--r-none);
+  border-radius: var(--r-full);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform var(--dur-base) var(--ease-spring);
@@ -713,7 +588,7 @@ details.accordion > .accordion-body {
   transform: scaleX(1);
 }
 
-/* ========== 涟漪点击反馈 · 工业蚀刻调色（Material 涟漪思路） ========== */
+/* ========== 涟漪点击反馈（Material 涟漪思路） ========== */
 .ripple-host {
   position: relative;
   overflow: hidden;
@@ -723,7 +598,6 @@ details.accordion > .accordion-body {
   border-radius: 50%;
   pointer-events: none;
   transform: scale(0);
-  /* 由 JS 注入 inline style: width/height/left/top + background */
   background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
   animation: ripple-fade 0.6s var(--ease-smooth) forwards;
   z-index: 1;
@@ -736,46 +610,6 @@ details.accordion > .accordion-body {
     transform: scale(2.4);
     opacity: 0;
   }
-}
-
-/* ========== 选项卡片左侧滑入指示器 · 题目选项悬停增强 ========== */
-/* 在原有 .qcard-option:hover 基础上增加左侧色条从底向上生长 */
-.qcard-option {
-  position: relative;
-}
-.qcard-option::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 3px;
-  height: 0;
-  background: var(--primary);
-  border-radius: var(--r-none);
-  transform: translateY(-50%);
-  transition: height var(--dur-base) var(--ease-spring);
-  pointer-events: none;
-}
-.qcard-option:hover:not(:disabled)::before,
-.qcard-option:focus-visible:not(:disabled)::before {
-  height: 60%;
-}
-/* 选中/正确/错误态保留原色覆盖 */
-.qcard-option.selected::before,
-.qcard-option.correct::before,
-.qcard-option.wrong::before {
-  height: 60%;
-}
-.qcard-option.selected::before { background: var(--primary); }
-.qcard-option.correct::before { background: var(--success); }
-.qcard-option.wrong::before { background: var(--danger); }
-/* 选项字母悬停微旋 */
-.qcard-option:hover:not(:disabled) .qcard-option-letter {
-  transform: rotate(-4deg) scale(1.05);
-}
-.qcard-option:active:not(:disabled) .qcard-option-letter {
-  transform: rotate(0) scale(0.95);
-  transition: transform 0ms;
 }
 
 /* ========== icon-btn 增强 · SVG 图标微旋反馈 ========== */
@@ -792,7 +626,6 @@ details.accordion > .accordion-body {
 
 /* ========== 复制按钮成功反馈增强 · 三态指示 ========== */
 .copy-btn.copied {
-  /* 已有 pulse 动画，此处补充颜色保持时序 */
   animation: copy-pulse 0.4s var(--ease-spring),
              copy-glow 1.2s var(--ease-smooth) 0.4s forwards;
 }
@@ -803,7 +636,6 @@ details.accordion > .accordion-body {
 }
 
 /* ========== 折叠面板 grid-rows 过渡 · 替代 max-height 黑魔法 ========== */
-/* 由 JS 在 [open] 切换时同步设置 grid-template-rows: 1fr / 0fr */
 .collapse-panel {
   display: grid;
   grid-template-rows: 0fr;
@@ -817,7 +649,7 @@ details.accordion > .accordion-body {
   min-height: 0;
 }
 
-/* ========== 阶梯入场动画 · stagger（配合 AnimatePresence 或纯 CSS） ========== */
+/* ========== 阶梯入场动画 · stagger ========== */
 .stagger-list > * {
   opacity: 0;
   transform: translateY(8px);
@@ -831,7 +663,7 @@ details.accordion > .accordion-body {
   }
 }
 
-/* ========== 数字滚动反馈 · 进度条/数值变化时使用 ========== */
+/* ========== 数字滚动反馈 ========== */
 .num-pop {
   animation: num-pop 0.4s var(--ease-spring);
 }
@@ -841,35 +673,17 @@ details.accordion > .accordion-body {
   100% { transform: scale(1); color: inherit; }
 }
 
-/* ========== 几何装饰图案 hover 时旋转 · 卡片角标 ========== */
-.deco-circles,
-.deco-diamond {
-  transition: opacity var(--dur-slow) var(--ease-smooth),
-              transform var(--dur-slow) var(--ease-smooth);
-}
-.group:hover .deco-circles,
-.card-hover-target:hover .deco-circles {
-  opacity: calc(var(--deco-opacity, 0.08) * 2);
-  transform: rotate(20deg);
-}
-.group:hover .deco-diamond,
-.card-hover-target:hover .deco-diamond {
-  opacity: calc(var(--deco-opacity, 0.08) * 1.5);
-  transform: rotate(45deg);
-}
-
 /* ========== 触控设备适配：移除磁吸与倾斜（避免抖动） ========== */
 @media (hover: none) and (pointer: coarse) {
   .btn-magnetic,
   .tilt-card,
   .tilt-card.is-tilting {
     transform: none !important;
-    box-shadow: var(--shadow-convex);
+    box-shadow: var(--shadow-xs);
   }
   .tilt-card > .tilt-layer {
     transform: none !important;
   }
-  /* 触屏上禁用磁吸 hover 反馈，保留 active 反馈 */
   .btn-magnetic:not(:disabled):hover {
     transform: none;
   }
@@ -892,8 +706,7 @@ details.accordion > .accordion-body {
   .tilt-card {
     transform: none !important;
   }
-  .underline-grow::after,
-  .qcard-option::before {
+  .underline-grow::after {
     transition: none !important;
   }
   .lazy-img-tag {
@@ -903,7 +716,7 @@ details.accordion > .accordion-body {
 }
 
 /* ===================================================================
-   v3.3 View Transitions API · 主题切换圆形扩散
+   View Transitions API · 主题切换圆形扩散
    - 现代浏览器（Chrome 111+ / Edge 111+ / Safari 18+ / Firefox 144+）
    - 以点击位置为圆心，新主题从圆心向外扩散覆盖旧主题
    - 不支持的浏览器自动降级为 .theme-transitioning class 过渡
@@ -915,19 +728,16 @@ details.accordion > .accordion-body {
   --theme-transition-y: 40px;
 }
 
-/* 视图过渡根层：裁剪新视图为圆形并扩散 */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
-/* 旧视图保持原样 */
 ::view-transition-old(root) {
   z-index: 1;
 }
 
-/* 新视图：clip-path 圆形从 0 扩散到覆盖视口 */
 ::view-transition-new(root) {
   z-index: 2;
   animation: theme-circle-reveal 0.5s var(--ease-smooth) forwards;
@@ -935,16 +745,13 @@ details.accordion > .accordion-body {
 
 @keyframes theme-circle-reveal {
   0% {
-    /* 初始：以触发点为圆心，半径为 0 的圆 */
     clip-path: circle(0px at var(--theme-transition-x) var(--theme-transition-y));
   }
   100% {
-    /* 终态：半径足够大以覆盖整个视口（对角线长度） */
     clip-path: circle(150vmax at var(--theme-transition-x) var(--theme-transition-y));
   }
 }
 
-/* reduced-motion 降级：立即显示新主题，无扩散动画 */
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) {

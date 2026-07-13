@@ -1,17 +1,17 @@
 /* ===================================================================
-   组件样式 · 工业蚀刻科技派
+   组件样式 · 现代企业级视觉系统
    - Modal · Toast · Skeleton · LazyImage · EmptyState · ConfirmDialog
    - QuestionCard · 雷达图 · 通用工具类
-   - 凹凸阴影 · 蚀刻边框 · 几何刻度 · 精密动效
+   - 1px 边框 + 品牌色光晕 · 无蚀刻/凹凸/角标刻度
    =================================================================== */
 
-/* ========== Spinner · 几何旋转（方形非圆形） ========== */
+/* ========== Spinner · 简洁圆形旋转 ========== */
 .spinner {
   width: 28px;
   height: 28px;
-  border: 2px solid var(--border);
+  border: 2.5px solid var(--border);
   border-top-color: var(--primary);
-  border-radius: var(--r-xs);
+  border-radius: 50%;
   animation: spin 0.7s linear infinite;
   margin: 0 auto var(--sp-3);
 }
@@ -19,7 +19,7 @@
   to { transform: rotate(360deg); }
 }
 
-/* ========== Modal 模态 · 凸起金属面板 ========== */
+/* ========== Modal 模态 · 简洁浮层 ========== */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -28,45 +28,21 @@
   align-items: center;
   justify-content: center;
   padding: var(--sp-4);
-  background: rgba(8, 14, 26, 0.65);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: oklch(0.21 0 0 / 0.55);
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
 }
 .modal {
   width: 100%;
   max-height: 90vh;
-  background: var(--bg-card);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--r-md);
-  /* 凸起金属面板：深阴影 + 顶部高光边 */
-  box-shadow: var(--shadow-xl), inset 0 1px 0 var(--edge-light);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-xl);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: relative;
-}
-/* 模态角标刻度（几何装饰） */
-.modal::before,
-.modal::after {
-  content: '';
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border: 1px solid var(--primary-border);
-  pointer-events: none;
-  z-index: 1;
-}
-.modal::before {
-  top: 6px;
-  left: 6px;
-  border-right: none;
-  border-bottom: none;
-}
-.modal::after {
-  bottom: 6px;
-  right: 6px;
-  border-left: none;
-  border-top: none;
 }
 .modal-sm { max-width: 380px; }
 .modal-md { max-width: 560px; }
@@ -78,29 +54,27 @@
   justify-content: space-between;
   padding: var(--sp-4) var(--sp-5);
   border-bottom: 1px solid var(--divider);
-  /* 底部蚀刻高光 */
-  box-shadow: inset 0 -1px 0 var(--edge-light);
 }
 .modal-title {
   font-family: var(--font-display);
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-1);
   letter-spacing: -0.01em;
 }
 .modal-close {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
-  border-radius: var(--r-xs);
+  border-radius: var(--r-sm);
   color: var(--text-3);
-  transition: all var(--dur-fast) var(--ease-precision);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
 }
 .modal-close:hover {
   background: var(--bg-hover);
   color: var(--text-1);
-  box-shadow: var(--shadow-inset);
 }
 .modal-body {
   flex: 1;
@@ -125,7 +99,7 @@
   gap: var(--sp-2);
 }
 
-/* ========== Toast 提示 · 凸起金属条 ========== */
+/* ========== Toast 提示 · 简洁浮层（无左侧色条） ========== */
 .toast-container {
   position: fixed;
   top: calc(var(--nav-h) + var(--sp-3));
@@ -142,12 +116,11 @@
   display: flex;
   align-items: center;
   gap: var(--sp-2);
-  padding: var(--sp-2) var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
   background: var(--bg-elev);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--r-sm);
-  /* 凸起金属质感 */
-  box-shadow: var(--shadow-lg), inset 0 1px 0 var(--edge-light);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-1);
@@ -156,39 +129,27 @@
   white-space: nowrap;
   max-width: 100%;
   overflow: hidden;
-  /* 左侧刻度指示条 */
-  position: relative;
-  padding-left: var(--sp-5);
 }
-.toast::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--text-3);
-}
-.toast.success::before { background: var(--success); }
-.toast.error::before { background: var(--danger); }
-.toast.info::before { background: var(--info); }
 .toast.success {
   border-color: var(--success);
   color: var(--success);
+  box-shadow: var(--shadow-lg), 0 0 0 3px var(--success-bg);
 }
 .toast.error {
   border-color: var(--danger);
   color: var(--danger);
+  box-shadow: var(--shadow-lg), 0 0 0 3px var(--danger-bg);
 }
 .toast.info {
   border-color: var(--info);
   color: var(--info);
+  box-shadow: var(--shadow-lg), 0 0 0 3px var(--info-bg);
 }
 .toast svg {
   flex-shrink: 0;
 }
 
-/* ========== GlobalLoading · 工业蚀刻脉冲加载器 ========== */
+/* ========== GlobalLoading · 简洁脉冲加载器 ========== */
 .global-loading {
   display: flex;
   flex-direction: column;
@@ -213,20 +174,17 @@
   color: var(--primary);
 }
 
-/* 外环：刻度旋转（顺时针） */
 .pulse-ring-outer {
   position: absolute;
   inset: 0;
   animation: pulse-spin-cw 2.4s linear infinite;
 }
 
-/* 中环：实线逆旋 */
 .pulse-ring-mid {
   position: absolute;
   animation: pulse-spin-ccw 1.6s linear infinite;
 }
 
-/* 内核：脉冲点 */
 .pulse-core {
   width: 8px;
   height: 8px;
@@ -246,14 +204,12 @@
   50% { transform: scale(1); opacity: 1; }
 }
 
-/* 加载文字 */
 .global-loading-text {
   margin: 0;
   color: var(--text-2);
   font-size: 0.8125rem;
 }
 
-/* 三点跳动动画 */
 .global-loading-dots {
   display: inline-flex;
   gap: 4px;
@@ -274,17 +230,17 @@
   30% { transform: translateY(-4px); opacity: 1; }
 }
 
-/* ========== Skeleton 骨架屏 · 蚀刻 shimmer ========== */
+/* ========== Skeleton 骨架屏 · shimmer ========== */
 .skeleton {
   background: linear-gradient(
     90deg,
-    var(--bg-sunken) 25%,
+    var(--bg-sub) 25%,
     var(--bg-hover) 37%,
-    var(--bg-sunken) 63%
+    var(--bg-sub) 63%
   );
   background-size: 400% 100%;
   animation: skeleton-shimmer 1.6s ease-in-out infinite;
-  border-radius: var(--r-xs);
+  border-radius: var(--r-sm);
 }
 @keyframes skeleton-shimmer {
   0% { background-position: 100% 50%; }
@@ -298,8 +254,8 @@
   padding: var(--sp-5);
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-convex);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
 }
 .list-skeleton {
   display: flex;
@@ -308,7 +264,7 @@
   padding: var(--sp-3);
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   box-shadow: var(--shadow-xs);
 }
 .list-skeleton-text {
@@ -324,7 +280,7 @@
   display: inline-block;
   border-radius: var(--r-sm);
   overflow: hidden;
-  background: var(--bg-sunken);
+  background: var(--bg-sub);
 }
 .lazy-img-tag {
   display: block;
@@ -341,15 +297,14 @@
   display: grid;
   place-items: center;
   color: var(--text-mute);
-  background: var(--bg-sunken);
+  background: var(--bg-sub);
 }
-/* 加载中占位附加 shimmer 扫光 */
 .lazy-img-loading .lazy-img-placeholder {
   background: linear-gradient(
     90deg,
-    var(--bg-sunken) 25%,
+    var(--bg-sub) 25%,
     var(--bg-hover) 37%,
-    var(--bg-sunken) 63%
+    var(--bg-sub) 63%
   );
   background-size: 400% 100%;
   animation: skeleton-shimmer 1.6s ease-in-out infinite;
@@ -375,7 +330,7 @@
 .empty-state-title {
   font-family: var(--font-display);
   font-size: 1.125rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-2);
   margin-bottom: var(--sp-2);
   letter-spacing: -0.01em;
@@ -390,20 +345,19 @@
   margin-top: var(--sp-2);
 }
 
-/* ========== QuestionCard 题目卡片 · 凸起金属面板 ========== */
+/* ========== QuestionCard 题目卡片 · 简洁卡片 ========== */
 .qcard {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   padding: var(--sp-6);
-  /* 凸起金属质感 */
-  box-shadow: var(--shadow-convex);
+  box-shadow: var(--shadow-xs);
   transition: box-shadow var(--dur-base) var(--ease-smooth),
               border-color var(--dur-base) var(--ease-smooth);
   position: relative;
 }
 .qcard:hover {
-  box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-light);
+  box-shadow: var(--shadow-md);
   border-color: var(--border-strong);
 }
 
@@ -438,33 +392,29 @@
   color: var(--text-mute);
 }
 .qcard-type {
-  padding: 2px 8px;
+  padding: 2px 10px;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  border-radius: var(--r-none);
+  border-radius: var(--r-xs);
   background: var(--primary-bg);
   color: var(--primary);
-  /* 蚀刻标记边 */
-  box-shadow: inset 0 0 0 1px var(--primary-border);
 }
 .qcard-type.judge {
   background: var(--accent-bg);
   color: var(--accent);
-  box-shadow: inset 0 0 0 1px var(--accent-border);
 }
 .qcard-badge {
-  padding: 2px 8px;
+  padding: 2px 10px;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.04em;
-  border-radius: var(--r-none);
+  border-radius: var(--r-xs);
   background: var(--info-soft);
   color: var(--info);
-  box-shadow: inset 0 0 0 1px rgba(29, 78, 216, 0.25);
 }
 .qcard-actions {
   display: flex;
@@ -474,7 +424,6 @@
   color: var(--accent);
   border-color: var(--accent-border);
   background: var(--accent-bg);
-  box-shadow: var(--shadow-inset);
 }
 
 /* 题干 */
@@ -488,31 +437,27 @@
 .qcard-question mark.kw {
   background: var(--primary-soft);
   color: var(--primary);
-  padding: 1px 4px;
-  border-radius: var(--r-none);
+  padding: 1px 6px;
+  border-radius: var(--r-xs);
   font-weight: 700;
-  box-shadow: inset 0 -1px 0 var(--primary-border);
 }
 .qcard-question mark.kw.danger {
   background: var(--danger-soft);
   color: var(--danger);
-  box-shadow: inset 0 -1px 0 rgba(185, 28, 28, 0.3);
 }
 .qcard-question mark.kw.num {
   background: var(--info-soft);
   color: var(--info);
-  box-shadow: inset 0 -1px 0 rgba(29, 78, 216, 0.3);
 }
 
 /* 图片 */
 .qcard-image {
   margin: 0 0 var(--sp-4);
   max-width: 100%;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   overflow: hidden;
   border: 1px solid var(--border);
-  /* 蚀刻凹陷感 */
-  box-shadow: var(--shadow-inset);
+  background: var(--bg-sub);
 }
 .qcard-image .lazy-img {
   width: 100%;
@@ -522,21 +467,21 @@
 .qcard-image .lazy-img-tag {
   max-height: 280px;
   object-fit: contain;
-  background: var(--bg-sunken);
+  background: var(--bg-sub);
 }
 
 /* 可点击图片容器 · 悬停反馈与聚焦态 */
 .qcard-image-clickable {
   position: relative;
   cursor: pointer;
-  transition: box-shadow var(--dur-fast) var(--ease-precision),
-              border-color var(--dur-fast) var(--ease-precision),
-              transform var(--dur-fast) var(--ease-precision);
+  transition: box-shadow var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
   outline: none;
 }
 .qcard-image-clickable:hover {
-  border-color: var(--primary-border);
-  box-shadow: var(--shadow-md), inset 0 0 0 1px var(--primary-border);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md), 0 0 0 3px var(--primary-bg);
   transform: translateY(-1px);
 }
 .qcard-image-clickable:focus-visible {
@@ -544,7 +489,6 @@
 }
 .qcard-image-clickable:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-inset);
 }
 
 /* 点击放大提示标识 · 右下角浮动标签 */
@@ -555,21 +499,26 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 8px;
+  padding: 4px 10px;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--text-1);
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--r-xs);
+  background: oklch(1 0 0 / 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
   box-shadow: var(--shadow-sm);
   pointer-events: none;
   opacity: 0.85;
-  transition: opacity var(--dur-fast) var(--ease-smooth);
+  transition: opacity var(--dur-fast) var(--ease-smooth),
+              color var(--dur-fast) var(--ease-out);
+}
+[data-theme="dark"] .qcard-image-zoom-hint {
+  background: oklch(0.205 0 0 / 0.92);
+  color: var(--text-1);
 }
 .qcard-image-clickable:hover .qcard-image-zoom-hint {
   opacity: 1;
@@ -582,8 +531,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-sunken);
-  border-radius: var(--r-sm);
+  background: var(--bg-sub);
+  border-radius: var(--r-md);
   overflow: hidden;
   padding: var(--sp-3);
 }
@@ -593,11 +542,11 @@
   width: auto;
   height: auto;
   object-fit: contain;
-  border-radius: var(--r-xs);
+  border-radius: var(--r-sm);
   box-shadow: var(--shadow-sm);
 }
 
-/* 选项 · 凹凸按钮组 */
+/* 选项 · 简洁按钮组 */
 .qcard-options {
   display: flex;
   flex-direction: column;
@@ -611,17 +560,17 @@
   padding: var(--sp-3) var(--sp-4);
   background: var(--bg-card);
   border: 1.5px solid var(--border);
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   text-align: left;
   font-size: 0.9375rem;
   color: var(--text-1);
-  transition: all var(--dur-fast) var(--ease-precision);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
 }
 .qcard-option:hover:not(:disabled) {
   border-color: var(--primary-border);
   background: var(--primary-bg);
-  /* 凸起感 */
-  box-shadow: var(--shadow-xs), inset 0 1px 0 var(--edge-light);
 }
 .qcard-option:disabled {
   cursor: not-allowed;
@@ -636,12 +585,11 @@
   font-size: 0.875rem;
   font-weight: 700;
   color: var(--text-3);
-  background: var(--bg-sunken);
-  border-radius: var(--r-xs);
+  background: var(--bg-sub);
+  border-radius: var(--r-sm);
   flex-shrink: 0;
-  transition: all var(--dur-fast);
-  /* 凹陷感 */
-  box-shadow: var(--shadow-inset);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
 }
 .qcard-option-text {
   flex: 1;
@@ -650,32 +598,26 @@
 .qcard-option.correct {
   border-color: var(--success);
   background: var(--success-soft);
-  box-shadow: inset 0 0 0 1px var(--success), var(--shadow-xs);
 }
 .qcard-option.correct .qcard-option-letter {
   background: var(--success);
   color: #fff;
-  box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .qcard-option.wrong {
   border-color: var(--danger);
   background: var(--danger-soft);
-  box-shadow: inset 0 0 0 1px var(--danger), var(--shadow-xs);
 }
 .qcard-option.wrong .qcard-option-letter {
   background: var(--danger);
   color: #fff;
-  box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .qcard-option.selected {
   border-color: var(--primary);
   background: var(--primary-bg);
-  box-shadow: inset 0 0 0 1px var(--primary), var(--shadow-xs);
 }
 .qcard-option.selected .qcard-option-letter {
   background: var(--primary);
   color: #fff;
-  box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .qcard-option.eliminated {
   opacity: 0.35;
@@ -689,7 +631,7 @@
   place-items: center;
   width: 20px;
   height: 20px;
-  border-radius: var(--r-none);
+  border-radius: var(--r-xs);
 }
 .qcard-option-icon.correct {
   color: var(--success);
@@ -713,27 +655,26 @@
   gap: var(--sp-2);
   padding: var(--sp-3) var(--sp-4);
   margin-top: var(--sp-3);
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   font-size: 0.875rem;
   font-weight: 600;
-  /* 蚀刻标记边 */
-  box-shadow: inset 0 0 0 1px;
+  border: 1px solid;
 }
 .qcard-result.correct {
   background: var(--success-soft);
   color: var(--success);
-  box-shadow: inset 0 0 0 1px var(--success);
+  border-color: var(--success);
 }
 .qcard-result.wrong {
   background: var(--danger-soft);
   color: var(--danger);
-  box-shadow: inset 0 0 0 1px var(--danger);
+  border-color: var(--danger);
 }
 
 /* 解析折叠区 */
 .qcard-analysis-wrap {
   margin-top: var(--sp-3);
-  border-top: 1px dashed var(--divider);
+  border-top: 1px solid var(--divider);
   padding-top: var(--sp-3);
 }
 .qcard-analysis-toggle {
@@ -745,7 +686,8 @@
   font-weight: 500;
   color: var(--text-2);
   border-radius: var(--r-sm);
-  transition: all var(--dur-fast);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
 }
 .qcard-analysis-toggle:hover {
   background: var(--bg-hover);
@@ -753,7 +695,7 @@
 }
 .qcard-analysis-toggle .chevron {
   margin-left: auto;
-  transition: transform 0.3s var(--ease-precision);
+  transition: transform 0.3s var(--ease-out);
 }
 .qcard-analysis-toggle .chevron.open {
   transform: rotate(180deg);
@@ -763,14 +705,13 @@
 }
 .qcard-analysis-text {
   padding: var(--sp-3) var(--sp-4);
-  background: var(--bg-sunken);
-  border-radius: var(--r-sm);
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
   font-size: 0.875rem;
   line-height: 1.7;
   color: var(--text-2);
   margin-top: var(--sp-2);
-  /* 凹陷蚀刻感 */
-  box-shadow: var(--shadow-inset);
 }
 .qcard-analysis-link {
   display: inline-block;
@@ -781,25 +722,13 @@
   text-underline-offset: 2px;
 }
 
-/* 口诀常驻显示 · 蚀刻标记面板（非渐变） */
+/* 口诀常驻显示 · 简洁信息面板（无左侧刻度条） */
 .qcard-mnemonic {
   margin-top: var(--sp-4);
   padding: var(--sp-3) var(--sp-4);
   background: var(--accent-bg);
   border: 1px solid var(--accent-border);
-  border-radius: var(--r-sm);
-  /* 蚀刻标记边 + 左侧刻度条 */
-  box-shadow: var(--shadow-inset);
-  position: relative;
-}
-.qcard-mnemonic::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--accent);
+  border-radius: var(--r-md);
 }
 .qcard-mnemonic-head {
   display: flex;
@@ -811,14 +740,14 @@
 .qcard-mnemonic-title {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .qcard-mnemonic-text {
   font-family: var(--font-display);
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-1);
   letter-spacing: 0.02em;
   line-height: 1.6;
@@ -829,7 +758,7 @@
   color: var(--text-3);
 }
 
-/* ========== 雷达图 · 几何刻度感 ========== */
+/* ========== 雷达图 · 简洁数据可视化 ========== */
 .radar-chart {
   display: block;
   width: 100%;
@@ -876,33 +805,31 @@
   padding: var(--sp-1) var(--sp-3);
   font-size: 0.8125rem;
   font-weight: 600;
-  border-radius: var(--r-xs);
+  border-radius: var(--r-sm);
   background: var(--primary);
   color: #fff;
-  transition: all var(--dur-fast) var(--ease-precision);
-  box-shadow: var(--shadow-xs), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
 }
 .mini-btn:hover {
   background: var(--primary-hover);
-  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  box-shadow: var(--shadow-sm);
 }
 .mini-btn:active {
   background: var(--primary-active);
-  box-shadow: var(--shadow-inset);
 }
 .mini-btn.ghost {
   background: var(--bg-card);
   color: var(--text-2);
-  border: 1px solid var(--border-strong);
-  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--border);
 }
 .mini-btn.ghost:hover {
   background: var(--bg-hover);
-  border-color: var(--primary-border);
+  border-color: var(--border-strong);
   color: var(--primary);
 }
 
-/* toggle chip 通用 · 几何刻度标签（非圆形） */
+/* toggle chip 通用 · 简洁标签 */
 .toggle-chip {
   display: inline-flex;
   align-items: center;
@@ -913,33 +840,32 @@
   color: var(--text-3);
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--r-xs);
-  transition: all var(--dur-fast) var(--ease-precision);
-  box-shadow: var(--shadow-xs);
+  border-radius: var(--r-full);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
 }
 .toggle-chip:hover {
   border-color: var(--border-strong);
   color: var(--text-1);
 }
 .toggle-chip.active {
-  background: var(--primary-bg);
-  color: var(--primary);
-  border-color: var(--primary-border);
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
   font-weight: 600;
-  /* 蚀刻标记边 */
-  box-shadow: inset 0 0 0 1px var(--primary-border);
 }
 
-/* btn-danger · 实色凸起 */
+/* btn-danger · 实色 */
 .btn-danger {
   background: var(--danger);
   color: #fff;
-  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-xs);
 }
 .btn-danger:hover {
-  background: #991b1b;
-  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  background: oklch(0.48 0.22 27.325);
+  box-shadow: var(--shadow-md);
 }
 .btn-danger:active {
-  box-shadow: var(--shadow-inset);
+  background: oklch(0.42 0.20 27.325);
 }

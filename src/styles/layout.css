@@ -1,6 +1,6 @@
 /* ===================================================================
-   布局样式 · 工业蚀刻科技派
-   - 顶部导航 · 棱角分明 · 精密机械动效
+   布局样式 · 现代企业级视觉系统
+   - 顶部导航 · 简洁毛玻璃 · 1px 边框
    - 主内容容器 · 视图通用容器
    =================================================================== */
 
@@ -10,48 +10,26 @@
   flex-direction: column;
 }
 
-/* ========== 顶部导航 · 凸起金属横梁 ========== */
+/* ========== 顶部导航 ========== */
 #topnav {
   position: sticky;
   top: 0;
   z-index: 100;
   background: color-mix(in srgb, var(--bg-card) 96%, transparent);
-  border-bottom: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border);
   height: var(--nav-h);
-  /* 底部蚀刻高光边（金属横梁感） */
-  box-shadow: inset 0 -1px 0 var(--edge-light);
-  /* 轻微毛玻璃（非滚动状态） */
   backdrop-filter: blur(8px) saturate(1.1);
   -webkit-backdrop-filter: blur(8px) saturate(1.1);
   transition: box-shadow var(--dur-base) var(--ease-smooth),
               background var(--dur-base) var(--ease-smooth),
               backdrop-filter var(--dur-base) var(--ease-smooth);
 }
-/* 顶部三色彩带 · 品牌标识装饰 */
-#topnav::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg,
-    var(--primary) 0%,
-    var(--primary) 33%,
-    var(--accent) 33%,
-    var(--accent) 66%,
-    var(--info) 66%,
-    var(--info) 100%);
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0.85;
-}
 #topnav.scrolled {
-  box-shadow: var(--shadow-sm), inset 0 -1px 0 var(--edge-light);
-  /* 增强毛玻璃（滚动状态） */
+  box-shadow: var(--shadow-sm);
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
   background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  border-bottom-color: var(--border-strong);
 }
 
 .nav-inner {
@@ -64,7 +42,7 @@
   gap: var(--sp-4);
 }
 
-/* 品牌 logo · 实色凸起方形（非渐变） */
+/* 品牌 logo · 简洁实色方形 */
 .brand {
   display: flex;
   align-items: center;
@@ -83,35 +61,11 @@
   place-items: center;
   background: var(--primary);
   color: #fff;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   font-size: 1rem;
   font-weight: 800;
   font-family: var(--font-display);
-  /* 凸起金属质感：底部阴影 + 顶部高光边 */
-  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  position: relative;
-}
-/* 品牌 mark 角标刻度（几何装饰） */
-.brand-mark::before,
-.brand-mark::after {
-  content: '';
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  pointer-events: none;
-}
-.brand-mark::before {
-  top: 2px;
-  left: 2px;
-  border-right: none;
-  border-bottom: none;
-}
-.brand-mark::after {
-  bottom: 2px;
-  right: 2px;
-  border-left: none;
-  border-top: none;
+  box-shadow: var(--shadow-xs);
 }
 .brand-accent {
   color: var(--accent);
@@ -119,7 +73,7 @@
   font-weight: 800;
 }
 
-/* 主导航链接 · 几何刻度感 */
+/* 主导航链接 */
 .nav-links {
   display: flex;
   align-items: center;
@@ -132,7 +86,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-3);
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   transition: color var(--dur-fast) var(--ease-precision),
               background var(--dur-fast) var(--ease-precision);
 }
@@ -143,20 +97,7 @@
 .nav-link.active {
   color: var(--primary);
   font-weight: 600;
-}
-/* 激活态下方刻度线（方形硬朗，非圆形） */
-.nav-link.active::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -1px;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 2px;
-  background: var(--primary);
-  border-radius: var(--r-none);
-  /* 刻度高光 */
-  box-shadow: 0 0 0 1px var(--primary-bg);
+  background: var(--primary-bg);
 }
 
 /* 右侧操作区 */
@@ -197,30 +138,29 @@
   letter-spacing: 0.04em;
 }
 
-/* 主题切换按钮 · 精密机械动效（非旋转） */
+/* 主题切换按钮 · 简洁方形 */
 .theme-toggle {
   width: 36px;
   height: 36px;
   display: grid;
   place-items: center;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   color: var(--text-2);
   background: var(--bg-card);
-  border: 1px solid var(--border-strong);
-  box-shadow: var(--shadow-xs), inset 0 1px 0 var(--edge-light);
-  transition: all var(--dur-fast) var(--ease-precision);
+  border: 1px solid var(--border);
+  transition: color var(--dur-fast) var(--ease-precision),
+              border-color var(--dur-fast) var(--ease-precision),
+              background var(--dur-fast) var(--ease-precision),
+              transform var(--dur-fast) var(--ease-precision);
 }
 .theme-toggle:hover {
   color: var(--accent);
   border-color: var(--accent-border);
   background: var(--accent-bg);
-  /* 精密机械感：微缩放 + 阴影变化（非旋转） */
   transform: translateY(-1px);
-  box-shadow: var(--shadow-sm), inset 0 1px 0 var(--edge-light);
 }
 .theme-toggle:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-inset);
 }
 
 /* 移动端菜单切换 */
@@ -229,28 +169,26 @@
   width: 36px;
   height: 36px;
   place-items: center;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   color: var(--text-1);
   background: var(--bg-card);
-  border: 1px solid var(--border-strong);
-  box-shadow: var(--shadow-xs), inset 0 1px 0 var(--edge-light);
+  border: 1px solid var(--border);
 }
 
-/* 移动端下拉菜单 · 凹陷面板 */
+/* 移动端下拉菜单 */
 .nav-mobile-menu {
   display: none;
   flex-direction: column;
   padding: var(--sp-2);
   background: var(--bg-card);
   border-top: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
 }
 .nav-mobile-link {
   padding: var(--sp-3) var(--sp-4);
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--text-2);
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   transition: background var(--dur-fast), color var(--dur-fast);
 }
 .nav-mobile-link:hover {
@@ -261,8 +199,6 @@
   background: var(--primary-bg);
   color: var(--primary);
   font-weight: 600;
-  /* 左侧刻度指示 */
-  box-shadow: inset 2px 0 0 var(--primary);
 }
 
 /* ========== 主内容区 ========== */
@@ -272,7 +208,7 @@
   width: 100%;
 }
 
-/* 视图通用容器 · 精密入场动效 */
+/* 视图通用容器 */
 .view {
   width: 100%;
   min-height: calc(100vh - var(--nav-h));
