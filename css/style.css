@@ -6,13 +6,13 @@
 
 /* ========== 设计令牌 · 浅色主题（默认） ========== */
 :root {
-  /* 背景层次 */
-  --bg-base: #fafaf7;
-  --bg-sub: #f4f4ee;
+  /* 背景层次 · 微调为带薄荷色调的清新白 */
+  --bg-base: #f8faf9;
+  --bg-sub: #f1f5f3;
   --bg-card: #ffffff;
   --bg-elev: #ffffff;
-  --bg-hover: #f0f0eb;
-  --bg-sunken: #f5f5f0;
+  --bg-hover: #eef2f0;
+  --bg-sunken: #f3f6f4;
 
   /* 文字层次 */
   --text-1: #1a1d29;
@@ -183,7 +183,7 @@ img { max-width: 100%; display: block; }
   top: 0; left: 0; right: 0;
   z-index: 100;
   height: var(--nav-h);
-  background: rgba(250, 250, 247, 0.85);
+  background: rgba(248, 250, 249, 0.85);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   border-bottom: 1px solid var(--border);
@@ -192,7 +192,7 @@ img { max-width: 100%; display: block; }
 [data-theme="dark"] #topnav { background: rgba(10, 15, 28, 0.85); }
 
 #topnav.scrolled {
-  background: rgba(250, 250, 247, 0.95);
+  background: rgba(248, 250, 249, 0.95);
   box-shadow: var(--shadow-sm);
 }
 [data-theme="dark"] #topnav.scrolled { background: rgba(10, 15, 28, 0.95); }
@@ -719,10 +719,135 @@ button:focus:not(:focus-visible) { outline: none; }
 
 /* ========== 主页 · 核心功能 ========== */
 .home-features,
-.home-hotcats {
+.home-hotcats,
+.home-guide {
   padding: var(--sp-16) var(--sp-6);
   max-width: var(--container-max);
   margin: 0 auto;
+}
+
+/* ========== 主页 · 学习路径引导 ========== */
+.guide-steps {
+  display: flex;
+  align-items: stretch;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-10);
+}
+.guide-step {
+  flex: 1;
+  position: relative;
+  padding: var(--sp-6);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+  overflow: hidden;
+}
+.guide-step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.guide-step:hover {
+  border-color: var(--primary-border);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.guide-step:hover::before { transform: scaleX(1); }
+.guide-step-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--sp-3);
+}
+.guide-step-icon {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: var(--r-md);
+  margin-bottom: var(--sp-3);
+  color: var(--primary);
+  background: var(--primary-bg);
+}
+.guide-step:nth-child(3) .guide-step-icon {
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+.guide-step:nth-child(5) .guide-step-icon {
+  color: var(--info);
+  background: var(--info-soft);
+}
+.guide-step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: var(--sp-2);
+}
+.guide-step-desc {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin-bottom: var(--sp-3);
+}
+.guide-step-hint {
+  font-size: 0.75rem;
+  color: var(--text-mute);
+  font-family: var(--font-mono);
+  padding: var(--sp-1) var(--sp-2);
+  background: var(--bg-sunken);
+  border-radius: var(--r-xs);
+  display: inline-block;
+}
+.guide-step-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--text-mute);
+  flex-shrink: 0;
+  animation: arrowSlide 2s var(--ease-in-out) infinite;
+}
+@keyframes arrowSlide {
+  0%, 100% { transform: translateX(0); opacity: 0.5; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+/* 教学提示条 */
+.teaching-tips {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-3);
+  padding: var(--sp-6);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+}
+.tip-icon {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border-radius: var(--r-sm);
+  color: var(--primary);
+  background: var(--primary-bg);
+}
+.tip-item:nth-child(2) .tip-icon { color: var(--accent); background: var(--accent-bg); }
+.tip-item:nth-child(3) .tip-icon { color: var(--info); background: var(--info-soft); }
+.tip-item:nth-child(4) .tip-icon { color: var(--success); background: var(--success-soft); }
+.tip-text {
+  font-size: 0.78rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  padding-top: 2px;
 }
 
 .features-grid {
@@ -3099,9 +3224,28 @@ kbd {
   opacity: 0.18;
 }
 @keyframes heroBlob {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.08); }
-  66% { transform: translate(-20px, 30px) scale(0.95); }
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  25% { transform: translate(40px, -30px) scale(1.1) rotate(90deg); }
+  50% { transform: translate(-20px, 40px) scale(0.92) rotate(180deg); }
+  75% { transform: translate(-40px, -20px) scale(1.05) rotate(270deg); }
+}
+
+/* 网格背景微动效：缓慢平移增加层次感 */
+.hero-bg::before {
+  animation: gridShift 40s linear infinite;
+}
+@keyframes gridShift {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 44px 44px, 44px 44px; }
+}
+
+/* 点阵层微动效：缓慢呼吸 */
+.hero-bg-dotgrid {
+  animation: dotBreathe 8s var(--ease-in-out) infinite;
+}
+@keyframes dotBreathe {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.25; }
 }
 
 /* ========== 滚动渐入：元素进入视口时淡入 ========== */
@@ -3261,6 +3405,7 @@ kbd {
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .hotcats-grid { grid-template-columns: repeat(3, 1fr); }
   .hero-content { gap: var(--sp-8); }
+  .teaching-tips { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 900px) {
@@ -3281,7 +3426,9 @@ kbd {
   .hero-title { font-size: clamp(2rem, 8vw, 2.8rem); }
   .hero-sub { font-size: 0.92rem; }
 
-  .home-features, .home-hotcats { padding: var(--sp-10) var(--sp-4); }
+  .home-features, .home-hotcats, .home-guide { padding: var(--sp-10) var(--sp-4); }
+  .guide-steps { flex-direction: column; }
+  .guide-step-arrow { display: none; }
 
   /* 练习视图：侧栏改为顶部抽屉 */
   .practice-layout { grid-template-columns: 1fr; }
@@ -3357,6 +3504,7 @@ kbd {
 
   .features-grid { grid-template-columns: 1fr; }
   .hotcats-grid { grid-template-columns: repeat(2, 1fr); }
+  .teaching-tips { grid-template-columns: 1fr; }
 
   .hero-title { font-size: clamp(1.8rem, 9vw, 2.4rem); }
   .stats-grid { grid-template-columns: 1fr 1fr; }

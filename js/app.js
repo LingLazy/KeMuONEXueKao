@@ -1,7 +1,7 @@
 /* ===================================================================
    科目一教考 · 应用逻辑 v2
    - 六视图SPA：主页 / 知识学习 / 题库练习 / 模拟考试 / 口诀总览 / 分类导航
-   - 1964题完整题库 + 76条口诀 + 6大分类(24小分类)
+   - 1964题完整题库 + 119条口诀 + 6大分类(24小分类)
    - 大分类聚合小分类，题目可在多分类出现（多对多关系）
    - 关键词高亮(mark.kw) + 口诀常驻 + 解析独立折叠
    - 模拟考试(倒计时+答题卡+五五提示+评分+错题回顾)
@@ -1617,6 +1617,11 @@
           item.setAttribute('aria-disabled', 'true');
         } else {
           if (userAnswer === val) item.classList.add('selected');
+          // 立即判断对错：已答题则显示正确/错误标记
+          if (userAnswer !== undefined) {
+            if (val === q.answer) item.classList.add('correct');
+            else if (val === userAnswer) item.classList.add('wrong');
+          }
           item.addEventListener('click', () => onExamAnswer(idx, val));
         }
         item.innerHTML = `
@@ -1636,6 +1641,11 @@
           item.setAttribute('aria-disabled', 'true');
         } else {
           if (userAnswer === i) item.classList.add('selected');
+          // 立即判断对错：已答题则显示正确/错误标记
+          if (userAnswer !== undefined) {
+            if (i === q.answer) item.classList.add('correct');
+            else if (i === userAnswer) item.classList.add('wrong');
+          }
           item.addEventListener('click', () => onExamAnswer(idx, i));
         }
         item.innerHTML = `
@@ -1651,11 +1661,23 @@
     saveExamState();
   }
 
-  /** 考试答题 */
+  /**
+   * 考试答题
+   * 立即判断对错：记录答案后显示正确/错误标记与 toast 反馈
+   * 允许修改答案：修改时仅在答案改变时提示
+   */
   function onExamAnswer(idx, selected) {
+    const q = State.exam.questions[idx];
+    if (!q) return;
+    const prevAnswer = State.exam.answers[idx];
     State.exam.answers[idx] = selected;
     saveExamState();
     renderExamQuestion();
+    // 立即判断对错反馈（仅在答案改变时提示，避免重复 toast）
+    if (prevAnswer !== selected) {
+      const correct = selected === q.answer;
+      toast(correct ? '回答正确' : '回答错误', correct ? 'success' : 'error');
+    }
   }
 
   /** 五五提示：剔除两个错误选项 */
