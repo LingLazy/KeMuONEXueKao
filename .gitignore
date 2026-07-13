@@ -50,6 +50,7 @@ kemu1_question_bank_full.json
 dist/
 dist-types/
 *.tsbuildinfo
+tsconfig.tsbuildinfo
 
 # 本地环境变量
 *.local
