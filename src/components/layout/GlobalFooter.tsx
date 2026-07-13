@@ -1,8 +1,7 @@
 /**
- * 主页页脚（紧凑型）
+ * 主页页脚（紧凑单行型）
  * - 仅在主页 HomeView 末尾渲染
- * - 单行布局：品牌 + 链接 + 版权
- * - 免责声明折叠为单行简短提示 + 查看完整链接
+ * - 单行布局：品牌 + 链接 + 右侧信息组（免责声明简略 + 版权）
  * - 顶部构成主义四色装饰条带（3px 细带）
  */
 const REPO_URL = 'https://github.com/fanquanpp/KeMuONEXueKao';
@@ -55,25 +54,21 @@ export default function GlobalFooter() {
           </a>
         </nav>
 
-        {/* 右侧：版权 */}
-        <div className="footer-copy">
-          © {YEAR} KeMuONEXueKao
+        {/* 右侧：底部尾页信息组 · 免责声明简略 + 版权 */}
+        <div className="footer-info">
+          <span className="footer-disclaimer-text">
+            非官方学习工具 · 仅供学习参考
+            <a
+              href={README_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-disclaimer-more"
+            >
+              完整声明 →
+            </a>
+          </span>
+          <span className="footer-copy">© {YEAR} KeMuONEXueKao</span>
         </div>
-      </div>
-
-      {/* 免责声明 · 单行简短提示 */}
-      <div className="footer-disclaimer-row">
-        <span className="footer-disclaimer-text">
-          非官方学习工具 · 仅供学习参考 · 以公安交管部门最新官方资料为准
-        </span>
-        <a
-          href={README_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="footer-disclaimer-more"
-        >
-          完整声明 →
-        </a>
       </div>
     </footer>
   );

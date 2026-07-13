@@ -390,25 +390,24 @@
   color: var(--text-mute);
   font-family: var(--font-mono);
   letter-spacing: 0.02em;
-  flex-shrink: 0;
 }
 
-/* 免责声明 · 单行简短提示 */
-.footer-disclaimer-row {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 var(--sp-6) var(--sp-3);
+/* 右侧底部尾页信息组 · 免责声明简略 + 版权 */
+.footer-info {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--sp-3);
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
 }
 .footer-disclaimer-text {
   font-size: 0.6875rem;
   color: var(--text-mute);
   letter-spacing: 0.01em;
   line-height: 1.5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .footer-disclaimer-more {
   font-size: 0.6875rem;
@@ -443,21 +442,20 @@
   .footer-link {
     font-size: 0.6875rem;
   }
+  .footer-info {
+    align-items: center;
+    width: 100%;
+    gap: 3px;
+  }
   .footer-copy {
     font-size: 0.6875rem;
-    width: 100%;
-    text-align: center;
-  }
-  .footer-disclaimer-row {
-    flex-direction: column;
-    align-items: center;
-    gap: var(--sp-1);
-    padding: 0 var(--sp-4) var(--sp-3);
-    text-align: center;
   }
   .footer-disclaimer-text {
     font-size: 0.625rem;
+    justify-content: center;
+    text-align: center;
   }
 }
+
 
 
