@@ -23,8 +23,8 @@ interface ProgressState {
   total: number;
   /** 设置题库总数 */
   setTotal: (total: number) => void;
-  /** 记录一次作答 */
-  recordAnswer: (qid: number, selected: number, correct: boolean) => void;
+  /** 记录一次作答（单选/判断题 selected 为 number，多选题为 number[]） */
+  recordAnswer: (qid: number, selected: number | number[], correct: boolean) => void;
   /** 切换收藏 */
   toggleBookmark: (qid: number) => void;
   /** 判断是否已收藏 */

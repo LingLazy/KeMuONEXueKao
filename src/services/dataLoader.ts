@@ -28,12 +28,13 @@ const JUDGE_OPTIONS = ['正确', '错误'];
 /**
  * 原始题目类型（questions.json 中的实际结构）
  * - 判断题 answer 可能为 boolean
+ * - 多选题 answer 为数字数组（number[]）
  * - options 可能为空数组
- * 与 Question 类型（answer: number）的区别在此显式声明，
+ * 与 Question 类型的区别在此显式声明，
  * 避免类型系统无法捕获数据层与消费层的不一致
  */
 interface RawQuestion extends Omit<Question, 'answer' | 'options'> {
-  answer: number | boolean;
+  answer: number | boolean | number[];
   options?: string[];
 }
 
@@ -41,25 +42,40 @@ interface RawQuestion extends Omit<Question, 'answer' | 'options'> {
  * 归一化单道题目
  * - 判断题：补齐选项、布尔答案转数字索引
  * - 单选题：原样返回
- * 输入：原始题目（可能含布尔 answer / 空 options）
+ * - 多选题：保证 answer 为数组、options 非空
+ * 输入：原始题目（可能含布尔 answer / 空 options / 数组 answer）
  * 返回：与 Question 类型完全一致的题目
  */
 function normalizeQuestion(raw: RawQuestion): Question {
-  if (raw.type !== 'judge') return raw as Question;
-  // 仅当 options 缺失或为空时补齐，避免覆盖已有数据
-  const options =
-    Array.isArray(raw.options) && raw.options.length >= 2
-      ? raw.options
-      : JUDGE_OPTIONS.slice();
-  // 布尔答案转索引：true → 0（正确），false → 1（错误）
-  // 已为数字时保留原值
-  let answer: number;
-  if (typeof raw.answer === 'boolean') {
-    answer = raw.answer ? 0 : 1;
-  } else {
-    answer = Number(raw.answer);
+  // 多选题：确保 answer 为 number[]，options 非空
+  if (raw.type === 'multi') {
+    const options =
+      Array.isArray(raw.options) && raw.options.length >= 2
+        ? raw.options
+        : [];
+    const answer: number[] = Array.isArray(raw.answer)
+      ? raw.answer.map((n) => Number(n))
+      : typeof raw.answer === 'number'
+        ? [Number(raw.answer)]
+        : [];
+    return { ...raw, options, answer } as Question;
   }
-  return { ...raw, options, answer } as Question;
+  // 判断题：补齐选项、布尔答案转数字索引
+  if (raw.type === 'judge') {
+    const options =
+      Array.isArray(raw.options) && raw.options.length >= 2
+        ? raw.options
+        : JUDGE_OPTIONS.slice();
+    let answer: number;
+    if (typeof raw.answer === 'boolean') {
+      answer = raw.answer ? 0 : 1;
+    } else {
+      answer = Number(raw.answer);
+    }
+    return { ...raw, options, answer } as Question;
+  }
+  // 单选题：原样返回
+  return raw as Question;
 }
 
 /**

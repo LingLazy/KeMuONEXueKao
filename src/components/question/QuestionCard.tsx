@@ -33,11 +33,11 @@ interface QuestionCardProps {
   total?: number;
   /** 是否为考试模式（不立即显示对错） */
   examMode?: boolean;
-  /** 已选答案索引（外部受控） */
-  selected?: number;
+  /** 已选答案索引（外部受控；单选/判断题为 number，多选题为 number[]） */
+  selected?: number | number[];
   /** 已剔除选项（考试五五提示） */
   eliminated?: number[];
-  /** 选项点击回调 */
+  /** 选项点击回调（考试模式使用，传递选项索引） */
   onSelect?: (optionIdx: number) => void;
   /** 下一题回调 */
   onNext?: () => void;
@@ -70,22 +70,48 @@ export default function QuestionCard({
   const vibrate = useVibrate();
   const { burst } = useConfetti();
 
-  // 本地已选状态（非受控模式）
-  const [localSelected, setLocalSelected] = useState<number>(-1);
+  // 本地已选状态（非受控模式）：单选/判断题为 number（-1 未答），多选题为 number[]（[] 未答）
+  const [localSelected, setLocalSelected] = useState<number | number[]>(
+    question.type === 'multi' ? [] : -1
+  );
   // 是否已答（用于显示解析）
   const [answered, setAnswered] = useState(false);
   // 图片放大查看模态框状态
   const [imageZoomOpen, setImageZoomOpen] = useState(false);
 
   const finalSelected = selected ?? localSelected;
-  const isAnswered = examMode ? finalSelected >= 0 : answered;
+  // 判断是否已作答：单选/判断题为 >=0，多选题为长度 > 0 的数组
+  const isAnswered = examMode
+    ? Array.isArray(finalSelected)
+      ? finalSelected.length > 0
+      : finalSelected >= 0
+    : answered;
   const showCorrect = isAnswered && !examMode;
 
-  // 题目变化时重置
+  // 是否为多选题
+  const isMulti = question.type === 'multi';
+
+  // 题目变化时重置（根据题型初始化选中状态）
   useEffect(() => {
-    setLocalSelected(-1);
+    setLocalSelected(question.type === 'multi' ? [] : -1);
     setAnswered(false);
-  }, [question.id]);
+  }, [question.id, question.type]);
+
+  /**
+   * 比较用户答案与正确答案
+   * - 单选/判断题：直接比较 number
+   * - 多选题：排序后逐项比较数组
+   */
+  const isCorrectAnswer = (userAns: number | number[], correctAns: number | number[]): boolean => {
+    if (Array.isArray(correctAns)) {
+      if (!Array.isArray(userAns)) return false;
+      if (userAns.length !== correctAns.length) return false;
+      const sortedUser = [...userAns].sort((a, b) => a - b);
+      const sortedCorrect = [...correctAns].sort((a, b) => a - b);
+      return sortedUser.every((v, i) => v === sortedCorrect[i]);
+    }
+    return !Array.isArray(userAns) && userAns === correctAns;
+  };
 
   // 处理选项点击
   const handleSelect = (optionIdx: number) => {
@@ -93,6 +119,23 @@ export default function QuestionCard({
     // 已剔除的选项不可选
     if (eliminated.includes(optionIdx)) return;
 
+    // 多选题：切换选中状态（不立即判定对错，需用户点击"确认答案"）
+    if (isMulti) {
+      if (examMode) {
+        // 考试模式：直接回调让 store 处理数组切换
+        onSelect?.(optionIdx);
+        return;
+      }
+      // 练习模式：本地维护选中数组
+      const cur = Array.isArray(localSelected) ? localSelected : [];
+      const next = cur.includes(optionIdx)
+        ? cur.filter((i) => i !== optionIdx)
+        : [...cur, optionIdx];
+      setLocalSelected(next);
+      return;
+    }
+
+    // 单选/判断题
     if (examMode) {
       // 考试模式：仅记录选择，不立即判断对错
       onSelect?.(optionIdx);
@@ -102,7 +145,7 @@ export default function QuestionCard({
     // 练习模式：立即判断对错
     setLocalSelected(optionIdx);
     setAnswered(true);
-    const correct = optionIdx === question.answer;
+    const correct = isCorrectAnswer(optionIdx, question.answer);
     recordAnswer(question.id, optionIdx, correct);
     // 反馈
     if (correct) {
@@ -116,6 +159,28 @@ export default function QuestionCard({
       toggleAnalysis(true);
     }
     onSelect?.(optionIdx);
+  };
+
+  /**
+   * 多选题确认答案
+   * 练习模式下用户选择至少 2 项后可点击确认，立即判定对错
+   */
+  const handleConfirmMulti = () => {
+    if (!isMulti || answered) return;
+    const cur = Array.isArray(localSelected) ? localSelected : [];
+    if (cur.length < 2) return;
+    setAnswered(true);
+    const correct = isCorrectAnswer(cur, question.answer);
+    recordAnswer(question.id, cur, correct);
+    if (correct) {
+      vibrate('correct');
+      burst();
+    } else {
+      vibrate('wrong');
+    }
+    if (!correct) {
+      toggleAnalysis(true);
+    }
   };
 
   // 滑动手势
@@ -158,7 +223,7 @@ export default function QuestionCard({
             </span>
           )}
           <span className={`qcard-type ${question.type}`}>
-            {question.type === 'judge' ? '判断题' : '单选题'}
+            {question.type === 'judge' ? '判断题' : question.type === 'multi' ? '多选题' : '单选题'}
           </span>
           {question.is_image_question && <span className="qcard-badge">图片题</span>}
         </div>
@@ -224,11 +289,21 @@ export default function QuestionCard({
         </div>
       </Modal>
 
-      {/* 选项 · 单选题使用 radiogroup 语义，屏幕阅读器可正确传达互斥单选 */}
-      <div className="qcard-options" role="radiogroup" aria-label="选项列表">
+      {/* 选项 · 单选/判断题使用 radiogroup 语义，多选题使用 group + checkbox 语义 */}
+      <div
+        className={`qcard-options ${isMulti ? 'qcard-options-multi' : ''}`}
+        role={isMulti ? 'group' : 'radiogroup'}
+        aria-label={isMulti ? '多选选项列表（可选多项）' : '选项列表'}
+      >
         {question.options.map((opt, i) => {
-          const isSelected = finalSelected === i;
-          const isCorrect = i === question.answer;
+          // 多选题：选中状态基于数组包含判断；单选：基于严格相等
+          const isSelected = isMulti
+            ? Array.isArray(finalSelected) && finalSelected.includes(i)
+            : finalSelected === i;
+          // 正确选项判定：多选题基于数组包含，单选基于严格相等
+          const isCorrect = Array.isArray(question.answer)
+            ? question.answer.includes(i)
+            : i === question.answer;
           const isEliminated = eliminated.includes(i);
           // 状态判定
           let stateClass = '';
@@ -251,15 +326,28 @@ export default function QuestionCard({
               showCorrect={showCorrect}
               isCorrect={isCorrect}
               isEliminated={isEliminated}
+              isMulti={isMulti}
               onClick={() => handleSelect(i)}
             />
           );
         })}
       </div>
 
+      {/* 多选题确认按钮 · 练习模式下选满 2 项及以上可确认 */}
+      {isMulti && !examMode && !answered && (
+        <button
+          type="button"
+          className="qcard-confirm-multi"
+          onClick={handleConfirmMulti}
+          disabled={!(Array.isArray(localSelected) && localSelected.length >= 2)}
+        >
+          确认答案（已选 {Array.isArray(localSelected) ? localSelected.length : 0} 项）
+        </button>
+      )}
+
       {/* 答题反馈与解析 · 使用 opacity + translateY 避免高度突变导致页面跳动 */}
       <AnimatePresence>
-        {(showCorrect || (examMode && finalSelected >= 0)) && (
+        {(showCorrect || (examMode && isAnswered)) && (
           <motion.div
             className="qcard-feedback"
             initial={{ opacity: 0, y: -4 }}
@@ -268,8 +356,8 @@ export default function QuestionCard({
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             {showCorrect && (
-              <div className={`qcard-result ${finalSelected === question.answer ? 'correct' : 'wrong'}`}>
-                {finalSelected === question.answer ? (
+              <div className={`qcard-result ${isCorrectAnswer(finalSelected, question.answer) ? 'correct' : 'wrong'}`}>
+                {isCorrectAnswer(finalSelected, question.answer) ? (
                   <>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <circle cx="12" cy="12" r="10" />
@@ -283,7 +371,7 @@ export default function QuestionCard({
                       <circle cx="12" cy="12" r="10" />
                       <path d="M15 9l-6 6M9 9l6 6" />
                     </svg>
-                    <span>回答错误，正确答案是 {OPTION_LETTERS[question.answer]}</span>
+                    <span>回答错误，正确答案是 {Array.isArray(question.answer) ? question.answer.map((i) => OPTION_LETTERS[i]).join('') : OPTION_LETTERS[question.answer]}</span>
                   </>
                 )}
               </div>
@@ -376,6 +464,8 @@ interface OptionButtonProps {
   isCorrect: boolean;
   /** 是否已剔除 */
   isEliminated: boolean;
+  /** 是否为多选题（决定 ARIA 角色：radio vs checkbox） */
+  isMulti?: boolean;
   /** 点击回调 */
   onClick: () => void;
 }
@@ -389,6 +479,7 @@ function OptionButtonImpl({
   showCorrect,
   isCorrect,
   isEliminated,
+  isMulti = false,
   onClick
 }: OptionButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
@@ -399,12 +490,12 @@ function OptionButtonImpl({
     <button
       ref={ref}
       type="button"
-      className={`qcard-option ripple-host ${stateClass}`}
+      className={`qcard-option ripple-host ${stateClass} ${isMulti ? 'qcard-option-multi' : ''}`}
       onClick={onClick}
       disabled={disabled}
-      role="radio"
+      role={isMulti ? 'checkbox' : 'radio'}
       aria-checked={isSelected}
-      aria-label={`选项 ${letter}：${text}`}
+      aria-label={`选项 ${letter}：${text}${isMulti ? '（多选）' : ''}`}
     >
       <span className="qcard-option-letter" aria-hidden="true">
         {letter}

@@ -69,10 +69,23 @@ function gradeExam(questions: ExamQuestionState[], usedTimeSec: number): ExamRes
   let unanswered = 0;
   const wrongIds: number[] = [];
   questions.forEach((q) => {
-    if (q.selected < 0) {
+    // 判断是否未答：单选/判断题 -1，多选题空数组 []
+    const isUnanswered = Array.isArray(q.selected)
+      ? q.selected.length === 0
+      : q.selected < 0;
+    if (isUnanswered) {
       unanswered++;
       wrongIds.push(q.question.id);
-    } else if (q.selected === q.question.answer) {
+      return;
+    }
+    // 比较答案：多选题排序后逐项比较，单选直接比较
+    const correctAns = q.question.answer;
+    const isCorrect = Array.isArray(correctAns)
+      ? Array.isArray(q.selected) &&
+        q.selected.length === correctAns.length &&
+        [...q.selected].sort((a, b) => a - b).every((v, i) => v === [...correctAns].sort((a, b) => a - b)[i])
+      : !Array.isArray(q.selected) && q.selected === correctAns;
+    if (isCorrect) {
       correct++;
     } else {
       wrong++;
@@ -109,9 +122,10 @@ export const useExamStore = create<ExamState>((set, get) => ({
     if (running) get().reset();
     // 100题随机抽取
     const picked = shuffle(questions).slice(0, EXAM_COUNT);
+    // 初始化作答状态：多选题初始为空数组 []，其他为 -1
     const examQuestions: ExamQuestionState[] = picked.map((q) => ({
       question: q,
-      selected: -1,
+      selected: q.type === 'multi' ? [] : -1,
       marked: false,
       hintUsed: false,
       eliminated: []
@@ -134,7 +148,17 @@ export const useExamStore = create<ExamState>((set, get) => ({
     const questions = get().questions.slice();
     const item = questions[index];
     if (!item) return;
-    questions[index] = { ...item, selected: optionIdx };
+    // 多选题：在选中数组中切换 optionIdx
+    if (item.question.type === 'multi') {
+      const cur = Array.isArray(item.selected) ? item.selected : [];
+      const next = cur.includes(optionIdx)
+        ? cur.filter((i) => i !== optionIdx)
+        : [...cur, optionIdx];
+      questions[index] = { ...item, selected: next };
+    } else {
+      // 单选/判断题：直接覆盖
+      questions[index] = { ...item, selected: optionIdx };
+    }
     set({ questions });
     get().persist();
   },
@@ -152,9 +176,14 @@ export const useExamStore = create<ExamState>((set, get) => ({
     const questions = get().questions.slice();
     const item = questions[index];
     if (!item || item.hintUsed) return item?.eliminated ?? [];
-    const correct = item.question.answer;
+    // 正确答案可能是数组（多选题）或数字（单选/判断题）
+    const correctArr = Array.isArray(item.question.answer)
+      ? item.question.answer
+      : [item.question.answer];
     // 从错误选项中随机剔除2个
-    const wrongOptions = range(0, item.question.options.length - 1).filter((i) => i !== correct);
+    const wrongOptions = range(0, item.question.options.length - 1).filter(
+      (i) => !correctArr.includes(i)
+    );
     const eliminated = shuffle(wrongOptions).slice(0, 2);
     questions[index] = { ...item, hintUsed: true, eliminated };
     set({ questions });
@@ -246,7 +275,7 @@ export const useExamStore = create<ExamState>((set, get) => ({
 
   restore: (allQuestions) => {
     const saved = SessionStore.get<{
-      questions: Array<{ id: number; selected: number; marked: boolean; hintUsed: boolean; eliminated: number[] }>;
+      questions: Array<{ id: number; selected: number | number[]; marked: boolean; hintUsed: boolean; eliminated: number[] }>;
       currentIndex: number;
       startTime: number;
       duration: number;

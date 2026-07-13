@@ -879,7 +879,7 @@
 
 /* 题目区 · 预留底部固定栏空间（含安全区域） */
 .exam-body {
-  max-width: 820px;
+  max-width: var(--container-question);
   margin: 0 auto;
   padding: var(--sp-6) var(--sp-4) calc(var(--sp-16) + var(--nav-h) + env(safe-area-inset-bottom));
 }

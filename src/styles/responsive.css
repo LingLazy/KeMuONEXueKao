@@ -460,6 +460,10 @@
     height: 24px;
     font-size: 0.8125rem;
   }
+  .qcard-confirm-multi {
+    padding: var(--sp-2) var(--sp-3);
+    font-size: 0.875rem;
+  }
   .qcard-image .lazy-img {
     max-height: 200px;
   }
@@ -890,13 +894,40 @@
 }
 
 /* ===================================================================
-   大屏优化（≥ 1600px）
-   - 容器最大宽度提升
-   - 网格列数增加
+   大屏优化（≥ 1440px）
+   - 容器宽度提升，充分利用宽屏显示区域
+   - 网格列数增加，减少空白边距
+   =================================================================== */
+@media (min-width: 1440px) {
+  :root {
+    --container-max: 1380px;
+    --sidebar-w: 280px;
+    --container-question: 880px;
+  }
+  .home-stats {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+  .home-cats-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  .cats-overview {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  .cat-detail-items {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+/* ===================================================================
+   超大屏优化（≥ 1600px）
+   - 容器进一步加宽
+   - 网格密度提升
    =================================================================== */
 @media (min-width: 1600px) {
   :root {
-    --container-max: 1440px;
+    --container-max: 1560px;
+    --sidebar-w: 300px;
+    --container-question: 920px;
   }
   .home-stats {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -909,5 +940,30 @@
   }
   .cat-detail-items {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+/* ===================================================================
+   全屏优化（≥ 1920px）
+   - 最大化利用全高清及以上显示区域
+   - 网格列数最大化
+   =================================================================== */
+@media (min-width: 1920px) {
+  :root {
+    --container-max: 1760px;
+    --sidebar-w: 320px;
+    --container-question: 960px;
+  }
+  .home-stats {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .home-cats-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+  .cats-overview {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  }
+  .cat-detail-items {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }

@@ -131,8 +131,8 @@
   --nav-h: 56px;
   --sidebar-w: 260px;
   --mnemonics-aside-w: 280px;
-  --container-max: 1280px;
-  --container-question: 720px;  /* 题目区建议宽度，避免长题干换行过多 */
+  --container-max: 1400px;
+  --container-question: 820px;  /* 题目区建议宽度，避免长题干换行过多 */
 
   /* === 动效时长 · 6 档（Framer Motion 默认 0.3s） === */
   --dur-fast: 0.15s;    /* 边框、背景色变化 */

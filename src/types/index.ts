@@ -3,8 +3,8 @@
  * 覆盖题目、口诀、分类、考试、答题记录等核心数据结构
  */
 
-/** 题目类型：单选题 / 判断题 */
-export type QuestionType = 'single' | 'judge';
+/** 题目类型：单选题 / 判断题 / 多选题 */
+export type QuestionType = 'single' | 'judge' | 'multi';
 
 /** 视图名称 */
 export type ViewName = 'home' | 'knowledge' | 'practice' | 'exam' | 'mnemonics' | 'categories';
@@ -17,8 +17,10 @@ export type ThemeMode = 'light' | 'dark';
  * 对应 src/data/questions.json 中的单条记录
  */
 export interface Question {
-  /** 题目ID（1~1964） */
+  /** 题目ID（1~1861） */
   id: number;
+  /** 原始题目ID */
+  qid?: number;
   /** 章节编号 */
   chapter: number;
   /** 章节名称 */
@@ -31,10 +33,10 @@ export interface Question {
   type: QuestionType;
   /** 题干文本 */
   question: string;
-  /** 选项数组（判断题为2项，单选题为4项） */
+  /** 选项数组（判断题为2项，单选题为4项，多选题为4项） */
   options: string[];
-  /** 正确答案索引（0-based） */
-  answer: number;
+  /** 正确答案索引（0-based，多选题为索引数组） */
+  answer: number | number[];
   /** 解析文本 */
   analysis: string;
   /** 解析来源链接 */
@@ -45,6 +47,14 @@ export interface Question {
   is_image_question: boolean;
   /** 关键词数组（用于高亮） */
   keywords: string[];
+  /** 难度等级 1-5 */
+  difficulty?: number;
+  /** 错误率 0-1 */
+  wrong_rate?: number;
+  /** 速记口诀 */
+  mnemonic?: string;
+  /** 通俗解析 */
+  concise_analysis?: string;
 }
 
 /**
@@ -107,8 +117,8 @@ export type GroupKey = 'image' | 'penalty' | 'scenario' | 'rules' | 'vehicle' | 
 export interface AnswerRecord {
   /** 是否正确 */
   correct: boolean;
-  /** 用户选择的索引 */
-  selected: number;
+  /** 用户选择的索引（单选/判断题为 number，多选题为 number[]；-1 或 [] 表示未答） */
+  selected: number | number[];
   /** 答题时间戳 */
   time: number;
 }
@@ -125,8 +135,8 @@ export interface BookmarkRecord {
 export interface ExamQuestionState {
   /** 原始题目 */
   question: Question;
-  /** 用户作答索引（-1 表示未答） */
-  selected: number;
+  /** 用户作答索引（单选/判断题为 number，-1 表示未答；多选题为 number[]，空数组表示未答） */
+  selected: number | number[];
   /** 是否标记 */
   marked: boolean;
   /** 是否已使用五五提示 */

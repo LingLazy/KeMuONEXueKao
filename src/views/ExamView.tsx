@@ -89,7 +89,10 @@ export default function ExamView() {
         toast.success('已剔除两个错误选项');
       },
       submit: async () => {
-        const unanswered = exam.questions.filter((q) => q.selected < 0).length;
+        // 多选题空数组 [] 视为未答
+        const unanswered = exam.questions.filter((q) =>
+          Array.isArray(q.selected) ? q.selected.length === 0 : q.selected < 0
+        ).length;
         if (unanswered > 0) {
           const ok = await confirm({
             title: '确认交卷',
@@ -124,7 +127,10 @@ export default function ExamView() {
 
   // 交卷
   const handleSubmit = async () => {
-    const unanswered = exam.questions.filter((q) => q.selected < 0).length;
+    // 多选题空数组 [] 视为未答
+    const unanswered = exam.questions.filter((q) =>
+      Array.isArray(q.selected) ? q.selected.length === 0 : q.selected < 0
+    ).length;
     if (unanswered > 0) {
       const ok = await confirm({
         title: '确认交卷',
@@ -223,7 +229,9 @@ export default function ExamView() {
     let answered = 0;
     let marked = 0;
     for (const q of exam.questions) {
-      if (q.selected >= 0) answered++;
+      // 多选题空数组 [] 视为未答
+      const isAnswered = Array.isArray(q.selected) ? q.selected.length > 0 : q.selected >= 0;
+      if (isAnswered) answered++;
       if (q.marked) marked++;
     }
     return { answeredCount: answered, markedCount: marked };
@@ -403,7 +411,8 @@ export default function ExamView() {
         </div>
         <div className="sheet-grid">
           {exam.questions.map((q, i) => {
-            const isAnswered = q.selected >= 0;
+            // 多选题空数组 [] 视为未答
+            const isAnswered = Array.isArray(q.selected) ? q.selected.length > 0 : q.selected >= 0;
             const isCurrent = i === exam.currentIndex;
             return (
               <button

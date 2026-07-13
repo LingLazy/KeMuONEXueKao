@@ -661,6 +661,54 @@
   flex-shrink: 0;
 }
 
+/* 多选题选项 · 方形勾选指示器（区别于单选的圆形 radio） */
+.qcard-option-multi .qcard-option-letter {
+  border-radius: var(--r-xs);
+}
+.qcard-option-multi[aria-checked="true"]:not(.correct):not(.wrong) {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+}
+.qcard-option-multi[aria-checked="true"]:not(.correct):not(.wrong) .qcard-option-letter {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* 多选题确认按钮 */
+.qcard-confirm-multi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-4);
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-md);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out),
+              opacity var(--dur-fast) var(--ease-out);
+}
+.qcard-confirm-multi:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+.qcard-confirm-multi:active:not(:disabled) {
+  transform: translateY(0);
+}
+.qcard-confirm-multi:disabled {
+  background: var(--bg-sub);
+  color: var(--text-mute);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 /* 反馈与解析 · 隔离布局重排，避免高度变化影响外部 */
 .qcard-feedback {
   overflow: hidden;
