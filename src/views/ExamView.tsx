@@ -65,7 +65,12 @@ export default function ExamView() {
       toggleMark: () => exam.toggleMark(exam.currentIndex),
       hint: () => {
         const item = exam.questions[exam.currentIndex];
-        if (!item || item.hintUsed) {
+        if (!item) return;
+        if (item.question.type === 'judge') {
+          toast.info('判断题不支持五五提示');
+          return;
+        }
+        if (item.hintUsed) {
           toast.info('已使用过提示或不可用');
           return;
         }
@@ -293,6 +298,10 @@ export default function ExamView() {
             type="button"
             className="exam-hint-btn"
             onClick={() => {
+              if (current.question.type === 'judge') {
+                toast.info('判断题不支持五五提示');
+                return;
+              }
               if (current.hintUsed) {
                 toast.info('本题已使用过提示');
                 return;
@@ -300,13 +309,13 @@ export default function ExamView() {
               exam.useHint(exam.currentIndex);
               toast.success('已剔除两个错误选项');
             }}
-            disabled={current.hintUsed}
-            title="五五提示：剔除两个错误选项"
+            disabled={current.hintUsed || current.question.type === 'judge'}
+            title={current.question.type === 'judge' ? '判断题不支持五五提示' : '五五提示：剔除两个错误选项'}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" />
             </svg>
-            {current.hintUsed ? '已提示' : '提示'}
+            {current.question.type === 'judge' ? '不可用' : current.hintUsed ? '已提示' : '提示'}
           </button>
         </div>
 

@@ -18,14 +18,49 @@ let mnemonicsCache: Mnemonic[] | null = null;
 let knowledgeCache: string | null = null;
 
 /**
+ * 判断题选项归一化文本
+ * 原始数据中判断题 options 为空数组、answer 为布尔值，
+ * 这里统一补齐为 ["正确", "错误"]，并将布尔答案转换为 0/1 索引，
+ * 保证下游组件（QuestionCard / examStore）按统一的数组+索引结构处理。
+ */
+const JUDGE_OPTIONS = ['正确', '错误'];
+
+/**
+ * 归一化单道题目
+ * - 判断题：补齐选项、布尔答案转数字索引
+ * - 单选题：原样返回
+ * 输入：原始题目（可能含布尔 answer / 空 options）
+ * 返回：与 Question 类型完全一致的题目
+ */
+function normalizeQuestion(raw: Question): Question {
+  if (raw.type !== 'judge') return raw;
+  // 仅当 options 缺失或为空时补齐，避免覆盖已有数据
+  const options =
+    Array.isArray(raw.options) && raw.options.length >= 2
+      ? raw.options
+      : JUDGE_OPTIONS.slice();
+  // 布尔答案转索引：true → 0（正确），false → 1（错误）
+  // 已为数字时保留原值
+  let answer: number;
+  if (typeof raw.answer === 'boolean') {
+    answer = raw.answer ? 0 : 1;
+  } else {
+    answer = Number(raw.answer);
+  }
+  return { ...raw, options, answer };
+}
+
+/**
  * 按需加载完整题库
  * 首次调用动态 import questions.json，后续返回缓存
+ * 加载后对判断题做归一化：补齐 ["正确","错误"] 选项、布尔答案转数字索引
  * 返回：Question[] 1964道题目
  */
 export async function loadQuestions(): Promise<Question[]> {
   if (questionsCache) return questionsCache;
   const module = await import('@/data/questions.json');
-  questionsCache = module.default as Question[];
+  const rawList = module.default as Question[];
+  questionsCache = rawList.map(normalizeQuestion);
   return questionsCache;
 }
 
