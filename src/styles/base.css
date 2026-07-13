@@ -15,9 +15,6 @@ html {
   scrollbar-gutter: stable;
   /* 启用滚动锚定，避免上方内容高度变化导致当前可视区跳动 */
   overflow-anchor: auto;
-  /* 禁止水平滚动条：clip 不创建 BFC，不影响子元素 sticky 定位；hidden 作为旧浏览器 fallback */
-  overflow-x: hidden;
-  overflow-x: clip;
 }
 
 body {
@@ -30,7 +27,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   transition: background-color 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth);
-  overflow-x: hidden;
   padding-top: env(safe-area-inset-top);
   /* 全局构成主义细网格 · 极淡,仅作底纹质感 */
   background-image:
