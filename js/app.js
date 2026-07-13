@@ -355,9 +355,13 @@
     list.addEventListener('click', e => {
       const item = e.target.closest('.cat-item');
       if (!item) return;
-      State.currentCat = item.dataset.cat;
+      const cat = item.dataset.cat;
+      if (cat === State.currentCat) return;
+      State.currentCat = cat;
       $$('.cat-item').forEach(c => c.classList.toggle('active', c.dataset.cat === State.currentCat));
       loadQuestionList();
+      const catName = cat === 'all' ? '全部题目' : (CATEGORIES[cat]?.name || '分类');
+      toast(`已切换至「${catName}」`);
     });
     list.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -837,7 +841,11 @@
     };
   }
 
-  /** 渲染右侧口诀列表 */
+  /**
+   * 渲染右侧口诀列表
+   * 设计：双列网格（桌面）+ 紧凑条目 + 点击展开详情，避免长卷轴
+   * 去AI味：无衬线体、无border-left引用块、无fadeUp堆砌
+   */
   function renderMnemonicList() {
     const listEl = $('#mnemonics-list');
     if (!listEl) return;
@@ -861,29 +869,48 @@
       return;
     }
 
-    // 分栏式详情列表（编辑式排版，避免卡片堆砌）
+    // 紧凑双列网格，默认只展示标题+口诀文本，点击展开解释与详情
     listEl.innerHTML = list.map((m, i) => {
       const meta = CATEGORIES[m.cat] || { name: m.cat, color: '#f59e0b' };
-      const color = meta.color;
+      const hasDetail = !!(m.explain || (m.details || []).length);
       return `
-        <article class="mnemonic-entry" style="--entry-color:${color}" id="mnemonic-${i}">
-          <div class="mnemonic-entry-header">
-            <div class="mnemonic-entry-cat">
-              <span class="entry-cat-dot" style="background:${color}" aria-hidden="true"></span>
-              <span class="entry-cat-name">${escapeHtml(meta.name)}</span>
-            </div>
-            <span class="mnemonic-entry-num">${String(i + 1).padStart(2, '0')}</span>
+        <article class="mn-item" style="--item-color:${meta.color}" data-idx="${i}">
+          <div class="mn-item-head">
+            <span class="mn-item-num">${String(i + 1).padStart(2, '0')}</span>
+            <span class="mn-item-cat">${escapeHtml(meta.name)}</span>
           </div>
-          <h3 class="mnemonic-entry-title">${escapeHtml(m.title)}</h3>
-          <div class="mnemonic-entry-text">${escapeHtml(m.text)}</div>
-          <p class="mnemonic-entry-explain">${escapeHtml(m.explain)}</p>
-          ${(m.details || []).length ? `
-          <ul class="mnemonic-entry-details">
-            ${m.details.map(d => `<li>${escapeHtml(d)}</li>`).join('')}
-          </ul>` : ''}
+          <h3 class="mn-item-title">${escapeHtml(m.title)}</h3>
+          <p class="mn-item-text">${escapeHtml(m.text)}</p>
+          ${hasDetail ? `
+          <button class="mn-item-toggle" type="button" aria-expanded="false">
+            <span class="toggle-text">展开详情</span>
+            <svg class="toggle-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="mn-item-detail" hidden>
+            ${m.explain ? `<p class="mn-item-explain">${escapeHtml(m.explain)}</p>` : ''}
+            ${(m.details || []).length ? `
+            <ul class="mn-item-points">
+              ${m.details.map(d => `<li>${escapeHtml(d)}</li>`).join('')}
+            </ul>` : ''}
+          </div>` : ''}
         </article>
       `;
     }).join('');
+
+    // 折叠展开事件（事件委托）
+    listEl.onclick = e => {
+      const toggle = e.target.closest('.mn-item-toggle');
+      if (!toggle) return;
+      const item = toggle.closest('.mn-item');
+      const detail = item && item.querySelector('.mn-item-detail');
+      const textEl = toggle.querySelector('.toggle-text');
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      if (!detail) return;
+      detail.hidden = expanded;
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      if (textEl) textEl.textContent = expanded ? '展开详情' : '收起详情';
+      toggle.classList.toggle('open', !expanded);
+    };
   }
 
   /** 更新口诀总览面包屑 */
@@ -906,64 +933,50 @@
     }
   }
 
-  // ============ 分类导航（列表式，非卡片堆砌） ============
-  /** 渲染分类导航表格 */
+  // ============ 分类导航（紧凑双列网格，非卡片堆砌） ============
+  /**
+   * 渲染分类导航
+   * 设计：桌面双列网格，每行紧凑展示编号+名称+题数+进度条
+   * 去AI味：无卡片化、无translateX位移、用分隔线而非阴影
+   */
   function renderCategories() {
     const tableEl = $('#categories-table');
     if (!tableEl) return;
     const entries = Object.entries(CATEGORIES).filter(([k, m]) => m.count > 0);
-    const totalCount = entries.reduce((sum, [k, m]) => sum + m.count, 0);
 
-    // 表头
-    let html = `
-      <div class="categories-row categories-header-row" role="listitem">
-        <div class="cat-col-num">#</div>
-        <div class="cat-col-name">分类名称</div>
-        <div class="cat-col-count">题目数</div>
-        <div class="cat-col-progress">已练习</div>
-        <div class="cat-col-action">操作</div>
-      </div>
-    `;
-
-    // 各分类行
-    entries.forEach(([key, meta], i) => {
+    tableEl.innerHTML = entries.map(([key, meta], i) => {
       const answeredInCat = (meta.ids || []).filter(id => State.answered[id]).length;
       const progressPct = meta.count > 0 ? Math.round(answeredInCat / meta.count * 100) : 0;
-      html += `
-        <div class="categories-row category-row" data-cat="${key}" role="listitem" tabindex="0" style="--row-color:${meta.color}">
-          <div class="cat-col-num">${String(i + 1).padStart(2, '0')}</div>
-          <div class="cat-col-name">
-            <span class="cat-row-dot" style="background:${meta.color}" aria-hidden="true"></span>
-            <span class="cat-row-name">${escapeHtml(meta.name)}</span>
-          </div>
-          <div class="cat-col-count"><span class="cat-row-count">${meta.count}</span></div>
-          <div class="cat-col-progress">
-            <div class="cat-progress-bar" role="progressbar" aria-label="${escapeHtml(meta.name)}练习进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${progressPct}">
-              <div class="cat-progress-fill" style="width:${progressPct}%"></div>
+      return `
+        <div class="navcat-item" data-cat="${key}" role="listitem" tabindex="0" style="--item-color:${meta.color}">
+          <div class="navcat-num">${String(i + 1).padStart(2, '0')}</div>
+          <div class="navcat-body">
+            <div class="navcat-top">
+              <span class="navcat-name">${escapeHtml(meta.name)}</span>
+              <span class="navcat-count">${meta.count}<span class="navcat-unit">题</span></span>
             </div>
-            <span class="cat-progress-text">${answeredInCat}/${meta.count}</span>
+            <div class="navcat-progress">
+              <div class="navcat-track" role="progressbar" aria-label="${escapeHtml(meta.name)}练习进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${progressPct}">
+                <div class="navcat-bar" style="width:${progressPct}%"></div>
+              </div>
+              <span class="navcat-done">${answeredInCat}/${meta.count}</span>
+            </div>
           </div>
-          <div class="cat-col-action">
-            <button class="btn btn-ghost btn-sm cat-enter-btn" data-cat="${key}" type="button">
-              <span>进入练习</span>
-              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </button>
+          <div class="navcat-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </div>
         </div>
       `;
-    });
+    }).join('');
 
-    tableEl.innerHTML = html;
-
-    // 点击事件
     tableEl.onclick = e => {
-      const row = e.target.closest('.category-row');
+      const row = e.target.closest('.navcat-item');
       if (!row) return;
       enterCategory(row.dataset.cat);
     };
     tableEl.onkeydown = e => {
       if (e.key === 'Enter' || e.key === ' ') {
-        const row = e.target.closest('.category-row');
+        const row = e.target.closest('.navcat-item');
         if (row) { e.preventDefault(); enterCategory(row.dataset.cat); }
       }
     };
