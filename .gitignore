@@ -3,7 +3,7 @@
 Thumbs.db
 desktop.ini
 
-# 编辑器文件
+# 编辑器与 IDE 文件
 .vscode/
 .idea/
 *.swp
@@ -15,57 +15,20 @@ desktop.ini
 *.tmp
 *.bak
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.egg-info/
-.pytest_cache/
-
 # 依赖目录
 node_modules/
 
-# 原始爬取中间产物（保留 full 题库 JSON，忽略其他中间文件）
-raw_chapter*.html
-raw_sign_page.html
-kemu1_analysis_sample.json
-kemu1_question_bank.json
-kemu1_question_bank_enhanced.json
-kemu1_question_bank_simple.json
-kemu1_question_bank_with_analysis.json
-kemu1_stats.json
-
-# Python 脚本（构建工具，不需要部署）
-*.py
-
-# 图片匹配中间产物
-image_map.json
-image_match_result.json
-
-# 图片重命名/分析临时产物
-rename-map-raw.txt
-scripts/image-arch-report.json
-
-# 仅构建用的数据源与参考资料（保留本地，不进入仓库与部署包）
-kemu1_question_bank_full.json
-科目一考试口诀技巧.md
-科目一知识点.txt
-新建 文本文档.txt
-
-# 图片迁移工作目录（中间产物，不进入仓库）
-提取的图标图片/
-
-# Vite 构建产物
+# Vite 构建产物与缓存
 dist/
 dist-types/
 *.tsbuildinfo
 tsconfig.tsbuildinfo
+.vite/
 
 # 本地环境变量
 *.local
 .env.local
 .env.*.local
 
-# 临时构建信息
-.vite/
-
+# 原始抓取源数据(已处理为 src/data/ 与 public/images/, 仅本地保留作备份)
+C1科目一题目/
