@@ -1,0 +1,523 @@
+/* ===================================================================
+   动效系统 · 工业蚀刻科技派
+   - Scroll-Driven 入场动画（view timeline，主线程外）
+   - 微交互反馈（按钮按压、卡片浮起、图标缩放）
+   - 装饰几何图案（同心圆、菱形、刻度网格）
+   - 三色彩带、左侧色条、顶部条带
+   - 触控设备适配（移除粘滞 hover）
+   - View Transitions API 路由过渡
+   =================================================================== */
+
+/* ========== Scroll-Driven 入场动画 · 主线程外执行 ========== */
+/* 兼容性：Chrome 115+ / Edge 115+。不支持的浏览器降级为直接显示 */
+@supports (animation-timeline: view()) {
+  /* 通用滚动入场：从下淡入上浮 */
+  .scroll-in-up {
+    animation: scroll-in-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 22%;
+  }
+  @keyframes scroll-in-up {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 通用滚动入场：从左淡入右移 */
+  .scroll-in-left {
+    animation: scroll-in-left linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 25%;
+  }
+  @keyframes scroll-in-left {
+    from { opacity: 0; transform: translateX(-24px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* 滚动入场：缩放淡入（用于卡片网格） */
+  .scroll-in-scale {
+    animation: scroll-in-scale linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 20%;
+  }
+  @keyframes scroll-in-scale {
+    from { opacity: 0; transform: scale(0.94) translateY(16px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* 滚动入场：右下角装饰图案旋转出现 */
+  .scroll-in-rotate {
+    animation: scroll-in-rotate linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+  }
+  @keyframes scroll-in-rotate {
+    from { opacity: 0; transform: rotate(-12deg) scale(0.8); }
+    to { opacity: var(--deco-opacity, 0.08); transform: rotate(0) scale(1); }
+  }
+}
+
+/* 不支持 animation-timeline 的浏览器：直接显示 */
+@supports not (animation-timeline: view()) {
+  .scroll-in-up,
+  .scroll-in-left,
+  .scroll-in-scale,
+  .scroll-in-rotate {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ========== 阅读进度条 · scroll-timeline 驱动 ========== */
+@supports (animation-timeline: scroll()) {
+  .reading-progress-fill {
+    transform-origin: left;
+    animation: reading-progress linear;
+    animation-timeline: scroll(root);
+  }
+  @keyframes reading-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+}
+
+/* ========== 微交互 · 按钮按压反馈 ========== */
+.btn:not(:disabled):active {
+  transform: translateY(1px);
+  transition: transform 0ms, box-shadow 0ms;
+}
+.btn-primary:not(:disabled):active {
+  box-shadow: var(--shadow-inset), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.btn-ghost:not(:disabled):active {
+  background: var(--bg-sunken);
+}
+
+/* ========== 微交互 · 图标按钮缩放反馈 ========== */
+.icon-btn {
+  transition: transform var(--dur-fast) var(--ease-precision),
+              color var(--dur-fast) var(--ease-precision),
+              background-color var(--dur-fast) var(--ease-precision),
+              box-shadow var(--dur-fast) var(--ease-precision);
+}
+.icon-btn:not(:disabled):hover {
+  transform: scale(1.08);
+}
+.icon-btn:not(:disabled):active {
+  transform: scale(0.92);
+  transition: transform 0ms;
+}
+
+/* ========== 微交互 · 复制按钮反馈（1.5s 复位） ========== */
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-3);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xs);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-precision);
+}
+.copy-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary-border);
+  background: var(--primary-bg);
+}
+.copy-btn:active {
+  transform: scale(0.96);
+  transition: transform 0ms;
+}
+.copy-btn.copied {
+  color: var(--success);
+  border-color: var(--success);
+  background: var(--success-soft);
+  animation: copy-pulse 0.4s var(--ease-spring);
+}
+@keyframes copy-pulse {
+  0% { transform: scale(0.94); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* ========== 装饰几何图案 · 卡片右下角同心圆 ========== */
+.deco-circles {
+  position: absolute;
+  pointer-events: none;
+  opacity: var(--deco-opacity, 0.08);
+  transition: opacity var(--dur-slow) var(--ease-smooth);
+  z-index: 0;
+}
+.deco-circles svg {
+  width: 100%;
+  height: 100%;
+}
+.group:hover .deco-circles,
+.card-hover-target:hover .deco-circles {
+  opacity: calc(var(--deco-opacity, 0.08) * 2);
+}
+
+/* 装饰几何图案 · 卡片右上角菱形 */
+.deco-diamond {
+  position: absolute;
+  pointer-events: none;
+  opacity: calc(var(--deco-opacity, 0.08) * 0.75);
+  transition: opacity var(--dur-slow) var(--ease-smooth);
+  z-index: 0;
+}
+.group:hover .deco-diamond,
+.card-hover-target:hover .deco-diamond {
+  opacity: calc(var(--deco-opacity, 0.08) * 1.5);
+}
+
+/* ========== 三色彩带 · 卡片底部装饰 ========== */
+.card-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    var(--primary) 0%,
+    var(--primary) 33%,
+    var(--accent) 33%,
+    var(--accent) 66%,
+    var(--info) 66%,
+    var(--info) 100%);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-smooth);
+  pointer-events: none;
+  z-index: 1;
+}
+.group:hover .card-strip,
+.card-hover-target:hover .card-strip {
+  opacity: 1;
+}
+
+/* 顶部三色彩带（导航/模态顶部装饰） */
+.top-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    var(--primary) 0%,
+    var(--primary) 33%,
+    var(--accent) 33%,
+    var(--accent) 66%,
+    var(--info) 66%,
+    var(--info) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ========== 左侧色条 · 卡片左侧装饰 ========== */
+.card-bar {
+  position: relative;
+  flex-shrink: 0;
+  width: 4px;
+  background: var(--card-bar-color, var(--primary));
+  border-radius: var(--r-xs);
+  overflow: hidden;
+}
+.card-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    transparent 30%);
+  pointer-events: none;
+}
+
+/* ========== Hover 显示操作按钮（卡片场景） ========== */
+.hover-show {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-fast) var(--ease-precision);
+}
+.group:hover .hover-show,
+.hover-target:hover .hover-show,
+.hover-target:focus-within .hover-show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ========== 键盘提示 kbd · 几何键帽 ========== */
+kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-2);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-xs);
+  /* 凹凸键帽质感 */
+  box-shadow: var(--shadow-inset), inset 0 -1px 0 var(--edge-dark);
+  line-height: 1;
+  letter-spacing: 0;
+}
+kbd + kbd {
+  margin-left: 2px;
+}
+
+/* ========== 术语 tooltip · 悬停弹窗 ========== */
+.term {
+  position: relative;
+  display: inline;
+  color: var(--primary);
+  border-bottom: 1px dotted var(--primary-border);
+  cursor: help;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast);
+}
+.term:hover {
+  color: var(--primary-hover);
+  border-bottom-color: var(--primary);
+}
+.term-popup {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(4px);
+  min-width: 220px;
+  max-width: 320px;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-elev);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  /* 凸起金属质感 */
+  box-shadow: var(--shadow-lg), inset 0 1px 0 var(--edge-light);
+  color: var(--text-2);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: normal;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--dur-fast), transform var(--dur-fast), visibility var(--dur-fast);
+  z-index: 50;
+  pointer-events: none;
+}
+.term-popup::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--bg-elev);
+}
+.term:hover .term-popup,
+.term:focus-within .term-popup {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========== 折叠面板 details · 知识章节 ========== */
+details.accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--bg-card);
+  /* 凸起金属质感 */
+  box-shadow: var(--shadow-convex);
+  overflow: hidden;
+  transition: box-shadow var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth);
+}
+details.accordion + details.accordion {
+  margin-top: var(--sp-3);
+}
+details.accordion[open] {
+  box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-light);
+  border-color: var(--border-strong);
+}
+details.accordion > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-1);
+  list-style: none;
+  user-select: none;
+  transition: background var(--dur-fast);
+}
+details.accordion > summary::-webkit-details-marker {
+  display: none;
+}
+details.accordion > summary:hover {
+  background: var(--bg-hover);
+}
+details.accordion > summary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+/* 折叠指示器 · 几何加号转叉号 */
+details.accordion > summary .accordion-icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--text-3);
+  transition: transform var(--dur-base) var(--ease-spring), color var(--dur-fast);
+}
+details.accordion > summary .accordion-icon::before,
+details.accordion > summary .accordion-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: currentColor;
+  transition: transform var(--dur-base) var(--ease-spring);
+}
+details.accordion > summary .accordion-icon::before {
+  width: 12px;
+  height: 1.5px;
+  transform: translate(-50%, -50%);
+}
+details.accordion > summary .accordion-icon::after {
+  width: 1.5px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+}
+details.accordion[open] > summary .accordion-icon {
+  color: var(--primary);
+  transform: rotate(180deg);
+}
+details.accordion[open] > summary .accordion-icon::after {
+  transform: translate(-50%, -50%) scaleY(0);
+}
+details.accordion > .accordion-body {
+  padding: 0 var(--sp-5) var(--sp-5);
+  border-top: 1px solid var(--divider);
+  padding-top: var(--sp-4);
+  animation: accordion-open var(--dur-slow) var(--ease-smooth);
+}
+@keyframes accordion-open {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== 触控设备适配 · 移除粘滞 hover ========== */
+@media (hover: none) and (pointer: coarse) {
+  /* 触屏设备上 hover 状态不可控，统一移除以避免"粘滞悬停"问题 */
+  .btn:hover:not(:disabled),
+  .icon-btn:hover:not(:disabled),
+  .cat-card:hover,
+  .quick-card:hover,
+  .stat-card:hover,
+  .qcard:hover,
+  .term:hover,
+  .copy-btn:hover {
+    transform: none;
+    box-shadow: inherit;
+    color: inherit;
+    border-color: inherit;
+    background: inherit;
+  }
+  /* hover-only 显示的元素在触屏上常驻显示 */
+  .hover-show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* 装饰图案在触屏上保持基础透明度 */
+  .deco-circles,
+  .deco-diamond {
+    opacity: var(--deco-opacity, 0.08) !important;
+  }
+  /* 术语 tooltip 在触屏改为点击触发（由 JS 控制） */
+  .term-popup {
+    position: fixed;
+    transform: none;
+  }
+}
+
+/* ========== View Transitions API · 路由过渡 ========== */
+@supports (view-transition-name: none) {
+  /* 视图根容器命名 */
+  .view {
+    view-transition-name: view-root;
+  }
+  /* 默认过渡：淡入淡出 + 微缩放 */
+  ::view-transition-old(view-root) {
+    animation: vt-out var(--dur-slow) var(--ease-smooth) both;
+  }
+  ::view-transition-new(view-root) {
+    animation: vt-in var(--dur-slow) var(--ease-smooth) both;
+  }
+  @keyframes vt-out {
+    to { opacity: 0; transform: scale(0.98); }
+  }
+  @keyframes vt-in {
+    from { opacity: 0; transform: scale(1.02); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+/* ========== 路由进入动画 utility（无 view-transition 时的降级） ========== */
+.route-enter {
+  animation: route-enter var(--dur-slow) var(--ease-smooth) both;
+}
+@keyframes route-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== 卡片悬停浮起 utility ========== */
+.hover-float {
+  transition: transform var(--dur-base) var(--ease-smooth),
+              box-shadow var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth);
+}
+.hover-float:hover {
+  transform: translateY(-2px);
+}
+
+/* ========== 标记动画 · pulse-dot 已在 views.css 中定义，此处补充通用脉冲 ========== */
+.pulse {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ========== 数据加载骨架闪烁（已在 components.css 中定义，此处增强方向感） ========== */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 100%);
+  background-size: 200% 100%;
+  animation: skeleton-sweep 1.6s ease-in-out infinite;
+}
+@keyframes skeleton-sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

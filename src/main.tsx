@@ -13,6 +13,7 @@ import '@/styles/layout.css';
 import '@/styles/components.css';
 import '@/styles/views.css';
 import '@/styles/responsive.css';
+import '@/styles/animations.css';
 
 // 全局错误处理：捕获未处理异常，避免白屏
 window.addEventListener('error', (e) => {

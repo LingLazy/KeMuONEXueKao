@@ -30,6 +30,7 @@ export default function KnowledgeView() {
   const [activeChapter, setActiveChapter] = useState<string>('');
   const [search, setSearch] = useState('');
   const [showToc, setShowToc] = useState(false);
+  const [readingProgress, setReadingProgress] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
   // 加载知识内容（支持重试时的 loading 态）
@@ -89,33 +90,36 @@ export default function KnowledgeView() {
     return renderMarkdown(result);
   }, [markdown, search]);
 
-  // 滚动监听：高亮当前章节（使用 rAF 节流避免长文档卡顿）
+  // 滚动监听：高亮当前章节 + 阅读进度（使用 rAF 节流避免长文档卡顿）
   useEffect(() => {
     if (!markdown || chapters.length === 0) return;
-    const container = contentRef.current;
-    if (!container) return;
     let rafId: number | null = null;
     const onScroll = () => {
       if (rafId !== null) return; // 已有未执行的 rAF
       rafId = requestAnimationFrame(() => {
         rafId = null;
+        // 章节高亮：基于 heading 相对视口的位置判断
         const headings = chapters
           .map((c) => document.getElementById(`chap-${c.id}`))
           .filter((el): el is HTMLElement => el !== null);
-        const scrollTop = container.scrollTop + 120;
+        const navH = 80; // 导航栏高度 + 偏移量
         let current = chapters[0]?.id ?? '';
         headings.forEach((h) => {
-          if (h.offsetTop <= scrollTop) {
+          if (h.getBoundingClientRect().top <= navH) {
             current = h.id;
           }
         });
         setActiveChapter(current);
+        // 阅读进度：基于整个文档的滚动比例
+        const docScrollMax = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docScrollMax > 0 ? Math.min(100, Math.round((window.scrollY / docScrollMax) * 100)) : 0;
+        setReadingProgress(progress);
       });
     };
-    container.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => {
-      container.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', onScroll);
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, [markdown, chapters]);
@@ -123,11 +127,9 @@ export default function KnowledgeView() {
   // 跳转到章节
   const jumpTo = (id: string) => {
     const el = document.getElementById(`chap-${id}`);
-    if (el && contentRef.current) {
-      contentRef.current.scrollTo({
-        top: el.offsetTop - 80,
-        behavior: 'smooth'
-      });
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
       setActiveChapter(id);
     }
     setShowToc(false);
@@ -178,6 +180,13 @@ export default function KnowledgeView() {
 
   return (
     <div className="view view-knowledge">
+      {/* 阅读进度条 · 固定在视图顶部 */}
+      <div className="reading-progress-bar" aria-hidden="true">
+        <div
+          className="reading-progress-fill-js"
+          style={{ width: `${readingProgress}%` }}
+        />
+      </div>
       <div className="view-container">
         {/* 标题区 */}
         <header className="section-header">
@@ -334,6 +343,10 @@ function renderMarkdown(md: string): string {
     let r = escapeHtml(s);
     // 搜索高亮
     r = r.replace(/==(.+?)==/g, '<mark class="kw search-hit">$1</mark>');
+    // 术语 tooltip：?[术语](解释)? → 悬停弹窗
+    r = r.replace(/\?\[([^\]]+)\]\(([^)]+)\)\?/g, (_m, term: string, tip: string) => {
+      return `<span class="term">${term}<span class="term-popup">${tip}</span></span>`;
+    });
     // 加粗
     r = r.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
     r = r.replace(/__([^_]+)__/g, '<strong>$1</strong>');

@@ -131,6 +131,11 @@
   opacity: 0;
   transition: opacity var(--dur-base);
 }
+/* 各颜色变体的左侧色条 */
+.stat-primary::before { background: var(--primary); }
+.stat-success::before { background: var(--success); }
+.stat-accent::before { background: var(--accent); }
+.stat-info::before { background: var(--info); }
 .stat-card:hover {
   box-shadow: var(--shadow-md), inset 0 1px 0 var(--edge-light);
   border-color: var(--border-strong);
@@ -138,6 +143,12 @@
 }
 .stat-card:hover::before {
   opacity: 1;
+}
+/* 确保卡片内容在装饰元素之上 */
+.stat-card > .stat-icon,
+.stat-card > .stat-info {
+  position: relative;
+  z-index: 1;
 }
 .stat-icon {
   width: 44px;
@@ -314,6 +325,13 @@
 .cat-card:hover .cat-card-arrow {
   color: var(--cat-color);
   transform: translateX(4px);
+}
+/* 确保卡片内容在装饰元素之上 */
+.cat-card > .cat-card-index,
+.cat-card > .cat-card-body,
+.cat-card > .cat-card-arrow {
+  position: relative;
+  z-index: 1;
 }
 
 /* 雷达图容器 */
@@ -1531,6 +1549,14 @@
   box-shadow: inset 0 0 0 1px var(--primary-border);
   letter-spacing: 0.02em;
 }
+/* 复制口诀操作区 */
+.mnemonic-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--divider);
+}
 
 /* ========== CategoriesView 分类视图 ========== */
 .view-categories {
@@ -1760,6 +1786,23 @@
 }
 
 /* ========== KnowledgeView 知识视图 ========== */
+/* 阅读进度条 · 固定在导航栏下方 */
+.reading-progress-bar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 90;
+  height: 3px;
+  background: var(--bg-sunken);
+  border-bottom: 1px solid var(--divider);
+  overflow: hidden;
+}
+.reading-progress-fill-js {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 50%, var(--info) 100%);
+  box-shadow: 0 0 8px var(--primary-glow, rgba(20, 86, 219, 0.4));
+  transition: width 0.1s linear;
+}
+
 .view-knowledge {
   padding-bottom: var(--sp-12);
 }

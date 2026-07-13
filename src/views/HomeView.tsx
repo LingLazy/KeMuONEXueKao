@@ -207,11 +207,12 @@ export default function HomeView() {
               <motion.button
                 key={gk}
                 type="button"
-                className="cat-card"
+                className="cat-card card-hover-target"
                 data-cat={gk}
                 style={{
                   '--cat-color': group.color,
-                  '--cat-color-bg': colorBg
+                  '--cat-color-bg': colorBg,
+                  '--deco-opacity': 0.1
                 } as React.CSSProperties}
                 onClick={() => enterCategory(gk)}
                 initial={{ opacity: 0, y: 20 }}
@@ -220,6 +221,18 @@ export default function HomeView() {
                 whileHover={{ y: -4 }}
                 aria-label={`进入${group.name}分类，共${count}题`}
               >
+                {/* 右下角同心圆装饰（hover 透明度倍增） */}
+                <svg
+                  className="deco-circles"
+                  style={{ right: '-24px', bottom: '-24px', width: '128px', height: '128px', color: group.color }}
+                  viewBox="0 0 128 128"
+                  aria-hidden="true"
+                >
+                  <circle cx="64" cy="64" r="56" stroke="currentColor" strokeWidth="1" fill="none" />
+                  <circle cx="64" cy="64" r="40" stroke="currentColor" strokeWidth="1" fill="none" />
+                  <circle cx="64" cy="64" r="24" stroke="currentColor" strokeWidth="1" fill="none" />
+                  <circle cx="64" cy="64" r="8" stroke="currentColor" strokeWidth="1" fill="none" />
+                </svg>
                 <div className="cat-card-index">{String(i + 1).padStart(2, '0')}</div>
                 <div className="cat-card-body">
                   <h3 className="cat-card-name">{group.name}</h3>
@@ -238,6 +251,8 @@ export default function HomeView() {
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </div>
+                {/* 底部三色彩带（hover 显示） */}
+                <span className="card-strip" aria-hidden="true" />
               </motion.button>
             );
           })}
@@ -315,7 +330,7 @@ function StatCard({
 }) {
   return (
     <motion.div
-      className={`stat-card stat-${color}`}
+      className={`stat-card stat-${color} card-hover-target`}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -2 }}
@@ -329,6 +344,8 @@ function StatCard({
         <span className="stat-value">{value}{total ? <span className="stat-total">/{total}</span> : null}</span>
         <span className="stat-label">{label}</span>
       </div>
+      {/* 底部三色彩带（hover 显示） */}
+      <span className="card-strip" aria-hidden="true" />
     </motion.div>
   );
 }
@@ -350,11 +367,21 @@ function QuickCard({
   return (
     <motion.button
       type="button"
-      className="quick-card"
-      style={{ '--qc-color': color } as React.CSSProperties}
+      className="quick-card card-hover-target"
+      style={{ '--qc-color': color, '--deco-opacity': 0.1 } as React.CSSProperties}
       onClick={onClick}
       whileHover={{ y: -3 }}
     >
+      {/* 左上角菱形几何装饰（hover 透明度倍增） */}
+      <svg
+        className="deco-diamond"
+        style={{ top: '14px', left: '14px', width: '20px', height: '20px', color }}
+        viewBox="0 0 20 20"
+        aria-hidden="true"
+      >
+        <rect x="5" y="0" width="14.14" height="14.14" transform="rotate(45 5 0)" stroke="currentColor" strokeWidth="1" fill="none" />
+        <rect x="9" y="4" width="5.66" height="5.66" transform="rotate(45 9 4)" stroke="currentColor" strokeWidth="1" fill="none" />
+      </svg>
       <div className="quick-card-icon" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           {QUICK_ICONS[icon]}
@@ -362,6 +389,8 @@ function QuickCard({
       </div>
       <h3 className="quick-card-title">{title}</h3>
       <p className="quick-card-desc">{desc}</p>
+      {/* 底部三色彩带（hover 显示） */}
+      <span className="card-strip" aria-hidden="true" />
     </motion.button>
   );
 }

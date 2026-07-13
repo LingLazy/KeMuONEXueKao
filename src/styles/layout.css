@@ -15,19 +15,43 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--bg-card);
+  background: color-mix(in srgb, var(--bg-card) 96%, transparent);
   border-bottom: 1px solid var(--border-strong);
   height: var(--nav-h);
   /* 底部蚀刻高光边（金属横梁感） */
   box-shadow: inset 0 -1px 0 var(--edge-light);
+  /* 轻微毛玻璃（非滚动状态） */
+  backdrop-filter: blur(8px) saturate(1.1);
+  -webkit-backdrop-filter: blur(8px) saturate(1.1);
   transition: box-shadow var(--dur-base) var(--ease-smooth),
-              background var(--dur-base) var(--ease-smooth);
+              background var(--dur-base) var(--ease-smooth),
+              backdrop-filter var(--dur-base) var(--ease-smooth);
+}
+/* 顶部三色彩带 · 品牌标识装饰 */
+#topnav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    var(--primary) 0%,
+    var(--primary) 33%,
+    var(--accent) 33%,
+    var(--accent) 66%,
+    var(--info) 66%,
+    var(--info) 100%);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.85;
 }
 #topnav.scrolled {
   box-shadow: var(--shadow-sm), inset 0 -1px 0 var(--edge-light);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: color-mix(in srgb, var(--bg-card) 92%, transparent);
+  /* 增强毛玻璃（滚动状态） */
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
 }
 
 .nav-inner {
