@@ -185,7 +185,7 @@
   }
 
   // ============ 视图切换 ============
-  const VALID_VIEWS = ['home', 'practice', 'exam', 'mnemonics', 'categories'];
+  const VALID_VIEWS = ['home', 'knowledge', 'practice', 'exam', 'mnemonics', 'categories'];
 
   /**
    * 切换视图
@@ -217,6 +217,7 @@
       // 首次进入练习视图时初始化侧栏（若未初始化）
       if (!$('#category-list').children.length) renderSidebar();
     }
+    else if (name === 'knowledge') renderKnowledge();
     else if (name === 'exam') updateExamStartPanel();
     else if (name === 'mnemonics') renderMnemonics();
     else if (name === 'categories') renderCategories();
@@ -930,6 +931,305 @@
         count = MNEMONICS.filter(m => m.cat === mnemonicsFilter).length;
       }
       crumbCount.textContent = `${count} 条`;
+    }
+  }
+
+  // ============ 知识学习（系统化知识点教学） ============
+  /** 知识学习视图状态 */
+  const KnowledgeState = {
+    raw: '',            // 原始 markdown 文本
+    chapters: [],       // 解析后的章节 [{id, title, html, text}]
+    loaded: false,      // 是否已加载
+    filter: ''          // 搜索关键词
+  };
+
+  /**
+   * 轻量 Markdown 解析器
+   * 支持：标题(h1-h4)、无序列表、有序列表、引用块、分割线、表格、加粗、行内代码、段落
+   * 输入：md 原始 markdown 字符串
+   * 返回：HTML 字符串
+   */
+  function parseMarkdown(md) {
+    if (!md) return '';
+    const lines = md.split('\n');
+    const html = [];
+    let i = 0;
+    let inList = false;       // 当前是否在无序列表中
+    let inOrderedList = false; // 当前是否在有序列表中
+    let listType = '';        // 'ul' | 'ol'
+
+    /** 关闭当前列表 */
+    const closeList = () => {
+      if (inList || inOrderedList) {
+        html.push(`</${listType}>`);
+        inList = false;
+        inOrderedList = false;
+      }
+    };
+
+    /** 行内格式化：加粗、行内代码、链接 */
+    const inline = (text) => {
+      let s = escapeHtml(text);
+      // 行内代码 `code`
+      s = s.replace(/`([^`]+)`/g, '<code class="md-code">$1</code>');
+      // 加粗 **text**
+      s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return s;
+    };
+
+    while (i < lines.length) {
+      const line = lines[i];
+      const trimmed = line.trim();
+
+      // 空行
+      if (!trimmed) {
+        closeList();
+        i++;
+        continue;
+      }
+
+      // 分割线 ---
+      if (/^---+$/.test(trimmed)) {
+        closeList();
+        html.push('<hr class="md-hr">');
+        i++;
+        continue;
+      }
+
+      // 标题 # ## ### ####
+      const headingMatch = trimmed.match(/^(#{1,4})\s+(.+)$/);
+      if (headingMatch) {
+        closeList();
+        const level = headingMatch[1].length;
+        const text = headingMatch[2];
+        // 生成锚点ID（去除特殊字符）
+        const id = text.replace(/[<>！？，。、（）【】《》""'']/g, '').replace(/\s+/g, '-').substring(0, 40);
+        html.push(`<h${level} class="md-h md-h${level}" id="md-${id}">${inline(text)}</h${level}>`);
+        i++;
+        continue;
+      }
+
+      // 引用块 >
+      if (trimmed.startsWith('>')) {
+        closeList();
+        const quoteText = trimmed.replace(/^>\s?/, '');
+        html.push(`<blockquote class="md-quote">${inline(quoteText)}</blockquote>`);
+        i++;
+        continue;
+      }
+
+      // 表格 | a | b |
+      if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+        closeList();
+        // 检查下一行是否是分隔行 |---|---|
+        const nextLine = (lines[i + 1] || '').trim();
+        if (/^\|[\s-:|]+\|$/.test(nextLine)) {
+          const headers = trimmed.split('|').slice(1, -1).map(c => c.trim());
+          const rows = [];
+          i += 2;
+          while (i < lines.length && lines[i].trim().startsWith('|') && lines[i].trim().endsWith('|')) {
+            rows.push(lines[i].trim().split('|').slice(1, -1).map(c => c.trim()));
+            i++;
+          }
+          let tableHtml = '<div class="md-table-wrap"><table class="md-table"><thead><tr>';
+          headers.forEach(h => { tableHtml += `<th>${inline(h)}</th>`; });
+          tableHtml += '</tr></thead><tbody>';
+          rows.forEach(row => {
+            tableHtml += '<tr>';
+            row.forEach(cell => { tableHtml += `<td>${inline(cell)}</td>`; });
+            tableHtml += '</tr>';
+          });
+          tableHtml += '</tbody></table></div>';
+          html.push(tableHtml);
+          continue;
+        }
+      }
+
+      // 无序列表 - * +
+      const ulMatch = trimmed.match(/^[-*+]\s+(.+)$/);
+      if (ulMatch) {
+        if (!inList) {
+          closeList();
+          html.push('<ul class="md-ul">');
+          inList = true;
+          listType = 'ul';
+        }
+        html.push(`<li>${inline(ulMatch[1])}</li>`);
+        i++;
+        continue;
+      }
+
+      // 有序列表 1. 2.
+      const olMatch = trimmed.match(/^\d+\.\s+(.+)$/);
+      if (olMatch) {
+        if (!inOrderedList) {
+          closeList();
+          html.push('<ol class="md-ol">');
+          inOrderedList = true;
+          listType = 'ol';
+        }
+        html.push(`<li>${inline(olMatch[1])}</li>`);
+        i++;
+        continue;
+      }
+
+      // 普通段落
+      closeList();
+      html.push(`<p class="md-p">${inline(trimmed)}</p>`);
+      i++;
+    }
+    closeList();
+    return html.join('\n');
+  }
+
+  /**
+   * 从 markdown 中提取章节（## 二级标题）
+   * 返回：[{id, title, html, text}] 数组
+   */
+  function extractChapters(md) {
+    if (!md) return [];
+    const lines = md.split('\n');
+    const chapters = [];
+    let current = null;     // 当前章节 {title, startLine}
+    let buffer = [];        // 当前章节内容行
+
+    lines.forEach((line, idx) => {
+      const match = line.match(/^##\s+(.+)$/);
+      if (match) {
+        // 保存上一章
+        if (current) {
+          const content = buffer.join('\n');
+          chapters.push({
+            id: 'md-' + current.title.replace(/[<>！？，。、（）【】《》""'']/g, '').replace(/\s+/g, '-').substring(0, 40),
+            title: current.title,
+            html: parseMarkdown(content),
+            text: content.replace(/[#*>`|]/g, '').trim()
+          });
+        }
+        current = { title: match[1].trim(), startLine: idx };
+        buffer = [];
+      } else if (current) {
+        buffer.push(line);
+      }
+    });
+    // 保存最后一章
+    if (current) {
+      const content = buffer.join('\n');
+      chapters.push({
+        id: 'md-' + current.title.replace(/[<>！？，。、（）【】《》""'']/g, '').replace(/\s+/g, '-').substring(0, 40),
+        title: current.title,
+        html: parseMarkdown(content),
+        text: content.replace(/[#*>`|]/g, '').trim()
+      });
+    }
+    return chapters;
+  }
+
+  /**
+   * 渲染知识学习视图
+   * 流程：加载markdown → 解析章节 → 渲染目录TOC + 内容
+   * 支持搜索过滤章节
+   */
+  async function renderKnowledge() {
+    const contentEl = $('#knowledge-content');
+    const tocEl = $('#knowledge-toc');
+    const countEl = $('#knowledge-count');
+    if (!contentEl || !tocEl) return;
+
+    // 首次进入：加载并解析 markdown
+    if (!KnowledgeState.loaded) {
+      contentEl.innerHTML = '<div class="loading-state">正在加载知识点...</div>';
+      try {
+        const resp = await fetch('docs/knowledge.md');
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        KnowledgeState.raw = await resp.text();
+        KnowledgeState.chapters = extractChapters(KnowledgeState.raw);
+        KnowledgeState.loaded = true;
+      } catch (err) {
+        contentEl.innerHTML = '<div class="empty-state">知识点加载失败：' + escapeHtml(err.message) + '<br>请刷新页面重试。</div>';
+        return;
+      }
+    }
+
+    const chapters = KnowledgeState.chapters;
+    if (!chapters.length) {
+      contentEl.innerHTML = '<div class="empty-state">暂无知识点内容</div>';
+      return;
+    }
+
+    // 更新章节计数
+    if (countEl) countEl.textContent = chapters.length + ' 章';
+
+    // 搜索过滤
+    const q = KnowledgeState.filter.trim().toLowerCase();
+    const filtered = q
+      ? chapters.filter(c =>
+          c.title.toLowerCase().includes(q) || c.text.toLowerCase().includes(q)
+        )
+      : chapters;
+
+    // 渲染左侧目录TOC
+    tocEl.innerHTML = filtered.map((c, i) => `
+      <a class="knowledge-toc-item" href="#${c.id}" data-target="${c.id}" role="listitem">
+        <span class="knowledge-toc-num">${String(i + 1).padStart(2, '0')}</span>
+        <span class="knowledge-toc-title">${escapeHtml(c.title)}</span>
+      </a>
+    `).join('');
+
+    // 目录点击：平滑滚动到对应章节
+    tocEl.onclick = e => {
+      const item = e.target.closest('.knowledge-toc-item');
+      if (!item) return;
+      e.preventDefault();
+      const target = document.getElementById(item.dataset.target);
+      if (target) {
+        const navH = 56;
+        const top = target.getBoundingClientRect().top + window.scrollY - navH - 12;
+        window.scrollTo({ top, behavior: 'smooth' });
+        // 高亮当前目录项
+        $$('.knowledge-toc-item', tocEl).forEach(el => el.classList.remove('active'));
+        item.classList.add('active');
+      }
+    };
+
+    // 渲染右侧内容
+    if (!filtered.length) {
+      contentEl.innerHTML = '<div class="empty-state">未找到匹配的知识点</div>';
+      return;
+    }
+
+    contentEl.innerHTML = filtered.map(c => `
+      <section class="md-chapter" id="${c.id}">
+        ${c.html}
+      </section>
+    `).join('');
+
+    // 滚动监听：高亮当前可见章节的目录项
+    if (!KnowledgeState._scrollBound) {
+      KnowledgeState._scrollBound = true;
+      let scrollTimer = null;
+      window.addEventListener('scroll', () => {
+        if (State.view !== 'knowledge') return;
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          const navH = 56 + 20;
+          let activeId = null;
+          for (const c of filtered) {
+            const el = document.getElementById(c.id);
+            if (!el) continue;
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= navH && rect.bottom > navH) {
+              activeId = c.id;
+              break;
+            }
+          }
+          if (activeId) {
+            $$('.knowledge-toc-item', tocEl).forEach(el => {
+              el.classList.toggle('active', el.dataset.target === activeId);
+            });
+          }
+        }, 80);
+      }, { passive: true });
     }
   }
 
@@ -1662,6 +1962,18 @@
         renderMnemonicList();
         updateMnemonicsBreadcrumb();
       }, 220);
+    });
+
+    // ===== 知识学习搜索事件 =====
+    const knowledgeSearchInput = $('#knowledge-search');
+    let knowledgeSearchTimer = null;
+    if (knowledgeSearchInput) knowledgeSearchInput.addEventListener('input', e => {
+      const val = e.target.value;
+      if (knowledgeSearchTimer) clearTimeout(knowledgeSearchTimer);
+      knowledgeSearchTimer = setTimeout(() => {
+        KnowledgeState.filter = val;
+        renderKnowledge();
+      }, 250);
     });
 
     // ===== 模拟考试事件 =====

@@ -47,6 +47,7 @@
     </a>
     <nav class="nav-links" aria-label="主导航">
       <a href="#home" class="nav-link" data-view="home" aria-current="page">主页</a>
+      <a href="#knowledge" class="nav-link" data-view="knowledge">知识学习</a>
       <a href="#practice" class="nav-link" data-view="practice">题库练习</a>
       <a href="#exam" class="nav-link" data-view="exam">模拟考试</a>
       <a href="#mnemonics" class="nav-link" data-view="mnemonics">口诀总览</a>
@@ -143,11 +144,19 @@
       <div class="section-header">
         <span class="section-eyebrow">FEATURES</span>
         <h2 class="section-title">核心功能</h2>
-        <p class="section-desc">四大学习模式，覆盖记忆、练习、考试、查阅全场景</p>
+        <p class="section-desc">五大学习模式，覆盖知识、记忆、练习、考试、查阅全场景</p>
       </div>
       <div class="features-grid">
-        <article class="feature-card" data-go="practice">
+        <article class="feature-card" data-go="knowledge">
           <div class="feature-icon feature-icon-1" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h3 class="feature-title">知识学习</h3>
+          <p class="feature-desc">系统化知识点教学，覆盖交通法规、安全驾驶、信号识别、应急处置等十大章节，建立完整知识框架。</p>
+          <div class="feature-arrow" aria-hidden="true">→</div>
+        </article>
+        <article class="feature-card" data-go="practice">
+          <div class="feature-icon feature-icon-2" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
           <h3 class="feature-title">题库练习</h3>
@@ -155,7 +164,7 @@
           <div class="feature-arrow" aria-hidden="true">→</div>
         </article>
         <article class="feature-card feature-card-accent" data-go="exam">
-          <div class="feature-icon feature-icon-2" aria-hidden="true">
+          <div class="feature-icon feature-icon-3" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <h3 class="feature-title">模拟考试</h3>
@@ -163,19 +172,11 @@
           <div class="feature-arrow" aria-hidden="true">→</div>
         </article>
         <article class="feature-card" data-go="mnemonics">
-          <div class="feature-icon feature-icon-3" aria-hidden="true">
+          <div class="feature-icon feature-icon-4" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           </div>
           <h3 class="feature-title">口诀总览</h3>
           <p class="feature-desc">76 条速记口诀按分类整理，分栏式查阅。每条均附详细解释与适用场景，配合练习效果更佳。</p>
-          <div class="feature-arrow" aria-hidden="true">→</div>
-        </article>
-        <article class="feature-card" data-go="categories">
-          <div class="feature-icon feature-icon-4" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          </div>
-          <h3 class="feature-title">分类导航</h3>
-          <p class="feature-desc">24 个分类列表式浏览，点击即进入对应分类题目练习。针对性强化薄弱环节。</p>
           <div class="feature-arrow" aria-hidden="true">→</div>
         </article>
       </div>
@@ -512,6 +513,38 @@
         <p class="section-desc">点击任意分类进入对应题目练习，列表式浏览更高效。</p>
       </header>
       <div class="categories-table" id="categories-table" role="list"></div>
+    </div>
+  </section>
+
+  <!-- ========== 知识学习视图 ========== -->
+  <section id="view-knowledge" class="view" aria-labelledby="knowledge-title">
+    <div class="knowledge-layout">
+      <!-- 左侧目录 -->
+      <aside class="knowledge-aside" aria-label="知识目录">
+        <div class="knowledge-aside-header">
+          <span class="knowledge-aside-title">知识目录</span>
+          <span class="knowledge-aside-count" id="knowledge-count">10 章</span>
+        </div>
+        <div class="knowledge-aside-search">
+          <svg class="search-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="knowledge-search" placeholder="搜索知识点..." aria-label="搜索知识点">
+        </div>
+        <nav class="knowledge-aside-list" id="knowledge-toc" role="navigation">
+          <!-- 目录由JS动态生成 -->
+        </nav>
+      </aside>
+
+      <!-- 右侧内容 -->
+      <div class="knowledge-main">
+        <header class="knowledge-header">
+          <span class="section-eyebrow">KNOWLEDGE</span>
+          <h2 class="section-title" id="knowledge-title">系统<span class="title-accent">知识学习</span></h2>
+          <p class="section-desc">基于公安部令第163号及2026年最新驾考大纲，系统化知识点教学，覆盖交通法规、安全驾驶、信号识别、应急处置全领域。</p>
+        </header>
+        <article class="knowledge-content" id="knowledge-content">
+          <!-- 内容由JS动态渲染 -->
+        </article>
+      </div>
     </div>
   </section>
 

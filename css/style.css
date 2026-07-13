@@ -1664,12 +1664,90 @@ kbd {
   grid-template-columns: 1fr 1fr;
   gap: var(--sp-3);
 }
-/* 复用 opt-item 样式 */
-.exam-q-options .opt-item.eliminated {
+/* 考试选项 · 独立样式（含状态反馈） */
+.exam-opt-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: all 0.2s var(--ease-smooth);
+  position: relative;
+  user-select: none;
+}
+.exam-opt-item:hover:not(.removed):not(.selected) {
+  border-color: var(--primary-border);
+  background: var(--primary-bg);
+  transform: translateX(2px);
+}
+.exam-opt-item.selected {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+.exam-opt-item.selected .exam-opt-letter {
+  background: var(--primary);
+  color: #fff;
+}
+.exam-opt-letter {
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  background: var(--bg-sunken);
+  color: var(--text-2);
+  border-radius: var(--r-sm);
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  transition: all 0.2s;
+}
+.exam-opt-item:hover:not(.removed):not(.selected) .exam-opt-letter {
+  background: var(--primary);
+  color: #fff;
+}
+.exam-opt-text {
+  flex: 1;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-1);
+}
+.exam-opt-removed {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-mute);
+  padding: 2px var(--sp-2);
+  background: var(--bg-sunken);
+  border-radius: var(--r-xs);
+}
+.exam-opt-item.removed {
   opacity: 0.4;
   text-decoration: line-through;
   cursor: not-allowed;
   pointer-events: none;
+  background: var(--bg-sunken);
+}
+.exam-opt-item.removed .exam-opt-letter {
+  background: var(--border-strong);
+  color: var(--text-mute);
+}
+.exam-opt-item.correct {
+  border-color: var(--success);
+  background: var(--success-soft);
+}
+.exam-opt-item.correct .exam-opt-letter {
+  background: var(--success);
+  color: #fff;
+}
+.exam-opt-item.wrong {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+.exam-opt-item.wrong .exam-opt-letter {
+  background: var(--danger);
+  color: #fff;
 }
 
 .exam-q-footer {
@@ -2375,6 +2453,276 @@ kbd {
 .toast.error { background: var(--danger); color: #fff; }
 .toast.info { background: var(--info); color: #fff; }
 
+/* ========== 知识学习视图 ========== */
+/* 双栏布局：左侧目录 + 右侧内容，编辑式排版 */
+.knowledge-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  max-width: 1440px;
+  margin: 0 auto;
+  min-height: calc(100vh - var(--nav-h));
+}
+
+/* 左侧目录侧栏 */
+.knowledge-aside {
+  position: sticky;
+  top: var(--nav-h);
+  height: calc(100vh - var(--nav-h));
+  border-right: 1px solid var(--border);
+  background: var(--bg-sub);
+  overflow-y: auto;
+  padding: var(--sp-5) var(--sp-3);
+}
+.knowledge-aside-header {
+  padding: 0 var(--sp-2) var(--sp-4);
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: var(--sp-3);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+.knowledge-aside-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-1);
+}
+.knowledge-aside-count {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.knowledge-aside-search {
+  position: relative;
+  margin-bottom: var(--sp-3);
+  padding: 0 var(--sp-2);
+}
+.knowledge-aside-search .search-icon {
+  position: absolute;
+  left: calc(var(--sp-2) + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-mute);
+  pointer-events: none;
+}
+.knowledge-aside-search input {
+  width: 100%;
+  padding: var(--sp-2) var(--sp-3) var(--sp-2) var(--sp-7);
+  font-size: 0.82rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text-1);
+}
+.knowledge-aside-search input:focus { outline: none; border-color: var(--primary); }
+.knowledge-aside-search input::placeholder { color: var(--text-mute); }
+.knowledge-aside-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0 var(--sp-2);
+}
+
+/* 目录项：编号 + 标题，active 用左侧色条指示 */
+.knowledge-toc-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+  position: relative;
+}
+.knowledge-toc-item:hover { background: var(--bg-hover); }
+.knowledge-toc-item.active {
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+.knowledge-toc-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 60%;
+  background: var(--primary);
+  border-radius: 1px;
+}
+.knowledge-toc-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-mute);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.knowledge-toc-item.active .knowledge-toc-num { color: var(--primary); }
+.knowledge-toc-title {
+  flex: 1;
+  font-size: 0.84rem;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+.knowledge-toc-item.active .knowledge-toc-title { font-weight: 600; color: var(--primary); }
+
+/* 右侧主内容 */
+.knowledge-main {
+  padding: var(--sp-6) var(--sp-8) var(--sp-12);
+  min-width: 0;
+}
+.knowledge-header {
+  margin-bottom: var(--sp-8);
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--divider);
+}
+.knowledge-content {
+  max-width: 760px;
+}
+
+/* 章节块 */
+.md-chapter {
+  margin-bottom: var(--sp-10);
+  padding-bottom: var(--sp-8);
+  border-bottom: 1px solid var(--divider);
+}
+.md-chapter:last-child { border-bottom: none; }
+
+/* 标题层级 */
+.md-h {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  scroll-margin-top: 80px;
+}
+.md-h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+  margin: var(--sp-8) 0 var(--sp-4);
+  padding-bottom: var(--sp-2);
+  border-bottom: 2px solid var(--primary-bg);
+}
+.md-h2:first-child { margin-top: 0; }
+.md-h3 {
+  font-size: 1.15rem;
+  margin: var(--sp-6) 0 var(--sp-3);
+  color: var(--text-1);
+}
+.md-h3::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: var(--primary);
+  border-radius: 1px;
+  margin-right: var(--sp-2);
+  vertical-align: -0.1em;
+}
+.md-h4 {
+  font-size: 0.98rem;
+  margin: var(--sp-5) 0 var(--sp-2);
+  color: var(--text-2);
+  font-weight: 600;
+}
+
+/* 段落 */
+.md-p {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: var(--text-2);
+  margin-bottom: var(--sp-3);
+}
+
+/* 列表 */
+.md-ul, .md-ol {
+  margin: 0 0 var(--sp-4) var(--sp-2);
+  padding-left: var(--sp-5);
+}
+.md-ul li, .md-ol li {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--text-2);
+  margin-bottom: var(--sp-1);
+}
+.md-ul li::marker { color: var(--primary); }
+.md-ol li::marker { color: var(--primary); font-weight: 600; }
+.md-ul strong, .md-ol strong, .md-p strong {
+  color: var(--text-1);
+  font-weight: 600;
+}
+
+/* 引用块 */
+.md-quote {
+  margin: 0 0 var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--primary-bg);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* 分割线 */
+.md-hr {
+  border: none;
+  height: 1px;
+  background: var(--divider);
+  margin: var(--sp-6) 0;
+}
+
+/* 行内代码 */
+.md-code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--bg-sunken);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: var(--r-xs);
+  border: 1px solid var(--border);
+}
+
+/* 表格 */
+.md-table-wrap {
+  overflow-x: auto;
+  margin: 0 0 var(--sp-4);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+}
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+.md-table th {
+  background: var(--bg-sub);
+  color: var(--text-1);
+  font-weight: 600;
+  text-align: left;
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.md-table td {
+  padding: var(--sp-2) var(--sp-3);
+  color: var(--text-2);
+  border-bottom: 1px solid var(--divider);
+  line-height: 1.6;
+}
+.md-table tr:last-child td { border-bottom: none; }
+.md-table tr:hover td { background: var(--bg-hover); }
+
+/* 加载/空状态 */
+.loading-state {
+  padding: var(--sp-12) var(--sp-4);
+  text-align: center;
+  color: var(--text-3);
+  font-size: 0.9rem;
+}
+
 /* ========== 移动端响应式 ========== */
 @media (max-width: 1100px) {
   .features-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2438,6 +2786,26 @@ kbd {
   .mnemonics-main { padding: var(--sp-4) var(--sp-4) var(--sp-10); }
   .mnemonics-list { grid-template-columns: 1fr; }
   .categories-table { grid-template-columns: 1fr; }
+
+  /* 知识学习视图：分栏改为单列，目录横向滚动 */
+  .knowledge-layout { grid-template-columns: 1fr; }
+  .knowledge-aside {
+    position: relative;
+    top: 0;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: var(--sp-4);
+  }
+  .knowledge-aside-list {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: var(--sp-2) 0;
+    gap: var(--sp-2);
+  }
+  .knowledge-toc-item { flex-shrink: 0; }
+  .knowledge-toc-item.active::before { display: none; }
+  .knowledge-main { padding: var(--sp-4) var(--sp-4) var(--sp-10); }
 
   .view-container { padding: var(--sp-8) var(--sp-4) var(--sp-12); }
 
@@ -2514,7 +2882,7 @@ kbd {
 
 /* ========== 打印样式 ========== */
 @media print {
-  #topnav, .nav-actions, .practice-sidebar, .q-options, .q-guide, .practice-footer, .toast, .modal-overlay { display: none !important; }
+  #topnav, .nav-actions, .practice-sidebar, .knowledge-aside, .q-options, .q-guide, .practice-footer, .toast, .modal-overlay { display: none !important; }
   .view { display: block !important; padding-top: 0; }
   body { background: #fff; color: #000; }
   .question-card, .mn-item { box-shadow: none; border: 1px solid #ccc; }
