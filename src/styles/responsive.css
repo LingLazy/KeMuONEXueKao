@@ -917,7 +917,8 @@
    =================================================================== */
 @media (min-width: 1440px) {
   :root {
-    --container-max: 1380px;
+    /* 大屏容器加宽，充分利用宽屏显示区域（原 1380px 小于默认 1400px，属异常值，已修正） */
+    --container-max: 1480px;
     --sidebar-w: 280px;
     --container-question: 880px;
   }
