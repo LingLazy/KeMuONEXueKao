@@ -1167,13 +1167,14 @@
   color: var(--text-3);
 }
 
-/* ========== MnemonicsView 口诀视图 ========== */
+/* ========== MnemenicsView 口诀视图 ========== */
 /* 紧凑布局：最大化列表可视高度，减少上下预留空间 */
 /* 非学习模式：CSS Flexbox 撑满视口，取代 JS 高度计算，兼容所有缩放比例 */
 .view-mnemonics:not(.study-mode-active) {
   height: calc(100vh - var(--nav-h));
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   overflow: hidden;
   padding-bottom: var(--sp-2);
 }
@@ -1188,10 +1189,12 @@
 }
 /* 非学习模式：容器作为 flex 子项撑满，内部纵向排列 */
 .view-mnemonics:not(.study-mode-active) > .view-container {
-  flex: 1;
+  flex: 1 1 0%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   min-height: 0;
+  min-width: 0;
   overflow: hidden;
 }
 /* 紧凑区块标题：缩小下边距 */
@@ -2307,16 +2310,21 @@
 }
 
 /* Markdown 渲染区 · 构成主义阅读面板 */
+/* 容器不限宽：向右拉满 grid 的 1fr 列，随容器宽度自适应 */
 .knowledge-content {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: var(--sp-6) var(--sp-8);
-  max-width: 820px;
   min-width: 0;
   line-height: 1.8;
   box-shadow: var(--shadow-xs);
   position: relative;
+}
+/* 行宽可读性约束：文本类子元素限宽 820px（左对齐保留阅读节奏），
+   表格与分割线不限宽，宽表格向右拉满容器完整展示 */
+.knowledge-content > *:not(.md-table-wrap):not(hr) {
+  max-width: 820px;
 }
 /* 面板右上角构成主义几何角标(替代色条) */
 .knowledge-content::before {
