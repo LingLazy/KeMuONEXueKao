@@ -131,7 +131,8 @@ export default function ExamView() {
   // 重新开始
   const handleRestart = () => {
     exam.reset();
-    setTimeout(() => handleStart(), 100);
+    // reset 同步清理后立即开始新考试，避免 setTimeout 在组件卸载后触发
+    handleStart();
   };
 
   // 返回开始

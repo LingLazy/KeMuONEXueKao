@@ -3,6 +3,7 @@
  * - 监听 toastStore 队列
  * - 多条堆叠显示
  * - 入场/退场动画
+ * - 键盘可关闭（Enter/Space 触发）
  */
 import { AnimatePresence, motion } from 'framer-motion';
 import { useToastStore } from '@/stores/toastStore';
@@ -23,7 +24,15 @@ export default function ToastContainer() {
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => remove(t.id)}
-            role="status"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                remove(t.id);
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label={`提示：${t.message}（按回车关闭）`}
           >
             {t.type === 'success' && (
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

@@ -4,9 +4,10 @@
  * - 遮罩层点击关闭
  * - ESC 键关闭
  * - 焦点陷阱（简易实现）
+ * - aria-labelledby 关联标题，无障碍朗读
  * - 入场/退场动画
  */
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useId, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -41,6 +42,8 @@ export default function Modal({
 }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const lastFocused = useRef<HTMLElement | null>(null);
+  // 生成唯一 ID 关联 dialog 与 title，供屏幕阅读器朗读
+  const titleId = useId();
 
   // ESC 关闭 + 焦点管理
   useEffect(() => {
@@ -73,11 +76,20 @@ export default function Modal({
     // 锁定 body 滚动
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    // 自动聚焦对话框
-    window.setTimeout(() => dialogRef.current?.focus(), 50);
+    // 自动聚焦对话框：优先聚焦第一个可聚焦子元素（如带 autoFocus 的按钮），无则聚焦对话框本身
+    // 保存 timer id 以便清理，避免组件卸载后触发焦点
+    const focusTimer = window.setTimeout(() => {
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+      const firstFocusable = dialog.querySelector<HTMLElement>(
+        'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      (firstFocusable ?? dialog).focus();
+    }, 50);
     return () => {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = prevOverflow;
+      window.clearTimeout(focusTimer);
       lastFocused.current?.focus();
     };
   }, [open, onClose, disableEscape]);
@@ -102,6 +114,7 @@ export default function Modal({
             className={`modal modal-${size} ${className}`}
             role="dialog"
             aria-modal="true"
+            aria-labelledby={title ? titleId : undefined}
             tabIndex={-1}
             initial={{ opacity: 0, y: 20, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -110,7 +123,7 @@ export default function Modal({
           >
             {title && (
               <div className="modal-header">
-                <h2 className="modal-title">{title}</h2>
+                <h2 id={titleId} className="modal-title">{title}</h2>
                 <button
                   type="button"
                   className="modal-close"

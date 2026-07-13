@@ -81,7 +81,6 @@ export default function ConfirmProvider({ children }: { children: ReactNode }) {
                       type="button"
                       className={`btn btn-sm ${item.opts.danger ? 'btn-danger' : 'btn-primary'}`}
                       onClick={() => close(item.id, true)}
-                      autoFocus
                     >
                       {item.opts.confirmText ?? '确定'}
                     </button>

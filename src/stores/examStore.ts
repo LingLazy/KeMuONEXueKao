@@ -103,6 +103,10 @@ export const useExamStore = create<ExamState>((set, get) => ({
   result: null,
 
   start: (questions) => {
+    // 清理已有计时器，避免重复 start 导致双倍速倒计时
+    const { timerId: oldTimerId, running } = get();
+    if (oldTimerId) clearInterval(oldTimerId);
+    if (running) get().reset();
     // 100题随机抽取
     const picked = shuffle(questions).slice(0, EXAM_COUNT);
     const examQuestions: ExamQuestionState[] = picked.map((q) => ({

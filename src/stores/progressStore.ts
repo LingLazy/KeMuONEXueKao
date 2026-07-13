@@ -42,7 +42,8 @@ interface ProgressState {
 export const useProgressStore = create<ProgressState>((set, get) => ({
   answered: Store.get<AnswerMap>(STORAGE_KEYS.answered, {}),
   bookmarks: Store.get<BookmarkMap>(STORAGE_KEYS.bookmarks, {}),
-  total: 1964,
+  // 题库总数：初始为 0，由 App.tsx 加载题库后通过 setTotal 动态注入
+  total: 0,
 
   setTotal: (total) => set({ total }),
 

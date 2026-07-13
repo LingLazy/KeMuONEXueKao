@@ -27,14 +27,18 @@ export default function App() {
   const applyTheme = useThemeStore((s) => s.apply);
   const setTotal = useProgressStore((s) => s.setTotal);
 
-  // 初始化：同步主题至 DOM、加载题库总数
+  // 初始化：同步主题至 DOM
+  // 拆分为独立 useEffect，避免主题切换时重复触发 loadQuestions
   useEffect(() => {
     applyTheme(theme);
-    // 异步加载题库总数
+  }, [theme, applyTheme]);
+
+  // 加载题库总数（仅在挂载时执行一次）
+  useEffect(() => {
     loadQuestions()
       .then((qs) => setTotal(qs.length))
       .catch((err) => console.error('题库加载失败', err));
-  }, [theme, applyTheme, setTotal]);
+  }, [setTotal]);
 
   return (
     <HashRouter>

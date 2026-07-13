@@ -30,6 +30,14 @@ interface PracticeState {
   onlyBookmark: boolean;
   /** 是否已显示解析 */
   analysisVisible: boolean;
+  /** 全量题库引用（由视图层注入） */
+  allQuestions: Question[];
+  /** 错题 ID 集合引用（由视图层注入） */
+  wrongIds: Set<number>;
+  /** 收藏 ID 集合引用（由视图层注入） */
+  bookmarkIds: Set<number>;
+  /** 注入数据源并重新筛选 */
+  setDataSource: (allQuestions: Question[], wrongIds: Set<number>, bookmarkIds: Set<number>) => void;
   /** 设置分类并筛选 */
   setCategory: (cat: string, allQuestions: Question[], wrongIds: Set<number>, bookmarkIds: Set<number>) => void;
   /** 设置搜索 */
@@ -40,6 +48,8 @@ interface PracticeState {
   toggleOnlyWrong: (allQuestions: Question[], wrongIds: Set<number>) => void;
   /** 切换仅收藏 */
   toggleOnlyBookmark: (allQuestions: Question[], bookmarkIds: Set<number>) => void;
+  /** 基于当前筛选条件重算列表 */
+  reapplyFilters: () => void;
   /** 跳到指定索引 */
   setIndex: (i: number) => void;
   /** 下一题 */
@@ -98,38 +108,65 @@ export const usePracticeStore = create<PracticeState>((set, get) => ({
   onlyWrong: false,
   onlyBookmark: false,
   analysisVisible: false,
+  allQuestions: [],
+  wrongIds: new Set<number>(),
+  bookmarkIds: new Set<number>(),
+
+  setDataSource: (allQuestions, wrongIds, bookmarkIds) => {
+    set({ allQuestions, wrongIds, bookmarkIds });
+    get().reapplyFilters();
+  },
 
   setCategory: (cat, allQuestions, wrongIds, bookmarkIds) => {
-    const list = filterQuestions(allQuestions, cat, get().search, get().onlyWrong, get().onlyBookmark, wrongIds, bookmarkIds);
+    set({ allQuestions, wrongIds, bookmarkIds, currentCat: cat, search: '', onlyWrong: false, onlyBookmark: false });
+    const list = filterQuestions(allQuestions, cat, '', false, false, wrongIds, bookmarkIds);
     const finalList = get().shuffled ? shuffle(list) : list;
-    set({ currentCat: cat, list: finalList, index: 0, analysisVisible: false });
+    set({ list: finalList, index: 0, analysisVisible: false });
     get().persist();
   },
 
   setSearch: (q, allQuestions) => {
     const state = get();
-    const list = filterQuestions(allQuestions, state.currentCat, q, state.onlyWrong, state.onlyBookmark, new Set(), new Set());
-    set({ search: q, list, index: 0, analysisVisible: false });
+    set({ allQuestions, search: q });
+    const list = filterQuestions(allQuestions, state.currentCat, q, state.onlyWrong, state.onlyBookmark, state.wrongIds, state.bookmarkIds);
+    set({ list, index: 0, analysisVisible: false });
   },
 
   toggleShuffle: () => {
     const state = get();
-    const list = state.shuffled ? state.list.slice() : shuffle(state.list);
-    set({ shuffled: !state.shuffled, list });
+    if (state.shuffled) {
+      // 关闭乱序：基于当前筛选条件重算有序列表
+      const list = filterQuestions(state.allQuestions, state.currentCat, state.search, state.onlyWrong, state.onlyBookmark, state.wrongIds, state.bookmarkIds);
+      set({ shuffled: false, list });
+    } else {
+      set({ shuffled: true, list: shuffle(state.list) });
+    }
   },
 
   toggleOnlyWrong: (allQuestions, wrongIds) => {
     const state = get();
     const nextOnlyWrong = !state.onlyWrong;
-    const list = filterQuestions(allQuestions, state.currentCat, state.search, nextOnlyWrong, state.onlyBookmark, wrongIds, new Set());
-    set({ onlyWrong: nextOnlyWrong, list, index: 0, analysisVisible: false });
+    set({ allQuestions, wrongIds, onlyWrong: nextOnlyWrong });
+    const list = filterQuestions(allQuestions, state.currentCat, state.search, nextOnlyWrong, state.onlyBookmark, wrongIds, state.bookmarkIds);
+    const finalList = state.shuffled ? shuffle(list) : list;
+    set({ list: finalList, index: 0, analysisVisible: false });
   },
 
   toggleOnlyBookmark: (allQuestions, bookmarkIds) => {
     const state = get();
     const nextOnlyBookmark = !state.onlyBookmark;
-    const list = filterQuestions(allQuestions, state.currentCat, state.search, state.onlyWrong, nextOnlyBookmark, new Set(), bookmarkIds);
-    set({ onlyBookmark: nextOnlyBookmark, list, index: 0, analysisVisible: false });
+    set({ allQuestions, bookmarkIds, onlyBookmark: nextOnlyBookmark });
+    const list = filterQuestions(allQuestions, state.currentCat, state.search, state.onlyWrong, nextOnlyBookmark, state.wrongIds, bookmarkIds);
+    const finalList = state.shuffled ? shuffle(list) : list;
+    set({ list: finalList, index: 0, analysisVisible: false });
+  },
+
+  reapplyFilters: () => {
+    const state = get();
+    const list = filterQuestions(state.allQuestions, state.currentCat, state.search, state.onlyWrong, state.onlyBookmark, state.wrongIds, state.bookmarkIds);
+    const finalList = state.shuffled ? shuffle(list) : list;
+    const newIndex = Math.min(state.index, Math.max(0, finalList.length - 1));
+    set({ list: finalList, index: newIndex });
   },
 
   setIndex: (i) => {
@@ -174,6 +211,10 @@ export const usePracticeStore = create<PracticeState>((set, get) => ({
   },
 
   restore: () => {
-    return Store.get<{ cat: string; index: number } | null>(STORAGE_KEYS.practiceProgress, null);
+    const saved = Store.get<{ cat: string; index: number } | null>(STORAGE_KEYS.practiceProgress, null);
+    if (saved) {
+      set({ currentCat: saved.cat, index: saved.index });
+    }
+    return saved;
   }
 }));

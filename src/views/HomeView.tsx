@@ -10,10 +10,24 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useProgressStore } from '@/stores/progressStore';
-import { CATEGORIES, loadQuestions, loadMnemonics } from '@/services/dataLoader';
-import { CATEGORY_GROUPS, GROUP_KEYS, isGroupKey } from '@/data/categoryGroups';
-import { hexToRgba } from '@/services/dataLoader';
+import { CATEGORIES, loadQuestions, loadMnemonics, hexToRgba } from '@/services/dataLoader';
+import { CATEGORY_GROUPS, GROUP_KEYS } from '@/data/categoryGroups';
 import type { Question } from '@/types';
+
+// 图标路径常量（模块级，避免每次渲染重建）
+const STAT_ICONS: Record<string, React.ReactNode> = {
+  book: <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />,
+  check: <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />,
+  star: <path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />,
+  trending: <path d="M23 6l-9.5 9.5-5-5L1 18M17 6h6v6" />
+};
+
+const QUICK_ICONS: Record<string, React.ReactNode> = {
+  book: <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />,
+  star: <path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />,
+  grid: <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />,
+  check: <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+};
 
 export default function HomeView() {
   const navigate = useNavigate();
@@ -89,11 +103,7 @@ export default function HomeView() {
 
   // 进入分类练习
   const enterCategory = (cat: string) => {
-    if (cat === 'all' || isGroupKey(cat)) {
-      navigate(`/practice/${cat}`);
-    } else {
-      navigate(`/practice/${cat}`);
-    }
+    navigate(`/practice/${cat}`);
   };
 
   return (
@@ -292,12 +302,6 @@ function StatCard({
   icon: 'book' | 'check' | 'star' | 'trending';
   color: 'primary' | 'success' | 'accent' | 'info';
 }) {
-  const icons: Record<string, React.ReactNode> = {
-    book: <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />,
-    check: <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />,
-    star: <path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />,
-    trending: <path d="M23 6l-9.5 9.5-5-5L1 18M17 6h6v6" />
-  };
   return (
     <motion.div
       className={`stat-card stat-${color}`}
@@ -307,7 +311,7 @@ function StatCard({
     >
       <div className="stat-icon" aria-hidden="true">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          {icons[icon]}
+          {STAT_ICONS[icon]}
         </svg>
       </div>
       <div className="stat-info">
@@ -332,12 +336,6 @@ function QuickCard({
   icon: 'book' | 'star' | 'grid' | 'check';
   onClick: () => void;
 }) {
-  const icons: Record<string, React.ReactNode> = {
-    book: <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />,
-    star: <path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />,
-    grid: <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />,
-    check: <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-  };
   return (
     <motion.button
       type="button"
@@ -348,7 +346,7 @@ function QuickCard({
     >
       <div className="quick-card-icon" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          {icons[icon]}
+          {QUICK_ICONS[icon]}
         </svg>
       </div>
       <h3 className="quick-card-title">{title}</h3>

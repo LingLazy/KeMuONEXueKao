@@ -3,7 +3,7 @@
  * - 练习视图：← / → 切换题目，1-4 选择选项，A 显示解析，F 收藏
  * - 考试视图：← / → 切换，1-4 选择，M 标记，H 五五提示
  */
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export interface HotkeyHandlers {
   /** 上一题（←） */
@@ -44,7 +44,8 @@ function isInputTarget(t: EventTarget | null): boolean {
  */
 export function useHotkeys(handlers: HotkeyHandlers, options: HotkeyOptions = {}) {
   const { enabled = true, maxOptions = 4 } = options;
-  const handlersRef = { current: handlers };
+  // 使用 useRef 保持最新 handlers 引用，避免闭包陈旧问题
+  const handlersRef = useRef<HotkeyHandlers>(handlers);
   handlersRef.current = handlers;
 
   useEffect(() => {

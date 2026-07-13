@@ -8,10 +8,11 @@
  * - 滚动联动高亮当前章节
  * - 移动端：单栏布局，目录折叠
  */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { loadKnowledge } from '@/services/dataLoader';
 import { useIsMobile } from '@/hooks';
+import { escapeHtml } from '@/utils';
 import EmptyState from '@/components/common/EmptyState';
 import { Skeleton } from '@/components/common/Skeleton';
 
@@ -25,19 +26,31 @@ export default function KnowledgeView() {
   const isMobile = useIsMobile();
   const [markdown, setMarkdown] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [reloading, setReloading] = useState(false);
   const [activeChapter, setActiveChapter] = useState<string>('');
   const [search, setSearch] = useState('');
   const [showToc, setShowToc] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  // 加载知识内容（支持重试时的 loading 态）
+  const load = useCallback(() => {
+    setReloading(true);
+    setLoadError(null);
     loadKnowledge()
-      .then(setMarkdown)
+      .then((md) => {
+        setMarkdown(md);
+        setReloading(false);
+      })
       .catch((err) => {
         console.error('知识内容加载失败', err);
         setLoadError(err instanceof Error ? err.message : String(err));
+        setReloading(false);
       });
   }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
 
   // 解析章节目录
   const chapters = useMemo<Chapter[]>(() => {
@@ -76,27 +89,35 @@ export default function KnowledgeView() {
     return renderMarkdown(result);
   }, [markdown, search]);
 
-  // 滚动监听：高亮当前章节
+  // 滚动监听：高亮当前章节（使用 rAF 节流避免长文档卡顿）
   useEffect(() => {
     if (!markdown || chapters.length === 0) return;
     const container = contentRef.current;
     if (!container) return;
+    let rafId: number | null = null;
     const onScroll = () => {
-      const headings = chapters
-        .map((c) => document.getElementById(`chap-${c.id}`))
-        .filter((el): el is HTMLElement => el !== null);
-      const scrollTop = container.scrollTop + 120;
-      let current = chapters[0]?.id ?? '';
-      headings.forEach((h) => {
-        if (h.offsetTop <= scrollTop) {
-          current = h.id;
-        }
+      if (rafId !== null) return; // 已有未执行的 rAF
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const headings = chapters
+          .map((c) => document.getElementById(`chap-${c.id}`))
+          .filter((el): el is HTMLElement => el !== null);
+        const scrollTop = container.scrollTop + 120;
+        let current = chapters[0]?.id ?? '';
+        headings.forEach((h) => {
+          if (h.offsetTop <= scrollTop) {
+            current = h.id;
+          }
+        });
+        setActiveChapter(current);
       });
-      setActiveChapter(current);
     };
-    container.addEventListener('scroll', onScroll);
+    container.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
-    return () => container.removeEventListener('scroll', onScroll);
+    return () => {
+      container.removeEventListener('scroll', onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, [markdown, chapters]);
 
   // 跳转到章节
@@ -113,7 +134,7 @@ export default function KnowledgeView() {
   };
 
   // 加载中
-  if (!markdown && !loadError) {
+  if ((!markdown && !loadError) || reloading) {
     return (
       <div className="view view-knowledge">
         <div className="view-container">
@@ -143,13 +164,10 @@ export default function KnowledgeView() {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => {
-                  setLoadError(null);
-                  setMarkdown(null);
-                  loadKnowledge().then(setMarkdown).catch((e) => setLoadError(String(e)));
-                }}
+                disabled={reloading}
+                onClick={load}
               >
-                重试
+                {reloading ? '加载中…' : '重试'}
               </button>
             }
           />
@@ -312,9 +330,6 @@ function renderMarkdown(md: string): string {
   let chapterIdSet = new Set<string>();
   let chapterCount = 0;
 
-  const escapeHtml = (s: string): string =>
-    s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-
   const inline = (s: string): string => {
     let r = escapeHtml(s);
     // 搜索高亮
@@ -326,8 +341,13 @@ function renderMarkdown(md: string): string {
     r = r.replace(/\*([^*]+)\*/g, '<em>$1</em>');
     // 行内代码
     r = r.replace(/`([^`]+)`/g, '<code>$1</code>');
-    // 链接 [text](url)
-    r = r.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    // 链接 [text](url) - 仅允许安全协议（http/https/mailto/tel/相对路径/锚点）
+    r = r.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text: string, url: string) => {
+      const trimmedUrl = url.trim();
+      const isSafe = /^(https?:|mailto:|tel:|\/|#|\.\/|\.\.\/)/i.test(trimmedUrl);
+      if (!isSafe) return match; // 不安全协议不转换，保留原文
+      return `<a href="${trimmedUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+    });
     // 删除线
     r = r.replace(/~~([^~]+)~~/g, '<del>$1</del>');
     return r;

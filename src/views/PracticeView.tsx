@@ -53,14 +53,18 @@ export default function PracticeView() {
     return new Set(Object.keys(progress.bookmarks).map((k) => Number(k)));
   }, [progress.bookmarks]);
 
-  // 当前分类变更
+  // 当前分类变更或筛选条件变化时重新筛选
   useEffect(() => {
     if (!questions) return;
     const targetCat = cat ?? 'all';
     if (practice.currentCat !== targetCat || practice.list.length === 0) {
       practice.setCategory(targetCat, questions, wrongIds, bookmarkIds);
+    } else {
+      // 筛选条件（错题/收藏）变化时，仅更新数据源引用并重算列表
+      practice.setDataSource(questions, wrongIds, bookmarkIds);
     }
-  }, [cat, questions, practice.currentCat]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cat, questions, wrongIds, bookmarkIds]);
 
   // 当前题目
   const currentQuestion = practice.list[practice.index];

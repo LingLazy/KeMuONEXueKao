@@ -3,8 +3,9 @@
  * - 答对：小撒花
  * - 考试通过：大撒花
  * - 调用 canvas-confetti 实现
+ * - 组件卸载时自动取消未完成的动画帧
  */
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 
 /**
@@ -12,6 +13,17 @@ import confetti from 'canvas-confetti';
  * 返回：触发撒花的函数
  */
 export function useConfetti() {
+  // 保存所有未完成的 rAF id，组件卸载时统一取消
+  const rafIdsRef = useRef<number[]>([]);
+
+  // 组件卸载时取消所有未完成的动画帧
+  useEffect(() => {
+    return () => {
+      rafIdsRef.current.forEach((id) => cancelAnimationFrame(id));
+      rafIdsRef.current = [];
+    };
+  }, []);
+
   /** 答对小撒花：单次爆发 */
   const burst = useCallback(() => {
     const colors = ['#0d9488', '#14b8a6', '#ea580c', '#fb923c', '#fbbf24'];
@@ -47,7 +59,10 @@ export function useConfetti() {
         colors,
         ticks: 200
       });
-      if (Date.now() < end) requestAnimationFrame(frame);
+      if (Date.now() < end) {
+        const id = requestAnimationFrame(frame);
+        rafIdsRef.current.push(id);
+      }
     };
     frame();
     // 中心爆发

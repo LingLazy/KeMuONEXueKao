@@ -6,7 +6,7 @@
  * - 虚拟滚动优化长列表性能
  * - 移动端：单栏布局，分类切换为顶部下拉
  */
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { loadMnemonics, CATEGORIES } from '@/services/dataLoader';
@@ -84,7 +84,7 @@ export default function MnemonicsView() {
   }, [mnemonics, activeCat, search]);
 
   // 虚拟滚动
-  const parentRef = useMemo(() => ({ current: null as HTMLDivElement | null }), []);
+  const parentRef = useRef<HTMLDivElement | null>(null);
   const virtualizer = useVirtualizer({
     count: filtered.length,
     getScrollElement: () => parentRef.current,

@@ -44,16 +44,30 @@ export async function loadMnemonics(): Promise<Mnemonic[]> {
 /**
  * 加载知识学习 Markdown 内容
  * 通过 fetch 异步获取 docs/knowledge.md
+ * 内置 10 秒超时，避免网络异常时长时间挂起
  */
 export async function loadKnowledge(): Promise<string> {
   if (knowledgeCache) return knowledgeCache;
   const base = import.meta.env.BASE_URL;
-  const resp = await fetch(`${base}docs/knowledge.md`);
-  if (!resp.ok) {
-    throw new Error(`知识内容加载失败: ${resp.status}`);
+  // 使用 AbortController 控制超时，避免弱网或离线时无限挂起
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), 10000);
+  try {
+    const resp = await fetch(`${base}docs/knowledge.md`, { signal: controller.signal });
+    if (!resp.ok) {
+      throw new Error(`知识内容加载失败: ${resp.status}`);
+    }
+    knowledgeCache = await resp.text();
+    return knowledgeCache;
+  } catch (err) {
+    // 区分超时错误，便于上层提示
+    if (err instanceof DOMException && err.name === 'AbortError') {
+      throw new Error('知识内容加载超时（10秒），请检查网络后重试');
+    }
+    throw err;
+  } finally {
+    window.clearTimeout(timeoutId);
   }
-  knowledgeCache = await resp.text();
-  return knowledgeCache;
 }
 
 /**
