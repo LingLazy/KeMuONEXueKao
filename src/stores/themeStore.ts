@@ -54,6 +54,7 @@ function syncDom(theme: ThemeMode): void {
  * 使用 View Transitions API 执行圆形扩散主题切换
  * - 在触发点为圆心，扩散至覆盖整个视口
  * - 不支持 VT API 时降级为直接 syncDom
+ * - 处理快速连续切换导致的 transition 中止：捕获 finished 的 reject
  * 输入：theme 目标主题，origin 触发坐标
  * 返回：无
  */
@@ -80,14 +81,34 @@ function syncDomWithTransition(theme: ThemeMode, origin?: { x: number; y: number
 
   // startViewTransition 是较新的 API，TS 类型定义可能未包含，使用类型断言兼容
   const docWithVT = document as Document & {
-    startViewTransition?: (cb: () => void) => { finished: Promise<void> };
+    startViewTransition?: (cb: () => void) => {
+      finished: Promise<void>;
+      ready: Promise<void>;
+      updateCallbackDone: Promise<void>;
+      skipTransition: () => void;
+    };
   };
-  const transition = docWithVT.startViewTransition?.(() => syncDom(theme));
-  transition?.finished.finally(() => {
-    // 清理坐标变量
+  try {
+    const transition = docWithVT.startViewTransition?.(() => syncDom(theme));
+    // finished Promise 在以下情况会 reject：
+    // 1. 用户快速连续切换主题，前一个 transition 被新 transition 中止
+    // 2. 浏览器在 transition 进行中跳转页面或发生其他状态变化
+    // 必须显式 catch，否则会触发 Uncaught (in promise) InvalidStateError
+    transition?.finished
+      .catch(() => {
+        // 中止是正常行为，静默处理，避免控制台报错
+      })
+      .finally(() => {
+        // 无论完成还是中止，都清理坐标变量
+        root.style.removeProperty('--theme-transition-x');
+        root.style.removeProperty('--theme-transition-y');
+      });
+  } catch {
+    // startViewTransition 同步抛出异常时的兜底：直接执行 syncDom
+    syncDom(theme);
     root.style.removeProperty('--theme-transition-x');
     root.style.removeProperty('--theme-transition-y');
-  });
+  }
 }
 
 export const useThemeStore = create<ThemeState>((set, get) => ({
