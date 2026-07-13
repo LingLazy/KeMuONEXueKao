@@ -1,14 +1,13 @@
 {
   "name": "kemu1-exam",
   "private": true,
-  "version": "3.0.0",
+  "version": "3.1.0",
   "type": "module",
   "description": "科目一教考 · 速记通 · 1964题完整题库 · React + TypeScript + Vite 重构版",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "preview": "vite preview"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.3",
