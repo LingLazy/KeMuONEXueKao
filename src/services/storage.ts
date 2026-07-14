@@ -102,5 +102,9 @@ export const STORAGE_KEYS = {
   examState: 'kemu1_exam_state',
   practiceProgress: 'kemu1_practice_progress',
   lastView: 'kemu1_last_view',
-  stats: 'kemu1_stats'
+  stats: 'kemu1_stats',
+  // 考试历史记录：每次交卷后写入一条快照，用于成绩趋势与回顾
+  examHistory: 'kemu1_exam_history',
+  // 错题本：累计所有考试中的错题 ID 与错误次数，用于针对性复习
+  wrongBook: 'kemu1_wrong_book'
 } as const;

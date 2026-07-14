@@ -7,10 +7,13 @@
  * - 评分：每题1分，≥90分及格
  * - 中途刷新自动恢复（sessionStorage 持久化）
  * - 通过时撒花庆祝 + 震动反馈
+ * - 交卷后自动写入历史记录与错题本
+ * - 历史记录、错题本、错题回顾模态框统一管理
  */
 import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useExamStore } from '@/stores/examStore';
+import { useWrongStore } from '@/stores/wrongStore';
 import { toast } from '@/stores/toastStore';
 import { useConfirm } from '@/components/feedback/ConfirmProvider';
 import { useHotkeys, useVibrate, useConfetti, useIsMobile } from '@/hooks';
@@ -23,6 +26,8 @@ import { Icon } from '@/components/common/Icon';
 import GeoBgDecor from '@/components/common/GeoBgDecor';
 import ExamStartView from './exam/ExamStartView';
 import ExamResultView from './exam/ExamResultView';
+import ExamHistoryModal from './exam/ExamHistoryModal';
+import WrongQuestionsModal from './exam/WrongQuestionsModal';
 import type { Question, Subject } from '@/types';
 
 export default function ExamView() {
@@ -32,6 +37,12 @@ export default function ExamView() {
   const [restored, setRestored] = useState(false);
   /** 开始页选中的考试科目（默认科目一） */
   const [selectedSubject, setSelectedSubject] = useState<Subject>('ke1');
+  /** 历史记录模态框 */
+  const [showHistory, setShowHistory] = useState(false);
+  /** 错题本模态框 */
+  const [showWrongBook, setShowWrongBook] = useState(false);
+  /** 本次错题回顾模态框 */
+  const [showReview, setShowReview] = useState(false);
 
   const exam = useExamStore();
   const confirm = useConfirm();
@@ -191,6 +202,52 @@ export default function ExamView() {
     return { answeredCount: answered, markedCount: marked };
   }, [exam.questions]);
 
+  // 错题本数据：从 wrongStore 获取错题 ID 列表，匹配题库中的完整题目
+  const { wrongQuestions, wrongUserAnswers, wrongCounts, wrongTimes } = useMemo(() => {
+    if (!questions) {
+      return {
+        wrongQuestions: [] as Question[],
+        wrongUserAnswers: new Map<number, number | number[]>(),
+        wrongCounts: new Map<number, number>(),
+        wrongTimes: new Map<number, number>()
+      };
+    }
+    const wrongItems = useWrongStore.getState().items;
+    const qMap = new Map(questions.map((q) => [q.id, q]));
+    const wq: Question[] = [];
+    const wua = new Map<number, number | number[]>();
+    const wc = new Map<number, number>();
+    const wt = new Map<number, number>();
+    // 按最近错误时间倒序排列
+    const sorted = Object.values(wrongItems).sort((a, b) => b.lastWrongTime - a.lastWrongTime);
+    for (const item of sorted) {
+      const q = qMap.get(item.qid);
+      if (!q) continue; // 题库中不存在该题（可能已被替换），跳过
+      wq.push(q);
+      wua.set(item.qid, item.lastSelected);
+      wc.set(item.qid, item.wrongCount);
+      wt.set(item.qid, item.lastWrongTime);
+    }
+    return { wrongQuestions: wq, wrongUserAnswers: wua, wrongCounts: wc, wrongTimes: wt };
+  }, [questions, showWrongBook]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // 本次考试错题回顾数据：从当前考试题目中提取错题
+  const { reviewQuestions, reviewUserAnswers } = useMemo(() => {
+    if (!exam.result) {
+      return { reviewQuestions: [] as Question[], reviewUserAnswers: new Map<number, number | number[]>() };
+    }
+    const rq: Question[] = [];
+    const rua = new Map<number, number | number[]>();
+    for (const item of exam.questions) {
+      // 错题 ID 列表包含未答与答错的题目
+      if (exam.result.wrongIds.includes(item.question.id)) {
+        rq.push(item.question);
+        rua.set(item.question.id, item.selected);
+      }
+    }
+    return { reviewQuestions: rq, reviewUserAnswers: rua };
+  }, [exam.result, exam.questions]);
+
   // 加载失败：错误态优先于加载态
   if (error) {
     return (
@@ -228,19 +285,65 @@ export default function ExamView() {
 
   // 结果页
   if (exam.result) {
-    return <ExamResultView result={exam.result} subject={exam.subject} onRestart={handleRestart} onBack={() => exam.reset()} />;
+    return (
+      <>
+        <ExamResultView
+          result={exam.result}
+          subject={exam.subject}
+          onRestart={handleRestart}
+          onBack={() => exam.reset()}
+          onReviewWrong={() => setShowReview(true)}
+          onOpenHistory={() => setShowHistory(true)}
+          onOpenWrongBook={() => setShowWrongBook(true)}
+        />
+        <ExamHistoryModal open={showHistory} onClose={() => setShowHistory(false)} />
+        <WrongQuestionsModal
+          open={showReview}
+          onClose={() => setShowReview(false)}
+          title="本次错题回顾"
+          questions={reviewQuestions}
+          userAnswers={reviewUserAnswers}
+          mode="review"
+        />
+        <WrongQuestionsModal
+          open={showWrongBook}
+          onClose={() => setShowWrongBook(false)}
+          title="错题本"
+          questions={wrongQuestions}
+          userAnswers={wrongUserAnswers}
+          mode="book"
+          wrongCounts={wrongCounts}
+          wrongTimes={wrongTimes}
+        />
+      </>
+    );
   }
 
   // 开始页
   if (!exam.running) {
     const subjectTotal = questions.filter((q) => q.subject === selectedSubject).length;
     return (
-      <ExamStartView
-        onStart={handleStart}
-        subjectTotal={subjectTotal}
-        selectedSubject={selectedSubject}
-        onSelectSubject={setSelectedSubject}
-      />
+      <>
+        <ExamStartView
+          onStart={handleStart}
+          subjectTotal={subjectTotal}
+          selectedSubject={selectedSubject}
+          onSelectSubject={setSelectedSubject}
+          onOpenHistory={() => setShowHistory(true)}
+          onOpenWrongBook={() => setShowWrongBook(true)}
+        />
+        <ExamHistoryModal open={showHistory} onClose={() => setShowHistory(false)} />
+        <WrongQuestionsModal
+          open={showWrongBook}
+          onClose={() => setShowWrongBook(false)}
+          title="错题本"
+          questions={wrongQuestions}
+          userAnswers={wrongUserAnswers}
+          mode="book"
+          wrongCounts={wrongCounts}
+          wrongTimes={wrongTimes}
+        />
+      </>
     );
   }
 
@@ -259,12 +362,13 @@ export default function ExamView() {
   // 统计已由上方 useMemo 计算（早返回前），此处直接使用
   const remainingSec = Math.floor(exam.remaining / 1000);
   const lowTime = remainingSec <= 300;
+  const isLastQuestion = exam.currentIndex >= exam.questions.length - 1;
 
   return (
     <div className="view view-exam">
       {/* 答题页装饰层 · 极简网格底纹 (不干扰答题专注) */}
       <GeoBgDecor variant="exam" />
-      {/* 顶部固定栏 */}
+      {/* 顶部固定栏 · 紧凑型三段式布局 */}
       <header className={`exam-header ${lowTime ? 'low-time' : ''}`}>
         <div className="exam-header-left">
           <button type="button" className="icon-btn" onClick={handleBack} aria-label="退出考试">
@@ -290,6 +394,12 @@ export default function ExamView() {
           <span className="exam-progress-label">
             第 <strong>{exam.currentIndex + 1}</strong> / {exam.questions.length} 题
           </span>
+          {markedCount > 0 && (
+            <span className="exam-header-marked" title="已标记题数">
+              <Icon name="bookmark" size={12} />
+              {markedCount}
+            </span>
+          )}
         </div>
         <div className="exam-header-right">
           <button
@@ -299,7 +409,6 @@ export default function ExamView() {
             aria-label="打开答题卡"
           >
             <Icon name="sheet" size={16} />
-            <span>答题卡</span>
             <span className="exam-sheet-count">{answeredCount}/{exam.questions.length}</span>
           </button>
         </div>
@@ -339,17 +448,19 @@ export default function ExamView() {
         </AnimatePresence>
       </div>
 
-      {/* 底部操作栏 */}
+      {/* 底部操作栏 · 三段式分组：导航 / 辅助 / 推进 */}
       <footer className="exam-footer">
-        <button
-          type="button"
-          className="btn btn-ghost"
-          onClick={exam.prev}
-          disabled={exam.currentIndex === 0}
-        >
-          <Icon name="chevron-left" size={16} />
-          上一题
-        </button>
+        <div className="exam-footer-nav">
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm"
+            onClick={exam.prev}
+            disabled={exam.currentIndex === 0}
+          >
+            <Icon name="chevron-left" size={16} />
+            上一题
+          </button>
+        </div>
 
         <div className="exam-footer-center">
           <button
@@ -391,17 +502,19 @@ export default function ExamView() {
           </button>
         </div>
 
-        {exam.currentIndex >= exam.questions.length - 1 ? (
-          <button type="button" className="btn btn-primary exam-submit-btn" onClick={handleSubmit}>
-            <Icon name="check-square" size={16} />
-            交卷
-          </button>
-        ) : (
-          <button type="button" className="btn btn-primary" onClick={exam.next}>
-            下一题
-            <Icon name="chevron-right" size={16} />
-          </button>
-        )}
+        <div className="exam-footer-action">
+          {isLastQuestion ? (
+            <button type="button" className="btn btn-primary exam-submit-btn" onClick={handleSubmit}>
+              <Icon name="check-square" size={16} />
+              交卷
+            </button>
+          ) : (
+            <button type="button" className="btn btn-primary btn-sm" onClick={exam.next}>
+              下一题
+              <Icon name="chevron-right" size={16} />
+            </button>
+          )}
+        </div>
       </footer>
 
       {/* 答题卡模态 */}

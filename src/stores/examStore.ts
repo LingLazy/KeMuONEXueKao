@@ -6,6 +6,7 @@
  * - 五五提示：剔除两个错误选项
  * - 评分：>=90分及格
  * - 中途状态持久化至 sessionStorage（支持刷新恢复）
+ * - 交卷后自动写入考试历史与错题本
  */
 import { create } from 'zustand';
 import type { ExamQuestionState, ExamResult, Question, Subject } from '@/types';
@@ -13,6 +14,9 @@ import { SessionStore, STORAGE_KEYS } from '@/services/storage';
 import { shuffle, range } from '@/utils';
 // 考试配置常量已迁移至 @/constants/exam，此处仅按需导入内部使用
 import { EXAM_CONFIG, EXAM_DURATION } from '@/constants/exam';
+// 历史记录与错题本 store：交卷时同步写入，使用 getState() 避免循环依赖
+import { useExamHistoryStore } from './examHistoryStore';
+import { useWrongStore } from './wrongStore';
 
 interface ExamState {
   /** 是否正在考试 */
@@ -251,6 +255,45 @@ export const useExamStore = create<ExamState>((set, get) => ({
     const result = gradeExam(questions, usedSec, config.pointsPerQuestion, config.passScore);
     set({ running: false, result, timerId: null });
     SessionStore.remove(STORAGE_KEYS.examState);
+
+    // 同步写入考试历史记录与错题本
+    // 防御性处理：subject 为 null 时跳过写入，避免脏数据
+    if (subject) {
+      try {
+        // 写入历史记录：传入题目总数（含未答），用于成绩回顾
+        useExamHistoryStore.getState().addRecord(result, subject, questions.length);
+        // 写入错题本：遍历本次错题，按 qid 累计错误次数
+        const wrongStore = useWrongStore.getState();
+        for (const q of questions) {
+          // 判断是否未答：单选/判断题 -1，多选题空数组 []
+          const isUnanswered = Array.isArray(q.selected)
+            ? q.selected.length === 0
+            : q.selected < 0;
+          // 未答的题目不写入错题本（仅记录答错的题目）
+          if (isUnanswered) continue;
+          // 判断是否答错：与正确答案比较
+          const correctAns = q.question.answer;
+          const isCorrect = Array.isArray(correctAns)
+            ? Array.isArray(q.selected) &&
+              q.selected.length === correctAns.length &&
+              (() => {
+                const sortedCorrect = [...correctAns].sort((a, b) => a - b);
+                const sortedSelected = [...q.selected].sort((a, b) => a - b);
+                return sortedSelected.every((v, i) => v === sortedCorrect[i]);
+              })()
+            : !Array.isArray(q.selected) && q.selected === correctAns;
+          if (!isCorrect) {
+            wrongStore.addWrong(q.question.id, q.selected, subject);
+          }
+        }
+      } catch (err) {
+        // 写入历史/错题本失败不应影响交卷流程，仅记录日志便于排查
+        if (import.meta.env.DEV) {
+          console.warn('[examStore] 写入考试历史/错题本失败', err);
+        }
+      }
+    }
+
     return result;
   },
 
