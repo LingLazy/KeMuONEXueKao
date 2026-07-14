@@ -55,7 +55,7 @@ export default defineConfig({
         display: 'standalone',
         orientation: 'portrait-primary',
         // 工业蚀刻科技派 · 冷调钢灰背景 + 电光蓝主色
-        background_color: '#eef1f5',
+        background_color: '#e8eaec',
         theme_color: '#1456db',
         lang: 'zh-CN',
         dir: 'ltr',
