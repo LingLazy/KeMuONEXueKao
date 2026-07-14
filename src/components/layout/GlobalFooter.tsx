@@ -4,7 +4,7 @@
  * - 单行布局：品牌 + 链接 + 右侧信息组（免责声明简略 + 版权）
  * - 顶部构成主义四色装饰条带（3px 细带）
  */
-const REPO_URL = 'https://github.com/fanquanpp/KeMuONEXueKao';
+import { REPO_URL } from '@/constants/navigation';
 const SITE_URL = 'https://fanquanpp.github.io/KeMuONEXueKao/';
 const LICENSE_URL = `${REPO_URL}/blob/main/LICENSE`;
 const README_URL = `${REPO_URL}#免责声明`;

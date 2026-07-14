@@ -12,9 +12,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useThemeStore } from '@/stores/themeStore';
 import { toast } from '@/stores/toastStore';
 import { useMagnetic, useProgressStats } from '@/hooks';
-
-/** GitHub 仓库地址（外链入口，集中常量便于维护） */
-const REPO_URL = 'https://github.com/fanquanpp/KeMuONEXueKao';
+import { REPO_URL } from '@/constants/navigation';
 
 interface NavItem {
   to: string;
