@@ -463,6 +463,9 @@
   overflow-wrap: break-word;
   /* 段落首行缩进增强阅读节奏（中文排版惯例） */
   text-indent: 0;
+  /* 保留换行符渲染：解析文本中的 \n 由 <br> 转换而来，
+     使用 pre-wrap 保留换行同时允许自动换行，避免使用 dangerouslySetInnerHTML */
+  white-space: pre-wrap;
 }
 .qcard-analysis-link {
   display: inline-block;

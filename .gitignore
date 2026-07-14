@@ -6,6 +6,7 @@ desktop.ini
 # 编辑器与 IDE 文件
 .vscode/
 .idea/
+.trae/
 *.swp
 *.swo
 *~

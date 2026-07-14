@@ -213,6 +213,14 @@ export default function QuestionCard({
     [question.question, question.keywords]
   );
 
+  // 解析文本预处理：将 <br>/<br/> 标签转换为换行符，
+  // 配合 CSS white-space: pre-wrap 渲染换行，避免使用 dangerouslySetInnerHTML，
+  // 保留 React 自动转义能力以防范 XSS 注入
+  const analysisText = useMemo(
+    () => question.analysis.replace(/<br\s*\/?>/gi, '\n'),
+    [question.analysis]
+  );
+
   // 收藏切换
   const handleBookmark = () => {
     toggleBookmark(question.id);
@@ -422,7 +430,7 @@ export default function QuestionCard({
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
               >
-                <p className="qcard-analysis-text">{question.analysis}</p>
+                <p className="qcard-analysis-text">{analysisText}</p>
                 {/* 安全校验：仅渲染 http/https 协议的链接，防止 javascript: 等协议注入 */}
                 {question.analysis_url && isSafeUrl(question.analysis_url) && (
                   <a

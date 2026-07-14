@@ -301,9 +301,18 @@
   /* 中西文混排自动间距 */
   text-spacing-autospace: ideograph-alpha ideograph-numeric;
 }
-/* 行宽可读性约束：文本类子元素限宽 820px（左对齐保留阅读节奏），
-   表格与分割线不限宽，宽表格向右拉满容器完整展示 */
-.knowledge-content > *:not(.md-table-wrap):not(hr) {
+/* 行宽可读性约束：仅作用于 .knowledge-content 直接子级中的文本块与段落，
+   容器类（.knowledge-section）与表格/分割线不限宽，向右拉满容器完整展示 */
+.knowledge-content > *:not(.md-table-wrap):not(hr):not(.knowledge-section) {
+  max-width: 820px;
+}
+/* 知识区块与子考点文章占满容器宽度，自适应填充 grid 的 1fr 列 */
+.knowledge-section,
+.knowledge-subpoint {
+  max-width: none;
+}
+/* 段落保持限宽 820px，确保长文阅读节奏（左对齐保留阅读节奏） */
+.knowledge-subpoint > .md-p {
   max-width: 820px;
 }
 /* 面板右上角构成主义几何角标(替代色条) */
