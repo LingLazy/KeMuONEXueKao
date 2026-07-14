@@ -1,7 +1,7 @@
 /**
  * 模拟考试视图
  * - 三阶段：开始页 → 答题页 → 结果页
- * - 100题随机抽取，45分钟倒计时
+ * - 随机抽取题目，限时倒计时
  * - 答题卡：已答/标记/未答状态
  * - 五五提示：剔除两个错误选项
  * - 评分：每题1分，≥90分及格
@@ -10,7 +10,7 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useExamStore, EXAM_COUNT, EXAM_DURATION, EXAM_PASS_SCORE } from '@/stores/examStore';
+import { useExamStore, EXAM_CONFIG } from '@/stores/examStore';
 import { toast } from '@/stores/toastStore';
 import { useConfirm } from '@/components/feedback/ConfirmProvider';
 import { useHotkeys, useVibrate, useConfetti, useIsMobile } from '@/hooks';
@@ -19,13 +19,15 @@ import { formatTime, formatDuration } from '@/utils';
 import QuestionCard from '@/components/question/QuestionCard';
 import EmptyState from '@/components/common/EmptyState';
 import Modal from '@/components/common/Modal';
-import type { Question } from '@/types';
+import type { Question, Subject } from '@/types';
 
 export default function ExamView() {
   const [questions, setQuestions] = useState<Question[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showSheet, setShowSheet] = useState(false);
   const [restored, setRestored] = useState(false);
+  /** 开始页选中的考试科目（默认科目一） */
+  const [selectedSubject, setSelectedSubject] = useState<Subject>('ke1');
 
   const exam = useExamStore();
   const confirm = useConfirm();
@@ -122,8 +124,8 @@ export default function ExamView() {
       if (!ok) return;
     }
     exam.reset();
-    exam.start(questions);
-    toast.success('考试已开始，45分钟倒计时启动');
+    exam.start(questions, selectedSubject);
+    toast.success(`${selectedSubject === 'ke1' ? '科目一' : '科目四'}考试已开始，倒计时启动`);
   };
 
   // 交卷
@@ -170,7 +172,7 @@ export default function ExamView() {
     exam.reset();
   };
 
-  // 缓存统计计算，避免每次渲染都对 100 题 filter
+  // 缓存统计计算，避免每次渲染都对所有题目 filter
   // 关键：必须放在所有条件 return 之前，否则违反 Rules of Hooks
   // （exam.running 从 false 变 true 时 Hook 数量会变化，导致 React 崩溃）
   const { answeredCount, markedCount } = useMemo(() => {
@@ -228,12 +230,20 @@ export default function ExamView() {
 
   // 结果页
   if (exam.result) {
-    return <ExamResultView result={exam.result} onRestart={handleRestart} onBack={() => exam.reset()} />;
+    return <ExamResultView result={exam.result} subject={exam.subject} onRestart={handleRestart} onBack={() => exam.reset()} />;
   }
 
   // 开始页
   if (!exam.running) {
-    return <ExamStartView onStart={handleStart} total={questions.length} />;
+    const subjectTotal = questions.filter((q) => q.subject === selectedSubject).length;
+    return (
+      <ExamStartView
+        onStart={handleStart}
+        total={subjectTotal}
+        selectedSubject={selectedSubject}
+        onSelectSubject={setSelectedSubject}
+      />
+    );
   }
 
   // 答题页
@@ -476,7 +486,20 @@ export default function ExamView() {
 }
 
 /** 考试开始页 */
-function ExamStartView({ onStart, total }: { onStart: () => void; total: number }) {
+function ExamStartView({
+  onStart,
+  total,
+  selectedSubject,
+  onSelectSubject
+}: {
+  onStart: () => void;
+  total: number;
+  selectedSubject: Subject;
+  onSelectSubject: (s: Subject) => void;
+}) {
+  const config = EXAM_CONFIG[selectedSubject];
+  const subjectLabel = selectedSubject === 'ke1' ? '科目一' : '科目四';
+  const fullScore = config.count * config.pointsPerQuestion;
   return (
     <div className="view view-exam">
       {/* 开始页装饰层 · 品牌光晕 + 涟漪环 + 三角切片 + S 曲线 */}
@@ -504,10 +527,29 @@ function ExamStartView({ onStart, total }: { onStart: () => void; total: number 
                 <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
               </svg>
             </div>
-            <h1 className="exam-start-title">模拟考试</h1>
+            <h1 className="exam-start-title">{subjectLabel}模拟考试</h1>
             <p className="exam-start-desc">
-              全真模拟正式考试环境，{EXAM_COUNT}题随机抽取，{Math.floor(EXAM_DURATION / 60000)}分钟限时，及格分{EXAM_PASS_SCORE}分
+              全真模拟正式考试环境，{config.count}题随机抽取，{Math.floor(config.duration / 60000)}分钟限时，及格分{config.passScore}分
             </p>
+          </div>
+
+          {/* 科目选择器 */}
+          <div className="exam-subject-selector" role="radiogroup" aria-label="选择考试科目">
+            {(['ke1', 'ke4'] as Subject[]).map((s) => (
+              <button
+                key={s}
+                type="button"
+                role="radio"
+                aria-checked={selectedSubject === s}
+                className={`exam-subject-btn ${selectedSubject === s ? 'active' : ''}`}
+                onClick={() => onSelectSubject(s)}
+              >
+                <span className="exam-subject-label">{s === 'ke1' ? '科目一' : '科目四'}</span>
+                <span className="exam-subject-desc">
+                  {EXAM_CONFIG[s].count}题 · {Math.floor(EXAM_CONFIG[s].duration / 60000)}分钟
+                </span>
+              </button>
+            ))}
           </div>
 
           <div className="exam-start-rules">
@@ -517,14 +559,14 @@ function ExamStartView({ onStart, total }: { onStart: () => void; total: number 
                 <span className="rule-num">01</span>
                 <div className="rule-text">
                   <strong>题量与时长</strong>
-                  <p>共 {EXAM_COUNT} 题，限时 {Math.floor(EXAM_DURATION / 60000)} 分钟，每题1分，满分100分</p>
+                  <p>共 {config.count} 题，限时 {Math.floor(config.duration / 60000)} 分钟，每题{config.pointsPerQuestion}分，满分{fullScore}分</p>
                 </div>
               </li>
               <li>
                 <span className="rule-num">02</span>
                 <div className="rule-text">
                   <strong>及格标准</strong>
-                  <p>得分 ≥ {EXAM_PASS_SCORE} 分为及格，未达分数建议加强复习</p>
+                  <p>得分 ≥ {config.passScore} 分为及格，未达分数建议加强复习</p>
                 </div>
               </li>
               <li>
@@ -556,20 +598,20 @@ function ExamStartView({ onStart, total }: { onStart: () => void; total: number 
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
               </svg>
-              题库 {total} 题
+              {subjectLabel}题库 {total} 题
             </span>
             <span className="exam-meta-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 6v6l4 2" />
               </svg>
-              {Math.floor(EXAM_DURATION / 60000)} 分钟
+              {Math.floor(config.duration / 60000)} 分钟
             </span>
             <span className="exam-meta-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
               </svg>
-              及格 {EXAM_PASS_SCORE} 分
+              及格 {config.passScore} 分
             </span>
           </div>
 
@@ -577,7 +619,7 @@ function ExamStartView({ onStart, total }: { onStart: () => void; total: number 
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
-            开始考试
+            开始{subjectLabel}考试
           </button>
         </motion.div>
       </div>
@@ -588,14 +630,17 @@ function ExamStartView({ onStart, total }: { onStart: () => void; total: number 
 /** 考试结果页 */
 function ExamResultView({
   result,
+  subject,
   onRestart,
   onBack
 }: {
   result: NonNullable<ReturnType<typeof useExamStore.getState>['result']>;
+  subject: Subject | null;
   onRestart: () => void;
   onBack: () => void;
 }) {
   const passed = result.passed;
+  const passScore = subject ? EXAM_CONFIG[subject].passScore : EXAM_CONFIG.ke1.passScore;
   return (
     <div className="view view-exam">
       {/* 结果页装饰层 · 通过=成功光晕+同心环; 失败=危险光晕+对角线 */}
@@ -662,7 +707,7 @@ function ExamResultView({
           <div className="exam-result-score">
             <span className="score-num">{result.score}</span>
             <span className="score-unit">分</span>
-            <span className="score-pass">/ 及格 {EXAM_PASS_SCORE} 分</span>
+            <span className="score-pass">/ 及格 {passScore} 分</span>
           </div>
 
           <div className="exam-result-stats">

@@ -2,7 +2,7 @@
  * 主页视图
  * - Hero 区：品牌主标题 + 副标题 + 核心数据
  * - 学习进度卡片：已答/正确率/收藏/总题数
- * - 六大分类入口（大分类卡片）
+ * - 五大分类入口（大分类卡片）
  * - 快捷功能入口：开始练习 / 模拟考试 / 知识学习 / 口诀速记
  * - 学习雷达图（按大分类统计正确率）
  */
@@ -66,14 +66,10 @@ export default function HomeView() {
       group.cats.forEach((catKey) => {
         count += CATEGORIES[catKey]?.ids.length ?? 0;
       });
-      // 图片题动态匹配
-      if (group.dynamic === 'image') {
-        count += questions.filter((q) => q.is_image_question).length;
-      }
       map[gk] = count;
     });
     return map;
-  }, [questions]);
+  }, []);
 
   // 雷达图数据：各大分类的正确率
   const radarData = useMemo(() => {
@@ -83,11 +79,6 @@ export default function HomeView() {
       group.cats.forEach((catKey) => {
         CATEGORIES[catKey]?.ids.forEach((id) => ids.add(id));
       });
-      if (group.dynamic === 'image') {
-        questions.forEach((q) => {
-          if (q.is_image_question) ids.add(q.id);
-        });
-      }
       let correct = 0;
       let total = 0;
       ids.forEach((id) => {
@@ -106,7 +97,7 @@ export default function HomeView() {
         total: ids.size
       };
     });
-  }, [answered, questions]);
+  }, [answered]);
 
   // 入口分类卡片
   const sortedGroups = useMemo(() => {
@@ -147,7 +138,7 @@ export default function HomeView() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="dot" /> 2026年7月最新版 · 公安部令第163号
+            <span className="dot" /> 科目一 / 科目四在线学习与模拟考试平台
           </motion.div>
           <motion.h1
             className="home-hero-title"
@@ -163,7 +154,7 @@ export default function HomeView() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {questions.length} 道完整题库 · {mnemonicCount} 条速记口诀 · 24 分类系统化学习 · 全真模拟考试 · 离线可用
+            {questions.length} 道完整题库 · {mnemonicCount} 条速记口诀 · 系统化分类学习 · 全真模拟考试 · 离线可用
           </motion.p>
           <motion.div
             className="home-hero-actions"
@@ -212,7 +203,7 @@ export default function HomeView() {
       <section className="home-section" aria-labelledby="home-cats-title">
         <header className="section-header">
           <span className="section-eyebrow">Categories</span>
-          <h2 id="home-cats-title" className="section-title">六大<span className="title-accent">分类</span>专题</h2>
+          <h2 id="home-cats-title" className="section-title">五大<span className="title-accent">分类</span>专题</h2>
           <p className="section-desc">按专题系统化练习，每个分类聚合相关题目，便于针对性强化</p>
         </header>
         <div className="home-cats-grid">
@@ -274,14 +265,14 @@ export default function HomeView() {
           />
           <QuickCard
             title="分类导航"
-            desc="24 小分类完整索引"
+            desc="小分类完整索引"
             color="#0ea5e9"
             icon="grid"
             onClick={() => navigate('/categories')}
           />
           <QuickCard
             title="全真考试"
-            desc="100 题 45 分钟全真模拟"
+            desc="全真模拟考试"
             color="#0d9488"
             icon="check"
             onClick={() => navigate('/exam')}

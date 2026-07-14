@@ -239,6 +239,25 @@ export default function PracticeView() {
               <span className="practice-count">
                 <span className="num">{practice.list.length}</span> 题
               </span>
+              {/* 科目筛选器：全部 / 科目一 / 科目四 */}
+              <div className="practice-subject-filter" role="radiogroup" aria-label="科目筛选">
+                {([
+                  { key: 'all', label: '全部' },
+                  { key: 'ke1', label: '科一' },
+                  { key: 'ke4', label: '科四' }
+                ] as const).map((opt) => (
+                  <button
+                    key={opt.key}
+                    type="button"
+                    role="radio"
+                    aria-checked={practice.subject === opt.key}
+                    className={`subject-chip ${practice.subject === opt.key ? 'active' : ''}`}
+                    onClick={() => practice.setSubject(opt.key, questions, wrongIds, bookmarkIds)}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
             </div>
             <div className="practice-toolbar-right">
               <div className="practice-search">

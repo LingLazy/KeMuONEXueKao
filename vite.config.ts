@@ -49,7 +49,7 @@ export default defineConfig({
       manifest: {
         name: '科目一教考 · 速记通',
         short_name: '科目一速记',
-        description: '1861道完整题库 · 155条速记口诀 · 24分类 · 模拟考试 · 2026年7月最新版',
+        description: '机动车驾驶证科目一在线学习与速记练习 · 模拟考试 · PWA离线可用',
         start_url: './',
         scope: './',
         display: 'standalone',
@@ -76,9 +76,9 @@ export default defineConfig({
           }
         ],
         shortcuts: [
-          { name: '题库练习', short_name: '练习', url: './#/practice', description: '1861道题目按分类练习' },
-          { name: '模拟考试', short_name: '考试', url: './#/exam', description: '45分钟100题全真模拟' },
-          { name: '口诀总览', short_name: '口诀', url: './#/mnemonics', description: '155条速记口诀' },
+          { name: '题库练习', short_name: '练习', url: './#/practice', description: '按分类练习题目' },
+          { name: '模拟考试', short_name: '考试', url: './#/exam', description: '全真模拟考试' },
+          { name: '口诀总览', short_name: '口诀', url: './#/mnemonics', description: '速记口诀与解释' },
           { name: '知识学习', short_name: '知识', url: './#/knowledge', description: '系统化知识学习' }
         ]
       }

@@ -1,10 +1,9 @@
 /**
- * 数据加载服务：按需加载题库、口诀、分类数据
+ * 数据加载服务：按需加载题库、口诀、分类、考点知识、交通标志数据
  * - 分类元数据：体积小，同步 import
- * - 题库与口诀：体积大，动态 import 实现代码分割
- * - 知识学习内容：fetch 加载 Markdown
+ * - 题库、口诀、考点知识、交通标志：体积大，动态 import 实现代码分割
  */
-import type { Question, Mnemonic, Category } from '@/types';
+import type { Question, Mnemonic, Category, KnowledgePoint, TrafficSign } from '@/types';
 import categoriesData from '@/data/categories.json';
 
 /** 分类元数据（同步加载，体积小） */
@@ -14,8 +13,10 @@ export const CATEGORIES = categoriesData as Record<string, Category>;
 let questionsCache: Question[] | null = null;
 /** 口诀数据缓存 */
 let mnemonicsCache: Mnemonic[] | null = null;
-/** 知识学习 Markdown 缓存 */
-let knowledgeCache: string | null = null;
+/** 考点知识缓存 */
+let knowledgeCache: KnowledgePoint[] | null = null;
+/** 交通标志缓存 */
+let signsCache: TrafficSign[] | null = null;
 
 /**
  * 判断题选项归一化文本
@@ -84,7 +85,7 @@ function normalizeQuestion(raw: RawQuestion): Question {
  * 按需加载完整题库
  * 首次调用动态 import questions.json，后续返回缓存
  * 加载后对判断题做归一化：补齐 ["正确","错误"] 选项、布尔答案转数字索引
- * 返回：Question[] 1861道题目（判断题914 + 单选题843 + 多选题104）
+ * 返回：Question[] 完整题目列表（判断题 + 单选题 + 多选题，含科目一与科目四）
  */
 export async function loadQuestions(): Promise<Question[]> {
   if (questionsCache) return questionsCache;
@@ -102,7 +103,7 @@ export async function loadQuestions(): Promise<Question[]> {
 /**
  * 按需加载完整口诀列表
  * 首次调用动态 import mnemonics.json，后续返回缓存
- * 返回：Mnemonic[] 155条口诀
+ * 返回：Mnemonic[] 速记口诀列表
  */
 export async function loadMnemonics(): Promise<Mnemonic[]> {
   if (mnemonicsCache) return mnemonicsCache;
@@ -116,45 +117,50 @@ export async function loadMnemonics(): Promise<Mnemonic[]> {
 }
 
 /**
- * 加载知识学习 Markdown 内容
- * 通过 fetch 异步获取 docs/knowledge.md
- * 内置 10 秒超时，避免网络异常时长时间挂起
+ * 按需加载考点知识（结构化 JSON）
+ * 首次调用动态 import knowledge.json，后续返回缓存
+ * 返回：KnowledgePoint[] 26 个一级分类的考点知识列表
  */
-export async function loadKnowledge(): Promise<string> {
+export async function loadKnowledgeData(): Promise<KnowledgePoint[]> {
   if (knowledgeCache) return knowledgeCache;
-  const base = import.meta.env.BASE_URL;
-  // 使用 AbortController 控制超时，避免弱网或离线时无限挂起
-  const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => controller.abort(), 10000);
   try {
-    const resp = await fetch(`${base}docs/knowledge.md`, { signal: controller.signal });
-    if (!resp.ok) {
-      throw new Error(`知识内容加载失败: ${resp.status}`);
-    }
-    knowledgeCache = await resp.text();
+    const module = await import('@/data/knowledge.json');
+    knowledgeCache = module.default as KnowledgePoint[];
     return knowledgeCache;
   } catch (err) {
-    // 区分超时错误，便于上层提示
-    if (err instanceof DOMException && err.name === 'AbortError') {
-      throw new Error('知识内容加载超时（10秒），请检查网络后重试');
-    }
-    throw err;
-  } finally {
-    window.clearTimeout(timeoutId);
+    throw new Error(`考点知识加载失败：${err instanceof Error ? err.message : String(err)}`);
+  }
+}
+
+/**
+ * 按需加载交通标志图标库
+ * 首次调用动态 import signs.json，后续返回缓存
+ * 返回：TrafficSign[] 719 个交通标志列表
+ */
+export async function loadSigns(): Promise<TrafficSign[]> {
+  if (signsCache) return signsCache;
+  try {
+    const module = await import('@/data/signs.json');
+    signsCache = module.default as TrafficSign[];
+    return signsCache;
+  } catch (err) {
+    throw new Error(`交通标志数据加载失败：${err instanceof Error ? err.message : String(err)}`);
   }
 }
 
 /**
  * 根据图片字段获取完整 URL
- * 输入：图片文件名，支持以下格式（容错性归一化）
- *   - "123.jpg"               （推荐格式，纯文件名）
- *   - "assets/images/123.jpg" （历史格式，自动剥离前缀避免双重拼接）
- *   - "/assets/images/123.jpg"
- *   - "https://example.com/a.jpg" （完整 URL，原样返回）
+ * 输入：图片相对路径，支持以下格式（容错性归一化）
+ *   - "questions/img_xxx.jpg"             （新数据格式，相对路径）
+ *   - "signs/01_prohibitory_sign/ps001_xxx.jpg"
+ *   - "123.jpg"                            （纯文件名，兼容旧格式）
+ *   - "assets/images/123.jpg"              （历史格式，自动剥离前缀避免双重拼接）
+ *   - "https://example.com/a.jpg"          （完整 URL，原样返回）
  * 返回：完整的图片资源路径
  *
- * 实现要点：自动剥离可能存在的 "assets/images/" 前缀，
- * 防止数据层与该函数同时拼接前缀导致 "/assets/images/assets/images/xxx.jpg" 双重前缀 bug
+ * 实现要点：
+ * - 新数据格式已含子目录（questions/ 或 signs/），直接拼接 `${base}images/${filename}`
+ * - 自动剥离可能存在的 "assets/images/" 前缀，防止双重前缀 bug
  */
 export function getImageUrl(image: string): string {
   if (!image) return '';
@@ -163,7 +169,7 @@ export function getImageUrl(image: string): string {
   // 以 data: 开头的内联资源原样返回
   if (image.startsWith('data:')) return image;
   const base = import.meta.env.BASE_URL;
-  // 归一化：剥离可能存在的前缀，统一为纯文件名
+  // 归一化：剥离可能存在的历史前缀，统一为相对路径
   let filename = image;
   const PREFIX = 'assets/images/';
   if (filename.startsWith(PREFIX)) {

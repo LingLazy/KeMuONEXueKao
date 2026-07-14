@@ -3,7 +3,7 @@
   "private": true,
   "version": "3.1.0",
   "type": "module",
-  "description": "科目一教考 · 速记通 · 1861题完整题库 · React + TypeScript + Vite 重构版",
+  "description": "科目一教考 · 速记通 · React + TypeScript + Vite",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

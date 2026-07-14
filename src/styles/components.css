@@ -949,6 +949,37 @@
   font-weight: 600;
 }
 
+/* subject-chip · 科目筛选小标签（练习工具栏） */
+.practice-subject-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  background: var(--bg-elevated, var(--bg-card));
+  border: 1px solid var(--border);
+  border-radius: var(--r-full);
+}
+.subject-chip {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-3);
+  background: transparent;
+  border: none;
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.subject-chip:hover {
+  color: var(--text-1);
+}
+.subject-chip.active {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
 /* btn-danger · 实色 */
 .btn-danger {
   background: var(--danger);

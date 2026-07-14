@@ -1,6 +1,6 @@
 /**
- * 科目一教考 · 全局类型定义
- * 覆盖题目、口诀、分类、考试、答题记录等核心数据结构
+ * 科目一/科目四教考 · 全局类型定义
+ * 覆盖题目、口诀、分类、考点知识、交通标志、考试、答题记录等核心数据结构
  */
 
 /** 题目类型：单选题 / 判断题 / 多选题 */
@@ -12,20 +12,25 @@ export type ViewName = 'home' | 'knowledge' | 'practice' | 'exam' | 'mnemonics' 
 /** 主题模式 */
 export type ThemeMode = 'light' | 'dark';
 
+/** 科目类型：ke1 科目一（法规基础）/ ke4 科目四（安全文明） */
+export type Subject = 'ke1' | 'ke4';
+
 /**
  * 题目结构
  * 对应 src/data/questions.json 中的单条记录
  */
 export interface Question {
-  /** 题目ID（1~1861） */
+  /** 题目ID（1-3494，ke1: 1-1861，ke4: 1862-3494） */
   id: number;
-  /** 原始题目ID */
+  /** 原始题库题目ID（驾考宝典 qid） */
   qid?: number;
-  /** 章节编号 */
+  /** 所属科目 */
+  subject: Subject;
+  /** 章节编号（对应一级分类序号 1-26） */
   chapter: number;
-  /** 章节名称 */
+  /** 章节名称（一级分类名） */
   chapter_name: string;
-  /** 所属小分类 key */
+  /** 所属小分类 key（cat01-cat26） */
   category: string;
   /** 标签数组（可属多个分类） */
   tags: string[];
@@ -41,7 +46,7 @@ export interface Question {
   analysis: string;
   /** 解析来源链接 */
   analysis_url?: string;
-  /** 题目图片文件名（空字符串表示无图） */
+  /** 题目图片相对路径（如 "questions/img_xxx.jpg" 或 "signs/01_prohibitory_sign/ps001_xxx.jpg"，空字符串表示无图） */
   image: string;
   /** 是否为图像题 */
   is_image_question: boolean;
@@ -51,7 +56,7 @@ export interface Question {
   difficulty?: number;
   /** 错误率 0-1 */
   wrong_rate?: number;
-  /** 速记口诀 */
+  /** 速记口诀（来自原题库 concise_explain 提炼） */
   mnemonic?: string;
   /** 通俗解析 */
   concise_analysis?: string;
@@ -77,6 +82,7 @@ export interface Mnemonic {
 /**
  * 小分类元数据
  * 对应 src/data/categories.json 中的单条记录
+ * 26 个一级分类（cat01-cat26）
  */
 export interface Category {
   /** 分类显示名 */
@@ -87,13 +93,14 @@ export interface Category {
   color: string;
   /** 题目数量 */
   count: number;
-  /** 题目ID列表 */
+  /** 题目ID列表（题目 id，1-3494） */
   ids: number[];
 }
 
 /**
  * 大分类（分类组）结构
- * 聚合多个小分类，题目可在多分类出现（多对多关系）
+ * 聚合多个小分类，便于在分类页/首页按主题分组展示
+ * 5 个大分类组：laws 法规常识 / penalty 违法处罚 / vehicle 车辆常识 / safety 安全驾驶 / misc 其他案例
  */
 export interface CategoryGroup {
   /** 大分类显示名 */
@@ -104,14 +111,75 @@ export interface CategoryGroup {
   color: string;
   /** 分类描述 */
   desc: string;
-  /** 包含的小分类 key 数组 */
+  /** 包含的小分类 key 数组（cat01-cat26） */
   cats: string[];
-  /** 动态匹配规则（'image' 表示额外包含所有图片题） */
-  dynamic?: 'image';
 }
 
-/** 大分类 key 类型 */
-export type GroupKey = 'image' | 'penalty' | 'scenario' | 'rules' | 'vehicle' | 'ev';
+/** 大分类 key 类型：5 大分类组 */
+export type GroupKey = 'laws' | 'penalty' | 'vehicle' | 'safety' | 'misc';
+
+/**
+ * 考点知识子节点
+ * 对应 src/data/knowledge.json 中 sub_points 数组的单条记录
+ */
+export interface KnowledgeSubPoint {
+  /** 子考点序号（如 "1.1"） */
+  index: string;
+  /** 子考点标题 */
+  title: string;
+  /** 原始标签ID */
+  label_id: number;
+  /** 关联题目数 */
+  question_count: number;
+  /** 考点内容正文 */
+  content: string;
+}
+
+/**
+ * 考点知识大类
+ * 对应 src/data/knowledge.json 中的单条记录
+ * 26 个一级分类的考点知识聚合
+ */
+export interface KnowledgePoint {
+  /** 大类ID（1-26） */
+  id: number;
+  /** 所属分类 key（cat01-cat26） */
+  category: string;
+  /** 分类名称 */
+  category_name: string;
+  /** 一级标签ID */
+  label_id: number;
+  /** 子考点列表 */
+  sub_points: KnowledgeSubPoint[];
+}
+
+/**
+ * 交通标志图标结构
+ * 对应 src/data/signs.json 中的单条记录
+ * 719 个交通标志，覆盖 17 个子类别
+ */
+export interface TrafficSign {
+  /** 标志ID（1-719） */
+  id: number;
+  /** 英文类别标识（如 "prohibitory_sign"） */
+  category_en: string;
+  /** 中文类别名（如 "禁令标志"） */
+  category_name: string;
+  /** 类别前缀（如 "ps"、"ws"） */
+  category_prefix: string;
+  /** 类内序号 */
+  icon_id: number;
+  /** 标志名称 */
+  title: string;
+  /** 标志含义说明 */
+  content: string;
+  /** 图片相对路径（如 "signs/01_prohibitory_sign/ps001_stop_and_yield.jpg"） */
+  image: string;
+  /** 关联科目一题目 qid 列表 */
+  ke1_questions: number[];
+  /** 关联科目四题目 qid 列表 */
+  ke4_questions: number[];
+}
 
 /** 答题记录 */
 export interface AnswerRecord {

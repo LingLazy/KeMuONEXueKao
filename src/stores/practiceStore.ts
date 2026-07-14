@@ -9,10 +9,13 @@
  * - 仅收藏模式
  */
 import { create } from 'zustand';
-import type { Question } from '@/types';
+import type { Question, Subject } from '@/types';
 import { Store, STORAGE_KEYS } from '@/services/storage';
 import { shuffle } from '@/utils';
 import { CATEGORY_GROUPS, isGroupKey } from '@/data/categoryGroups';
+
+/** 科目筛选类型：all 表示不按科目筛选 */
+type SubjectFilter = Subject | 'all';
 
 interface PracticeState {
   /** 当前分类 key */
@@ -29,6 +32,8 @@ interface PracticeState {
   onlyWrong: boolean;
   /** 仅收藏模式 */
   onlyBookmark: boolean;
+  /** 科目筛选 */
+  subject: SubjectFilter;
   /** 是否已显示解析 */
   analysisVisible: boolean;
   /** 全量题库引用（由视图层注入） */
@@ -41,6 +46,8 @@ interface PracticeState {
   setDataSource: (allQuestions: Question[], wrongIds: Set<number>, bookmarkIds: Set<number>) => void;
   /** 设置分类并筛选 */
   setCategory: (cat: string, allQuestions: Question[], wrongIds: Set<number>, bookmarkIds: Set<number>) => void;
+  /** 设置科目筛选 */
+  setSubject: (subject: SubjectFilter, allQuestions: Question[], wrongIds: Set<number>, bookmarkIds: Set<number>) => void;
   /** 设置搜索 */
   setSearch: (q: string, allQuestions: Question[]) => void;
   /** 切换乱序 */
@@ -61,10 +68,10 @@ interface PracticeState {
   jumpToId: (qid: number) => void;
   /** 切换解析显示 */
   toggleAnalysis: (visible?: boolean) => void;
-  /** 持久化进度（分类+索引） */
+  /** 持久化进度（分类+索引+科目） */
   persist: () => void;
   /** 恢复进度 */
-  restore: () => { cat: string; index: number } | null;
+  restore: () => { cat: string; index: number; subject: SubjectFilter } | null;
 }
 
 /** 过滤器：根据当前条件筛选题目 */
@@ -75,18 +82,20 @@ function filterQuestions(
   onlyWrong: boolean,
   onlyBookmark: boolean,
   wrongIds: Set<number>,
-  bookmarkIds: Set<number>
+  bookmarkIds: Set<number>,
+  subject: SubjectFilter
 ): Question[] {
   let result = all;
+  // 科目筛选
+  if (subject !== 'all') {
+    result = result.filter((q) => q.subject === subject);
+  }
   // 分类筛选
   if (cat !== 'all') {
     // 大分类（group key）：聚合其所有子分类，避免大分类入口在练习中返回空列表
     if (isGroupKey(cat)) {
       const subCats = new Set<string>(CATEGORY_GROUPS[cat].cats);
       result = result.filter((q) => subCats.has(q.category) || q.tags.some((t) => subCats.has(t)));
-    } else if (cat === 'image') {
-      // 图片题大分类：dynamic 匹配所有 is_image_question=true 的题目
-      result = result.filter((q) => q.is_image_question);
     } else {
       result = result.filter((q) => q.category === cat || q.tags.includes(cat));
     }
@@ -117,6 +126,7 @@ export const usePracticeStore = create<PracticeState>((set, get) => ({
   shuffled: false,
   onlyWrong: false,
   onlyBookmark: false,
+  subject: 'all',
   analysisVisible: false,
   allQuestions: [],
   wrongIds: new Set<number>(),
@@ -128,9 +138,19 @@ export const usePracticeStore = create<PracticeState>((set, get) => ({
   },
 
   setCategory: (cat, allQuestions, wrongIds, bookmarkIds) => {
+    const state = get();
     set({ allQuestions, wrongIds, bookmarkIds, currentCat: cat, search: '', onlyWrong: false, onlyBookmark: false });
-    const list = filterQuestions(allQuestions, cat, '', false, false, wrongIds, bookmarkIds);
-    const finalList = get().shuffled ? shuffle(list) : list;
+    const list = filterQuestions(allQuestions, cat, '', false, false, wrongIds, bookmarkIds, state.subject);
+    const finalList = state.shuffled ? shuffle(list) : list;
+    set({ list: finalList, index: 0, analysisVisible: false });
+    get().persist();
+  },
+
+  setSubject: (subject, allQuestions, wrongIds, bookmarkIds) => {
+    const state = get();
+    set({ allQuestions, wrongIds, bookmarkIds, subject });
+    const list = filterQuestions(allQuestions, state.currentCat, state.search, state.onlyWrong, state.onlyBookmark, wrongIds, bookmarkIds, subject);
+    const finalList = state.shuffled ? shuffle(list) : list;
     set({ list: finalList, index: 0, analysisVisible: false });
     get().persist();
   },
@@ -138,7 +158,7 @@ export const usePracticeStore = create<PracticeState>((set, get) => ({
   setSearch: (q, allQuestions) => {
     const state = get();
     set({ allQuestions, search: q });
-    const list = filterQuestions(allQuestions, state.currentCat, q, state.onlyWrong, state.onlyBookmark, state.wrongIds, state.bookmarkIds);
+    const list = filterQuestions(allQuestions, state.currentCat, q, state.onlyWrong, state.onlyBookmark, state.wrongIds, state.bookmarkIds, state.subject);
     set({ list, index: 0, analysisVisible: false });
   },
 
@@ -146,7 +166,7 @@ export const usePracticeStore = create<PracticeState>((set, get) => ({
     const state = get();
     if (state.shuffled) {
       // 关闭乱序：基于当前筛选条件重算有序列表
-      const list = filterQuestions(state.allQuestions, state.currentCat, state.search, state.onlyWrong, state.onlyBookmark, state.wrongIds, state.bookmarkIds);
+      const list = filterQuestions(state.allQuestions, state.currentCat, state.search, state.onlyWrong, state.onlyBookmark, state.wrongIds, state.bookmarkIds, state.subject);
       set({ shuffled: false, list, index: 0 });
     } else {
       // 开启乱序：重置 index 到 0，避免题目突变导致体验割裂
@@ -158,7 +178,7 @@ export const usePracticeStore = create<PracticeState>((set, get) => ({
     const state = get();
     const nextOnlyWrong = !state.onlyWrong;
     set({ allQuestions, wrongIds, onlyWrong: nextOnlyWrong });
-    const list = filterQuestions(allQuestions, state.currentCat, state.search, nextOnlyWrong, state.onlyBookmark, wrongIds, state.bookmarkIds);
+    const list = filterQuestions(allQuestions, state.currentCat, state.search, nextOnlyWrong, state.onlyBookmark, wrongIds, state.bookmarkIds, state.subject);
     const finalList = state.shuffled ? shuffle(list) : list;
     set({ list: finalList, index: 0, analysisVisible: false });
   },
@@ -167,14 +187,14 @@ export const usePracticeStore = create<PracticeState>((set, get) => ({
     const state = get();
     const nextOnlyBookmark = !state.onlyBookmark;
     set({ allQuestions, bookmarkIds, onlyBookmark: nextOnlyBookmark });
-    const list = filterQuestions(allQuestions, state.currentCat, state.search, state.onlyWrong, nextOnlyBookmark, state.wrongIds, bookmarkIds);
+    const list = filterQuestions(allQuestions, state.currentCat, state.search, state.onlyWrong, nextOnlyBookmark, state.wrongIds, bookmarkIds, state.subject);
     const finalList = state.shuffled ? shuffle(list) : list;
     set({ list: finalList, index: 0, analysisVisible: false });
   },
 
   reapplyFilters: () => {
     const state = get();
-    const list = filterQuestions(state.allQuestions, state.currentCat, state.search, state.onlyWrong, state.onlyBookmark, state.wrongIds, state.bookmarkIds);
+    const list = filterQuestions(state.allQuestions, state.currentCat, state.search, state.onlyWrong, state.onlyBookmark, state.wrongIds, state.bookmarkIds, state.subject);
     const finalList = state.shuffled ? shuffle(list) : list;
     const newIndex = Math.min(state.index, Math.max(0, finalList.length - 1));
     set({ list: finalList, index: newIndex });
@@ -217,14 +237,14 @@ export const usePracticeStore = create<PracticeState>((set, get) => ({
   },
 
   persist: () => {
-    const { currentCat, index } = get();
-    Store.set(STORAGE_KEYS.practiceProgress, { cat: currentCat, index });
+    const { currentCat, index, subject } = get();
+    Store.set(STORAGE_KEYS.practiceProgress, { cat: currentCat, index, subject });
   },
 
   restore: () => {
-    const saved = Store.get<{ cat: string; index: number } | null>(STORAGE_KEYS.practiceProgress, null);
+    const saved = Store.get<{ cat: string; index: number; subject: SubjectFilter } | null>(STORAGE_KEYS.practiceProgress, null);
     if (saved) {
-      set({ currentCat: saved.cat, index: saved.index });
+      set({ currentCat: saved.cat, index: saved.index, subject: saved.subject ?? 'all' });
     }
     return saved;
   }

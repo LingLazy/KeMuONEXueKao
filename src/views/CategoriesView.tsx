@@ -1,6 +1,6 @@
 /**
  * 分类导航视图
- * - 六大分类组完整索引
+ * - 五大分类组完整索引
  * - 每组下展示其小分类列表
  * - 显示每分类题数与正确率
  * - 点击进入对应分类练习
@@ -73,12 +73,6 @@ export default function CategoriesView() {
       group.cats.forEach((ck) => {
         CATEGORIES[ck]?.ids.forEach((id) => ids.add(id));
       });
-      if (group.dynamic === 'image') {
-        // questions 可能未加载完成（null），此时跳过动态聚合，待加载后重算
-        questions?.forEach((q) => {
-          if (q.is_image_question) ids.add(q.id);
-        });
-      }
       let answeredNum = 0;
       let correctNum = 0;
       ids.forEach((id) => {
@@ -101,7 +95,7 @@ export default function CategoriesView() {
         progress: ids.size > 0 ? Math.round((answeredNum / ids.size) * 100) : 0
       };
     });
-  }, [answered, questions]);
+  }, [answered]);
 
   const enterCategory = (cat: string) => {
     navigate(`/practice/${cat}`);
@@ -192,7 +186,7 @@ export default function CategoriesView() {
           <span className="section-eyebrow">Categories</span>
           <h1 className="section-title">分类<span className="title-accent">导航</span></h1>
           <p className="section-desc">
-            6 大分类专题 · 24 小分类完整索引 · 共 {Object.values(CATEGORIES).reduce((s, c) => s + c.ids.length, 0)} 题分布
+            大分类专题 · 小分类完整索引 · 共 {Object.values(CATEGORIES).reduce((s, c) => s + c.ids.length, 0)} 题分布
           </p>
         </header>
 
@@ -332,20 +326,6 @@ export default function CategoriesView() {
 /** 大分类图标 */
 function GroupIcon({ name }: { name: string }) {
   const icons: Record<string, React.ReactNode> = {
-    image: (
-      <>
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <circle cx="9" cy="9" r="2" />
-        <path d="m21 15-3.5-3.5L9 20" />
-      </>
-    ),
-    star: <path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />,
-    road: (
-      <>
-        <path d="M7 2v20M17 2v20" />
-        <path d="M7 8h10M7 14h10M7 20h10" strokeDasharray="2 2" />
-      </>
-    ),
     traffic: (
       <>
         <rect x="7" y="2" width="10" height="20" rx="2" />
@@ -354,6 +334,7 @@ function GroupIcon({ name }: { name: string }) {
         <circle cx="12" cy="17" r="1.5" />
       </>
     ),
+    star: <path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />,
     car: (
       <>
         <path d="M5 17H3v-5l2-5h14l2 5v5h-2" />
@@ -361,7 +342,17 @@ function GroupIcon({ name }: { name: string }) {
         <circle cx="16.5" cy="17.5" r="2" />
       </>
     ),
-    bolt: <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" />
+    safety: (
+      <>
+        <path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4z" />
+        <path d="M9 12l2 2 4-4" />
+      </>
+    ),
+    other: (
+      <>
+        <path d="M3 7h18M3 12h18M3 17h18" />
+      </>
+    )
   };
   return (
     <div className="group-icon" aria-hidden="true">

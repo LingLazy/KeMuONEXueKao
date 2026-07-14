@@ -1,27 +1,46 @@
 /**
  * 考试状态管理
- * - 100题随机抽取
- * - 45分钟倒计时
+ * - 随机抽取题目
+ * - 限时倒计时
  * - 答题卡：已答/标记/未答
  * - 五五提示：剔除两个错误选项
  * - 评分：>=90分及格
  * - 中途状态持久化至 sessionStorage（支持刷新恢复）
  */
 import { create } from 'zustand';
-import type { ExamQuestionState, ExamResult, Question } from '@/types';
+import type { ExamQuestionState, ExamResult, Question, Subject } from '@/types';
 import { SessionStore, STORAGE_KEYS } from '@/services/storage';
 import { shuffle, range } from '@/utils';
 
-/** 考试时长（45分钟，毫秒） */
-export const EXAM_DURATION = 45 * 60 * 1000;
-/** 考试题数 */
-export const EXAM_COUNT = 100;
-/** 及格分数 */
-export const EXAM_PASS_SCORE = 90;
+/** 各科目考试配置：题量 / 时长 / 及格分 / 每题分值 */
+export const EXAM_CONFIG: Record<Subject, {
+  /** 题目数量 */
+  count: number;
+  /** 考试时长（毫秒） */
+  duration: number;
+  /** 及格分数 */
+  passScore: number;
+  /** 每题分值 */
+  pointsPerQuestion: number;
+}> = {
+  // 科目一：100题 × 1分 = 100分，45分钟，90分及格
+  ke1: { count: 100, duration: 45 * 60 * 1000, passScore: 90, pointsPerQuestion: 1 },
+  // 科目四：50题 × 2分 = 100分，30分钟，90分及格
+  ke4: { count: 50, duration: 30 * 60 * 1000, passScore: 90, pointsPerQuestion: 2 }
+};
+
+/** 默认考试时长（向后兼容，取科目一配置） */
+export const EXAM_DURATION = EXAM_CONFIG.ke1.duration;
+/** 默认考试题数（向后兼容，取科目一配置） */
+export const EXAM_COUNT = EXAM_CONFIG.ke1.count;
+/** 默认及格分数（向后兼容，取科目一配置） */
+export const EXAM_PASS_SCORE = EXAM_CONFIG.ke1.passScore;
 
 interface ExamState {
   /** 是否正在考试 */
   running: boolean;
+  /** 当前考试科目 */
+  subject: Subject | null;
   /** 考试题目列表（含作答状态） */
   questions: ExamQuestionState[];
   /** 当前题目索引 */
@@ -37,7 +56,7 @@ interface ExamState {
   /** 考试结果 */
   result: ExamResult | null;
   /** 开始考试 */
-  start: (questions: Question[]) => void;
+  start: (questions: Question[], subject: Subject) => void;
   /** 选择答案 */
   select: (index: number, optionIdx: number) => void;
   /** 切换标记 */
@@ -62,8 +81,13 @@ interface ExamState {
   restore: (allQuestions: Question[]) => boolean;
 }
 
-/** 评分：每题1分，答错0分，未答0分 */
-function gradeExam(questions: ExamQuestionState[], usedTimeSec: number): ExamResult {
+/** 评分：按每题分值计分，答错0分，未答0分 */
+function gradeExam(
+  questions: ExamQuestionState[],
+  usedTimeSec: number,
+  pointsPerQuestion: number,
+  passScore: number
+): ExamResult {
   let correct = 0;
   let wrong = 0;
   let unanswered = 0;
@@ -97,11 +121,11 @@ function gradeExam(questions: ExamQuestionState[], usedTimeSec: number): ExamRes
       wrongIds.push(q.question.id);
     }
   });
-  // 每题1分
-  const score = correct;
+  // 按每题分值计算总分
+  const score = correct * pointsPerQuestion;
   return {
     score,
-    passed: score >= EXAM_PASS_SCORE,
+    passed: score >= passScore,
     correct,
     wrong,
     unanswered,
@@ -112,6 +136,7 @@ function gradeExam(questions: ExamQuestionState[], usedTimeSec: number): ExamRes
 
 export const useExamStore = create<ExamState>((set, get) => ({
   running: false,
+  subject: null,
   questions: [],
   currentIndex: 0,
   startTime: 0,
@@ -120,13 +145,15 @@ export const useExamStore = create<ExamState>((set, get) => ({
   remaining: EXAM_DURATION,
   result: null,
 
-  start: (questions) => {
+  start: (questions, subject) => {
     // 清理已有计时器，避免重复 start 导致双倍速倒计时
     const { timerId: oldTimerId, running } = get();
     if (oldTimerId) clearInterval(oldTimerId);
     if (running) get().reset();
-    // 100题随机抽取
-    const picked = shuffle(questions).slice(0, EXAM_COUNT);
+    const config = EXAM_CONFIG[subject];
+    // 按科目筛选后随机抽取考试题目
+    const subjectQuestions = questions.filter((q) => q.subject === subject);
+    const picked = shuffle(subjectQuestions).slice(0, config.count);
     // 初始化作答状态：多选题初始为空数组 []，其他为 -1
     const examQuestions: ExamQuestionState[] = picked.map((q) => ({
       question: q,
@@ -138,12 +165,13 @@ export const useExamStore = create<ExamState>((set, get) => ({
     const timerId = setInterval(() => get().tick(), 1000);
     set({
       running: true,
+      subject,
       questions: examQuestions,
       currentIndex: 0,
       startTime: Date.now(),
-      duration: EXAM_DURATION,
+      duration: config.duration,
       timerId,
-      remaining: EXAM_DURATION,
+      remaining: config.duration,
       result: null
     });
     get().persist();
@@ -236,11 +264,13 @@ export const useExamStore = create<ExamState>((set, get) => ({
   },
 
   submit: () => {
-    const { questions, timerId, startTime, duration } = get();
+    const { questions, timerId, startTime, duration, subject } = get();
     if (timerId) clearInterval(timerId);
     const usedMs = Date.now() - startTime;
     const usedSec = Math.min(Math.floor(usedMs / 1000), Math.floor(duration / 1000));
-    const result = gradeExam(questions, usedSec);
+    // 无科目时回退到科目一配置（理论上不会发生，防御性处理）
+    const config = subject ? EXAM_CONFIG[subject] : EXAM_CONFIG.ke1;
+    const result = gradeExam(questions, usedSec, config.pointsPerQuestion, config.passScore);
     set({ running: false, result, timerId: null });
     SessionStore.remove(STORAGE_KEYS.examState);
     return result;
@@ -251,6 +281,7 @@ export const useExamStore = create<ExamState>((set, get) => ({
     if (timerId) clearInterval(timerId);
     set({
       running: false,
+      subject: null,
       questions: [],
       currentIndex: 0,
       startTime: 0,
@@ -263,7 +294,7 @@ export const useExamStore = create<ExamState>((set, get) => ({
   },
 
   persist: () => {
-    const { questions, currentIndex, startTime, duration, remaining } = get();
+    const { questions, currentIndex, startTime, duration, remaining, subject } = get();
     // 仅持久化必要字段，避免保存函数
     const minimal = questions.map((q) => ({
       id: q.question.id,
@@ -273,6 +304,7 @@ export const useExamStore = create<ExamState>((set, get) => ({
       eliminated: q.eliminated
     }));
     SessionStore.set(STORAGE_KEYS.examState, {
+      subject,
       questions: minimal,
       currentIndex,
       startTime,
@@ -283,6 +315,7 @@ export const useExamStore = create<ExamState>((set, get) => ({
 
   restore: (allQuestions) => {
     const saved = SessionStore.get<{
+      subject: Subject | null;
       questions: Array<{ id: number; selected: number | number[]; marked: boolean; hintUsed: boolean; eliminated: number[] }>;
       currentIndex: number;
       startTime: number;
@@ -320,6 +353,7 @@ export const useExamStore = create<ExamState>((set, get) => ({
     const timerId = setInterval(() => get().tick(), 1000);
     set({
       running: true,
+      subject: saved.subject,
       questions: examQuestions,
       currentIndex: saved.currentIndex,
       startTime: saved.startTime,
