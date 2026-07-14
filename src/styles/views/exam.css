@@ -5,8 +5,12 @@
 
 /* ========== ExamView 考试视图 ========== */
 .view-exam {
-  min-height: 100vh;
+  /* 减去导航高度，避免与 #topnav 叠加产生额外滚动空间 */
+  min-height: calc(100vh - var(--nav-h));
   background: var(--bg-base);
+  /* 创建层叠上下文，隔离内部 sticky/fixed 元素的 z-index 层级
+     确保子元素的 z-index 不与 #topnav (z-index:100) 冲突 */
+  position: relative;
 }
 .exam-loading {
   display: flex;
@@ -171,17 +175,21 @@
   margin: 0 auto;
 }
 
-/* 答题页 · 顶部状态栏 */
+/* 答题页 · 顶部状态栏
+   z-index 提升至 100，与 #topnav 一致，确保在 qcard 之上
+   避免被 motion.div 的 transform 属性干扰层叠顺序 */
 .exam-header {
   position: sticky;
   top: var(--nav-h);
-  z-index: 50;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: var(--sp-3) var(--sp-6);
   background: var(--bg-card);
   border-bottom: 1px solid var(--border);
+  /* 隔离 transform 干扰，建立独立层叠上下文 */
+  contain: layout paint;
 }
 .exam-header.low-time {
   background: var(--danger-bg);
@@ -265,20 +273,27 @@
   transition: width 0.4s var(--ease-out);
 }
 
-/* 题目区 · 预留底部固定栏空间（含安全区域） */
+/* 题目区 · 预留底部固定栏空间（含安全区域）
+   position: relative + z-index: 1 确保题目内容在 header/footer 之下，
+   避免 motion.div 的 transform 创建的层叠上下文覆盖 header/footer */
 .exam-body {
+  position: relative;
+  z-index: 1;
   max-width: var(--container-question);
   margin: 0 auto;
-  padding: var(--sp-6) var(--sp-4) calc(var(--sp-16) + var(--nav-h) + env(safe-area-inset-bottom));
+  /* padding-bottom 精确匹配 footer 实际高度（padding 12px*2 + 按钮约 32px = 56px）
+     加上安全区域，避免内容被 footer 遮挡 */
+  padding: var(--sp-6) var(--sp-4) calc(var(--sp-16) + env(safe-area-inset-bottom));
 }
 
-/* 底部操作栏 · 简洁浮层（适配安全区域 + 隔离布局重排） */
+/* 底部操作栏 · 简洁浮层（适配安全区域 + 隔离布局重排）
+   z-index 提升至 100，与 exam-header 一致，确保始终可见不被遮挡 */
 .exam-footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 60;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;

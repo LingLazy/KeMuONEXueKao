@@ -61,8 +61,19 @@ const GEO_DECOR_CONFIG: Record<GeoBgVariant, GeoDecorItem[]> = {
   ],
   /** 练习空题列表态：网格底纹 + 十字坐标点 */
   'practice-empty': ['geo-bg-grid', 'geo-cross-marks'],
-  /** 考试答题页：极简网格底纹，避免干扰答题专注 */
-  exam: ['geo-bg-grid'],
+  /** 考试答题页：网格底纹 + 品牌光晕 + 几何线条 + 动态元素
+   *  克制使用 8 项装饰，营造专注但不单调的答题氛围
+   *  所有装饰均为低饱和度/低透明度，不干扰文字阅读 */
+  exam: [
+    'geo-bg-grid',
+    'geo-glow-primary-tl',
+    'geo-curve-s',
+    'geo-cross-marks',
+    'geo-dots-radial',
+    'geo-bezier-flow',
+    'geo-pulse-ring',
+    'geo-float-block'
+  ],
   /** 口诀总览正常态：网格底纹 + 弧线 + 对角线 + 波浪线等 10 项装饰 */
   mnemonics: [
     'geo-bg-grid',

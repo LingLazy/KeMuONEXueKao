@@ -287,7 +287,7 @@
 
   /* 题目区 */
   .exam-body {
-    padding: var(--sp-4) var(--sp-3) calc(var(--sp-16) + var(--nav-h) + var(--sp-4));
+    padding: var(--sp-4) var(--sp-3) calc(var(--sp-16) + var(--sp-4));
   }
 
   /* 底部操作栏 */
@@ -307,10 +307,6 @@
   .exam-hint-btn {
     padding: 4px 8px;
     font-size: 0.75rem;
-  }
-  .exam-mark-btn span:not(.exam-mark-btn-text),
-  .exam-hint-btn span:not(.exam-hint-btn-text) {
-    display: none;
   }
 
   /* 答题卡 */
@@ -746,7 +742,7 @@
   }
   .exam-body {
     padding-top: var(--sp-3);
-    padding-bottom: calc(var(--sp-12) + var(--nav-h));
+    padding-bottom: calc(var(--sp-12) + var(--sp-4));
   }
   .exam-footer {
     padding: var(--sp-2) var(--sp-3);

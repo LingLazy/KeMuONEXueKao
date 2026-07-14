@@ -90,18 +90,36 @@
   background: var(--accent-bg);
 }
 
-/* 题干 */
+/* 题干 · 强化视觉效果
+   - 字号 1.125rem / 字重 600 提升视觉权重
+   - 左侧主色渐变装饰条强化构成主义风格
+   - 字间距优化提升长题干可读性 */
 .qcard-question {
-  font-size: 1.0625rem;
+  position: relative;
+  font-size: 1.125rem;
   line-height: 1.75;
   color: var(--text-1);
-  margin-bottom: var(--sp-4);
-  font-weight: 500;
+  margin-bottom: var(--sp-5);
+  margin-left: calc(var(--sp-2) * -1);
+  padding-left: var(--sp-4);
+  font-weight: 600;
+  letter-spacing: 0.005em;
   /* 长题干排版优化：段间距感与断词 */
   text-wrap: pretty;
   overflow-wrap: break-word;
   /* 中文与西文混排自动间距（避免挤在一起） */
   text-spacing-autospace: ideograph-alpha ideograph-numeric;
+}
+/* 左侧主色渐变装饰条 · 构成主义几何元素 */
+.qcard-question::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  bottom: 0.35em;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--primary), var(--primary-hover));
+  border-radius: var(--r-full);
 }
 .qcard-question mark.kw {
   background: var(--primary-soft);
