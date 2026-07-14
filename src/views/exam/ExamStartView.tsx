@@ -6,6 +6,7 @@
  * - 调用 onStart 启动考试
  */
 import { motion } from 'framer-motion';
+import { useShallow } from 'zustand/react/shallow';
 import { EXAM_CONFIG } from '@/constants/exam';
 import { Icon } from '@/components/common/Icon';
 import { useExamHistoryStore } from '@/stores/examHistoryStore';
@@ -53,41 +54,47 @@ export default function ExamStartView({
   const fullScore = config.count * config.pointsPerQuestion;
 
   // 历史统计（按当前选中科目筛选）
-  const historyStats = useExamHistoryStore((s) => {
-    const records = s.records.filter((r) => r.subject === selectedSubject);
-    if (records.length === 0) {
-      return { count: 0, passed: 0, passRate: 0, avg: 0, best: 0, latestScore: null, latestPassed: null, latestTime: null };
-    }
-    const count = records.length;
-    const passed = records.filter((r) => r.passed).length;
-    const scores = records.map((r) => r.score);
-    const sum = scores.reduce((a, b) => a + b, 0);
-    // noUncheckedIndexedAccess 下 records[0] 类型为 T | undefined，
-    // 但前面已判断 length === 0 提前返回，此处一定存在，使用非空断言
-    const latest = records[0]!;
-    return {
-      count,
-      passed,
-      passRate: Math.round((passed / count) * 100),
-      avg: Math.round((sum / count) * 10) / 10,
-      best: Math.max(...scores),
-      latestScore: latest.score,
-      latestPassed: latest.passed,
-      latestTime: latest.timestamp
-    };
-  });
+  // 使用 useShallow 做浅比较，避免选择器返回新对象导致无限重渲染
+  const historyStats = useExamHistoryStore(
+    useShallow((s) => {
+      const records = s.records.filter((r) => r.subject === selectedSubject);
+      if (records.length === 0) {
+        return { count: 0, passed: 0, passRate: 0, avg: 0, best: 0, latestScore: null, latestPassed: null, latestTime: null };
+      }
+      const count = records.length;
+      const passed = records.filter((r) => r.passed).length;
+      const scores = records.map((r) => r.score);
+      const sum = scores.reduce((a, b) => a + b, 0);
+      // noUncheckedIndexedAccess 下 records[0] 类型为 T | undefined，
+      // 但前面已判断 length === 0 提前返回，此处一定存在，使用非空断言
+      const latest = records[0]!;
+      return {
+        count,
+        passed,
+        passRate: Math.round((passed / count) * 100),
+        avg: Math.round((sum / count) * 10) / 10,
+        best: Math.max(...scores),
+        latestScore: latest.score,
+        latestPassed: latest.passed,
+        latestTime: latest.timestamp
+      };
+    })
+  );
 
   // 错题本统计（按当前选中科目筛选）
-  const wrongStats = useWrongStore((s) => {
-    const items = Object.values(s.items).filter((item) => item.subject === selectedSubject);
-    const now = Date.now();
-    const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-    return {
-      count: items.length,
-      recentCount: items.filter((item) => now - item.lastWrongTime < WEEK_MS).length,
-      totalWrong: items.reduce((sum, item) => sum + item.wrongCount, 0)
-    };
-  });
+  // 使用 useShallow 做浅比较，避免选择器返回新对象导致无限重渲染
+  const wrongStats = useWrongStore(
+    useShallow((s) => {
+      const items = Object.values(s.items).filter((item) => item.subject === selectedSubject);
+      const now = Date.now();
+      const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+      return {
+        count: items.length,
+        recentCount: items.filter((item) => now - item.lastWrongTime < WEEK_MS).length,
+        totalWrong: items.reduce((sum, item) => sum + item.wrongCount, 0)
+      };
+    })
+  );
 
   const hasHistory = historyStats.count > 0;
   const hasWrong = wrongStats.count > 0;
