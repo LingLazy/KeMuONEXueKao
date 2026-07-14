@@ -7,20 +7,22 @@
    =================================================================== */
 
 :root {
-  /* === 背景层次 · 暖中性 Stone（亮色） ===
-     借鉴 shadcn/ui：仅 2 层背景（page + card），不引入第三层 */
-  --bg-base: oklch(0.985 0 0);           /* App 背景 */
-  --bg-sub: oklch(0.97 0 0);             /* 次级背景（极少使用） */
-  --bg-card: oklch(1 0 0);               /* 卡片背景 */
-  --bg-elev: oklch(1 0 0);               /* 浮层背景（弹窗/菜单） */
-  --bg-hover: oklch(0.97 0 0);           /* 交互 hover 背景 */
-  --bg-sunken: oklch(0.97 0 0);          /* 凹陷区域（输入框内等，不使用 inset shadow） */
+  /* === 背景层次 · 淡灰中性系（亮色）
+     借鉴 Linear/Notion 浅色界面：避免纯白刺眼，建立"灰底-亮卡"层次聚焦
+     - 灰底降低屏幕亮度，减少眩光，突出白色卡片聚焦点
+     - 卡片使用近白微暖色，与底色形成 4-5% 明度差，弱化边框依赖 */
+  --bg-base: oklch(0.965 0.002 264);        /* App 背景 · 淡灰微冷 */
+  --bg-sub: oklch(0.945 0.003 264);         /* 次级背景 · 略深灰 */
+  --bg-card: oklch(0.992 0.001 264);        /* 卡片背景 · 近白微冷 */
+  --bg-elev: oklch(0.998 0 0);              /* 浮层背景 · 弹窗/菜单（保持高对比） */
+  --bg-hover: oklch(0.955 0.003 264);       /* 交互 hover 背景 */
+  --bg-sunken: oklch(0.94 0.003 264);       /* 凹陷区域（输入框内等） */
 
   /* === 文字层次 · 暖中性近黑 === */
-  --text-1: oklch(0.145 0 0);            /* 高对比主文本 */
-  --text-2: oklch(0.32 0 0);             /* 次级文本 */
-  --text-3: oklch(0.55 0 0);             /* 辅助文本 */
-  --text-mute: oklch(0.7 0 0);           /* 静音/占位 */
+  --text-1: oklch(0.18 0.005 264);          /* 高对比主文本（微冷深墨，避免纯黑刺眼） */
+  --text-2: oklch(0.36 0.005 264);          /* 次级文本 */
+  --text-3: oklch(0.55 0.008 264);          /* 辅助文本 */
+  --text-mute: oklch(0.7 0.008 264);        /* 静音/占位 */
 
   /* === 主色 · Indigo 12 步色阶（亮色）
      借鉴 Radix Colors Indigo Step 9：oklch(0.546 0.215 276.8) #3F51D9
@@ -55,22 +57,24 @@
   --warn-soft: oklch(0.95 0.04 70.08);
 
   /* === 边框与分割 · 统一使用 var(--border)
-     借鉴 shadcn：亮色用淡灰、暗色用 10% 白色 === */
-  --border: oklch(0.922 0 0);                    /* 默认边框 */
-  --border-strong: oklch(0.85 0 0);              /* 强调边框（hover 态） */
-  --divider: oklch(0.92 0 0);                     /* 分割线 */
+     借鉴 shadcn：亮色用淡灰、暗色用 10% 白色
+     淡灰底色下边框需略加深，保持卡片轮廓清晰 === */
+  --border: oklch(0.895 0.003 264);                /* 默认边框（加深以适应灰底） */
+  --border-strong: oklch(0.82 0.005 264);          /* 强调边框（hover 态） */
+  --divider: oklch(0.90 0.003 264);                 /* 分割线 */
 
   /* === 阴影系统 · 4 级分层 + 品牌色光晕
      借鉴 Geist Materials：Surface（on page）+ Floating（above page）
-     关键：hover 时用 4-8% 品牌色光晕取代灰色阴影，杜绝 inset 凹凸 === */
-  --shadow-xs: 0 1px 2px 0 oklch(0.21 0 0 / 0.04);
-  --shadow-sm: 0 1px 3px 0 oklch(0.21 0 0 / 0.05), 0 1px 2px -1px oklch(0.21 0 0 / 0.04);
-  --shadow-md: 0 4px 8px -2px oklch(0.546 0.215 276.8 / 0.06),
-               0 2px 4px -2px oklch(0.21 0 0 / 0.05);
-  --shadow-lg: 0 12px 24px -6px oklch(0.546 0.215 276.8 / 0.08),
-               0 4px 8px -4px oklch(0.21 0 0 / 0.06);
-  --shadow-xl: 0 24px 48px -12px oklch(0.21 0 0 / 0.18),
-               0 8px 16px -8px oklch(0.546 0.215 276.8 / 0.08);
+     关键：hover 时用 4-8% 品牌色光晕取代灰色阴影，杜绝 inset 凹凸
+     灰底环境下阴影需略加强，形成更明显的层次悬浮感 === */
+  --shadow-xs: 0 1px 2px 0 oklch(0.21 0.005 264 / 0.06);
+  --shadow-sm: 0 1px 3px 0 oklch(0.21 0.005 264 / 0.08), 0 1px 2px -1px oklch(0.21 0.005 264 / 0.06);
+  --shadow-md: 0 4px 12px -2px oklch(0.546 0.215 276.8 / 0.10),
+               0 2px 4px -2px oklch(0.21 0.005 264 / 0.08);
+  --shadow-lg: 0 12px 28px -6px oklch(0.546 0.215 276.8 / 0.12),
+               0 4px 8px -4px oklch(0.21 0.005 264 / 0.10);
+  --shadow-xl: 0 24px 48px -12px oklch(0.21 0.005 264 / 0.22),
+               0 8px 16px -8px oklch(0.546 0.215 276.8 / 0.12);
 
   /* 焦点环：2px 间隔 + 4px 品牌色环（无障碍规范） */
   --ring-focus: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--primary);

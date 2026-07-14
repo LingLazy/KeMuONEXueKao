@@ -414,9 +414,16 @@
   margin-bottom: var(--sp-3);
   overflow: hidden;
   transition: box-shadow var(--dur-base) var(--ease-smooth),
-              border-color var(--dur-base) var(--ease-smooth);
+              border-color var(--dur-base) var(--ease-smooth),
+              transform var(--dur-base) var(--ease-smooth);
   box-shadow: var(--shadow-xs);
   position: relative;
+}
+/* 卡片整体悬浮反馈：轻微上浮 + 阴影增强 + 边框主色化 */
+.mnemonic-card:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
 }
 /* 构成主义:左边缘竖虚线锚(极淡) */
 .mnemonic-card::before {
@@ -434,7 +441,11 @@
     transparent 6px
   );
   opacity: 0.6;
-  transition: opacity var(--dur-base);
+  transition: opacity var(--dur-base),
+              background var(--dur-base) var(--ease-smooth);
+}
+.mnemonic-card:hover::before {
+  opacity: 0.9;
 }
 .mnemonic-card.expanded::before {
   opacity: 1;
@@ -449,6 +460,23 @@
 .mnemonic-card.expanded {
   border-color: var(--primary-border);
   box-shadow: var(--shadow-md);
+}
+/* 展开态额外主色光晕 · 视觉聚焦强化 */
+.mnemonic-card.expanded::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--primary) 20%,
+    var(--accent) 50%,
+    var(--primary) 80%,
+    transparent 100%);
+  opacity: 0.7;
+  pointer-events: none;
 }
 .mnemonic-card-head {
   display: flex;
@@ -518,6 +546,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: 0.02em;
+  /* 口诀文本主色化渐变 · 强化内容视觉感 */
+  background: linear-gradient(90deg, var(--text-2) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background var(--dur-base) var(--ease-smooth);
+}
+/* 展开态口诀文本：色彩饱和度提升 */
+.mnemonic-card.expanded .mnemonic-card-text {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .mnemonic-card-chevron {
   color: var(--text-mute);
@@ -545,6 +586,23 @@
   min-height: 0; /* grid 子元素必须 min-height:0 才能正确收缩 */
   padding: 0 var(--sp-4) var(--sp-4);
   padding-left: var(--sp-5);
+  position: relative;
+}
+/* 展开区左侧主色淡条 · 强化视觉聚焦与内容区域感 */
+.mnemonic-card-body::before {
+  content: '';
+  position: absolute;
+  left: var(--sp-2);
+  top: var(--sp-2);
+  bottom: var(--sp-3);
+  width: 2px;
+  background: linear-gradient(180deg,
+    var(--primary) 0%,
+    var(--primary-border) 50%,
+    transparent 100%);
+  opacity: 0.5;
+  border-radius: var(--r-full);
+  pointer-events: none;
 }
 /* 收起态时隐藏 body 内部内容，避免 tab 聚焦 */
 .mnemonic-card-body-wrap:not(.open) .mnemonic-card-body {
@@ -554,11 +612,31 @@
 .mnemonic-card-body-wrap.open .mnemonic-card-body {
   visibility: visible;
 }
+/* 解释/分条说明区 · 卡片化重构，强化层次与视觉聚焦 */
 .mnemonic-section {
-  padding: var(--sp-3) var(--sp-4);
-  background: var(--bg-sub);
+  position: relative;
+  padding: var(--sp-4) var(--sp-4) var(--sp-4) var(--sp-5);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--bg-sub) 92%, var(--primary-bg) 8%) 0%,
+    var(--bg-sub) 100%);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
   border-radius: var(--r-md);
-  margin-top: var(--sp-2);
+  margin-top: var(--sp-3);
+  transition: border-left-color var(--dur-base) var(--ease-smooth),
+              box-shadow var(--dur-base) var(--ease-smooth);
+}
+/* 解释区悬浮：左侧锚条变红 + 微阴影 */
+.mnemonic-section:hover {
+  border-left-color: var(--geo-red);
+  box-shadow: var(--shadow-xs);
+}
+/* 分条说明区使用强调色（琥珀）作为左侧锚条，区分于解释区 */
+.mnemonic-section:last-child {
+  border-left-color: var(--accent);
+}
+.mnemonic-section:last-child:hover {
+  border-left-color: var(--geo-red);
 }
 .mnemonic-section-label {
   display: inline-flex;
@@ -571,6 +649,9 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: var(--sp-2);
+  padding: 2px 8px;
+  background: var(--primary-bg);
+  border-radius: var(--r-xs);
 }
 .mnemonic-section-label::before {
   content: '';
@@ -578,10 +659,19 @@
   height: 5px;
   background: var(--primary);
 }
+/* 分条说明 label 使用强调色 */
+.mnemonic-section:last-child .mnemonic-section-label {
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+.mnemonic-section:last-child .mnemonic-section-label::before {
+  background: var(--accent);
+}
 .mnemonic-explain {
-  font-size: 0.875rem;
-  color: var(--text-2);
-  line-height: 1.75;
+  font-size: 0.9375rem;
+  color: var(--text-1);
+  line-height: 1.8;
+  font-weight: 500;
   /* 长解释文本排版优化 */
   text-wrap: pretty;
   overflow-wrap: break-word;
@@ -595,27 +685,41 @@
 .mnemonic-details li {
   display: flex;
   align-items: flex-start;
-  gap: var(--sp-2);
-  font-size: 0.8125rem;
-  color: var(--text-2);
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  font-size: 0.875rem;
+  color: var(--text-1);
   line-height: 1.7;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
   /* 详情列表项断词 */
   overflow-wrap: break-word;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
 }
-/* 构成主义:编号方块(非圆形胶囊) */
+/* 列表项悬浮：边框主色化 + 微右移，强化交互反馈 */
+.mnemonic-details li:hover {
+  border-color: var(--primary-border);
+  background: var(--primary-bg);
+  transform: translateX(2px);
+}
+/* 构成主义:编号方块(非圆形胶囊) · 渐变主色化强化视觉感 */
 .mnemonic-detail-num {
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   display: grid;
   place-items: center;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   font-weight: 700;
-  color: var(--bg-base);
-  background: var(--geo-ink);
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
   border-radius: var(--r-xs);
   letter-spacing: 0.02em;
+  box-shadow: 0 2px 4px -1px oklch(0.546 0.215 276.8 / 0.30);
 }
 /* 复制口诀操作区 */
 .mnemonic-card-actions {

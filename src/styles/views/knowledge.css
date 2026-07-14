@@ -291,7 +291,7 @@
   padding: var(--sp-6) var(--sp-8);
   min-width: 0;
   line-height: 1.8;
-  box-shadow: var(--shadow-xs);
+  box-shadow: var(--shadow-sm);
   position: relative;
   /* 长文档排版优化 */
   text-wrap: pretty;
@@ -300,20 +300,29 @@
   text-spacing-trim: space-all;
   /* 中西文混排自动间距 */
   text-spacing-autospace: ideograph-alpha ideograph-numeric;
+  /* 过渡：便于悬浮态平滑变化 */
+  transition: box-shadow var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth);
 }
-/* 行宽可读性约束：仅作用于 .knowledge-content 直接子级中的文本块与段落，
-   容器类（.knowledge-section）与表格/分割线不限宽，向右拉满容器完整展示 */
-.knowledge-content > *:not(.md-table-wrap):not(hr):not(.knowledge-section) {
-  max-width: 820px;
+/* 内容区轻微悬浮反馈：边框微亮 + 阴影增强 */
+.knowledge-content:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+/* 行宽可读性约束：仅作用于 .knowledge-content 直接子级中的纯文本块（搜索摘要等小元素）
+   主要内容容器（.knowledge-section / .knowledge-subpoint / 段落）不再强制 820px 限宽，
+   以自适应填充 grid 的 1fr 列，避免大屏下右侧出现大面积留白 */
+.knowledge-content > *:not(.md-table-wrap):not(hr):not(.knowledge-section):not(.knowledge-subpoint) {
+  max-width: 980px;
 }
 /* 知识区块与子考点文章占满容器宽度，自适应填充 grid 的 1fr 列 */
 .knowledge-section,
 .knowledge-subpoint {
   max-width: none;
 }
-/* 段落保持限宽 820px，确保长文阅读节奏（左对齐保留阅读节奏） */
+/* 段落放宽限宽至 980px，平衡长文阅读节奏与大屏空间利用（左对齐保留阅读节奏） */
 .knowledge-subpoint > .md-p {
-  max-width: 820px;
+  max-width: 980px;
 }
 /* 面板右上角构成主义几何角标(替代色条) */
 .knowledge-content::before {
@@ -607,62 +616,142 @@
   padding: var(--sp-2) var(--sp-4);
   font-size: 0.8125rem;
   color: var(--text-3);
-  background: var(--bg-sub);
-  border: 1px solid var(--border);
+  background: var(--primary-bg);
+  border: 1px solid var(--primary-border);
   border-radius: var(--r-md);
   font-family: var(--font-mono);
   letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+/* 统计条左侧构成主义红色锚点 */
+.knowledge-search-summary::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--geo-red);
 }
 /* 一级分类区块 */
 .knowledge-section {
   margin-bottom: var(--sp-8);
+  position: relative;
 }
-/* 子考点文章 */
+/* 子考点文章 · 卡片化重构，强化视觉聚焦与层次 */
 .knowledge-subpoint {
-  margin: var(--sp-6) 0;
-  padding: var(--sp-4) 0 var(--sp-5);
-  border-bottom: 1px dashed var(--divider);
+  position: relative;
+  margin: var(--sp-4) 0;
+  padding: var(--sp-5) var(--sp-5) var(--sp-5) var(--sp-6);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--bg-card) 96%, var(--primary-bg) 4%) 0%,
+    var(--bg-card) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  /* 左侧主色实色锚条，建立视觉聚焦点 */
+  border-left: 3px solid var(--primary);
+  box-shadow: var(--shadow-xs);
   /* 子考点区块排版优化 */
   overflow-wrap: break-word;
+  /* 鼠标交互过渡 */
+  transition: transform var(--dur-base) var(--ease-smooth),
+              box-shadow var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth),
+              border-left-color var(--dur-base) var(--ease-smooth);
 }
-.knowledge-subpoint:last-child {
-  border-bottom: none;
+/* 子考点悬浮：左侧锚条变粗、轻微上浮、阴影增强、边框主色化 */
+.knowledge-subpoint:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-border);
+  border-left-color: var(--geo-red);
+  border-left-width: 4px;
+  box-shadow: var(--shadow-md);
+}
+/* 子考点右上角构成主义角标 · 默认隐藏，悬浮显现强化交互反馈 */
+.knowledge-subpoint::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  background:
+    linear-gradient(135deg, transparent 50%, var(--primary-soft) 50%);
+  border-radius: 0 var(--r-lg) 0 0;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity var(--dur-base) var(--ease-smooth),
+              background var(--dur-base) var(--ease-smooth);
+}
+.knowledge-subpoint:hover::before {
+  opacity: 1;
+  background: linear-gradient(135deg, transparent 50%, var(--primary-bg) 50%);
 }
 /* 子考点序号徽标（h2 内的第一个 span） */
 .knowledge-sub-index {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
-  height: 24px;
+  min-width: 40px;
+  height: 26px;
   padding: 0 var(--sp-2);
-  background: var(--primary-bg);
-  color: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  color: #fff;
   border-radius: var(--r-xs);
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   flex-shrink: 0;
+  /* 序号徽标投影增强立体感 */
+  box-shadow: 0 2px 6px -1px oklch(0.546 0.215 276.8 / 0.30);
 }
 /* 子考点标题文本 */
 .knowledge-sub-title {
-  font-size: 1.125rem;
+  font-size: 1.1875rem;
   font-weight: 800;
   color: var(--text-1);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   line-height: 1.4;
   /* 长标题断行优化 */
   text-wrap: balance;
   overflow-wrap: break-word;
 }
-/* 子考点关联题目数 */
+/* 子考点关联题目数 · 强化标签视觉感 */
 .knowledge-sub-meta {
-  margin: var(--sp-1) 0 var(--sp-2);
-  font-size: 0.75rem;
-  color: var(--text-mute);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  margin: var(--sp-2) 0 var(--sp-3);
+  padding: 2px 10px;
+  font-size: 0.7rem;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--r-full);
   font-family: var(--font-mono);
   letter-spacing: 0.04em;
+  font-weight: 600;
+}
+/* 关联题数前的圆点装饰 */
+.knowledge-sub-meta::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+/* 子考点段落增强 · 首段加重，建立阅读节奏
+   兼容两种结构：h2 直接待首段 / h2 → meta → 首段 */
+.knowledge-subpoint > h2 + .md-p,
+.knowledge-subpoint > .knowledge-sub-meta + .md-p {
+  color: var(--text-1);
+  font-weight: 500;
+  padding-left: var(--sp-3);
+  border-left: 2px solid var(--primary-border);
+  margin-top: var(--sp-2);
 }
 /* 搜索无结果内联提示 */
 .knowledge-empty-inline {

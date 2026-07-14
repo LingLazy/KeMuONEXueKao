@@ -426,6 +426,17 @@
     padding: var(--sp-4);
     border-radius: var(--r-md);
   }
+  /* 子考点卡片移动端紧凑化 */
+  .knowledge-subpoint {
+    padding: var(--sp-3) var(--sp-3) var(--sp-3) var(--sp-4);
+    margin: var(--sp-3) 0;
+  }
+  .knowledge-subpoint > .md-p {
+    max-width: 100%;
+  }
+  .knowledge-subpoint > .md-p:first-of-type {
+    padding-left: var(--sp-2);
+  }
   .markdown-body h1 {
     font-size: 1.5rem;
   }
@@ -758,14 +769,31 @@
   .jump-cell:hover,
   .sheet-cell:hover,
   .modal-close:hover,
-  .knowledge-toc-item:hover {
+  .knowledge-toc-item:hover,
+  .knowledge-content:hover,
+  .knowledge-subpoint:hover,
+  .mnemonic-card:hover,
+  .mnemonic-section:hover,
+  .mnemonic-details li:hover {
     transform: none;
     /* 触摸设备保留简洁投影，避免粘滞高亮 */
     box-shadow: var(--shadow-xs);
+    /* 触摸设备不强制变更边框色，避免粘滞主色边框 */
+    border-color: var(--border);
+    border-left-color: var(--border);
   }
   .cat-card:hover::before,
-  .quick-card:hover::before {
-    opacity: 0;
+  .quick-card:hover::before,
+  .knowledge-subpoint:hover::before,
+  .mnemonic-card:hover::before {
+    opacity: 0.6;
+  }
+  /* 展开态口诀卡片在触摸设备下保留主色边框 */
+  .mnemonic-card.expanded:hover {
+    border-color: var(--primary-border);
+  }
+  .mnemonic-card.expanded:hover::before {
+    opacity: 1;
   }
   .theme-toggle:hover {
     transform: none;
@@ -775,7 +803,9 @@
   .quick-card:active,
   .group-card:active,
   .cat-detail-item:active,
-  .qcard-option:active:not(:disabled) {
+  .qcard-option:active:not(:disabled),
+  .knowledge-subpoint:active,
+  .mnemonic-card:active {
     transform: scale(0.985);
     box-shadow: var(--shadow-xs);
     transition: transform 0.1s var(--ease-precision), box-shadow 0.1s var(--ease-precision);
