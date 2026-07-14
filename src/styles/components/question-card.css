@@ -93,10 +93,15 @@
 /* 题干 */
 .qcard-question {
   font-size: 1.0625rem;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--text-1);
   margin-bottom: var(--sp-4);
   font-weight: 500;
+  /* 长题干排版优化：段间距感与断词 */
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  /* 中文与西文混排自动间距（避免挤在一起） */
+  text-spacing-autospace: ideograph-alpha ideograph-numeric;
 }
 .qcard-question mark.kw {
   background: var(--primary-soft);
@@ -231,7 +236,7 @@
 }
 .qcard-option {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--sp-3);
   padding: var(--sp-3) var(--sp-4);
   background: var(--bg-card);
@@ -239,10 +244,14 @@
   border-radius: var(--r-md);
   text-align: left;
   font-size: 0.9375rem;
+  line-height: 1.65;
   color: var(--text-1);
   transition: background-color var(--dur-fast) var(--ease-out),
               border-color var(--dur-fast) var(--ease-out),
               box-shadow var(--dur-fast) var(--ease-out);
+  /* 长选项排版优化 */
+  text-wrap: pretty;
+  overflow-wrap: break-word;
 }
 .qcard-option:hover:not(:disabled) {
   border-color: var(--primary-border);
@@ -264,12 +273,17 @@
   background: var(--bg-sub);
   border-radius: var(--r-sm);
   flex-shrink: 0;
+  /* 多行选项时字母固定在首行顶部，不随文本垂直居中 */
+  margin-top: 2px;
   transition: background-color var(--dur-fast) var(--ease-out),
               color var(--dur-fast) var(--ease-out);
 }
 .qcard-option-text {
   flex: 1;
-  line-height: 1.6;
+  line-height: 1.65;
+  /* 长选项文本断词与孤行控制 */
+  text-wrap: pretty;
+  overflow-wrap: break-word;
 }
 .qcard-option.correct {
   border-color: var(--success);
@@ -436,14 +450,19 @@
   overflow-anchor: none;
 }
 .qcard-analysis-text {
-  padding: var(--sp-3) var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
   background: var(--bg-sub);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
-  font-size: 0.875rem;
-  line-height: 1.7;
+  font-size: 0.9rem;
+  line-height: 1.8;
   color: var(--text-2);
   margin-top: var(--sp-2);
+  /* 长解析排版优化：可读性优先 */
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  /* 段落首行缩进增强阅读节奏（中文排版惯例） */
+  text-indent: 0;
 }
 .qcard-analysis-link {
   display: inline-block;
@@ -502,11 +521,17 @@
   font-weight: 700;
   color: var(--text-1);
   letter-spacing: 0.02em;
-  line-height: 1.6;
+  line-height: 1.7;
+  /* 长口诀断词 */
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 .qcard-mnemonic-explain {
-  margin-top: var(--sp-1);
+  margin-top: var(--sp-2);
   font-size: 0.8125rem;
   color: var(--text-3);
-  line-height: 1.6;
+  line-height: 1.75;
+  /* 解释文本优化 */
+  text-wrap: pretty;
+  overflow-wrap: break-word;
 }

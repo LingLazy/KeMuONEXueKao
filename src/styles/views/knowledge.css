@@ -293,6 +293,13 @@
   line-height: 1.8;
   box-shadow: var(--shadow-xs);
   position: relative;
+  /* 长文档排版优化 */
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  /* 中文标点挤压（避免句号、逗号后出现多余空隙） */
+  text-spacing-trim: space-all;
+  /* 中西文混排自动间距 */
+  text-spacing-autospace: ideograph-alpha ideograph-numeric;
 }
 /* 行宽可读性约束：文本类子元素限宽 820px（左对齐保留阅读节奏），
    表格与分割线不限宽，宽表格向右拉满容器完整展示 */
@@ -322,8 +329,12 @@
   padding-bottom: var(--sp-2);
   border-bottom: 1px solid var(--divider);
   letter-spacing: -0.025em;
+  line-height: 1.3;
   scroll-margin-top: calc(var(--nav-h) + var(--sp-4));
   position: relative;
+  /* 标题断行优化：平衡两行 */
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 /* h1 下方构成主义短线(偏左,非满宽) */
 .markdown-body h1::after {
@@ -343,12 +354,16 @@
   margin: var(--sp-6) 0 var(--sp-3);
   padding-left: 0;
   letter-spacing: -0.02em;
+  line-height: 1.35;
   scroll-margin-top: calc(var(--nav-h) + var(--sp-4));
   position: relative;
   /* 构成主义:编号方块 + 渐隐线(替代左色条) */
   display: flex;
   align-items: center;
   gap: var(--sp-3);
+  /* 标题断行优化 */
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 .markdown-body h2::before {
   content: '';
@@ -413,18 +428,34 @@
 .markdown-body .md-p {
   font-size: 0.9375rem;
   color: var(--text-2);
-  line-height: 1.8;
-  margin: var(--sp-2) 0;
+  line-height: 1.85;
+  margin: var(--sp-3) 0;
+  /* 段落排版优化：孤行控制与断词 */
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  /* 段落首行缩进（中文长文阅读惯例，2 字符宽度） */
+  text-indent: 2em;
+}
+/* 首段不缩进（紧随标题时无需缩进） */
+.markdown-body h1 + .md-p,
+.markdown-body h2 + .md-p,
+.markdown-body h3 + .md-p,
+.markdown-body h4 + .md-p,
+.markdown-body .knowledge-sub-meta + .md-p {
+  text-indent: 0;
 }
 .markdown-body .md-list {
   margin: var(--sp-3) 0;
   padding-left: var(--sp-6);
   font-size: 0.9375rem;
   color: var(--text-2);
+  line-height: 1.8;
 }
 .markdown-body .md-list li {
-  margin: var(--sp-1) 0;
-  line-height: 1.7;
+  margin: var(--sp-2) 0;
+  line-height: 1.75;
+  /* 列表项断词 */
+  overflow-wrap: break-word;
 }
 .markdown-body .md-list li::marker {
   color: var(--primary);
@@ -453,15 +484,19 @@
   color: var(--accent);
 }
 .markdown-body .md-quote {
-  margin: var(--sp-3) 0;
+  margin: var(--sp-4) 0;
   padding: var(--sp-4) var(--sp-5);
   background: var(--bg-sub);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   color: var(--text-2);
   font-size: 0.9375rem;
+  line-height: 1.8;
   position: relative;
   /* 构成主义:左侧编号方块 + 竖虚线(替代色条) */
+  /* 引用块排版优化 */
+  text-wrap: pretty;
+  overflow-wrap: break-word;
 }
 .markdown-body .md-quote::before {
   content: '';
@@ -571,13 +606,15 @@
 }
 /* 一级分类区块 */
 .knowledge-section {
-  margin-bottom: var(--sp-6);
+  margin-bottom: var(--sp-8);
 }
 /* 子考点文章 */
 .knowledge-subpoint {
-  margin: var(--sp-4) 0;
-  padding-bottom: var(--sp-4);
+  margin: var(--sp-6) 0;
+  padding: var(--sp-4) 0 var(--sp-5);
   border-bottom: 1px dashed var(--divider);
+  /* 子考点区块排版优化 */
+  overflow-wrap: break-word;
 }
 .knowledge-subpoint:last-child {
   border-bottom: none;
@@ -605,6 +642,10 @@
   font-weight: 800;
   color: var(--text-1);
   letter-spacing: -0.01em;
+  line-height: 1.4;
+  /* 长标题断行优化 */
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 /* 子考点关联题目数 */
 .knowledge-sub-meta {

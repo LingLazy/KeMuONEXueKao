@@ -496,6 +496,10 @@
   font-weight: 700;
   color: var(--text-1);
   letter-spacing: -0.01em;
+  line-height: 1.4;
+  /* 长标题断行优化 */
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 .mnemonic-card-head-right {
   display: flex;
@@ -577,7 +581,10 @@
 .mnemonic-explain {
   font-size: 0.875rem;
   color: var(--text-2);
-  line-height: 1.7;
+  line-height: 1.75;
+  /* 长解释文本排版优化 */
+  text-wrap: pretty;
+  overflow-wrap: break-word;
 }
 .mnemonic-details {
   list-style: none;
@@ -591,7 +598,9 @@
   gap: var(--sp-2);
   font-size: 0.8125rem;
   color: var(--text-2);
-  line-height: 1.6;
+  line-height: 1.7;
+  /* 详情列表项断词 */
+  overflow-wrap: break-word;
 }
 /* 构成主义:编号方块(非圆形胶囊) */
 .mnemonic-detail-num {
