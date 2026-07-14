@@ -79,6 +79,8 @@ export default function QuestionCard({
   const toggleBookmark = useProgressStore((s) => s.toggleBookmark);
   // 直接从状态读取布尔值，避免调用方法导致选择器返回值不稳定
   const isBookmarked = useProgressStore((s) => Boolean(s.bookmarks[question.id]));
+  // 读取当前题目的历史答题记录，用于刷新后恢复已答状态
+  const existingRecord = useProgressStore((s) => s.answered[question.id]);
   const analysisVisible = usePracticeStore((s) => s.analysisVisible);
   const toggleAnalysis = usePracticeStore((s) => s.toggleAnalysis);
 
@@ -86,11 +88,18 @@ export default function QuestionCard({
   const { burst } = useConfetti();
 
   // 本地已选状态（非受控模式）：单选/判断题为 number（-1 未答），多选题为 number[]（[] 未答）
-  const [localSelected, setLocalSelected] = useState<number | number[]>(
-    question.type === 'multi' ? [] : -1
-  );
-  // 是否已答（用于显示解析）
-  const [answered, setAnswered] = useState(false);
+  // 初始化时优先从 progressStore 恢复历史答题记录，避免刷新后已答题目显示为未答
+  const [localSelected, setLocalSelected] = useState<number | number[]>(() => {
+    if (examMode) return question.type === 'multi' ? [] : -1;
+    // 练习模式：若存在历史答题记录，恢复用户选择
+    if (existingRecord) return existingRecord.selected;
+    return question.type === 'multi' ? [] : -1;
+  });
+  // 是否已答（用于显示解析）：练习模式下根据历史记录恢复
+  const [answered, setAnswered] = useState(() => {
+    if (examMode) return false;
+    return Boolean(existingRecord);
+  });
   // 图片放大查看模态框状态
   const [imageZoomOpen, setImageZoomOpen] = useState(false);
 
@@ -106,11 +115,24 @@ export default function QuestionCard({
   // 是否为多选题
   const isMulti = question.type === 'multi';
 
-  // 题目变化时重置（根据题型初始化选中状态）
+  // 题目变化时从 progressStore 恢复历史答题状态（刷新或切题后保持已答记录可见）
   useEffect(() => {
-    setLocalSelected(question.type === 'multi' ? [] : -1);
-    setAnswered(false);
-  }, [question.id, question.type]);
+    if (examMode) {
+      // 考试模式不恢复历史记录，由 examStore 受控管理
+      setLocalSelected(question.type === 'multi' ? [] : -1);
+      setAnswered(false);
+      return;
+    }
+    // 练习模式：从 progressStore 读取该题的答题记录
+    const record = useProgressStore.getState().answered[question.id];
+    if (record) {
+      setLocalSelected(record.selected);
+      setAnswered(true);
+    } else {
+      setLocalSelected(question.type === 'multi' ? [] : -1);
+      setAnswered(false);
+    }
+  }, [question.id, question.type, examMode]);
 
   /**
    * 比较用户答案与正确答案

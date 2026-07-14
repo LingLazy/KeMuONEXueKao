@@ -6,7 +6,7 @@
  * - 底部：上下题导航 + 题目跳转
  * - 移动端：滑动切题 + 底部快捷栏
  */
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CATEGORIES, loadMnemonics } from '@/services/dataLoader';
@@ -20,7 +20,7 @@ import { QuestionCardSkeleton } from '@/components/common/Skeleton';
 import Modal from '@/components/common/Modal';
 import GeoBgDecor from '@/components/common/GeoBgDecor';
 import SearchInput from '@/components/common/SearchInput';
-import type { Question } from '@/types';
+import type { Question, Mnemonic } from '@/types';
 
 export default function PracticeView() {
   const { cat } = useParams<{ cat?: string }>();
@@ -44,8 +44,33 @@ export default function PracticeView() {
   const mnemonics = mnemonicsData ?? [];
 
   // 当前分类变更时重新筛选（init 完成后驱动首次筛选）
+  // 首次初始化时恢复持久化进度（分类 + 索引 + 科目），避免刷新后回到第一题
+  // 后续路由参数变化时按路由指定的分类筛选
+  const restoredRef = useRef(false);
   useEffect(() => {
     if (!practice.initialized) return;
+    // 首次完成初始化：尝试恢复持久化进度（仅恢复一次，避免路由切换时重复覆盖）
+    if (!restoredRef.current) {
+      restoredRef.current = true;
+      const saved = practice.restore();
+      // 若路由携带 cat 参数且与恢复的分类不同，优先采用路由参数（支持深链接分享）
+      const targetCat = cat ?? 'all';
+      if (saved && saved.cat !== targetCat && targetCat !== 'all') {
+        practice.setCategory(targetCat);
+      } else if (saved) {
+        // 恢复成功后基于恢复的分类与科目重算列表，并修正索引越界
+        practice.reapplyFilters();
+      } else {
+        // 无持久化进度时按路由参数筛选
+        if (practice.currentCat !== targetCat) {
+          practice.setCategory(targetCat);
+        } else {
+          practice.reapplyFilters();
+        }
+      }
+      return;
+    }
+    // 后续路由参数变化：按新分类筛选
     const targetCat = cat ?? 'all';
     if (practice.currentCat !== targetCat) {
       practice.setCategory(targetCat);
@@ -57,9 +82,23 @@ export default function PracticeView() {
 
   // 当前题目
   const currentQuestion = practice.list[practice.index];
-  // 匹配口诀
+  // 匹配口诀：优先使用题目自带的专属口诀（question.mnemonic），
+  // 确保每道题显示针对性口诀而非同一分类下所有题目共用一条；
+  // 题目无专属口诀时回退到 mnemonics.json 中按分类匹配的通用口诀
   const currentMnemonic = useMemo(() => {
     if (!currentQuestion) return null;
+    // 优先：题目自带专属口诀（来自原题库 concise_explain 提炼）
+    const qMnemonic = currentQuestion.mnemonic?.trim();
+    if (qMnemonic) {
+      return {
+        cat: currentQuestion.category,
+        title: '本题速记',
+        text: qMnemonic,
+        explain: currentQuestion.concise_analysis?.trim() || '',
+        details: []
+      } as Mnemonic;
+    }
+    // 回退：按分类匹配通用口诀
     return mnemonics.find((m) => m.cat === currentQuestion.category) ?? null;
   }, [currentQuestion, mnemonics]);
 
