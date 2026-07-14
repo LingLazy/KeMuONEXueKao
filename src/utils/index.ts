@@ -74,3 +74,25 @@ export function formatDuration(seconds: number): string {
 export function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
 }
+
+/**
+ * 计算正确率
+ * @param correct 答对题数
+ * @param total 总答题数
+ * @returns 正确率百分比（0-100），total 为 0 时返回 0
+ */
+export function calcAccuracy(correct: number, total: number): number {
+  if (total <= 0) return 0;
+  return Math.round((correct / total) * 100);
+}
+
+/**
+ * 计算学习进度
+ * @param answered 已答题数
+ * @param total 总题数
+ * @returns 进度百分比（0-100），total 为 0 时返回 0
+ */
+export function calcProgress(answered: number, total: number): number {
+  if (total <= 0) return 0;
+  return Math.round((answered / total) * 100);
+}

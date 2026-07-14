@@ -1,0 +1,37 @@
+/* ===================================================================
+   EmptyState 空状态
+   - 图标 + 标题 + 描述 + 可选操作按钮
+   - 用于列表/数据为空时的占位提示
+   =================================================================== */
+
+/* ========== EmptyState 空状态 ========== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-16) var(--sp-6);
+  text-align: center;
+}
+.empty-state-icon {
+  color: var(--text-mute);
+  margin-bottom: var(--sp-4);
+  opacity: 0.5;
+}
+.empty-state-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: var(--sp-2);
+  letter-spacing: -0.01em;
+}
+.empty-state-desc {
+  font-size: 0.875rem;
+  color: var(--text-3);
+  margin-bottom: var(--sp-4);
+  max-width: 40ch;
+}
+.empty-state-action {
+  margin-top: var(--sp-2);
+}

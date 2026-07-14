@@ -1,0 +1,86 @@
+/* ===================================================================
+   GlobalLoading · 全局脉冲加载器
+   - 三层同心环脉冲动画 + 文字 + 三点跳动
+   - 用于全局加载占位场景
+   =================================================================== */
+
+/* ========== GlobalLoading · 简洁脉冲加载器 ========== */
+.global-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-16) var(--sp-6);
+  color: var(--text-3);
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  gap: var(--sp-3);
+}
+
+/* 三层同心环脉冲加载器 */
+.global-loading-pulse {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  color: var(--primary);
+}
+
+.pulse-ring-outer {
+  position: absolute;
+  inset: 0;
+  animation: pulse-spin-cw 2.4s linear infinite;
+}
+
+.pulse-ring-mid {
+  position: absolute;
+  animation: pulse-spin-ccw 1.6s linear infinite;
+}
+
+.pulse-core {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: pulse-core-beat 1.2s var(--ease-smooth) infinite;
+}
+
+@keyframes pulse-spin-cw {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse-spin-ccw {
+  to { transform: rotate(-360deg); }
+}
+@keyframes pulse-core-beat {
+  0%, 100% { transform: scale(0.6); opacity: 0.4; }
+  50% { transform: scale(1); opacity: 1; }
+}
+
+.global-loading-text {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.8125rem;
+}
+
+.global-loading-dots {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 2px;
+}
+.global-loading-dots .dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-3);
+  animation: dot-bounce 1.4s var(--ease-smooth) infinite;
+}
+.global-loading-dots .dot:nth-child(2) { animation-delay: 0.2s; }
+.global-loading-dots .dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dot-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}

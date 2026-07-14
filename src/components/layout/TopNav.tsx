@@ -7,12 +7,11 @@
  * - 主题切换按钮
  * - 移动端折叠菜单
  */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useThemeStore } from '@/stores/themeStore';
-import { useProgressStore } from '@/stores/progressStore';
 import { toast } from '@/stores/toastStore';
-import { useMagnetic } from '@/hooks';
+import { useMagnetic, useProgressStats } from '@/hooks';
 
 /** GitHub 仓库地址（外链入口，集中常量便于维护） */
 const REPO_URL = 'https://github.com/fanquanpp/KeMuONEXueKao';
@@ -35,9 +34,6 @@ const NAV_ITEMS: NavItem[] = [
 export default function TopNav() {
   const theme = useThemeStore((s) => s.theme);
   const toggle = useThemeStore((s) => s.toggle);
-  // 选择原始状态引用，避免选择器返回新对象导致 React 19 useSyncExternalStore 无限重渲染
-  const answered = useProgressStore((s) => s.answered);
-  const total = useProgressStore((s) => s.total);
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -45,15 +41,9 @@ export default function TopNav() {
   const themeToggleRef = useRef<HTMLButtonElement>(null);
   useMagnetic(themeToggleRef, { strength: 0.4 });
 
-  // 由原始状态派生统计指标（useMemo 保证引用稳定）
-  const stats = useMemo(() => {
-    const answeredList = Object.values(answered);
-    const answeredCount = answeredList.length;
-    const correctCount = answeredList.filter((r) => r.correct).length;
-    const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
-    const progress = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
-    return { answered: answeredCount, accuracy, progress, total };
-  }, [answered, total]);
+  // 通过通用进度统计 Hook 派生 answered / accuracy / progress / total 等指标
+  // 消除原 useMemo 中重复的正确率与进度计算逻辑（由 useProgressStats 内部统一调用 calcAccuracy / calcProgress）
+  const stats = useProgressStats();
 
   // 监听滚动添加阴影
   useEffect(() => {

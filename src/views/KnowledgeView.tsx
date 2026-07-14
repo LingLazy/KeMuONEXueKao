@@ -7,12 +7,14 @@
  * - 滚动联动高亮当前章节
  * - 移动端：单栏布局，目录抽屉
  */
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { loadKnowledgeData } from '@/services/dataLoader';
-import { useIsMobile } from '@/hooks';
+import { useAsyncData, useIsMobile, useScrollSpy } from '@/hooks';
 import type { KnowledgePoint, KnowledgeSubPoint } from '@/types';
 import EmptyState from '@/components/common/EmptyState';
+import GeoBgDecor from '@/components/common/GeoBgDecor';
+import SearchInput from '@/components/common/SearchInput';
 import { Skeleton } from '@/components/common/Skeleton';
 
 /** 目录节点：一级分类或子考点 */
@@ -55,34 +57,15 @@ function highlightText(text: string, kw: string): ReactNode {
 
 export default function KnowledgeView() {
   const isMobile = useIsMobile();
-  const [knowledgePoints, setKnowledgePoints] = useState<KnowledgePoint[] | null>(null);
-  const [loadError, setLoadError] = useState<string | null>(null);
-  const [reloading, setReloading] = useState(false);
-  const [activeChapter, setActiveChapter] = useState<string>('');
+  // 通过通用异步数据 Hook 加载考点知识，统一管理 loading / error / reload 三态
+  // data 为 null 表示加载中，加载完成后为 KnowledgePoint[]（与原 useState 语义一致）
+  const { data: knowledgePoints, error: loadError, loading, reload } = useAsyncData(
+    () => loadKnowledgeData(),
+    []
+  );
   const [search, setSearch] = useState('');
   const [showToc, setShowToc] = useState(false);
-  const [readingProgress, setReadingProgress] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  // 加载考点知识（支持重试时的 loading 态）
-  const load = useCallback(() => {
-    setReloading(true);
-    setLoadError(null);
-    loadKnowledgeData()
-      .then((points) => {
-        setKnowledgePoints(points);
-        setReloading(false);
-      })
-      .catch((err) => {
-        console.error('考点知识加载失败', err);
-        setLoadError(err instanceof Error ? err.message : String(err));
-        setReloading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    load();
-  }, [load]);
 
   // 关键字（去空格，便于下游匹配）
   const keyword = search.trim();
@@ -122,57 +105,30 @@ export default function KnowledgeView() {
     });
   }, [filteredPoints]);
 
-  // 滚动监听：高亮当前章节 + 阅读进度（rAF 节流避免长文档卡顿）
-  useEffect(() => {
-    if (!knowledgePoints || chapters.length === 0) return;
-    let rafId: number | null = null;
-    const onScroll = () => {
-      if (rafId !== null) return;
-      rafId = requestAnimationFrame(() => {
-        rafId = null;
-        const headings = chapters
-          .map((c) => document.getElementById(`chap-${c.id}`))
-          .filter((el): el is HTMLElement => el !== null);
-        const navH = 80; // 导航栏高度 + 偏移量
-        let current = chapters[0]?.id ?? '';
-        headings.forEach((h) => {
-          if (h.getBoundingClientRect().top <= navH) {
-            current = h.id;
-          }
-        });
-        setActiveChapter(current);
-        const docScrollMax = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = docScrollMax > 0 ? Math.min(100, Math.round((window.scrollY / docScrollMax) * 100)) : 0;
-        setReadingProgress(progress);
-      });
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      if (rafId !== null) cancelAnimationFrame(rafId);
-    };
-  }, [knowledgePoints, chapters]);
+  // 通过通用滚动监听 Hook 高亮当前章节并计算阅读进度
+  // chapters 为 TocNode 数组，其 id 规则为 kp-${point.id} / kp-${point.id}-${sub.index}
+  // useScrollSpy 内部按 chap-${id} 查找 DOM 元素，与本视图 DOM id 规则一致，无需调整
+  // useScrollSpy 内部已使用 useRafThrottle 节流，无需手动 rAF 节流
+  const { activeId: activeChapter, readingProgress } = useScrollSpy(
+    chapters.map((c) => c.id),
+    80
+  );
 
-  // 跳转到章节
+  // 跳转到章节：手动滚动定位，滚动过程中 useScrollSpy 会通过 scroll 事件自动更新高亮
   const jumpTo = (id: string) => {
     const el = document.getElementById(`chap-${id}`);
     if (el) {
       const top = el.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top, behavior: 'smooth' });
-      setActiveChapter(id);
     }
     setShowToc(false);
   };
 
-  // 加载中
-  if ((!knowledgePoints && !loadError) || reloading) {
+  // 加载中（含首次加载与重载）
+  if (loading) {
     return (
       <div className="view view-knowledge">
-        <div className="geo-bg-decor" aria-hidden="true">
-          <div className="geo-bg-grid" />
-          <div className="geo-dots-sm" />
-        </div>
+        <GeoBgDecor variant="loading" />
         <div className="view-container">
           <div className="knowledge-loading">
             <Skeleton width="40%" height={28} />
@@ -192,10 +148,7 @@ export default function KnowledgeView() {
   if (loadError) {
     return (
       <div className="view view-knowledge">
-        <div className="geo-bg-decor" aria-hidden="true">
-          <div className="geo-bg-grid" />
-          <div className="geo-dots-lg" />
-        </div>
+        <GeoBgDecor variant="error" />
         <div className="view-container">
           <EmptyState
             title="考点知识加载失败"
@@ -204,10 +157,10 @@ export default function KnowledgeView() {
               <button
                 type="button"
                 className="btn btn-primary"
-                disabled={reloading}
-                onClick={load}
+                disabled={loading}
+                onClick={reload}
               >
-                {reloading ? '加载中…' : '重试'}
+                {loading ? '加载中…' : '重试'}
               </button>
             }
           />
@@ -219,19 +172,7 @@ export default function KnowledgeView() {
   return (
     <div className="view view-knowledge">
       {/* 构成主义几何背景装饰层 · 知识学习专题 */}
-      <div className="geo-bg-decor" aria-hidden="true">
-        <div className="geo-bg-grid" />
-        <div className="geo-arc-tl" />
-        <div className="geo-diag-line" />
-        <div className="geo-square-br" />
-        <div className="geo-nested-squares-tl" />
-        <div className="geo-curve-s" />
-        <div className="geo-vline-bundle" />
-        <div className="geo-glow-accent-br" />
-        <div className="geo-cross-grid" />
-        <div className="geo-spiral-ccw" />
-        <div className="geo-float-block" />
-      </div>
+      <GeoBgDecor variant="knowledge" />
       {/* 阅读进度条 · 固定在视图顶部 */}
       <div className="reading-progress-bar" aria-hidden="true">
         <div
@@ -250,26 +191,14 @@ export default function KnowledgeView() {
         </header>
 
         {/* 搜索 */}
-        <div className="knowledge-search-bar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.3-4.3" />
-          </svg>
-          <input
-            type="search"
-            placeholder="搜索考点关键字…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            aria-label="搜索考点"
-          />
-          {search && (
-            <button type="button" className="knowledge-search-clear" onClick={() => setSearch('')} aria-label="清空搜索">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
-            </button>
-          )}
-        </div>
+        <SearchInput
+          value={search}
+          onChange={setSearch}
+          placeholder="搜索考点关键字…"
+          ariaLabel="搜索考点"
+          containerClassName="knowledge-search-bar"
+          clearClassName="knowledge-search-clear"
+        />
 
         {/* 搜索结果统计 */}
         {keyword && (

@@ -10,15 +10,19 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useExamStore, EXAM_CONFIG } from '@/stores/examStore';
+import { useExamStore } from '@/stores/examStore';
 import { toast } from '@/stores/toastStore';
 import { useConfirm } from '@/components/feedback/ConfirmProvider';
 import { useHotkeys, useVibrate, useConfetti, useIsMobile } from '@/hooks';
 import { loadQuestions } from '@/services/dataLoader';
-import { formatTime, formatDuration } from '@/utils';
+import { formatTime } from '@/utils';
 import QuestionCard from '@/components/question/QuestionCard';
 import EmptyState from '@/components/common/EmptyState';
 import Modal from '@/components/common/Modal';
+import { Icon } from '@/components/common/Icon';
+import GeoBgDecor from '@/components/common/GeoBgDecor';
+import ExamStartView from './exam/ExamStartView';
+import ExamResultView from './exam/ExamResultView';
 import type { Question, Subject } from '@/types';
 
 export default function ExamView() {
@@ -191,10 +195,7 @@ export default function ExamView() {
   if (error) {
     return (
       <div className="view view-exam">
-        <div className="geo-bg-decor" aria-hidden="true">
-          <div className="geo-bg-grid" />
-          <div className="geo-dots-lg" />
-        </div>
+        <GeoBgDecor variant="error" />
         <div className="view-container">
           <EmptyState
             title="题库加载失败"
@@ -214,10 +215,7 @@ export default function ExamView() {
   if (!questions) {
     return (
       <div className="view view-exam">
-        <div className="geo-bg-decor" aria-hidden="true">
-          <div className="geo-bg-grid" />
-          <div className="geo-dots-sm" />
-        </div>
+        <GeoBgDecor variant="loading" />
         <div className="view-container">
           <div className="exam-loading">
             <div className="spinner" />
@@ -239,7 +237,7 @@ export default function ExamView() {
     return (
       <ExamStartView
         onStart={handleStart}
-        total={subjectTotal}
+        subjectTotal={subjectTotal}
         selectedSubject={selectedSubject}
         onSelectSubject={setSelectedSubject}
       />
@@ -265,16 +263,12 @@ export default function ExamView() {
   return (
     <div className="view view-exam">
       {/* 答题页装饰层 · 极简网格底纹 (不干扰答题专注) */}
-      <div className="geo-bg-decor" aria-hidden="true">
-        <div className="geo-bg-grid" />
-      </div>
+      <GeoBgDecor variant="exam" />
       {/* 顶部固定栏 */}
       <header className={`exam-header ${lowTime ? 'low-time' : ''}`}>
         <div className="exam-header-left">
           <button type="button" className="icon-btn" onClick={handleBack} aria-label="退出考试">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
+            <Icon name="arrow-left" size={18} />
           </button>
           <div
             className="exam-timer"
@@ -282,10 +276,7 @@ export default function ExamView() {
             aria-label={`剩余时间 ${formatTime(remainingSec)}`}
             aria-live="off"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 6v6l4 2" />
-            </svg>
+            <Icon name="clock" size={16} />
             <span className="exam-timer-text">{formatTime(remainingSec)}</span>
           </div>
           {/* 低时间无障碍提示：仅进入低时间状态时播报一次 */}
@@ -307,10 +298,7 @@ export default function ExamView() {
             onClick={() => setShowSheet(true)}
             aria-label="打开答题卡"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <path d="M3 9h18M9 21V9" />
-            </svg>
+            <Icon name="sheet" size={16} />
             <span>答题卡</span>
             <span className="exam-sheet-count">{answeredCount}/{exam.questions.length}</span>
           </button>
@@ -359,9 +347,7 @@ export default function ExamView() {
           onClick={exam.prev}
           disabled={exam.currentIndex === 0}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="m15 18-6-6 6-6" />
-          </svg>
+          <Icon name="chevron-left" size={16} />
           上一题
         </button>
 
@@ -373,6 +359,10 @@ export default function ExamView() {
             aria-pressed={current.marked}
             title="标记本题"
           >
+            {/*
+              标记按钮保留内联 SVG：marked 状态下需动态填充 fill="currentColor"，
+              Icon 组件固定 fill="none" 无法表达该视觉态，CSS .active 也未设置 fill。
+            */}
             <svg width="16" height="16" viewBox="0 0 24 24" fill={current.marked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
             </svg>
@@ -396,26 +386,20 @@ export default function ExamView() {
             disabled={current.hintUsed || current.question.type === 'judge'}
             title={current.question.type === 'judge' ? '判断题不支持五五提示' : '五五提示：剔除两个错误选项'}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" />
-            </svg>
+            <Icon name="lightbulb" size={16} />
             {current.question.type === 'judge' ? '不可用' : current.hintUsed ? '已提示' : '提示'}
           </button>
         </div>
 
         {exam.currentIndex >= exam.questions.length - 1 ? (
           <button type="button" className="btn btn-primary exam-submit-btn" onClick={handleSubmit}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-            </svg>
+            <Icon name="check-square" size={16} />
             交卷
           </button>
         ) : (
           <button type="button" className="btn btn-primary" onClick={exam.next}>
             下一题
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="m9 18 6-6-6-6" />
-            </svg>
+            <Icon name="chevron-right" size={16} />
           </button>
         )}
       </footer>
@@ -481,274 +465,6 @@ export default function ExamView() {
           </button>
         </div>
       </Modal>
-    </div>
-  );
-}
-
-/** 考试开始页 */
-function ExamStartView({
-  onStart,
-  total,
-  selectedSubject,
-  onSelectSubject
-}: {
-  onStart: () => void;
-  total: number;
-  selectedSubject: Subject;
-  onSelectSubject: (s: Subject) => void;
-}) {
-  const config = EXAM_CONFIG[selectedSubject];
-  const subjectLabel = selectedSubject === 'ke1' ? '科目一' : '科目四';
-  const fullScore = config.count * config.pointsPerQuestion;
-  return (
-    <div className="view view-exam">
-      {/* 开始页装饰层 · 品牌光晕 + 涟漪环 + 三角切片 + S 曲线 */}
-      <div className="geo-bg-decor" aria-hidden="true">
-        <div className="geo-bg-grid" />
-        <div className="geo-glow-primary-tl" />
-        <div className="geo-ripple-tr" />
-        <div className="geo-triangle-bl" />
-        <div className="geo-curve-s" />
-        <div className="geo-cross-marks" />
-        {/* 扩展装饰 v3.4 · 考试开始页动态元素 */}
-        <div className="geo-orbit-dots" />
-        <div className="geo-pulse-ring" />
-      </div>
-      <div className="view-container">
-        <motion.div
-          className="exam-start"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="exam-start-hero">
-            <div className="exam-start-icon" aria-hidden="true">
-              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-              </svg>
-            </div>
-            <h1 className="exam-start-title">{subjectLabel}模拟考试</h1>
-            <p className="exam-start-desc">
-              全真模拟正式考试环境，{config.count}题随机抽取，{Math.floor(config.duration / 60000)}分钟限时，及格分{config.passScore}分
-            </p>
-          </div>
-
-          {/* 科目选择器 */}
-          <div className="exam-subject-selector" role="radiogroup" aria-label="选择考试科目">
-            {(['ke1', 'ke4'] as Subject[]).map((s) => (
-              <button
-                key={s}
-                type="button"
-                role="radio"
-                aria-checked={selectedSubject === s}
-                className={`exam-subject-btn ${selectedSubject === s ? 'active' : ''}`}
-                onClick={() => onSelectSubject(s)}
-              >
-                <span className="exam-subject-label">{s === 'ke1' ? '科目一' : '科目四'}</span>
-                <span className="exam-subject-desc">
-                  {EXAM_CONFIG[s].count}题 · {Math.floor(EXAM_CONFIG[s].duration / 60000)}分钟
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div className="exam-start-rules">
-            <h2 className="exam-rules-title">考试须知</h2>
-            <ul className="exam-rules-list">
-              <li>
-                <span className="rule-num">01</span>
-                <div className="rule-text">
-                  <strong>题量与时长</strong>
-                  <p>共 {config.count} 题，限时 {Math.floor(config.duration / 60000)} 分钟，每题{config.pointsPerQuestion}分，满分{fullScore}分</p>
-                </div>
-              </li>
-              <li>
-                <span className="rule-num">02</span>
-                <div className="rule-text">
-                  <strong>及格标准</strong>
-                  <p>得分 ≥ {config.passScore} 分为及格，未达分数建议加强复习</p>
-                </div>
-              </li>
-              <li>
-                <span className="rule-num">03</span>
-                <div className="rule-text">
-                  <strong>五五提示</strong>
-                  <p>每题可使用一次"五五提示"，系统将剔除两个错误选项（不扣分）</p>
-                </div>
-              </li>
-              <li>
-                <span className="rule-num">04</span>
-                <div className="rule-text">
-                  <strong>标记题目</strong>
-                  <p>遇到不确定的题目可标记，稍后在答题卡中快速跳转回顾</p>
-                </div>
-              </li>
-              <li>
-                <span className="rule-num">05</span>
-                <div className="rule-text">
-                  <strong>中途退出</strong>
-                  <p>考试进度自动保存，刷新页面可恢复，主动退出将丢失进度</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div className="exam-start-meta">
-            <span className="exam-meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-              </svg>
-              {subjectLabel}题库 {total} 题
-            </span>
-            <span className="exam-meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 6v6l4 2" />
-              </svg>
-              {Math.floor(config.duration / 60000)} 分钟
-            </span>
-            <span className="exam-meta-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-              </svg>
-              及格 {config.passScore} 分
-            </span>
-          </div>
-
-          <button type="button" className="btn btn-primary btn-lg exam-start-btn" onClick={onStart}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
-            开始{subjectLabel}考试
-          </button>
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-/** 考试结果页 */
-function ExamResultView({
-  result,
-  subject,
-  onRestart,
-  onBack
-}: {
-  result: NonNullable<ReturnType<typeof useExamStore.getState>['result']>;
-  subject: Subject | null;
-  onRestart: () => void;
-  onBack: () => void;
-}) {
-  const passed = result.passed;
-  const passScore = subject ? EXAM_CONFIG[subject].passScore : EXAM_CONFIG.ke1.passScore;
-  return (
-    <div className="view view-exam">
-      {/* 结果页装饰层 · 通过=成功光晕+同心环; 失败=危险光晕+对角线 */}
-      <div className="geo-bg-decor" aria-hidden="true">
-        <div className="geo-bg-grid" />
-        {passed ? (
-          <>
-            <div className="geo-glow-success-mr" />
-            <div className="geo-glow-primary-tl" />
-            <div className="geo-half-rings-br" />
-            <div className="geo-curve-s" />
-            {/* 扩展装饰 v3.4 · 通过时漂浮方块与螺旋庆祝感 */}
-            <div className="geo-float-block" />
-            <div className="geo-spiral-ccw" />
-          </>
-        ) : (
-          <>
-            <div className="geo-glow-danger-ml" />
-            <div className="geo-diag-line" />
-            <div className="geo-triangle-rt" />
-            <div className="geo-cross-marks" />
-            {/* 扩展装饰 v3.4 · 失败时十字网格强化复盘感 */}
-            <div className="geo-cross-grid" />
-          </>
-        )}
-      </div>
-      <div className="view-container">
-        <motion.div
-          className={`exam-result ${passed ? 'passed' : 'failed'}`}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="exam-result-hero">
-            <motion.div
-              className={`exam-result-icon ${passed ? 'passed' : 'failed'}`}
-              initial={{ scale: 0, rotate: -30 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 12, delay: 0.2 }}
-              aria-hidden="true"
-            >
-              {passed ? (
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M9 12l2 2 4-4" />
-                </svg>
-              ) : (
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M15 9l-6 6M9 9l6 6" />
-                </svg>
-              )}
-            </motion.div>
-            <h1 className="exam-result-title">
-              {passed ? '恭喜通过' : '未达及格线'}
-            </h1>
-            <p className="exam-result-desc">
-              {passed
-                ? '已通过模拟考试，可以预约正式考试了'
-                : '继续努力，加强复习后再战'}
-            </p>
-          </div>
-
-          <div className="exam-result-score">
-            <span className="score-num">{result.score}</span>
-            <span className="score-unit">分</span>
-            <span className="score-pass">/ 及格 {passScore} 分</span>
-          </div>
-
-          <div className="exam-result-stats">
-            <div className="result-stat correct">
-              <span className="result-stat-num">{result.correct}</span>
-              <span className="result-stat-label">答对</span>
-            </div>
-            <div className="result-stat wrong">
-              <span className="result-stat-num">{result.wrong}</span>
-              <span className="result-stat-label">答错</span>
-            </div>
-            <div className="result-stat unanswered">
-              <span className="result-stat-num">{result.unanswered}</span>
-              <span className="result-stat-label">未答</span>
-            </div>
-            <div className="result-stat time">
-              <span className="result-stat-num">{formatDuration(result.usedTime)}</span>
-              <span className="result-stat-label">用时</span>
-            </div>
-          </div>
-
-          <div className="exam-result-actions">
-            <button type="button" className="btn btn-ghost btn-lg" onClick={onBack}>
-              返回主页
-            </button>
-            <button type="button" className="btn btn-primary btn-lg" onClick={onRestart}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M3 12a9 9 0 1 0 9-9M3 3v6h6" />
-              </svg>
-              再考一次
-            </button>
-          </div>
-
-          {result.wrongIds.length > 0 && (
-            <div className="exam-result-wrong">
-              <p className="wrong-title">本次错题 ({result.wrongIds.length} 题)</p>
-              <p className="wrong-hint">建议在练习视图按分类复习相关题目</p>
-            </div>
-          )}
-        </motion.div>
-      </div>
     </div>
   );
 }

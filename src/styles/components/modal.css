@@ -1,0 +1,85 @@
+/* ===================================================================
+   Modal 模态 · 简洁浮层
+   - 包含 Modal 主体与 Confirm 确认框样式
+   - 1px 边框 + 品牌色光晕 · 无蚀刻/凹凸/角标刻度
+   =================================================================== */
+
+/* ========== Modal 模态 · 简洁浮层 ========== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  background: oklch(0.21 0 0 / 0.55);
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+}
+.modal {
+  width: 100%;
+  max-height: 90vh;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.modal-sm { max-width: 380px; }
+.modal-md { max-width: 560px; }
+.modal-lg { max-width: 800px; }
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--divider);
+}
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+}
+.modal-close {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-sm);
+  color: var(--text-3);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.modal-close:hover {
+  background: var(--bg-hover);
+  color: var(--text-1);
+}
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-5);
+}
+
+/* ========== Confirm 确认框 ========== */
+.confirm-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+.confirm-content {
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+}

@@ -6,55 +6,44 @@
  * - 快捷功能入口：开始练习 / 模拟考试 / 知识学习 / 口诀速记
  * - 学习雷达图（按大分类统计正确率）
  */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useProgressStore } from '@/stores/progressStore';
-import { CATEGORIES, loadQuestions, loadMnemonics, hexToRgba } from '@/services/dataLoader';
+import { toast } from '@/stores/toastStore';
+import { CATEGORIES, loadQuestions, loadMnemonics } from '@/services/dataLoader';
 import { CATEGORY_GROUPS, GROUP_KEYS } from '@/data/categoryGroups';
-import { useTilt } from '@/hooks';
+import { useProgressStats, useAsyncData } from '@/hooks';
+import { hexToRgba } from '@/utils/color';
+import { Icon } from '@/components/common/Icon';
+import GeoBgDecor from '@/components/common/GeoBgDecor';
 import GlobalFooter from '@/components/layout/GlobalFooter';
-import type { Question } from '@/types';
-
-// 图标路径常量（模块级，避免每次渲染重建）
-const STAT_ICONS: Record<string, React.ReactNode> = {
-  book: <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />,
-  check: <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />,
-  star: <path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />,
-  trending: <path d="M23 6l-9.5 9.5-5-5L1 18M17 6h6v6" />
-};
-
-const QUICK_ICONS: Record<string, React.ReactNode> = {
-  book: <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />,
-  star: <path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />,
-  grid: <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />,
-  check: <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-};
+import { StatCard } from '@/views/home/StatCard';
+import { QuickCard } from '@/views/home/QuickCard';
+import { CatCard } from '@/views/home/CatCard';
+import { RadarChart } from '@/components/charts/RadarChart';
 
 export default function HomeView() {
   const navigate = useNavigate();
-  // 选择原始状态引用，避免选择器返回新对象导致 React 19 useSyncExternalStore 无限重渲染
+  // answered 原始引用用于雷达图统计（useProgressStats 仅返回派生数值）
   const answered = useProgressStore((s) => s.answered);
-  const bookmarks = useProgressStore((s) => s.bookmarks);
-  const total = useProgressStore((s) => s.total);
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [mnemonicCount, setMnemonicCount] = useState(0);
+  const stats = useProgressStats();
 
-  // 由原始状态派生统计指标（useMemo 保证引用稳定）
-  const stats = useMemo(() => {
-    const answeredList = Object.values(answered);
-    const answeredCount = answeredList.length;
-    const correctCount = answeredList.filter((r) => r.correct).length;
-    const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
-    const progress = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
-    return { answered: answeredCount, correct: correctCount, accuracy, total, progress };
-  }, [answered, total]);
-
-  // 加载题库与口诀（用于统计）
-  useEffect(() => {
-    loadQuestions().then(setQuestions).catch(console.error);
-    loadMnemonics().then((m) => setMnemonicCount(m.length)).catch(console.error);
+  // 加载题库与口诀计数（useAsyncData 管理三态与卸载取消）
+  const { data: loadData, error } = useAsyncData(async () => {
+    const [qs, ms] = await Promise.all([loadQuestions(), loadMnemonics()]);
+    return { questionCount: qs.length, mnemonicCount: ms.length };
   }, []);
+  const questionCount = loadData?.questionCount ?? 0;
+  const mnemonicCount = loadData?.mnemonicCount ?? 0;
+
+  // 数据加载失败时通过 Toast 提示用户
+  // 依赖数组仅含 error，同一错误值不会重复触发，确保同一错误只提示一次
+  useEffect(() => {
+    if (error) {
+      toast.error('数据加载失败，请刷新重试');
+    }
+  }, [error]);
 
   // 各大分类的题目数
   const groupCounts = useMemo(() => {
@@ -99,11 +88,20 @@ export default function HomeView() {
     });
   }, [answered]);
 
-  // 入口分类卡片
+  // 入口分类卡片（按题目数降序）
   const sortedGroups = useMemo(() => {
     return GROUP_KEYS.filter((gk) => (groupCounts[gk] ?? 0) > 0)
       .sort((a, b) => (groupCounts[b] ?? 0) - (groupCounts[a] ?? 0));
   }, [groupCounts]);
+
+  // 雷达图数据映射为 RadarChart 组件所需格式
+  const radarChartData = useMemo(() => {
+    return radarData.map((r) => ({
+      label: r.name,
+      value: r.accuracy,
+      color: r.color
+    }));
+  }, [radarData]);
 
   // 进入分类练习
   const enterCategory = (cat: string) => {
@@ -113,19 +111,7 @@ export default function HomeView() {
   return (
     <div className="view view-home">
       {/* 主页装饰层 · 品牌光晕 + S 曲线 + 涟漪环 + 三角切片 (Hero 区已自带点阵/同心圆/虚线) */}
-      <div className="geo-bg-decor" aria-hidden="true">
-        <div className="geo-glow-primary-tl" />
-        <div className="geo-glow-accent-br" />
-        <div className="geo-curve-s" />
-        <div className="geo-ripple-tr" />
-        <div className="geo-triangle-rt" />
-        <div className="geo-cross-marks" />
-        {/* 扩展装饰 v3.4 · 多位置动态元素 */}
-        <div className="geo-spiral-ccw" />
-        <div className="geo-pulse-ring" />
-        <div className="geo-float-block" />
-        <div className="geo-glow-info-bl" />
-      </div>
+      <GeoBgDecor variant="home" />
       {/* Hero */}
       <section className="home-hero">
         <div className="home-hero-bg" aria-hidden="true" />
@@ -154,7 +140,7 @@ export default function HomeView() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {questions.length} 道完整题库 · {mnemonicCount} 条速记口诀 · 系统化分类学习 · 全真模拟考试 · 离线可用
+            {questionCount} 道完整题库 · {mnemonicCount} 条速记口诀 · 系统化分类学习 · 全真模拟考试 · 离线可用
           </motion.p>
           <motion.div
             className="home-hero-actions"
@@ -163,15 +149,11 @@ export default function HomeView() {
             transition={{ duration: 0.5, delay: 0.15 }}
           >
             <button type="button" className="btn btn-primary btn-lg btn-shine" onClick={() => navigate('/practice/all')}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+              <Icon name="arrow-right" size={18} />
               开始练习
             </button>
             <button type="button" className="btn btn-ghost btn-lg btn-shine" onClick={() => navigate('/exam')}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-              </svg>
+              <Icon name="check-square" size={18} />
               模拟考试
             </button>
           </motion.div>
@@ -182,7 +164,7 @@ export default function HomeView() {
       <section className="home-stats" aria-label="学习进度概览">
         <StatCard label="已答题数" value={stats.answered} total={stats.total} icon="book" color="primary" />
         <StatCard label="正确率" value={`${stats.accuracy}%`} icon="check" color="success" />
-        <StatCard label="收藏题目" value={Object.keys(bookmarks).length} icon="star" color="accent" />
+        <StatCard label="收藏题目" value={stats.bookmarkCount} icon="star" color="accent" />
         <StatCard label="学习进度" value={`${stats.progress}%`} icon="trending" color="info" />
       </section>
 
@@ -237,7 +219,7 @@ export default function HomeView() {
             <p className="section-desc">实时展示各大分类的掌握程度，红色越满代表正确率越高</p>
           </header>
           <div className="home-radar">
-            <RadarChart data={radarData} />
+            <RadarChart data={radarChartData} />
           </div>
         </section>
       )}
@@ -282,215 +264,5 @@ export default function HomeView() {
       {/* 主页页脚 · 品牌信息 + 仓库链接 + 免责声明（紧凑单行） */}
       <GlobalFooter />
     </div>
-  );
-}
-
-/** 数据统计卡片 */
-function StatCard({
-  label,
-  value,
-  total,
-  icon,
-  color
-}: {
-  label: string;
-  value: string | number;
-  total?: number;
-  icon: 'book' | 'check' | 'star' | 'trending';
-  color: 'primary' | 'success' | 'accent' | 'info';
-}) {
-  return (
-    <motion.div
-      className={`stat-card stat-${color} card-hover-target btn-shine`}
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -2 }}
-    >
-      <div className="stat-icon" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          {STAT_ICONS[icon]}
-        </svg>
-      </div>
-      <div className="stat-info">
-        <span className="stat-value">{value}{total ? <span className="stat-total">/{total}</span> : null}</span>
-        <span className="stat-label">{label}</span>
-      </div>
-    </motion.div>
-  );
-}
-
-/** 快捷入口卡片 */
-function QuickCard({
-  title,
-  desc,
-  color,
-  icon,
-  onClick
-}: {
-  title: string;
-  desc: string;
-  color: string;
-  icon: 'book' | 'star' | 'grid' | 'check';
-  onClick: () => void;
-}) {
-  const ref = useRef<HTMLButtonElement>(null);
-  // 快捷卡片附加 3D 倾斜效果（桌面端悬停时跟随鼠标轻微倾斜）
-  useTilt(ref, { max: 0.7 });
-  return (
-    <motion.button
-      ref={ref}
-      type="button"
-      className="quick-card card-hover-target tilt-card btn-shine"
-      style={{ '--qc-color': color } as React.CSSProperties}
-      onClick={onClick}
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
-      <div className="quick-card-icon tilt-layer" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          {QUICK_ICONS[icon]}
-        </svg>
-      </div>
-      <h3 className="quick-card-title">{title}</h3>
-      <p className="quick-card-desc">{desc}</p>
-    </motion.button>
-  );
-}
-
-/** 分类入口卡片（封装 tilt-card + btn-shine） */
-interface CatCardProps {
-  gk: string;
-  index: number;
-  group: typeof CATEGORY_GROUPS[keyof typeof CATEGORY_GROUPS];
-  count: number;
-  radar: { accuracy: number; answered: number } | undefined;
-  colorBg: string;
-  onClick: () => void;
-}
-
-function CatCard({ gk, index, group, count, radar, colorBg, onClick }: CatCardProps) {
-  const ref = useRef<HTMLButtonElement>(null);
-  // 分类大卡片附加 3D 倾斜（强度略大，呈现金属面板视差感）
-  useTilt(ref, { max: 0.85 });
-  return (
-    <motion.button
-      ref={ref}
-      key={gk}
-      type="button"
-      className="cat-card card-hover-target tilt-card btn-shine"
-      data-cat={gk}
-      style={{
-        '--cat-color': group.color,
-        '--cat-color-bg': colorBg
-      } as React.CSSProperties}
-      onClick={onClick}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      aria-label={`进入${group.name}分类，共${count}题`}
-    >
-      <div className="cat-card-index tilt-layer">{String(index + 1).padStart(2, '0')}</div>
-      <div className="cat-card-body tilt-layer">
-        <h3 className="cat-card-name">{group.name}</h3>
-        <p className="cat-card-desc">{group.desc}</p>
-        <div className="cat-card-meta">
-          <span className="cat-card-count">
-            <span className="num">{count}</span> 题
-          </span>
-          {radar && radar.answered > 0 && (
-            <span className="cat-card-acc">正确率 {radar.accuracy}%</span>
-          )}
-        </div>
-      </div>
-      <div className="cat-card-arrow" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-      </div>
-    </motion.button>
-  );
-}
-
-/** 雷达图（SVG 自绘） */
-function RadarChart({
-  data
-}: {
-  data: Array<{ key: string; name: string; color: string; accuracy: number; answered: number; total: number }>;
-}) {
-  const size = 320;
-  const center = size / 2;
-  const maxRadius = 110;
-  const count = data.length;
-  const angleStep = (Math.PI * 2) / count;
-
-  // 计算各点坐标
-  const points = data.map((d, i) => {
-    const angle = -Math.PI / 2 + i * angleStep;
-    const r = (d.accuracy / 100) * maxRadius;
-    return {
-      x: center + Math.cos(angle) * r,
-      y: center + Math.sin(angle) * r,
-      labelX: center + Math.cos(angle) * (maxRadius + 30),
-      labelY: center + Math.sin(angle) * (maxRadius + 30),
-      ...d
-    };
-  });
-
-  const polygonPoints = points.map((p) => `${p.x},${p.y}`).join(' ');
-
-  // 网格圈
-  const gridLevels = [0.25, 0.5, 0.75, 1];
-
-  return (
-    <svg viewBox={`0 0 ${size} ${size}`} className="radar-chart" aria-label="分类正确率雷达图">
-      {/* 网格 */}
-      {gridLevels.map((level) => {
-        const r = level * maxRadius;
-        const polyPoints = data
-          .map((_, i) => {
-            const angle = -Math.PI / 2 + i * angleStep;
-            return `${center + Math.cos(angle) * r},${center + Math.sin(angle) * r}`;
-          })
-          .join(' ');
-        return <polygon key={level} points={polyPoints} className="radar-grid" />;
-      })}
-      {/* 轴线 */}
-      {data.map((_, i) => {
-        const angle = -Math.PI / 2 + i * angleStep;
-        return (
-          <line
-            key={i}
-            x1={center}
-            y1={center}
-            x2={center + Math.cos(angle) * maxRadius}
-            y2={center + Math.sin(angle) * maxRadius}
-            className="radar-axis"
-          />
-        );
-      })}
-      {/* 数据多边形 */}
-      <polygon points={polygonPoints} className="radar-polygon" />
-      {/* 数据点 */}
-      {points.map((p) => (
-        <circle key={p.key} cx={p.x} cy={p.y} r={4} fill={p.color} className="radar-point" />
-      ))}
-      {/* 标签 */}
-      {points.map((p) => (
-        <text
-          key={p.key}
-          x={p.labelX}
-          y={p.labelY}
-          className="radar-label"
-          textAnchor="middle"
-          dominantBaseline="middle"
-        >
-          {p.name}
-          <tspan x={p.labelX} y={p.labelY + 14} className="radar-label-val">
-            {p.accuracy}%
-          </tspan>
-        </text>
-      ))}
-    </svg>
   );
 }

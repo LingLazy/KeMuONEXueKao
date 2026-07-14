@@ -11,30 +11,8 @@ import { create } from 'zustand';
 import type { ExamQuestionState, ExamResult, Question, Subject } from '@/types';
 import { SessionStore, STORAGE_KEYS } from '@/services/storage';
 import { shuffle, range } from '@/utils';
-
-/** 各科目考试配置：题量 / 时长 / 及格分 / 每题分值 */
-export const EXAM_CONFIG: Record<Subject, {
-  /** 题目数量 */
-  count: number;
-  /** 考试时长（毫秒） */
-  duration: number;
-  /** 及格分数 */
-  passScore: number;
-  /** 每题分值 */
-  pointsPerQuestion: number;
-}> = {
-  // 科目一：100题 × 1分 = 100分，45分钟，90分及格
-  ke1: { count: 100, duration: 45 * 60 * 1000, passScore: 90, pointsPerQuestion: 1 },
-  // 科目四：50题 × 2分 = 100分，30分钟，90分及格
-  ke4: { count: 50, duration: 30 * 60 * 1000, passScore: 90, pointsPerQuestion: 2 }
-};
-
-/** 默认考试时长（向后兼容，取科目一配置） */
-export const EXAM_DURATION = EXAM_CONFIG.ke1.duration;
-/** 默认考试题数（向后兼容，取科目一配置） */
-export const EXAM_COUNT = EXAM_CONFIG.ke1.count;
-/** 默认及格分数（向后兼容，取科目一配置） */
-export const EXAM_PASS_SCORE = EXAM_CONFIG.ke1.passScore;
+// 考试配置常量已迁移至 @/constants/exam，此处仅按需导入内部使用
+import { EXAM_CONFIG, EXAM_DURATION } from '@/constants/exam';
 
 interface ExamState {
   /** 是否正在考试 */

@@ -9,7 +9,11 @@ function readLocal<T>(key: string, fallback: T): T {
   try {
     const raw = localStorage.getItem(key);
     return raw ? (JSON.parse(raw) as T) : fallback;
-  } catch {
+  } catch (err) {
+    // DEV 模式下输出警告，便于开发调试；生产环境静默降级
+    if (import.meta.env.DEV) {
+      console.warn('[storage] 读取本地存储失败', err);
+    }
     return fallback;
   }
 }
@@ -18,8 +22,11 @@ function readLocal<T>(key: string, fallback: T): T {
 function writeLocal(key: string, value: unknown): void {
   try {
     localStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    /* 配额超限或隐私模式，静默忽略 */
+  } catch (err) {
+    // 配额超限或隐私模式，DEV 模式下输出警告便于排查
+    if (import.meta.env.DEV) {
+      console.warn('[storage] 写入本地存储失败', err);
+    }
   }
 }
 
@@ -27,8 +34,11 @@ function writeLocal(key: string, value: unknown): void {
 function removeLocal(key: string): void {
   try {
     localStorage.removeItem(key);
-  } catch {
-    /* 忽略 */
+  } catch (err) {
+    // DEV 模式下输出警告，便于开发调试
+    if (import.meta.env.DEV) {
+      console.warn('[storage] 移除本地存储项失败', err);
+    }
   }
 }
 
@@ -37,7 +47,11 @@ function readSession<T>(key: string, fallback: T): T {
   try {
     const raw = sessionStorage.getItem(key);
     return raw ? (JSON.parse(raw) as T) : fallback;
-  } catch {
+  } catch (err) {
+    // DEV 模式下输出警告，便于开发调试；生产环境静默降级
+    if (import.meta.env.DEV) {
+      console.warn('[storage] 读取会话存储失败', err);
+    }
     return fallback;
   }
 }
@@ -46,8 +60,11 @@ function readSession<T>(key: string, fallback: T): T {
 function writeSession(key: string, value: unknown): void {
   try {
     sessionStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    /* 忽略 */
+  } catch (err) {
+    // DEV 模式下输出警告，便于开发调试
+    if (import.meta.env.DEV) {
+      console.warn('[storage] 写入会话存储失败', err);
+    }
   }
 }
 
@@ -55,8 +72,11 @@ function writeSession(key: string, value: unknown): void {
 function removeSession(key: string): void {
   try {
     sessionStorage.removeItem(key);
-  } catch {
-    /* 忽略 */
+  } catch (err) {
+    // DEV 模式下输出警告，便于开发调试
+    if (import.meta.env.DEV) {
+      console.warn('[storage] 移除会话存储项失败', err);
+    }
   }
 }
 

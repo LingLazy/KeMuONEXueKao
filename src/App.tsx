@@ -12,6 +12,7 @@ import ConfirmProvider from '@/components/feedback/ConfirmProvider';
 import GlobalLoading from '@/components/feedback/GlobalLoading';
 import { useThemeStore } from '@/stores/themeStore';
 import { useProgressStore } from '@/stores/progressStore';
+import { toast } from '@/stores/toastStore';
 import { loadQuestions } from '@/services/dataLoader';
 
 // 视图懒加载：首屏仅加载 Home，其余按路由按需加载
@@ -34,10 +35,14 @@ export default function App() {
   }, [theme, applyTheme]);
 
   // 加载题库总数（仅在挂载时执行一次）
+  // 失败时记录日志并向用户展示友好 Toast 提示，便于用户感知并重试
   useEffect(() => {
     loadQuestions()
       .then((qs) => setTotal(qs.length))
-      .catch((err) => console.error('题库加载失败', err));
+      .catch((err) => {
+        console.error('[App] 题库加载失败', err);
+        toast.error('题库加载失败，请刷新重试');
+      });
   }, [setTotal]);
 
   return (

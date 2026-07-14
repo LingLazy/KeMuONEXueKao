@@ -9,81 +9,51 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CATEGORIES, loadQuestions, loadMnemonics } from '@/services/dataLoader';
+import { CATEGORIES, loadMnemonics } from '@/services/dataLoader';
 import { CATEGORY_GROUPS, GROUP_KEYS, isGroupKey } from '@/data/categoryGroups';
 import { usePracticeStore } from '@/stores/practiceStore';
 import { useProgressStore } from '@/stores/progressStore';
-import { useHotkeys, useIsMobile } from '@/hooks';
+import { useAsyncData, useHotkeys, useIsMobile } from '@/hooks';
 import QuestionCard from '@/components/question/QuestionCard';
 import EmptyState from '@/components/common/EmptyState';
 import { QuestionCardSkeleton } from '@/components/common/Skeleton';
 import Modal from '@/components/common/Modal';
-import type { Question, Mnemonic } from '@/types';
+import GeoBgDecor from '@/components/common/GeoBgDecor';
+import SearchInput from '@/components/common/SearchInput';
+import type { Question } from '@/types';
 
 export default function PracticeView() {
   const { cat } = useParams<{ cat?: string }>();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
 
-  const [questions, setQuestions] = useState<Question[] | null>(null);
-  const [mnemonics, setMnemonics] = useState<Mnemonic[]>([]);
-  const [error, setError] = useState<string | null>(null);
   const [showSidebar, setShowSidebar] = useState(false);
   const [showJumpModal, setShowJumpModal] = useState(false);
 
   const practice = usePracticeStore();
   const progress = useProgressStore();
 
-  // 加载题库与口诀（带错误状态，便于 UI 反馈与重试）
-  const loadData = () => {
-    setError(null);
-    Promise.all([
-      loadQuestions().then(setQuestions),
-      loadMnemonics().then(setMnemonics)
-    ]).catch((err) => {
-      setError(err instanceof Error ? err.message : '数据加载失败');
-    });
-  };
+  // 通过通用异步数据 Hook 加载口诀数据，同时并行执行 practice.init() 完成题库自加载
+  // practice.init() 负责题库加载并通过 practice.initialized 状态驱动加载态 UI（init 内部有防重入）
+  // useAsyncData 负责统一管理 Promise.all 的 error / reload 三态，替代原手动 cancelled + setState 模式
+  // data 为 Mnemonic[] | null，null 时 mnemonics 回退为 []（与原 useState 初始值语义一致）
+  const { data: mnemonicsData, error, reload } = useAsyncData(
+    () => Promise.all([practice.init(), loadMnemonics()]).then(([, ms]) => ms),
+    []
+  );
+  const mnemonics = mnemonicsData ?? [];
 
+  // 当前分类变更时重新筛选（init 完成后驱动首次筛选）
   useEffect(() => {
-    // 卸载保护：避免组件卸载后仍 setState 触发警告
-    let cancelled = false;
-    setError(null);
-    Promise.all([
-      loadQuestions().then((qs) => { if (!cancelled) setQuestions(qs); }),
-      loadMnemonics().then((ms) => { if (!cancelled) setMnemonics(ms); })
-    ]).catch((err) => {
-      if (!cancelled) setError(err instanceof Error ? err.message : '数据加载失败');
-    });
-    return () => { cancelled = true; };
-  }, []);
-
-  // 错题ID集合
-  const wrongIds = useMemo(() => {
-    const set = new Set<number>();
-    Object.entries(progress.answered).forEach(([id, rec]) => {
-      if (!rec.correct) set.add(Number(id));
-    });
-    return set;
-  }, [progress.answered]);
-
-  // 收藏ID集合
-  const bookmarkIds = useMemo(() => {
-    return new Set(Object.keys(progress.bookmarks).map((k) => Number(k)));
-  }, [progress.bookmarks]);
-
-  // 当前分类变更或筛选条件变化时重新筛选
-  useEffect(() => {
-    if (!questions) return;
+    if (!practice.initialized) return;
     const targetCat = cat ?? 'all';
-    if (practice.currentCat !== targetCat || practice.list.length === 0) {
-      practice.setCategory(targetCat, questions, wrongIds, bookmarkIds);
+    if (practice.currentCat !== targetCat) {
+      practice.setCategory(targetCat);
     } else {
-      // 筛选条件（错题/收藏）变化时，仅更新数据源引用并重算列表
-      practice.setDataSource(questions, wrongIds, bookmarkIds);
+      practice.reapplyFilters();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cat, questions, wrongIds, bookmarkIds]);
+  }, [cat, practice.initialized]);
 
   // 当前题目
   const currentQuestion = practice.list[practice.index];
@@ -112,16 +82,13 @@ export default function PracticeView() {
   if (error) {
     return (
       <div className="view view-practice">
-        <div className="geo-bg-decor" aria-hidden="true">
-          <div className="geo-bg-grid" />
-          <div className="geo-dots-lg" />
-        </div>
+        <GeoBgDecor variant="error" />
         <div className="view-container">
           <EmptyState
             title="数据加载失败"
             description={error}
             action={
-              <button type="button" className="btn btn-primary" onClick={loadData}>
+              <button type="button" className="btn btn-primary" onClick={reload}>
                 重试加载
               </button>
             }
@@ -132,13 +99,10 @@ export default function PracticeView() {
   }
 
   // 加载中
-  if (!questions) {
+  if (!practice.initialized) {
     return (
       <div className="view view-practice">
-        <div className="geo-bg-decor" aria-hidden="true">
-          <div className="geo-bg-grid" />
-          <div className="geo-dots-sm" />
-        </div>
+        <GeoBgDecor variant="loading" />
         <div className="view-container">
           <QuestionCardSkeleton />
         </div>
@@ -150,10 +114,7 @@ export default function PracticeView() {
   if (practice.list.length === 0) {
     return (
       <div className="view view-practice">
-        <div className="geo-bg-decor" aria-hidden="true">
-          <div className="geo-bg-grid" />
-          <div className="geo-cross-marks" />
-        </div>
+        <GeoBgDecor variant="practice-empty" />
         <div className="view-container">
           <EmptyState
             title="该分类暂无题目"
@@ -172,16 +133,7 @@ export default function PracticeView() {
   return (
     <div className="view view-practice">
       {/* 练习模式装饰层 · 网格底纹 + 平行斜线 + 十字坐标点 */}
-      <div className="geo-bg-decor" aria-hidden="true">
-        <div className="geo-bg-grid" />
-        <div className="geo-parallel-lines" />
-        <div className="geo-cross-marks" />
-        <div className="geo-hatch-block" style={{ top: '12%', right: '4%' }} />
-        {/* 扩展装饰 v3.4 · 多位置动态元素 */}
-        <div className="geo-dots-radial" />
-        <div className="geo-chevron-stack" />
-        <div className="geo-bezier-flow" />
-      </div>
+      <GeoBgDecor variant="practice" />
       {/* 移动端顶栏：分类切换按钮 */}
       {isMobile && (
         <div className="practice-mobile-bar">
@@ -207,7 +159,7 @@ export default function PracticeView() {
             <CategoryTree
               currentCat={practice.currentCat}
               onSelect={switchCategory}
-              counts={getCategoryCounts(questions)}
+              counts={getCategoryCounts(practice.allQuestions)}
             />
           </Modal>
         ) : (
@@ -225,7 +177,7 @@ export default function PracticeView() {
             <CategoryTree
               currentCat={practice.currentCat}
               onSelect={switchCategory}
-              counts={getCategoryCounts(questions)}
+              counts={getCategoryCounts(practice.allQuestions)}
             />
           </aside>
         )}
@@ -252,7 +204,7 @@ export default function PracticeView() {
                     role="radio"
                     aria-checked={practice.subject === opt.key}
                     className={`subject-chip ${practice.subject === opt.key ? 'active' : ''}`}
-                    onClick={() => practice.setSubject(opt.key, questions, wrongIds, bookmarkIds)}
+                    onClick={() => practice.setSubject(opt.key)}
                   >
                     {opt.label}
                   </button>
@@ -260,23 +212,17 @@ export default function PracticeView() {
               </div>
             </div>
             <div className="practice-toolbar-right">
-              <div className="practice-search">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
-                <input
-                  type="search"
-                  placeholder="搜索题目关键词"
-                  value={practice.search}
-                  onChange={(e) => practice.setSearch(e.target.value, questions)}
-                  aria-label="搜索题目"
-                />
-              </div>
+              <SearchInput
+                value={practice.search}
+                onChange={practice.setSearch}
+                placeholder="搜索题目关键词"
+                ariaLabel="搜索题目"
+                containerClassName="practice-search"
+              />
               <button
                 type="button"
                 className={`toggle-chip ${practice.onlyWrong ? 'active' : ''}`}
-                onClick={() => practice.toggleOnlyWrong(questions, wrongIds)}
+                onClick={() => practice.toggleOnlyWrong()}
                 aria-pressed={practice.onlyWrong}
                 title="仅显示错题"
               >
@@ -288,7 +234,7 @@ export default function PracticeView() {
               <button
                 type="button"
                 className={`toggle-chip ${practice.onlyBookmark ? 'active' : ''}`}
-                onClick={() => practice.toggleOnlyBookmark(questions, bookmarkIds)}
+                onClick={() => practice.toggleOnlyBookmark()}
                 aria-pressed={practice.onlyBookmark}
                 title="仅显示收藏"
               >

@@ -5,40 +5,24 @@
  * - 显示每分类题数与正确率
  * - 点击进入对应分类练习
  */
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CATEGORIES, loadQuestions, hexToRgba } from '@/services/dataLoader';
 import { CATEGORY_GROUPS, GROUP_KEYS } from '@/data/categoryGroups';
 import { useProgressStore } from '@/stores/progressStore';
-import { useIsMobile } from '@/hooks';
+import { useAsyncData, useIsMobile } from '@/hooks';
+import { calcAccuracy, calcProgress } from '@/utils';
 import EmptyState from '@/components/common/EmptyState';
-import type { Question } from '@/types';
+import GeoBgDecor from '@/components/common/GeoBgDecor';
 
 export default function CategoriesView() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  // null 表示加载中，[] 表示已加载但为空，与 PracticeView/ExamView 保持一致
-  const [questions, setQuestions] = useState<Question[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // 通过通用异步数据 Hook 加载题库，统一管理 loading / error / reload 三态
+  // data 为 null 表示加载中（与原 useState null 语义一致），[] 表示已加载但为空
+  const { data: questions, error, reload } = useAsyncData(() => loadQuestions(), []);
   const answered = useProgressStore((s) => s.answered);
-
-  // 数据加载：带错误状态与卸载保护，便于 UI 反馈与重试
-  const loadData = () => {
-    setError(null);
-    let cancelled = false;
-    loadQuestions()
-      .then((qs) => { if (!cancelled) setQuestions(qs); })
-      .catch((err) => {
-        if (!cancelled) setError(err instanceof Error ? err.message : '数据加载失败');
-      });
-    return () => { cancelled = true; };
-  };
-
-  useEffect(() => {
-    const cleanup = loadData();
-    return cleanup;
-  }, []);
 
   // 各分类的题数与正确率
   const catStats = useMemo(() => {
@@ -59,7 +43,7 @@ export default function CategoriesView() {
         count: cat.ids.length,
         answered: answeredNum,
         correct: correctNum,
-        accuracy: answeredNum > 0 ? Math.round((correctNum / answeredNum) * 100) : 0
+        accuracy: calcAccuracy(correctNum, answeredNum)
       };
     });
     return stats;
@@ -91,8 +75,8 @@ export default function CategoriesView() {
         total: ids.size,
         answered: answeredNum,
         correct: correctNum,
-        accuracy: answeredNum > 0 ? Math.round((correctNum / answeredNum) * 100) : 0,
-        progress: ids.size > 0 ? Math.round((answeredNum / ids.size) * 100) : 0
+        accuracy: calcAccuracy(correctNum, answeredNum),
+        progress: calcProgress(answeredNum, ids.size)
       };
     });
   }, [answered]);
@@ -105,16 +89,13 @@ export default function CategoriesView() {
   if (error) {
     return (
       <div className="view view-categories">
-        <div className="geo-bg-decor" aria-hidden="true">
-          <div className="geo-bg-grid" />
-          <div className="geo-dots-lg" />
-        </div>
+        <GeoBgDecor variant="error" />
         <div className="view-container">
           <EmptyState
             title="数据加载失败"
             description={error}
             action={
-              <button type="button" className="btn btn-primary" onClick={loadData}>
+              <button type="button" className="btn btn-primary" onClick={reload}>
                 重试加载
               </button>
             }
@@ -128,10 +109,7 @@ export default function CategoriesView() {
   if (!questions) {
     return (
       <div className="view view-categories">
-        <div className="geo-bg-decor" aria-hidden="true">
-          <div className="geo-bg-grid" />
-          <div className="geo-dots-sm" />
-        </div>
+        <GeoBgDecor variant="loading" />
         <div className="view-container">
           <div
             className="cats-loading"
@@ -168,19 +146,7 @@ export default function CategoriesView() {
   return (
     <div className="view view-categories">
       {/* 分类视图装饰层 · 同心环 + 横竖虚线束 + 三角切片 */}
-      <div className="geo-bg-decor" aria-hidden="true">
-        <div className="geo-bg-grid" />
-        <div className="geo-half-rings-br" />
-        <div className="geo-vline-bundle" />
-        <div className="geo-triangle-rt" />
-        <div className="geo-cross-marks" />
-        <div className="geo-hline-dashed" style={{ top: '32%' }} />
-        <div className="geo-hline-dashed" style={{ top: '68%' }} />
-        {/* 扩展装饰 v3.4 · 多位置动态元素 */}
-        <div className="geo-dots-radial" />
-        <div className="geo-chevron-stack" />
-        <div className="geo-glow-info-bl" />
-      </div>
+      <GeoBgDecor variant="categories" />
       <div className="view-container">
         <header className="section-header">
           <span className="section-eyebrow">Categories</span>

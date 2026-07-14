@@ -1,0 +1,47 @@
+/* ===================================================================
+   雷达图 · 简洁数据可视化
+   - SVG 雷达图样式（网格/轴线/多边形/数据点/标签）
+   - 用于能力图谱等数据可视化场景
+   =================================================================== */
+
+/* ========== 雷达图 · 简洁数据可视化 ========== */
+.radar-chart {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 0 auto;
+}
+.radar-grid {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.radar-axis {
+  stroke: var(--divider);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+}
+.radar-polygon {
+  fill: var(--primary);
+  fill-opacity: 0.12;
+  stroke: var(--primary);
+  stroke-width: 1.5;
+}
+.radar-point {
+  stroke: var(--bg-card);
+  stroke-width: 2;
+}
+.radar-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--text-2);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.radar-label-val {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--primary);
+  font-weight: 700;
+}

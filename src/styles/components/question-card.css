@@ -1,0 +1,512 @@
+/* ===================================================================
+   QuestionCard 题目卡片
+   - 题头/题干/图片/选项/反馈/解析/口诀
+   - 含图片点击放大、多选确认按钮、口诀常驻显示
+   - 1px 边框 + 品牌色光晕 · 无蚀刻/凹凸/角标刻度
+   =================================================================== */
+
+/* ========== QuestionCard 题目卡片 · 简洁卡片 ========== */
+.qcard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth);
+  position: relative;
+  /* 隔离卡片内部重排，避免高度变化影响外部布局抖动 */
+  contain: content;
+  /* 题目卡片作为滚动锚点，防止答题后页面跳动 */
+  overflow-anchor: none;
+}
+.qcard:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+/* 题头 */
+.qcard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-4);
+}
+.qcard-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+.qcard-index {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+}
+.qcard-index .num {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+.qcard-index .sep {
+  color: var(--text-mute);
+}
+.qcard-type {
+  padding: 2px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--r-xs);
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+.qcard-type.judge {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+.qcard-badge {
+  padding: 2px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: var(--r-xs);
+  background: var(--info-soft);
+  color: var(--info);
+}
+.qcard-actions {
+  display: flex;
+  gap: var(--sp-1);
+}
+.icon-btn.active {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
+}
+
+/* 题干 */
+.qcard-question {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-1);
+  margin-bottom: var(--sp-4);
+  font-weight: 500;
+}
+.qcard-question mark.kw {
+  background: var(--primary-soft);
+  color: var(--primary);
+  padding: 1px 6px;
+  border-radius: var(--r-xs);
+  font-weight: 700;
+}
+.qcard-question mark.kw.danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+.qcard-question mark.kw.num {
+  background: var(--info-soft);
+  color: var(--info);
+}
+
+/* 图片 */
+.qcard-image {
+  margin: 0 0 var(--sp-4);
+  max-width: 100%;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-sub);
+  /* 预留图片区高度，避免图片加载完成后高度突变引起页面跳动 */
+  min-height: 120px;
+}
+.qcard-image .lazy-img {
+  width: 100%;
+  /* 通过 aspect-ratio 占位，避免图片加载前高度为 0 导致布局抖动 */
+  aspect-ratio: 16 / 9;
+  max-height: 280px;
+  border-radius: 0;
+}
+.qcard-image .lazy-img-tag {
+  max-height: 280px;
+  object-fit: contain;
+  background: var(--bg-sub);
+}
+
+/* 可点击图片容器 · 悬停反馈与聚焦态（原生 button 元素重置） */
+.qcard-image-clickable {
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+  outline: none;
+  /* button 元素重置：消除默认样式干扰 */
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.qcard-image-clickable:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md), 0 0 0 3px var(--primary-bg);
+  transform: translateY(-1px);
+}
+.qcard-image-clickable:focus-visible {
+  box-shadow: var(--ring-focus);
+}
+.qcard-image-clickable:active {
+  transform: translateY(0);
+}
+
+/* 点击放大提示标识 · 右下角浮动标签 */
+.qcard-image-zoom-hint {
+  position: absolute;
+  right: var(--sp-2);
+  bottom: var(--sp-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-1);
+  background: oklch(1 0 0 / 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-sm);
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity var(--dur-fast) var(--ease-smooth),
+              color var(--dur-fast) var(--ease-out);
+}
+[data-theme="dark"] .qcard-image-zoom-hint {
+  background: oklch(0.205 0 0 / 0.92);
+  color: var(--text-1);
+}
+.qcard-image-clickable:hover .qcard-image-zoom-hint {
+  opacity: 1;
+  color: var(--primary);
+  border-color: var(--primary-border);
+}
+
+/* 模态框内图片放大查看 · 居中、最大尺寸约束 */
+.qcard-image-zoom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-sub);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  padding: var(--sp-3);
+}
+.qcard-image-zoom img {
+  max-width: 100%;
+  max-height: 72vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 选项 · 简洁按钮组 */
+.qcard-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+}
+.qcard-option {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  text-align: left;
+  font-size: 0.9375rem;
+  color: var(--text-1);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+.qcard-option:hover:not(:disabled) {
+  border-color: var(--primary-border);
+  background: var(--primary-bg);
+}
+.qcard-option:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+.qcard-option-letter {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-3);
+  background: var(--bg-sub);
+  border-radius: var(--r-sm);
+  flex-shrink: 0;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.qcard-option-text {
+  flex: 1;
+  line-height: 1.6;
+}
+.qcard-option.correct {
+  border-color: var(--success);
+  background: var(--success-soft);
+}
+.qcard-option.correct .qcard-option-letter {
+  background: var(--success);
+  color: #fff;
+}
+.qcard-option.wrong {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+.qcard-option.wrong .qcard-option-letter {
+  background: var(--danger);
+  color: #fff;
+}
+.qcard-option.selected {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+}
+.qcard-option.selected .qcard-option-letter {
+  background: var(--primary);
+  color: #fff;
+}
+.qcard-option.eliminated {
+  opacity: 0.35;
+  text-decoration: line-through;
+  pointer-events: none;
+}
+.qcard-option-icon {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--r-xs);
+}
+.qcard-option-icon.correct {
+  color: var(--success);
+}
+.qcard-option-icon.wrong {
+  color: var(--danger);
+}
+.qcard-option-eliminated {
+  margin-left: auto;
+  color: var(--text-mute);
+  flex-shrink: 0;
+}
+
+/* 多选题选项 · 方形勾选指示器（区别于单选的圆形 radio） */
+.qcard-option-multi .qcard-option-letter {
+  border-radius: var(--r-xs);
+}
+.qcard-option-multi[aria-checked="true"]:not(.correct):not(.wrong) {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+}
+.qcard-option-multi[aria-checked="true"]:not(.correct):not(.wrong) .qcard-option-letter {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* 多选题确认按钮 */
+.qcard-confirm-multi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-4);
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-md);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out),
+              opacity var(--dur-fast) var(--ease-out);
+}
+.qcard-confirm-multi:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+.qcard-confirm-multi:active:not(:disabled) {
+  transform: translateY(0);
+}
+.qcard-confirm-multi:disabled {
+  background: var(--bg-sub);
+  color: var(--text-mute);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* 反馈与解析 · 隔离布局重排，避免高度变化影响外部 */
+.qcard-feedback {
+  overflow: hidden;
+  contain: layout style;
+  overflow-anchor: none;
+}
+.qcard-result {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  margin-top: var(--sp-3);
+  border-radius: var(--r-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid;
+  /* 预留单行高度，避免反馈出现时高度从 0 突变 */
+  min-height: 44px;
+}
+.qcard-result.correct {
+  background: var(--success-soft);
+  color: var(--success);
+  border-color: var(--success);
+}
+.qcard-result.wrong {
+  background: var(--danger-soft);
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+/* 解析折叠区 · 隔离布局重排 */
+.qcard-analysis-wrap {
+  margin-top: var(--sp-3);
+  border-top: 1px solid var(--divider);
+  padding-top: var(--sp-3);
+  contain: layout style;
+  overflow-anchor: none;
+}
+.qcard-analysis-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-2);
+  border-radius: var(--r-sm);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.qcard-analysis-toggle:hover {
+  background: var(--bg-hover);
+  color: var(--text-1);
+}
+.qcard-analysis-toggle .chevron {
+  margin-left: auto;
+  transition: transform 0.3s var(--ease-out);
+}
+.qcard-analysis-toggle .chevron.open {
+  transform: rotate(180deg);
+}
+.qcard-analysis {
+  overflow: hidden;
+  contain: layout style;
+  overflow-anchor: none;
+}
+.qcard-analysis-text {
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin-top: var(--sp-2);
+}
+.qcard-analysis-link {
+  display: inline-block;
+  margin-top: var(--sp-2);
+  font-size: 0.8125rem;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* 口诀常驻显示 · 构成主义信息面板(无黄色透明底) */
+.qcard-mnemonic {
+  margin-top: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  padding-left: var(--sp-6);
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  position: relative;
+  /* 构成主义:左侧编号锚 + 虚线(替代黄色透明底) */
+}
+.qcard-mnemonic::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--geo-red) 0,
+    var(--geo-red) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  border-radius: var(--r-md) 0 0 var(--r-md);
+}
+.qcard-mnemonic-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--text-3);
+  margin-bottom: var(--sp-2);
+}
+.qcard-mnemonic-title {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.qcard-mnemonic-text {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+.qcard-mnemonic-explain {
+  margin-top: var(--sp-1);
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  line-height: 1.6;
+}

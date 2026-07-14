@@ -1,0 +1,270 @@
+/* ===================================================================
+   CategoriesView 分类视图样式
+   - 从 views.css 拆分而来
+   =================================================================== */
+
+/* ========== CategoriesView 分类视图 ========== */
+.view-categories {
+  padding-bottom: var(--sp-12);
+}
+.cats-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-12);
+}
+.group-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-5);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  text-align: left;
+  transition: box-shadow var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth),
+              transform var(--dur-base) var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+/* 构成主义角标:左上角三角切片(替代顶部色条) */
+.group-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--group-color);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  opacity: 0.85;
+}
+/* 右上角构成主义辅助点 */
+.group-card::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--group-color);
+  opacity: 0.4;
+}
+.group-card:hover {
+  border-color: var(--group-color-border);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+.group-card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.group-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-md);
+  background: var(--group-color-bg);
+  color: var(--group-color);
+  flex-shrink: 0;
+}
+.group-card-head-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.group-card-name {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+}
+.group-card-total {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+}
+.group-card-arrow {
+  color: var(--text-mute);
+  transition: transform var(--dur-base) var(--ease-out), color var(--dur-base);
+}
+.group-card:hover .group-card-arrow {
+  color: var(--group-color);
+  transform: translateX(4px);
+}
+.group-card-desc {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  line-height: 1.6;
+}
+.group-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  background: var(--bg-sub);
+  border-radius: var(--r-md);
+}
+.group-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.group-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.group-stat-value {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+}
+.group-card-progress {
+  margin-top: var(--sp-1);
+}
+.group-card-progress .progress-track {
+  height: 3px;
+}
+
+/* 小分类详细列表 */
+.cats-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+.cat-detail-group {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
+  padding-left: var(--sp-6);
+  box-shadow: var(--shadow-xs);
+  position: relative;
+  /* 构成主义:左侧编号竖线 + 顶部色块角标(替代左色条) */
+}
+.cat-detail-group::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 24px;
+  background: var(--group-color);
+  border-radius: var(--r-lg) 0 var(--r-lg) 0;
+}
+.cat-detail-group::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 28px;
+  bottom: var(--sp-5);
+  width: 1px;
+  background: linear-gradient(to bottom, var(--group-color), transparent);
+  opacity: 0.3;
+}
+.cat-detail-group-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--divider);
+}
+.cat-detail-group-name {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+}
+.cat-detail-group-count {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+}
+.cat-detail-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sp-3);
+}
+.cat-detail-items.mobile {
+  grid-template-columns: 1fr;
+}
+.cat-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  text-align: left;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+.cat-detail-item:hover {
+  background: var(--bg-card);
+  border-color: var(--primary-border);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.cat-detail-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cat-detail-item-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-1);
+}
+.cat-detail-item-count {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.cat-detail-item-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+}
+.meta-answered {
+  color: var(--success);
+}
+.meta-acc {
+  color: var(--primary);
+  font-weight: 600;
+}
+.cat-detail-item-progress {
+  height: 3px;
+  background: var(--bg-hover);
+  border-radius: var(--r-full);
+  overflow: hidden;
+}
+.cat-detail-item-progress .progress-fill {
+  height: 100%;
+  transition: width 0.4s var(--ease-out);
+}

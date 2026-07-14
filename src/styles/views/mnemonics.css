@@ -1,0 +1,618 @@
+/* ===================================================================
+   MnemonicsView 口诀视图样式
+   - 从 views.css 拆分而来
+   =================================================================== */
+
+/* ========== MnemenicsView 口诀视图 ========== */
+/* 紧凑布局：最大化列表可视高度，减少上下预留空间 */
+/* 非学习模式：CSS Flexbox 撑满视口，取代 JS 高度计算，兼容所有缩放比例 */
+.view-mnemonics:not(.study-mode-active) {
+  /* dvh 动态视口高度，更准确适配系统缩放与浏览器缩放，避免 100vh 偏差；vh 作为旧浏览器 fallback */
+  height: calc(100vh - var(--nav-h));
+  height: calc(100dvh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  padding-bottom: var(--sp-2);
+}
+/* 学习模式：恢复正常页面滚动 */
+.view-mnemonics.study-mode-active {
+  padding-bottom: var(--sp-12);
+}
+/* 通读模式：解除 layout/main 的 overflow 约束，
+   使 .mnemonics-aside 的 sticky 相对页面滚动视口生效（分类导航固定） */
+.view-mnemonics.study-mode-active .mnemonics-layout {
+  overflow: visible;
+}
+.view-mnemonics.study-mode-active .mnemonics-main {
+  overflow: visible;
+}
+/* 缩减视图容器上下内边距，为列表腾出更多可视高度 */
+.view-mnemonics > .view-container {
+  padding-top: var(--sp-4);
+  padding-bottom: var(--sp-2);
+}
+/* 非学习模式：容器作为 flex 子项撑满，内部纵向排列 */
+.view-mnemonics:not(.study-mode-active) > .view-container {
+  flex: 1 1 0%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+/* 紧凑区块标题：缩小下边距 */
+.view-mnemonics .section-header {
+  margin-bottom: var(--sp-3);
+  flex-shrink: 0;
+}
+.view-mnemonics .section-title {
+  font-size: 1.375rem;
+  margin-bottom: var(--sp-1);
+}
+.view-mnemonics .section-desc {
+  margin-bottom: 0;
+  font-size: 0.875rem;
+}
+.mnemonics-loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+/* 工具栏：搜索框 + 学习模式按钮 */
+.mnemonics-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-2);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.mnemonics-search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text-mute);
+  flex: 1;
+  min-width: 200px;
+  max-width: 600px;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+.mnemonics-search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 0.875rem;
+}
+.mnemonics-search-bar input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.mnemonics-search-bar:has(input:focus) {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+.mnemonics-search-clear {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--r-xs);
+  color: var(--text-mute);
+  background: var(--bg-sub);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.mnemonics-search-clear:hover {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+/* 学习模式按钮 */
+.study-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-2);
+  white-space: nowrap;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+.study-mode-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-bg);
+}
+.study-mode-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.study-mode-btn.active:hover {
+  background: var(--primary-strong, var(--primary));
+}
+
+/* 键盘快捷键提示 */
+.mnemonics-shortcut-hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  padding: var(--sp-1) var(--sp-3);
+  margin-bottom: var(--sp-2);
+  font-size: 0.75rem;
+  color: var(--text-mute);
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.mnemonics-shortcut-hint kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xs);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-2);
+  margin: 0 2px;
+  box-shadow: 0 1px 0 var(--border);
+}
+
+/* 学习模式列表（展开态全部渲染） */
+.mnemonics-study-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+/* 口诀卡片 · 键盘聚焦态（构成主义红色边角强调） */
+.mnemonic-card.focused {
+  border-color: var(--geo-red);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--geo-red) 12%, transparent);
+}
+.mnemonic-card.focused::before {
+  background: var(--geo-red);
+}
+
+/* 学习模式隐藏展开箭头（无需切换） */
+.mnemonic-card.study-mode .mnemonic-card-chevron {
+  display: none;
+}
+.mnemonic-card.study-mode .mnemonic-card-head {
+  cursor: default;
+}
+
+.mnemonics-layout {
+  display: grid;
+  grid-template-columns: var(--mnemonics-aside-w) 1fr;
+  gap: var(--sp-6);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.mnemonics-aside {
+  /* 非学习模式：高度由 grid 默认 stretch 自动撑满行高，不依赖 100vh，
+     避免系统缩放/浏览器缩放下视口高度与实际容器高度不一致导致的覆盖遮挡。
+     祖先均为 overflow:hidden 不可滚动，sticky 无效故不使用。 */
+  position: relative;
+  min-height: 0;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-xs);
+}
+/* 学习模式：layout overflow:visible 可滚动，恢复 sticky 使分类导航固定在视口 */
+.view-mnemonics.study-mode-active .mnemonics-aside {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--sp-6));
+  align-self: start;
+  max-height: calc(100dvh - var(--nav-h) - var(--sp-6));
+  z-index: 5;
+}
+/* 构成主义:右上角三角切片 */
+.mnemonics-aside::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 16px;
+  height: 16px;
+  background: var(--geo-red);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  z-index: 1;
+}
+.mnemonics-aside-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--sp-3);
+  margin-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--divider);
+}
+.mnemonics-aside-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding-left: 10px;
+  position: relative;
+}
+.mnemonics-aside-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 12px;
+  background: var(--geo-ink);
+}
+.mnemonics-aside-count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-2);
+  background: var(--bg-sub);
+  padding: 2px 8px;
+  border-radius: var(--r-xs);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+.mnemonics-cat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.mnemonics-cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-2) var(--sp-3) var(--sp-2) var(--sp-4);
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  border-radius: var(--r-xs);
+  position: relative;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              padding-left var(--dur-fast) var(--ease-out);
+}
+.mnemonics-cat-item:hover {
+  background: var(--bg-hover);
+  color: var(--text-1);
+}
+/* 构成主义:左侧锚点指示器 */
+.mnemonics-cat-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 12px;
+  background: var(--geo-line);
+  transition: all var(--dur-fast) var(--ease-out);
+}
+.mnemonics-cat-item:hover::before {
+  background: var(--geo-red);
+  height: 16px;
+}
+.mnemonics-cat-item.active {
+  background: transparent;
+  color: var(--geo-red);
+  font-weight: 700;
+  padding-left: var(--sp-5);
+}
+.mnemonics-cat-item.active::before {
+  width: 6px;
+  height: 16px;
+  background: var(--geo-red);
+}
+.mnemonics-cat-name {
+  flex: 1;
+  text-align: left;
+}
+.mnemonics-cat-count {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-mute);
+  letter-spacing: 0.02em;
+}
+
+.mnemonics-mobile-cats {
+  display: none;
+  margin-bottom: var(--sp-4);
+}
+.mnemonics-mobile-cats select {
+  width: 100%;
+  padding: var(--sp-3);
+  font-size: 0.875rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+
+.mnemonics-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+.mnemonics-list-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--sp-2);
+  flex-shrink: 0;
+}
+.mnemonics-list-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+}
+.mnemonics-list-count {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+}
+.mnemonics-list {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  /* 平滑滚动 + 惯性 */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* 自定义滚动条（WebKit） */
+}
+.mnemonics-list::-webkit-scrollbar {
+  width: 6px;
+}
+.mnemonics-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mnemonics-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+.mnemonics-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-mute);
+}
+/* 右侧内边距预留滚动条空间，避免内容被遮挡 */
+.mnemonics-list > div {
+  padding-right: 4px;
+}
+
+/* 口诀卡片 · 构成主义信息卡 */
+.mnemonic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  margin-bottom: var(--sp-3);
+  overflow: hidden;
+  transition: box-shadow var(--dur-base) var(--ease-smooth),
+              border-color var(--dur-base) var(--ease-smooth);
+  box-shadow: var(--shadow-xs);
+  position: relative;
+}
+/* 构成主义:左边缘竖虚线锚(极淡) */
+.mnemonic-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: var(--sp-4);
+  bottom: var(--sp-4);
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--geo-line) 0,
+    var(--geo-line) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+  opacity: 0.6;
+  transition: opacity var(--dur-base);
+}
+.mnemonic-card.expanded::before {
+  opacity: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--primary) 0,
+    var(--primary) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+.mnemonic-card.expanded {
+  border-color: var(--primary-border);
+  box-shadow: var(--shadow-md);
+}
+.mnemonic-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--sp-4);
+  padding-left: var(--sp-5);
+  text-align: left;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.mnemonic-card-head:hover {
+  background: var(--bg-hover);
+}
+.mnemonic-card-head-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+/* 构成主义:分类标签改为方形角标(非胶囊圆角) */
+.mnemonic-card-cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text-3);
+  align-self: flex-start;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.mnemonic-card-cat::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--geo-ink);
+}
+.mnemonic-card-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+}
+.mnemonic-card-head-right {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-shrink: 0;
+}
+.mnemonic-card-text {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--text-2);
+  font-weight: 600;
+  max-width: 280px;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.02em;
+}
+.mnemonic-card-chevron {
+  color: var(--text-mute);
+  transition: transform 0.3s var(--ease-out), color var(--dur-fast);
+}
+.mnemonic-card-chevron.open {
+  transform: rotate(180deg);
+  color: var(--primary);
+}
+/* 展开内容容器：CSS grid-template-rows 0fr→1fr 实现 GPU 友好的高度过渡 */
+/* 相比 framer-motion height:auto，避免逐帧布局测量，过渡更顺滑 */
+.mnemonic-card-body-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s var(--ease-smooth),
+              opacity 0.25s var(--ease-out);
+  opacity: 0;
+}
+.mnemonic-card-body-wrap.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.mnemonic-card-body {
+  overflow: hidden;
+  min-height: 0; /* grid 子元素必须 min-height:0 才能正确收缩 */
+  padding: 0 var(--sp-4) var(--sp-4);
+  padding-left: var(--sp-5);
+}
+/* 收起态时隐藏 body 内部内容，避免 tab 聚焦 */
+.mnemonic-card-body-wrap:not(.open) .mnemonic-card-body {
+  visibility: hidden;
+  transition: visibility 0s linear 0.3s; /* 过渡结束后才隐藏 */
+}
+.mnemonic-card-body-wrap.open .mnemonic-card-body {
+  visibility: visible;
+}
+.mnemonic-section {
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-sub);
+  border-radius: var(--r-md);
+  margin-top: var(--sp-2);
+}
+.mnemonic-section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+}
+.mnemonic-section-label::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--primary);
+}
+.mnemonic-explain {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+.mnemonic-details {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.mnemonic-details li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  font-size: 0.8125rem;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+/* 构成主义:编号方块(非圆形胶囊) */
+.mnemonic-detail-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--bg-base);
+  background: var(--geo-ink);
+  border-radius: var(--r-xs);
+  letter-spacing: 0.02em;
+}
+/* 复制口诀操作区 */
+.mnemonic-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--divider);
+}

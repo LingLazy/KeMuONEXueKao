@@ -1,0 +1,44 @@
+/* ===================================================================
+   LazyImage 懒加载图片
+   - 加载/完成/错误三态占位与渐显动画
+   - 复用 skeleton-shimmer 动画作为加载占位背景
+   =================================================================== */
+
+/* ========== LazyImage 懒加载图片 ========== */
+.lazy-img {
+  position: relative;
+  display: inline-block;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--bg-sub);
+}
+.lazy-img-tag {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  transition: opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth);
+}
+.lazy-img-loading .lazy-img-tag { opacity: 0; transform: scale(1.04); }
+.lazy-img-loaded .lazy-img-tag { opacity: 1; transform: scale(1); }
+.lazy-img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--text-mute);
+  background: var(--bg-sub);
+}
+.lazy-img-loading .lazy-img-placeholder {
+  background: linear-gradient(
+    90deg,
+    var(--bg-sub) 25%,
+    var(--bg-hover) 37%,
+    var(--bg-sub) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+.lazy-img-error .lazy-img-placeholder {
+  color: var(--danger);
+}

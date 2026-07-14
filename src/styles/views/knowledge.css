@@ -1,0 +1,622 @@
+/* ===================================================================
+   KnowledgeView 知识视图样式
+   - 从 views.css 拆分而来
+   =================================================================== */
+
+/* ========== KnowledgeView 知识视图 ========== */
+/* 阅读进度条 · 构成主义斜纹底 + 红色实色填充 */
+.reading-progress-bar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 90;
+  height: 4px;
+  background:
+    /* 构成主义斜纹底纹 */
+    repeating-linear-gradient(
+      -45deg,
+      var(--bg-sub) 0,
+      var(--bg-sub) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  border-bottom: 1px solid var(--divider);
+  overflow: hidden;
+}
+.reading-progress-fill-js {
+  height: 100%;
+  background: var(--geo-red);
+  transition: width 0.1s linear;
+  position: relative;
+}
+/* 填充末端构成主义方块角标 */
+.reading-progress-fill-js::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: -2px;
+  width: 8px;
+  height: 8px;
+  background: var(--geo-red);
+  transform: rotate(45deg);
+}
+
+.view-knowledge {
+  padding-bottom: var(--sp-12);
+}
+.knowledge-loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.knowledge-search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text-mute);
+  margin-bottom: var(--sp-6);
+  max-width: 600px;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+.knowledge-search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 0.875rem;
+}
+.knowledge-search-bar input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.knowledge-search-bar:has(input:focus) {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+.knowledge-search-clear {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--r-xs);
+  color: var(--text-mute);
+  background: var(--bg-sub);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.knowledge-search-clear:hover {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.knowledge-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--sp-6);
+}
+.knowledge-toc {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--sp-6));
+  align-self: start;
+  max-height: calc(100vh - var(--nav-h) - var(--sp-12));
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-xs);
+  /* 构成主义:左上角方块角标 */
+}
+.knowledge-toc::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 14px;
+  height: 14px;
+  background: var(--geo-red);
+  z-index: 1;
+}
+.knowledge-toc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--sp-3);
+  margin-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--divider);
+}
+.knowledge-toc-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* 构成主义:标题左侧加粗短竖线 */
+  padding-left: 10px;
+  position: relative;
+}
+.knowledge-toc-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 12px;
+  background: var(--geo-ink);
+}
+.knowledge-toc-count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-2);
+  background: var(--bg-sub);
+  padding: 2px 8px;
+  border-radius: var(--r-xs);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+.knowledge-toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.knowledge-toc-item {
+  display: block;
+  padding: var(--sp-2) var(--sp-3) var(--sp-2) var(--sp-4);
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  border-radius: var(--r-xs);
+  text-align: left;
+  position: relative;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              padding-left var(--dur-fast) var(--ease-out);
+}
+.knowledge-toc-item.level-1 {
+  font-weight: 700;
+  color: var(--text-1);
+  margin-top: var(--sp-3);
+  font-family: var(--font-display);
+  letter-spacing: -0.005em;
+}
+.knowledge-toc-item.level-1:first-child {
+  margin-top: 0;
+}
+.knowledge-toc-item.level-2 {
+  padding-left: var(--sp-6);
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+.knowledge-toc-item:hover {
+  background: var(--bg-hover);
+  color: var(--text-1);
+}
+/* 构成主义:左侧锚点 - 默认虚线, hover 实线, active 方块 */
+.knowledge-toc-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 12px;
+  background: var(--geo-line);
+  transition: all var(--dur-fast) var(--ease-out);
+}
+.knowledge-toc-item.level-2::before {
+  background: var(--geo-line);
+  opacity: 0.6;
+}
+.knowledge-toc-item:hover::before {
+  background: var(--geo-red);
+  height: 16px;
+}
+.knowledge-toc-item.active {
+  background: transparent;
+  color: var(--geo-red);
+  font-weight: 700;
+  padding-left: var(--sp-5);
+}
+.knowledge-toc-item.active::before {
+  width: 6px;
+  height: 16px;
+  background: var(--geo-red);
+}
+
+/* 移动端目录切换 */
+.knowledge-toc-toggle {
+  display: none;
+  width: 100%;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  font-size: 0.875rem;
+  color: var(--text-2);
+  margin-bottom: var(--sp-4);
+}
+.knowledge-toc-current {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--primary);
+  max-width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.02em;
+}
+
+/* 移动端目录抽屉 */
+.knowledge-toc-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: oklch(0.21 0 0 / 0.55);
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+}
+.knowledge-toc-drawer-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background: var(--bg-card);
+  padding: var(--sp-4);
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+}
+.knowledge-toc-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-4);
+}
+
+/* Markdown 渲染区 · 构成主义阅读面板 */
+/* 容器不限宽：向右拉满 grid 的 1fr 列，随容器宽度自适应 */
+.knowledge-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-6) var(--sp-8);
+  min-width: 0;
+  line-height: 1.8;
+  box-shadow: var(--shadow-xs);
+  position: relative;
+}
+/* 行宽可读性约束：文本类子元素限宽 820px（左对齐保留阅读节奏），
+   表格与分割线不限宽，宽表格向右拉满容器完整展示 */
+.knowledge-content > *:not(.md-table-wrap):not(hr) {
+  max-width: 820px;
+}
+/* 面板右上角构成主义几何角标(替代色条) */
+.knowledge-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 56px;
+  height: 56px;
+  background:
+    /* 四分之一圆弧切片 */
+    linear-gradient(135deg, transparent 50%, var(--primary-bg) 50%);
+  border-radius: 0 var(--r-lg) 0 0;
+  pointer-events: none;
+}
+.markdown-body h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-1);
+  margin: var(--sp-6) 0 var(--sp-3);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--divider);
+  letter-spacing: -0.025em;
+  scroll-margin-top: calc(var(--nav-h) + var(--sp-4));
+  position: relative;
+}
+/* h1 下方构成主义短线(偏左,非满宽) */
+.markdown-body h1::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: var(--geo-red);
+}
+.markdown-body h2 {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--text-1);
+  margin: var(--sp-6) 0 var(--sp-3);
+  padding-left: 0;
+  letter-spacing: -0.02em;
+  scroll-margin-top: calc(var(--nav-h) + var(--sp-4));
+  position: relative;
+  /* 构成主义:编号方块 + 渐隐线(替代左色条) */
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.markdown-body h2::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: var(--geo-ink);
+  flex-shrink: 0;
+  transform: rotate(45deg);
+}
+.markdown-body h2::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--geo-line), transparent);
+}
+.markdown-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin: var(--sp-4) 0 var(--sp-2);
+  letter-spacing: -0.01em;
+  position: relative;
+  padding-left: var(--sp-3);
+}
+/* h3:构成主义圆点锚(替代色条) */
+.markdown-body h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--geo-red);
+}
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-2);
+  margin: var(--sp-3) 0 var(--sp-2);
+  letter-spacing: -0.01em;
+  padding-left: var(--sp-3);
+  position: relative;
+}
+.markdown-body h4::before,
+.markdown-body h5::before,
+.markdown-body h6::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--text-mute);
+}
+.markdown-body .md-p {
+  font-size: 0.9375rem;
+  color: var(--text-2);
+  line-height: 1.8;
+  margin: var(--sp-2) 0;
+}
+.markdown-body .md-list {
+  margin: var(--sp-3) 0;
+  padding-left: var(--sp-6);
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+.markdown-body .md-list li {
+  margin: var(--sp-1) 0;
+  line-height: 1.7;
+}
+.markdown-body .md-list li::marker {
+  color: var(--primary);
+  font-family: var(--font-mono);
+}
+.markdown-body .md-code {
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  margin: var(--sp-3) 0;
+}
+.markdown-body .md-code code {
+  font-family: var(--font-mono);
+  color: var(--text-1);
+  letter-spacing: 0.01em;
+}
+.markdown-body code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 2px 6px;
+  background: var(--bg-sub);
+  border-radius: var(--r-xs);
+  color: var(--accent);
+}
+.markdown-body .md-quote {
+  margin: var(--sp-3) 0;
+  padding: var(--sp-4) var(--sp-5);
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  position: relative;
+  /* 构成主义:左侧编号方块 + 竖虚线(替代色条) */
+}
+.markdown-body .md-quote::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: var(--sp-3);
+  width: 4px;
+  height: 4px;
+  background: var(--geo-red);
+}
+.markdown-body .md-quote::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: calc(var(--sp-3) + 8px);
+  bottom: var(--sp-3);
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--geo-line) 0,
+    var(--geo-line) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+.markdown-body hr {
+  margin: var(--sp-6) 0;
+  border: none;
+  height: 1px;
+  background: var(--divider);
+}
+.markdown-body strong {
+  color: var(--text-1);
+  font-weight: 700;
+}
+.markdown-body em {
+  color: var(--primary);
+  font-style: italic;
+}
+.markdown-body del {
+  color: var(--text-mute);
+}
+.markdown-body a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--dur-fast);
+}
+.markdown-body a:hover {
+  color: var(--primary-hover);
+}
+.markdown-body mark.kw.search-hit {
+  background: var(--warn-soft);
+  color: var(--warn);
+  padding: 1px 6px;
+  border-radius: var(--r-xs);
+  font-weight: 700;
+}
+
+/* 表格 · 简洁网格 */
+.md-table-wrap {
+  overflow-x: auto;
+  margin: var(--sp-3) 0;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.md-table th,
+.md-table td {
+  padding: var(--sp-2) var(--sp-3);
+  text-align: left;
+  border-bottom: 1px solid var(--divider);
+}
+.md-table th {
+  background: var(--bg-sub);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+}
+.md-table td {
+  color: var(--text-2);
+}
+.md-table tr:last-child td {
+  border-bottom: none;
+}
+.md-table tr:hover td {
+  background: var(--bg-hover);
+}
+
+/* ========== 考点知识结构化渲染（KnowledgeView 专用） ========== */
+/* 搜索结果统计条 */
+.knowledge-search-summary {
+  margin: var(--sp-3) 0 var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+/* 一级分类区块 */
+.knowledge-section {
+  margin-bottom: var(--sp-6);
+}
+/* 子考点文章 */
+.knowledge-subpoint {
+  margin: var(--sp-4) 0;
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px dashed var(--divider);
+}
+.knowledge-subpoint:last-child {
+  border-bottom: none;
+}
+/* 子考点序号徽标（h2 内的第一个 span） */
+.knowledge-sub-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 24px;
+  padding: 0 var(--sp-2);
+  background: var(--primary-bg);
+  color: var(--primary);
+  border-radius: var(--r-xs);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+/* 子考点标题文本 */
+.knowledge-sub-title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--text-1);
+  letter-spacing: -0.01em;
+}
+/* 子考点关联题目数 */
+.knowledge-sub-meta {
+  margin: var(--sp-1) 0 var(--sp-2);
+  font-size: 0.75rem;
+  color: var(--text-mute);
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+/* 搜索无结果内联提示 */
+.knowledge-empty-inline {
+  text-align: center;
+  color: var(--text-3);
+  padding: var(--sp-8) 0;
+}
