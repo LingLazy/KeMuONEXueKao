@@ -457,3 +457,10 @@ npm run build        # 构建校验
 **在线体验**：<https://fanquanpp.github.io/KeMuONEXueKao/>
 
 **源代码**：<https://github.com/fanquanpp/KeMuONEXueKao>
+
+## 在线站点
+
+- 本站（fork 部署）：https://linglazy.github.io/KeMuONEXueKao/
+- 上游项目：[xfhxly/KeMuONEXueKao](https://github.com/xfhxly/KeMuONEXueKao)
+
+部署方式：`main` 分支 push 或手动触发 `.github/workflows/deploy.yml`（npm ci → npm run build → 部署 `dist` 到 Pages）。
