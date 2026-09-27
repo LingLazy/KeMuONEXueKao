@@ -54,3 +54,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+# fork-activated: 重新推送以在 fork 中注册并启用此 workflow
