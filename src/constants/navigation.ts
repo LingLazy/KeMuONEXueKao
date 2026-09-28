@@ -4,7 +4,7 @@
  */
 
 /** GitHub 仓库地址（外链入口，TopNav 与 GlobalFooter 共用） */
-export const REPO_URL = 'https://github.com/fanquanpp/KeMuONEXueKao';
+export const REPO_URL = 'https://github.com/LingLazy/KeMuONEXueKao';
 
 /** 顶部导航栏高度（px），用于滚动偏移计算与章节高亮判定 */
 export const NAV_HEIGHT = 80;

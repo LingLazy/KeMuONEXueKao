@@ -729,3 +729,93 @@
   padding-top: var(--sp-3);
   border-top: 1px solid var(--divider);
 }
+
+/* ===================================================================
+   移动端口诀完整显示（≤768px）
+   ------------------------------------------------------------------
+   原问题：非通读模式下 .view-mnemonics 被锁定为「一屏高度 + overflow:hidden」，
+          列表是内部滚动容器（桌面虚拟滚动所需），导致手机上展开口诀后
+          「解释」「分条说明」被裁切在可视区外 —— 表现为口诀显示不全。
+   方案：  移动端解除高度锁定与内部滚动，改为整页自然滚动；
+          view 同时带 .mobile-flow 标记，二重保险。
+   =================================================================== */
+@media (max-width: 768px) {
+  /* 1. 解除视图高度锁定与裁切，改为整页滚动 */
+  .view-mnemonics:not(.study-mode-active),
+  .view-mnemonics.mobile-flow {
+    height: auto;
+    min-height: calc(100dvh - var(--nav-h));
+    overflow: visible;
+    padding-bottom: var(--sp-10);
+  }
+  .view-mnemonics:not(.study-mode-active) > .view-container,
+  .view-mnemonics.mobile-flow > .view-container {
+    flex: none;
+    height: auto;
+    overflow: visible;
+  }
+  /* 2. 布局改单列，列表不设高度上限 */
+  .view-mnemonics .mnemonics-layout {
+    display: block;
+    overflow: visible;
+  }
+  .view-mnemonics .mnemonics-main,
+  .view-mnemonics .mnemonics-list,
+  .view-mnemonics .mnemonics-flow-list {
+    overflow: visible;
+    max-height: none;
+  }
+  /* 3. 移动端分类下拉显示 */
+  .mnemonics-mobile-cats {
+    display: block;
+  }
+  /* 4. 卡片头部换行排布，内容不截断、不横向溢出 */
+  .mnemonic-card-head {
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    padding: var(--sp-4);
+  }
+  .mnemonic-card-head-left,
+  .mnemonic-card-head-right {
+    width: 100%;
+    min-width: 0;
+  }
+  .mnemonic-card-head-right {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--sp-2);
+  }
+  .mnemonic-card-title,
+  .mnemonic-card-text,
+  .mnemonic-explain,
+  .mnemonic-detail-text {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  /* 5. 展开内容：字号与行高更适合手机阅读 */
+  .mnemonic-card-body {
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+  .mnemonic-details li {
+    align-items: flex-start;
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+  /* 6. 卡片间距统一，滚动连贯 */
+  .mnemonics-flow-list .mnemonic-card,
+  .mnemonics-study-list .mnemonic-card {
+    margin-bottom: var(--sp-3);
+  }
+  /* 7. 搜索框独占一行，通读按钮不被挤压 */
+  .mnemonics-search-bar {
+    min-width: 0;
+    flex: 1 1 100%;
+    max-width: none;
+  }
+  .study-mode-btn {
+    flex: 0 0 auto;
+  }
+}

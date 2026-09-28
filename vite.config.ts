@@ -23,6 +23,8 @@ export default defineConfig({
       workbox: {
         // 预缓存核心资源
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2,json,md}'],
+        // 已移除题库/交通标志相关视图，排除其大体积 chunk，避免预缓存 3.9MB 无用数据
+        globIgnores: ['**/questions-*.js', '**/signs-*.js'],
         // 单文件最大缓存体积（5MB，覆盖题库JSON）
         maximumFileSizeToCacheInBytes: 6 * 1024 * 1024,
         runtimeCaching: [
@@ -49,7 +51,7 @@ export default defineConfig({
       manifest: {
         name: '科目一教考 · 速记通',
         short_name: '科目一速记',
-        description: '机动车驾驶证科目一在线学习与速记练习 · 模拟考试 · PWA离线可用',
+        description: '机动车驾驶证科目一速记手册 · 95 条速记口诀 + 知识学习 · PWA 离线可用',
         start_url: './',
         scope: './',
         display: 'standalone',
@@ -76,9 +78,7 @@ export default defineConfig({
           }
         ],
         shortcuts: [
-          { name: '题库练习', short_name: '练习', url: './#/practice', description: '按分类练习题目' },
-          { name: '模拟考试', short_name: '考试', url: './#/exam', description: '全真模拟考试' },
-          { name: '口诀总览', short_name: '口诀', url: './#/mnemonics', description: '速记口诀与解释' },
+          { name: '速记口诀', short_name: '口诀', url: './#/mnemonics', description: '95 条速记口诀与解释' },
           { name: '知识学习', short_name: '知识', url: './#/knowledge', description: '系统化知识学习' }
         ]
       }

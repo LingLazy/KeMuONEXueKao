@@ -1,17 +1,16 @@
 /**
- * 顶部导航
- * - 品牌 logo（仓库名称 KeMuONEXueKao）
- * - 六视图导航链接（含激活态下划线指示器）
- * - 顶部进度与正确率显示
- * - GitHub 仓库链接按钮（外链新窗口）
- * - 主题切换按钮
+ * 顶部导航（精简版）
+ * - 品牌标识
+ * - 两个导航项：速记口诀 / 知识学习
+ * - GitHub 仓库外链按钮（外链新窗口）
+ * - 主题切换按钮（含 View Transitions 圆形扩散原点）
  * - 移动端折叠菜单
  */
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useThemeStore } from '@/stores/themeStore';
 import { toast } from '@/stores/toastStore';
-import { useMagnetic, useProgressStats } from '@/hooks';
+import { useMagnetic } from '@/hooks';
 import { REPO_URL } from '@/constants/navigation';
 
 interface NavItem {
@@ -21,12 +20,8 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { to: '/', label: '主页', end: true },
-  { to: '/knowledge', label: '知识' },
-  { to: '/practice', label: '练习' },
-  { to: '/exam', label: '考试' },
-  { to: '/mnemonics', label: '口诀' },
-  { to: '/categories', label: '分类' }
+  { to: '/mnemonics', label: '速记口诀' },
+  { to: '/knowledge', label: '知识学习' }
 ];
 
 export default function TopNav() {
@@ -38,10 +33,6 @@ export default function TopNav() {
   // 主题切换按钮磁吸 ref
   const themeToggleRef = useRef<HTMLButtonElement>(null);
   useMagnetic(themeToggleRef, { strength: 0.4 });
-
-  // 通过通用进度统计 Hook 派生 answered / accuracy / progress / total 等指标
-  // 消除原 useMemo 中重复的正确率与进度计算逻辑（由 useProgressStats 内部统一调用 calcAccuracy / calcProgress）
-  const stats = useProgressStats();
 
   // 监听滚动添加阴影
   useEffect(() => {
@@ -65,10 +56,10 @@ export default function TopNav() {
   return (
     <header id="topnav" className={scrolled ? 'scrolled' : ''} role="banner">
       <div className="nav-inner">
-        <NavLink to="/" className="brand" aria-label="KeMuONEXueKao 返回主页">
-          <span className="brand-mark" aria-hidden="true">K</span>
+        <NavLink to="/mnemonics" className="brand" aria-label="速记口诀 返回首页">
+          <span className="brand-mark" aria-hidden="true">科</span>
           <span className="brand-text">
-            KeMuONE<span className="brand-accent">Xue</span>Kao
+            科目一<span className="brand-accent">速记</span>通
           </span>
         </NavLink>
 
@@ -86,16 +77,6 @@ export default function TopNav() {
         </nav>
 
         <div className="nav-actions">
-          <div className="nav-meta" aria-live="polite">
-            <span className="nav-stat">
-              <span id="nav-progress">{stats.progress}%</span>
-              <span className="nav-stat-divider">·</span>
-              <span className="nav-stat-accuracy">
-                正确率 <span id="nav-accuracy">{stats.accuracy}%</span>
-              </span>
-            </span>
-            <span className="nav-stat-sub">{stats.answered}/{stats.total} 题</span>
-          </div>
           {/* GitHub 仓库外链按钮：新窗口打开，rel noopener 防止反向 tabnabbing */}
           <a
             href={REPO_URL}

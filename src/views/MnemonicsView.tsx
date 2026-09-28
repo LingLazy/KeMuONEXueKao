@@ -1,12 +1,14 @@
 /**
  * 口诀总览视图
- * - 左侧：口诀分类导航（按小分类聚合）
+ * - 左侧：口诀分类导航（桌面）/ 顶部下拉（移动端）
  * - 右侧：选中分类的口诀列表
  * - 支持搜索关键字
- * - 虚拟滚动优化长列表性能
+ * - 桌面端：虚拟滚动优化长列表性能
+ * - 移动端：全量渲染 + 整页自然滚动（不使用虚拟滚动）
+ *   —— 虚拟滚动依赖「绝对定位 + 内部滚动容器」，在移动端会导致展开后的
+ *      解释与分条说明被裁切、窗口滚动失效，表现为「口诀显示不全」
  * - 键盘快捷键：J/K 上下导航，Enter 展开/收起，/ 聚焦搜索，Esc 收起
  * - 学习模式：一键展开全部口诀用于通读复习
- * - 移动端：单栏布局，分类切换为顶部下拉
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -23,6 +25,9 @@ import { VIRT_ROW_HEIGHT, VIRT_OVERSCAN } from '@/constants/ui';
 import { toast } from '@/stores/toastStore';
 import type { Mnemonic } from '@/types';
 import MnemonicCard from './mnemonics/MnemonicCard';
+
+/** 移动端展开后滚动定位延迟（毫秒）：等待卡片高度过渡完成 */
+const MOBILE_SCROLL_DELAY = 180;
 
 export default function MnemonicsView() {
   const isMobile = useIsMobile();
@@ -77,19 +82,32 @@ export default function MnemonicsView() {
     return list;
   }, [mnemonics, activeCat, search]);
 
-  // 虚拟滚动
+  // 移动端不使用虚拟滚动（详见文件头注释）
+  const useVirtual = !isMobile;
+
+  // 虚拟滚动（仅桌面端生效）
   const parentRef = useRef<HTMLDivElement | null>(null);
   const virtualizer = useVirtualizer({
-    count: filtered.length,
+    count: useVirtual ? filtered.length : 0,
     getScrollElement: () => parentRef.current,
     estimateSize: () => VIRT_ROW_HEIGHT,
     overscan: VIRT_OVERSCAN
   });
 
-  /** 选中/取消选中口诀，移动端滚动至顶部 */
+  /**
+   * 选中/取消选中口诀
+   * - 移动端：展开后把该卡片滚动到视口顶部，确保解释与分条说明完整可见
+   *   （此前用 window.scrollTo 无效，因为列表是内部滚动容器）
+   */
   const handleSelect = (m: Mnemonic | null) => {
     setSelectedMnemonic(m);
-    if (isMobile && m) window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (!isMobile || !m) return;
+    const idx = filtered.indexOf(m);
+    if (idx < 0) return;
+    window.setTimeout(() => {
+      const el = document.querySelector<HTMLElement>(`[data-mnemonic-index="${idx}"]`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, MOBILE_SCROLL_DELAY);
   };
 
   /** 切换学习模式：开启时退出单选 */
@@ -101,11 +119,11 @@ export default function MnemonicsView() {
     });
   };
 
-  // 键盘导航：J/K 移动焦点，Enter 展开/收起，/ 聚焦搜索，Esc 收起
+  // 键盘导航：J/K 移动焦点，Enter 展开/收起，/ 聚焦搜索，Esc 收起（仅桌面虚拟列表）
   useMnemonicKeyboard({
-    itemCount: filtered.length,
+    itemCount: useVirtual ? filtered.length : 0,
     selectedIndex: focusIndex,
-    enabled: !studyMode && filtered.length > 0,
+    enabled: useVirtual && !studyMode && filtered.length > 0,
     onSelect: (index) => { setFocusIndex(index); virtualizer.scrollToIndex(index, { align: 'center' }); },
     onConfirm: (index) => { const m = filtered[index]; if (m) handleSelect(selectedMnemonic === m ? null : m); },
     onFocusSearch: () => { searchRef.current?.focus(); searchRef.current?.select(); },
@@ -125,8 +143,6 @@ export default function MnemonicsView() {
     }
   }, [error]);
 
-  // 列表高度由 CSS Flexbox 自动撑满视口，虚拟滚动器通过 getScrollElement 读取 clientHeight 适配
-
   if (!mnemonics) {
     return (
       <div className="view view-mnemonics">
@@ -141,7 +157,7 @@ export default function MnemonicsView() {
   }
 
   return (
-    <div className={`view view-mnemonics ${studyMode ? 'study-mode-active' : ''}`}>
+    <div className={`view view-mnemonics ${studyMode ? 'study-mode-active' : ''} ${useVirtual ? '' : 'mobile-flow'}`}>
       {/* 构成主义几何背景装饰层 · 口诀速记专题 */}
       <GeoBgDecor variant="mnemonics" />
       <div className="view-container">
@@ -178,8 +194,8 @@ export default function MnemonicsView() {
           </button>
         </div>
 
-        {/* 键盘快捷键提示（桌面端，非学习模式时显示） */}
-        {!isMobile && !studyMode && filtered.length > 0 && (
+        {/* 键盘快捷键提示（仅桌面虚拟列表模式） */}
+        {useVirtual && !studyMode && filtered.length > 0 && (
           <div className="mnemonics-shortcut-hint" aria-hidden="true">
             <kbd>J</kbd><kbd>K</kbd> 导航 · <kbd>Enter</kbd> 展开 · <kbd>/</kbd> 搜索 · <kbd>Esc</kbd> 收起
           </div>
@@ -238,7 +254,7 @@ export default function MnemonicsView() {
             {filtered.length === 0 ? (
               <EmptyState title="未找到匹配的口诀" description={search ? '尝试更换关键字' : '该分类暂无口诀'} />
             ) : studyMode ? (
-              /* 学习模式：渲染全部口诀（展开态），不使用虚拟滚动 */
+              /* 通读模式：渲染全部口诀（展开态），不使用虚拟滚动 */
               <div className="mnemonics-study-list">
                 <AnimatePresence mode="popLayout">
                   {filtered.map((m, i) => (
@@ -254,6 +270,20 @@ export default function MnemonicsView() {
                     </motion.div>
                   ))}
                 </AnimatePresence>
+              </div>
+            ) : !useVirtual ? (
+              /* 移动端：全量渲染 + 整页自然滚动，展开内容完整可见 */
+              <div className="mnemonics-flow-list">
+                {filtered.map((m, i) => (
+                  <div key={`${m.title}-${i}`} data-mnemonic-index={i}>
+                    <MnemonicCard
+                      mnemonic={m}
+                      expanded={selectedMnemonic === m}
+                      onToggle={() => handleSelect(selectedMnemonic === m ? null : m)}
+                      catName={CATEGORIES[m.cat]?.name ?? m.cat}
+                    />
+                  </div>
+                ))}
               </div>
             ) : (
               <div ref={(el) => { parentRef.current = el; }} className="mnemonics-list">
