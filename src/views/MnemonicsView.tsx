@@ -266,7 +266,7 @@ export default function MnemonicsView() {
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.25, delay: Math.min(i * 0.02, 0.3) }}
                     >
-                      <MnemonicCard mnemonic={m} expanded={true} onToggle={() => {}} catName={CATEGORIES[m.cat]?.name ?? m.cat} studyMode />
+                      <MnemonicCard mnemonic={m} expanded={true} onToggle={() => {}} catName={CATEGORIES[m.cat]?.name ?? m.cat} catColor={CATEGORIES[m.cat]?.color} studyMode />
                     </motion.div>
                   ))}
                 </AnimatePresence>
@@ -281,6 +281,7 @@ export default function MnemonicsView() {
                       expanded={selectedMnemonic === m}
                       onToggle={() => handleSelect(selectedMnemonic === m ? null : m)}
                       catName={CATEGORIES[m.cat]?.name ?? m.cat}
+                      catColor={CATEGORIES[m.cat]?.color}
                     />
                   </div>
                 ))}
@@ -304,6 +305,7 @@ export default function MnemonicsView() {
                           focused={vi.index === focusIndex}
                           onToggle={() => handleSelect(selectedMnemonic === m ? null : m)}
                           catName={CATEGORIES[m.cat]?.name ?? m.cat}
+                          catColor={CATEGORIES[m.cat]?.color}
                         />
                       </div>
                     );

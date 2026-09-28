@@ -498,25 +498,35 @@
   flex: 1;
   min-width: 0;
 }
-/* 构成主义:分类标签改为方形角标(非胶囊圆角) */
+/* 构成主义:分类徽标 —— 放大 + 分类色高对比，一眼可辨分类 */
 .mnemonic-card-cat {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 2px 0;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  color: var(--text-3);
+  gap: 7px;
   align-self: flex-start;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  padding: 4px 11px 4px 9px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  /* 分类色与正文字色混合，保证浅色/深色主题下都有足够对比度 */
+  color: color-mix(in srgb, var(--cat-color, var(--primary)) 58%, var(--text-1) 42%);
+  background: color-mix(in srgb, var(--cat-color, var(--primary)) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cat-color, var(--primary)) 55%, transparent);
+  border-radius: var(--r-xs);
 }
 .mnemonic-card-cat::before {
   content: '';
-  width: 6px;
-  height: 6px;
-  background: var(--geo-ink);
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--cat-color, var(--primary)) 78%, var(--text-1) 22%);
+}
+/* 展开态：分类徽标进一步强化 */
+.mnemonic-card.expanded .mnemonic-card-cat {
+  background: color-mix(in srgb, var(--cat-color, var(--primary)) 28%, transparent);
+  border-color: color-mix(in srgb, var(--cat-color, var(--primary)) 70%, transparent);
 }
 .mnemonic-card-title {
   font-family: var(--font-display);
@@ -768,6 +778,15 @@
   /* 3. 移动端分类下拉显示 */
   .mnemonics-mobile-cats {
     display: block;
+  }
+  /* 3.1 移动端分类徽标再放大一档，手指可辨、远看可读 */
+  .mnemonic-card-cat {
+    font-size: 0.875rem;
+    padding: 5px 12px 5px 10px;
+  }
+  .mnemonic-card-cat::before {
+    width: 9px;
+    height: 9px;
   }
   /* 4. 卡片头部换行排布，内容不截断、不横向溢出 */
   .mnemonic-card-head {

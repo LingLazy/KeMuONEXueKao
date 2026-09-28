@@ -23,6 +23,8 @@ interface MnemonicCardProps {
   focused?: boolean;
   /** 是否为学习模式（默认展开、隐藏切换箭头交互） */
   studyMode?: boolean;
+  /** 分类主题色（来自 categories.json，用于分类徽标着色） */
+  catColor?: string;
 }
 
 /**
@@ -42,7 +44,8 @@ export default function MnemonicCard({
   onToggle,
   catName,
   focused = false,
-  studyMode = false
+  studyMode = false,
+  catColor
 }: MnemonicCardProps) {
   const [copied, setCopied] = useState(false);
 
@@ -72,7 +75,12 @@ export default function MnemonicCard({
     <div className={cardClass}>
       <button type="button" className="mnemonic-card-head" onClick={onToggle} aria-expanded={expanded}>
         <div className="mnemonic-card-head-left">
-          <span className="mnemonic-card-cat">{catName}</span>
+          <span
+            className="mnemonic-card-cat"
+            style={catColor ? ({ '--cat-color': catColor } as React.CSSProperties) : undefined}
+          >
+            {catName}
+          </span>
           <h3 className="mnemonic-card-title">{mnemonic.title}</h3>
         </div>
         <div className="mnemonic-card-head-right">
